@@ -5,6 +5,7 @@ public class VideoJuego2 {
 
     public static void main(String[] args) {
         creandoEjercito();
+	mostrarTablero(tablero);
     }
 
     public static void creandoEjercito() {
@@ -17,7 +18,7 @@ public class VideoJuego2 {
 	int nivelR = 0, filaR = 0, columnaR = 0;
 	for (int i = 0; i < soldados.length; i++) {
             soldados[i] = new Soldado();
-            soldados[i].setNombre("Soldado_" + (i + 1);
+            soldados[i].setNombre("Soldado_" + (i + 1));
             nivelR = (int) (Math.random() * 5 + 1);
             soldados[i].setNivelDeVida(nivelR);
             // Este ciclo nos permitirá comprobar que los valores generados no coincidan con uno ya existente
@@ -43,5 +44,20 @@ public class VideoJuego2 {
             return true;
         }
         return false;
+    }
+
+    public static void mostrarTablero(Soldado[][] ejercito){
+    	for(int i = 0; i < ejercito.length; i++){
+	    String fila = "|";
+	    for(int j = 0; j < ejercito[i].length; j++){
+	    	if(ejercito[i][j] == null){
+			fila = fila +" - " + "|"; 
+		}
+		else{
+			fila = fila + " S " + "|";
+		}
+	    }
+	    System.out.println(fila);
+	}
     }
 }
