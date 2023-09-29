@@ -7,6 +7,7 @@ public class VideoJuego2 {
     	Soldado[] ejercito =  creandoEjercito();
 	mostrarTablero(tablero);
 	mayorNivelVida(ejercito).mostrar();
+	System.out.println("El promedio de nivel de vida de los soldados es :" + promedioNivelVida(ejercito));
     }
 
     public static Soldado[] creandoEjercito() {
@@ -73,4 +74,12 @@ public class VideoJuego2 {
 		}
 		return soldMayor;
     }
+    public static int promedioNivelVida(Soldado[] soldados) {
+        int promedio = 0;
+        for (Soldado soldado : soldados) {
+            promedio += soldado.getNivelDeVida();
+        }
+        return promedio;
+    }
+
 }
