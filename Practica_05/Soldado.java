@@ -28,7 +28,7 @@ public class Soldado {
 	}
 
 	public String mostrar(){
-		return "Nombre: " + nombre  + "\nNivel de Vida: "
-            + nivelVida + "\nFila/Columna: "+ fila + " / "+ columna; 	
+		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
+            + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna; 	
 	}
 }

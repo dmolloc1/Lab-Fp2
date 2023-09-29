@@ -5,9 +5,15 @@ public class VideoJuego2 {
 
     public static void main(String[] args) {
     	Soldado[] ejercito =  creandoEjercito();
+	System.out.println("		~TABLERO~");
 	mostrarTablero(tablero);
 	mayorNivelVida(ejercito).mostrar();
-	System.out.println("El promedio de nivel de vida de los soldados es :" + promedioNivelVida(ejercito));
+	System.out.println("\nEl total de nivel de vida del ejercito es :" + totalNivelVida(ejercito));
+	System.out.println("El promedio de nivel de vida del ejercito es :" + promedioNivelVida(ejercito));
+	System.out.println("\n~~~ Nivel de vida de los soldados ~~~");
+	mostrarNivelVida(ejercito);
+	System.out.println("\n~~~ Soldados del ejercito ~~~");
+	mostrarSoldados(ejercito);
     }
 
     public static Soldado[] creandoEjercito() {
@@ -34,9 +40,6 @@ public class VideoJuego2 {
             }
             soldados[i].setFila(filaR + 1);
             soldados[i].setColumna((char) (columnaR + 65));
-        }
-        for (Soldado n : soldados) {
-            System.out.println(n.mostrar());
         }
 	return soldados;
     }
@@ -74,12 +77,24 @@ public class VideoJuego2 {
 		}
 		return soldMayor;
     }
-    public static int promedioNivelVida(Soldado[] soldados) {
-        int promedio = 0;
+    public static int totalNivelVida(Soldado[] soldados) {
+        int total = 0;
         for (Soldado soldado : soldados) {
-            promedio += soldado.getNivelDeVida();
+            total += soldado.getNivelDeVida();
         }
-        return promedio;
+        return total;
     }
-
+    public static int promedioNivelVida(Soldado[] soldados){
+    	return totalNivelVida(soldados)/ soldados.length;
+    }
+    public static void mostrarNivelVida(Soldado[] soldados) {
+        for (Soldado soldado : soldados) {
+            System.out.println(soldado.mostrar());
+        }
+    }
+    public static void mostrarSoldados(Soldado[] soldados){
+        for (Soldado n : soldados) {
+            System.out.println("---------------------------------\n"+n.mostrar());
+        }
+    }
 }
