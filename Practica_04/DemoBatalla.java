@@ -104,12 +104,45 @@ public class DemoBatalla {
 
     //Método que ordena por número de puntos de menor a mayor
     public static void ordenarPorPuntosBurbuja(Nave[] flota){
+        for (int i = 0; i < flota.length - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (flota[j].getPuntos() > flota[j + 1].getPuntos()) {
+                    Nave temp = flota[j];
+                    flota[j] = flota[j + 1];
+                    flota[j + 1] = temp;
+                }
+            }
+        }
     }
     //Método que ordena por nombre de A a Z
     public static void ordenarPorNombreBurbuja(Nave[] flota){
+        for (int i = 0; i < flota.length - 1; i++) {
+            for (int j = 0; j < flota.length - i - 1; j++) {
+                if (flota[j].getNombre().compareToIgnoreCase(flota[j + 1].getNombre()) > 0) {
+                    Nave vControl = flota[j];
+                    flota[j] = flota[j + 1];
+                    flota[j + 1] = vControl;
+                }
+            }
+        }
     }
 //Método para buscar la primera nave con un nombre que se pidió por teclado
     public static int busquedaBinariaNombre(Nave[] flota, String s){
+    	int left = 0;
+        int right = flota.length - 1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int comparar = flota[mid].getNombre().compareToIgnoreCase(s);
+            if (comparar == 0) {
+                return mid; 
+            }
+            if (comparar < 0) {
+                left = mid + 1; 
+	    } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
     }
 //Método que ordena por número de puntos de menor a mayor
     public static void ordenarPorPuntosSeleccion(Nave[] flota){
