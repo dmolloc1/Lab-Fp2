@@ -154,17 +154,47 @@ public class DemoBatalla {
                 }
             }
             Nave vControl = flota[i];
-            flota[i] = flota[minIndex];
-            flota[minIndex] = vControl;
+            flota[i] = flota[minIndice];
+            flota[minIndice] = vControl;
         }
     }
     //Método que ordena por nombre de A a Z
     public static void ordenarPorNombreSeleccion(Nave[] flota){
+        for (int i = 0; i < flota.length - 1; i++) {
+            int minIndice = i;
+            for (int j = i + 1; j < flota.length; j++) {
+                if (flota[j].getNombre().compareToIgnoreCase(flota[minIndice].getNombre()) < 0) {
+                    minIndice = j;
+                }
+            }
+            Nave vControl = flota[i];
+            flota[i] = flota[minIndice];
+            flota[minIndice] = vControl;
+        }    
     }
     //Método que muestra las naves ordenadas por número de puntos de mayor a menor
     public static void ordenarPorPuntosInsercion(Nave[] flota){
+	int n = flota.length;
+        for (int i = 1; i < flota.lengthn; ++i) {
+            Nave llave = flota[i];
+            int j = i - 1;
+            while (j >= 0 && flota[j].getPuntos() < llave.getPuntos()) {
+                flota[j + 1] = flota[j];
+                j = j - 1;
+            }
+            flota[j + 1] = llave;
+        }
     }
     //Método que muestra las naves ordenadas por nombre de Z a A
     public static void ordenarPorNombreInsercion(Nave[] flota){
+        for (int i = 1; i < flota.length; ++i) {
+            Nave llave = flota[i];
+            int j = i - 1;
+            while (j >= 0 && flota[j].getNombre().compareToIgnoreCase(llave.getNombre()) < 0) {
+                flota[j + 1] = flota[j];
+                j = j - 1;
+            }
+            flota[j + 1] = llave;
+        }
     }
 }
