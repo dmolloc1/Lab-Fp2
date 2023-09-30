@@ -146,6 +146,17 @@ public class DemoBatalla {
     }
 //Método que ordena por número de puntos de menor a mayor
     public static void ordenarPorPuntosSeleccion(Nave[] flota){
+	    for (int i = 0; i < flota.length - 1; i++) {
+            	int minIndice = i;
+            for (int j = i + 1; j < flota.length; j++) {
+                if (flota[j].getPuntos() < flota[minIndice].getPuntos()) {
+                    minIndice = j;
+                }
+            }
+            Nave vControl = flota[i];
+            flota[i] = flota[minIndex];
+            flota[minIndex] = vControl;
+        }
     }
     //Método que ordena por nombre de A a Z
     public static void ordenarPorNombreSeleccion(Nave[] flota){
