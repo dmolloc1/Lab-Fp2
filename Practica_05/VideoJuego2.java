@@ -19,7 +19,7 @@ public class VideoJuego2 {
         mostrarSoldados(ejercito);
     //Creamos otro ejercito para aplicar el otro metodo de ordenamiento
         Soldado[] ejercito2 = creandoEjercito();
-        ordenarPorNivelSelección(ejercito);
+        ordenarPorNivelSelección(ejercito2);
 	    System.out.println("\n~~~ Soldados ordenados Metodo de Selección ~~~");
         mostrarSoldados(ejercito2);
     }
@@ -117,7 +117,7 @@ public class VideoJuego2 {
                     min = j;
                 }  
             }
-            intercambiar(soldados, i, min);
+            intercambiar(soldados, min, i);
         }
     }
     public static void intercambiar(Soldado[] lista, int i, int j){
