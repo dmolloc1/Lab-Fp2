@@ -1,22 +1,27 @@
 import java.util.*;
-
+//Laboratorio A Fundamentos 2
+//Autor: Mollo Chuquicaña Dolly Yadhira
 public class VideoJuego2 {
     static Soldado[][] tablero = new Soldado[10][10];
-
     public static void main(String[] args) {
     	Soldado[] ejercito =  creandoEjercito();
-	System.out.println("		~TABLERO~");
-	mostrarTablero(tablero);
-	mayorNivelVida(ejercito).mostrar();
-	System.out.println("\nEl total de nivel de vida del ejercito es :" + totalNivelVida(ejercito));
-	System.out.println("El promedio de nivel de vida del ejercito es :" + promedioNivelVida(ejercito));
-	System.out.println("\n~~~ Nivel de vida de los soldados ~~~");
-	mostrarNivelVida(ejercito);
-	System.out.println("\n~~~ Soldados del ejercito ~~~");
-	mostrarSoldados(ejercito);
-    ordenarPorNivelSelección(ejercito);
-	System.out.println("\n~~~ Soldados ordenados Metodo Burbuja ~~~");
-    mostrarSoldados(ejercito);
+	    System.out.println("		~TABLERO~");
+	    mostrarTablero(tablero);
+	    mayorNivelVida(ejercito).mostrar();
+	    System.out.println("\nEl total de nivel de vida del ejercito es :" + totalNivelVida(ejercito));
+	    System.out.println("El promedio de nivel de vida del ejercito es :" + promedioNivelVida(ejercito));
+	    System.out.println("\n~~~ Nivel de vida de los soldados ~~~");
+	    mostrarNivelVida(ejercito);
+    	System.out.println("\n~~~ Soldados del ejercito ~~~");
+	    mostrarSoldados(ejercito);
+        ordenarPorNivelBurbuja(ejercito);
+	    System.out.println("\n~~~ Soldados ordenados Metodo Burbuja ~~~");
+        mostrarSoldados(ejercito);
+    //Creamos otro ejercito para aplicar el otro metodo de ordenamiento
+        Soldado[] ejercito2 = creandoEjercito();
+        ordenarPorNivelSelección(ejercito);
+	    System.out.println("\n~~~ Soldados ordenados Metodo de Selección ~~~");
+        mostrarSoldados(ejercito2);
     }
 
     public static Soldado[] creandoEjercito() {
