@@ -14,6 +14,9 @@ public class VideoJuego2 {
 	mostrarNivelVida(ejercito);
 	System.out.println("\n~~~ Soldados del ejercito ~~~");
 	mostrarSoldados(ejercito);
+    ordenarPorNivelSelección(ejercito);
+	System.out.println("\n~~~ Soldados ordenados Metodo Burbuja ~~~");
+    mostrarSoldados(ejercito);
     }
 
     public static Soldado[] creandoEjercito() {
@@ -91,6 +94,31 @@ public class VideoJuego2 {
         for (Soldado soldado : soldados) {
             System.out.println(soldado.mostrar());
         }
+    }
+    public static void ordenarPorNivelBurbuja(Soldado[] soldados){
+        for(int i = 1; i< soldados.length; i++){
+            for(int j = 0; j < soldados.length - i; j++){
+                if(soldados[j].getNivelDeVida() > soldados[j + 1].getNivelDeVida()){
+                    intercambiar(soldados, j , j + 1);
+                }
+            }
+        }
+    }
+    public static void ordenarPorNivelSelección(Soldado[] soldados){
+        for(int i = 0; i < soldados.length - 1; i++){
+            int min = i;
+            for(int j = i + 1; j < soldados.length; j++){
+                if(soldados[min].getNivelDeVida() >  soldados[j].getNivelDeVida()){
+                    min = j;
+                }  
+            }
+            intercambiar(soldados, i, min);
+        }
+    }
+    public static void intercambiar(Soldado[] lista, int i, int j){
+        Soldado vControl = lista[i];
+        lista[i]= lista[j];
+        lista[j]= vControl;
     }
     public static void mostrarSoldados(Soldado[] soldados){
         for (Soldado n : soldados) {
