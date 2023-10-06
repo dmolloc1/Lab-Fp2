@@ -4,7 +4,10 @@ import java.util.*;
 public class VideoJuego2 {
     static ArrayList <ArrayList <Soldado>> tablero = new ArrayList <ArrayList<Soldado>>();
     public static void main(String[] args) {
-    	ArrayList <Soldado> ejercito1 = creandoEjercito();
+        //Para diferenciar los soldados se agregara colores
+        String turqueza = "\u001B[30m";
+        String amarillo = "\u001B[31m";
+        ArrayList <Soldado> ejercito1 = creandoEjercito(turqueza);
 	    System.out.println("\nEl total de nivel de vida del ejercito 1 es :" + totalNivelVida(ejercito1));
 	    System.out.println("El promedio de nivel de vida del ejercito 1 es :" + promedioNivelVida(ejercito1));
     	System.out.println("\n~~~ Soldados del ejercito 1 ~~~");
@@ -14,7 +17,7 @@ public class VideoJuego2 {
         mostrarSoldados(ejercito1);
 	    System.out.println("\nEl soldado con mayor nivel de vida del ejercito 1 es: \n"+ mayorNivelVida(ejercito1).mostrar());
     //Creamos el segundo ejercito
-    	ArrayList <Soldado> ejercito2 = creandoEjercito();
+    	ArrayList <Soldado> ejercito2 = creandoEjercito(amarillo);
 	    System.out.println("\nEl total de nivel de vida del ejercito 2 es :" + totalNivelVida(ejercito2));
 	    System.out.println("El promedio de nivel de vida del ejercito 2 es :" + promedioNivelVida(ejercito2));
     	System.out.println("\n~~~ Soldados del ejercito 2 ~~~");
@@ -27,7 +30,7 @@ public class VideoJuego2 {
         mostrarTablero();
     }
 
-    public static ArrayList <Soldado> creandoEjercito() {
+    public static ArrayList <Soldado> creandoEjercito(String color) {
         ArrayList <Soldado> listEjercito = new ArrayList <Soldado>();
     	int nivelR = 0, filaR = 0, columnaR = 0;
 	    int armyLen = (int)(Math.random()* 10 + 1);
@@ -46,6 +49,7 @@ public class VideoJuego2 {
             }
             nuevo.setFila(filaR + 1);
             nuevo.setColumna((char) (columnaR + 65));
+            nuevo.setColor(color);
             listEjercito.add(nuevo);
         }
 
@@ -95,7 +99,7 @@ public class VideoJuego2 {
 	            if(tablero.get(i).get(j) == null){
 					fila = fila +" - " + "|"; 
 				}else{
-					fila = fila + " S " + "|";
+					fila = fila + tablero.get(i).get(j).getColor() + "|";
 				}
 	    	}
 	    	System.out.println(fila);
