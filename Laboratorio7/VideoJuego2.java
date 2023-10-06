@@ -5,8 +5,10 @@ public class VideoJuego2 {
     static Soldado[][]tablero = new Soldado[10][10];
     public static void main(String[] args) {
     	List <Soldado> ejercito1, ejercito2;
- 	    ejercito1 = creandoEjercito();
-        ejercito2 = creandoEjercito();
+        String turqueza = "\u001B[36m";
+        String amarillo = "\u001B[33m";
+ 	    ejercito1 = creandoEjercito(turqueza);
+        ejercito2 = creandoEjercito(amarillo);
         System.out.println("		~TABLERO~");
 	    mostrarTablero();
 /*	    mayorNivelVida(ejercito).mostrar();
@@ -26,7 +28,7 @@ public class VideoJuego2 {
         mostrarSoldados(ejercito2);*/
     }
 
-    public static List <Soldado> creandoEjercito() {
+    public static List <Soldado> creandoEjercito(String color) {
         List <Soldado> listArmy = new ArrayList <Soldado>();
     	int nivelR = 0, filaR = 0, columnaR = 0;
         int armyLength = (int)(Math.random() * 10 + 1);
@@ -45,6 +47,7 @@ public class VideoJuego2 {
             }
             nuevo.setFila(filaR + 1);
             nuevo.setColumna((char) (columnaR + 65));
+            nuevo.setValorTablero(color,""+ nuevo.getNivelDeVida());
             listArmy.add(nuevo);
         }
 
@@ -66,7 +69,7 @@ public class VideoJuego2 {
 	            if(tablero[i][j] == null){
 					fila = fila +" - " + "|"; 
 				}else{
-					fila = fila + " S " + "|";
+					fila = fila + " " + tablero[i][j].getValorTablero() + " |";
 				}
 	    	}
 	    	System.out.println(fila);
