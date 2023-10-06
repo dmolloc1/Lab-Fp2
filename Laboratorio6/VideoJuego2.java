@@ -2,14 +2,12 @@ import java.util.*;
 //Laboratorio A Fundamentos 2
 //Autor: Mollo Chuquicaña Dolly Yadhira
 public class VideoJuego2 {
-    static ArrayList <ArrayList <Soldado>> tablero = new ArrayList <>();
+    static ArrayList <ArrayList <Soldado>> tablero = new ArrayList <ArrayList<Soldado>>();
     public static void main(String[] args) {
-    	ArrayList <Soldado> ejercito = new ArrayList <Soldado>(1);
-        for(Soldado a: creandoEjercito()){
-            ejercito.add(a);
-        }
-	    System.out.println("		~TABLERO~");
-	    mostrarTablero();
+    	ArrayList <Soldado> ejercito = creandoEjercito();
+	    
+        System.out.println("		~TABLERO~");
+        mostrarTablero();
 /*	    mayorNivelVida(ejercito).mostrar();
 	    System.out.println("\nEl total de nivel de vida del ejercito es :" + totalNivelVida(ejercito));
 	    System.out.println("El promedio de nivel de vida del ejercito es :" + promedioNivelVida(ejercito));
@@ -27,10 +25,11 @@ public class VideoJuego2 {
         mostrarSoldados(ejercito2);*/
     }
 
-    public static ArrayList<Soldado> creandoEjercito() {
+    public static ArrayList <Soldado> creandoEjercito() {
         ArrayList <Soldado> listEjercito = new ArrayList <Soldado>();
     	int nivelR = 0, filaR = 0, columnaR = 0;
-	    for (int i = 0; i < (Math.random()*10) + 1; i++) {
+	    int armyLen = (int)(Math.random()* 10 + 1);
+        for (int i = 0; i < armyLen; i++) {
             Soldado nuevo = new Soldado();
             nuevo.setNombre("Soldado_" + (i + 1));
             nuevo.setNivelDeVida((int) (Math.random() * 5 + 1));
@@ -48,25 +47,50 @@ public class VideoJuego2 {
             listEjercito.add(nuevo);
         }
 
-	return listEjercito;
-    }
-
+        return listEjercito;
+    } 
+    
     public static boolean rellenarTablero(int fila, int columna, Soldado sol) {
-         if (tablero.get(fila) == null) {
-            tablero.set(fila, new ArrayList<>());
+        if(fila < tablero.size()){
+            if (tablero.get(fila).size() > columna) {
+                if(tablero.get(fila).get(columna)== null){
+                    tablero.get(fila).set(columna, sol);
+                    return true;
+                }
+                return false;
+            }else{
+                while(tablero.get(fila).size() <= columna){
+                    tablero.get(fila).add(null);
+                }
+                tablero.get(fila).set(columna, sol);
+                return true;
+            }
+        }else{
+            while(tablero.size() <= fila){
+                tablero.add( new ArrayList<>());
+            }
+            while(columna >= tablero.get(fila).size()){
+                tablero.get(fila).add(null);
+            }
         }
-        if (tablero.get(fila).get(columna) == null) {
-            tablero.get(fila).set(columna, sol);
-            return true;
+        if(columna < tablero.get(fila).size()){
+            if (tablero.get(fila).get(columna)== null) {
+                tablero.get(fila).set(columna, sol);
+                return true;
+            }
+            return false;
         }
-        return false;
+        
+        tablero.get(fila).add(columna, sol);
+        return true;
     }
 
     public static void mostrarTablero(){
-    	for(int i = 0; i < tablero.size(); i++){
+    	
+        for(int i = 0; i < tablero.size(); i++){
 	    	String fila = "|";
 	    	for(int j = 0; j < tablero.get(i).size(); j++){
-	    		if(tablero.get(i).get(j) == null){
+	            if(tablero.get(i).get(j) == null){
 					fila = fila +" - " + "|"; 
 				}else{
 					fila = fila + " S " + "|";
@@ -75,8 +99,8 @@ public class VideoJuego2 {
 	    	System.out.println(fila);
 		}
     }
-/*
-    public static Soldado mayorNivelVida(Soldado[] soldados){
+
+/*    public static Soldado mayorNivelVida(Soldado[] soldados){
 		Soldado soldMayor = soldados[0];
 
 		for(int i = 1; i < soldados.length; i++){
