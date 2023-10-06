@@ -4,8 +4,9 @@ import java.util.*;
 public class VideoJuego2 {
     static Soldado[][]tablero = new Soldado[10][10];
     public static void main(String[] args) {
-    	List <Soldado> ejercito = new ArrayList<Soldado>();
-	    ejercito = creandoEjercito();
+    	List <Soldado> ejercito1, ejercito2;
+ 	    ejercito1 = creandoEjercito();
+        ejercito2 = creandoEjercito();
         System.out.println("		~TABLERO~");
 	    mostrarTablero();
 /*	    mayorNivelVida(ejercito).mostrar();

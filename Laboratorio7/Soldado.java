@@ -2,6 +2,7 @@ public class Soldado {
 	private String nombre;
 	private int nivelVida, fila;
 	private char columna;
+    private String valorTablero;
    	public void setNombre( String n){
 		nombre = n;
 	}
@@ -31,4 +32,11 @@ public class Soldado {
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
             + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna; 	
 	}
+    public String setColor(String color, String nivelVida){
+        valorTablero = color + nivelVida + "\u001B[0m"; 
+    }
+    public String getValorTablero(){
+        return valorTablero;
+    }
 }
+
