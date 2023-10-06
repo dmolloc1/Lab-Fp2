@@ -4,25 +4,29 @@ import java.util.*;
 public class VideoJuego2 {
     static ArrayList <ArrayList <Soldado>> tablero = new ArrayList <ArrayList<Soldado>>();
     public static void main(String[] args) {
-    	ArrayList <Soldado> ejercito = creandoEjercito();
-	    
+    	ArrayList <Soldado> ejercito1 = creandoEjercito();
+	    System.out.println("\nEl total de nivel de vida del ejercito 1 es :" + totalNivelVida(ejercito1));
+	    System.out.println("El promedio de nivel de vida del ejercito 1 es :" + promedioNivelVida(ejercito1));
+    	System.out.println("\n~~~ Soldados del ejercito 1 ~~~");
+	    mostrarSoldados(ejercito1);
+        ordenarPorNivelBurbuja(ejercito1);
+	    System.out.println("\n~~~ Soldados ordenados Metodo Burbuja ~~~");
+        mostrarSoldados(ejercito1);
+	    System.out.println("El soldado con mayor nivel de vida del ejercito 1 es: ");
+        mayorNivelVida(ejercito1).getNombre();
+    //Creamos el segundo ejercito
+    	ArrayList <Soldado> ejercito2 = creandoEjercito();
+	    System.out.println("\nEl total de nivel de vida del ejercito 2 es :" + totalNivelVida(ejercito2));
+	    System.out.println("El promedio de nivel de vida del ejercito 2 es :" + promedioNivelVida(ejercito2));
+    	System.out.println("\n~~~ Soldados del ejercito 2 ~~~");
+	    mostrarSoldados(ejercito2);
+        ordenarPorNivelSelección(ejercito2);//Ordenando el ejercito con el metodo de Selcción
+	    System.out.println("\n~~~ Soldados ordenados Metodo de Selección ~~~");
+        mostrarSoldados(ejercito2);
+	    System.out.println("El soldado con mayor nivel de vida del ejercito 2 es: ");
+        mayorNivelVida(ejercito2).getNombre();
         System.out.println("		~TABLERO~");
         mostrarTablero();
-/*	    mayorNivelVida(ejercito).mostrar();
-	    System.out.println("\nEl total de nivel de vida del ejercito es :" + totalNivelVida(ejercito));
-	    System.out.println("El promedio de nivel de vida del ejercito es :" + promedioNivelVida(ejercito));
-	    System.out.println("\n~~~ Nivel de vida de los soldados ~~~");
-	    mostrarNivelVida(ejercito);
-    	System.out.println("\n~~~ Soldados del ejercito ~~~");
-	    mostrarSoldados(ejercito);
-        ordenarPorNivelBurbuja(ejercito);
-	    System.out.println("\n~~~ Soldados ordenados Metodo Burbuja ~~~");
-        mostrarSoldados(ejercito);
-    //Creamos otro ejercito para aplicar el otro metodo de ordenamiento
-        Soldado[] ejercito2 = creandoEjercito();
-        ordenarPorNivelSelección(ejercito2);
-	    System.out.println("\n~~~ Soldados ordenados Metodo de Selección ~~~");
-        mostrarSoldados(ejercito2);*/
     }
 
     public static ArrayList <Soldado> creandoEjercito() {
@@ -100,63 +104,54 @@ public class VideoJuego2 {
 		}
     }
 
-/*    public static Soldado mayorNivelVida(Soldado[] soldados){
-		Soldado soldMayor = soldados[0];
-
-		for(int i = 1; i < soldados.length; i++){
-			int min = soldados[i].getNivelDeVida();
-			if(soldados[i].getNivelDeVida() > soldMayor.getNivelDeVida()){
-				soldMayor = soldados[i];
-			}
-		}
+   public static Soldado mayorNivelVida(ArrayList <Soldado> soldados){
+		Soldado soldMayor = soldados.get(soldados.size() - 1);
 		return soldMayor;
     }
-    public static int totalNivelVida(Soldado[] soldados) {
+    public static int totalNivelVida(ArrayList <Soldado> soldados) {
         int total = 0;
         for (Soldado soldado : soldados) {
             total += soldado.getNivelDeVida();
         }
         return total;
     }
-    public static int promedioNivelVida(Soldado[] soldados){
-    	return totalNivelVida(soldados)/ soldados.length;
+    public static int promedioNivelVida(ArrayList<Soldado> soldados){
+    	return totalNivelVida(soldados)/ soldados.size();
     }
-    public static void mostrarNivelVida(Soldado[] soldados) {
+    public static void mostrarNivelVida(ArrayList<Soldado> soldados) {
         for (Soldado soldado : soldados) {
             System.out.println(soldado.mostrar());
         }
     }
-    public static void ordenarPorNivelBurbuja(Soldado[] soldados){
-        for(int i = 1; i< soldados.length; i++){
-            for(int j = 0; j < soldados.length - i; j++){
-                if(soldados[j].getNivelDeVida() > soldados[j + 1].getNivelDeVida()){
+    public static void ordenarPorNivelBurbuja(ArrayList<Soldado> soldados){
+        for(int i = 1; i< soldados.size(); i++){
+            for(int j = 0; j < soldados.size() - i; j++){
+                if(soldados.get(j).getNivelDeVida() > soldados.get(j + 1).getNivelDeVida()){
                     intercambiar(soldados, j , j + 1);
                 }
             }
         }
     }
-    public static void ordenarPorNivelSelección(Soldado[] soldados){
-        for(int i = 0; i < soldados.length - 1; i++){
+    public static void ordenarPorNivelSelección(ArrayList <Soldado> soldados){
+        for(int i = 0; i < soldados.size() - 1; i++){
             int min = i;
-            for(int j = i + 1; j < soldados.length; j++){
-                if(soldados[min].getNivelDeVida() >  soldados[j].getNivelDeVida()){
+            for(int j = i + 1; j < soldados.size(); j++){
+                if(soldados.get(min).getNivelDeVida() >  soldados.get(j).getNivelDeVida()){
                     min = j;
                 }  
             }
             intercambiar(soldados, min, i);
         }
     }
-    public static void intercambiar(Soldado[] lista, int i, int j){
-        Soldado vControl = lista[i];
-        lista[i]= lista[j];
-        lista[j]= vControl;
+    public static void intercambiar(ArrayList <Soldado> lista, int i, int j){
+        Soldado vControl = lista.get(i);
+        lista.set(i,lista.get(j));
+        lista.set(j, vControl);
     }
-    public static void mostrarSoldados(Soldado[] soldados){
+    public static void mostrarSoldados(ArrayList <Soldado> soldados){
         for (Soldado n : soldados) {
             System.out.println("---------------------------------\n"+n.mostrar());
         }
     }
-    
-  */
 }
 
