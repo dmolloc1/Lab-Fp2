@@ -8,7 +8,8 @@ public class VideoJuego2 {
         String turqueza = "\u001B[30m";
         String amarillo = "\u001B[31m";
         ArrayList <Soldado> ejercito1 = creandoEjercito(turqueza);
-	    System.out.println("\nEl total de nivel de vida del ejercito 1 es :" + totalNivelVida(ejercito1));
+        int total1 = totalNivelVida(ejercito1);
+	    System.out.println("\nEl total de nivel de vida del ejercito 1 es :" + total1);
 	    System.out.println("El promedio de nivel de vida del ejercito 1 es :" + promedioNivelVida(ejercito1));
     	System.out.println("\n~~~ Soldados del ejercito 1 ~~~");
 	    mostrarSoldados(ejercito1);
@@ -18,7 +19,8 @@ public class VideoJuego2 {
 	    System.out.println("\nEl soldado con mayor nivel de vida del ejercito 1 es: \n"+ mayorNivelVida(ejercito1).mostrar());
     //Creamos el segundo ejercito
     	ArrayList <Soldado> ejercito2 = creandoEjercito(amarillo);
-	    System.out.println("\nEl total de nivel de vida del ejercito 2 es :" + totalNivelVida(ejercito2));
+        int total2 = totalNivelVida(ejercito2);
+	    System.out.println("\nEl total de nivel de vida del ejercito 2 es :" + total2);
 	    System.out.println("El promedio de nivel de vida del ejercito 2 es :" + promedioNivelVida(ejercito2));
     	System.out.println("\n~~~ Soldados del ejercito 2 ~~~");
 	    mostrarSoldados(ejercito2);
@@ -26,8 +28,20 @@ public class VideoJuego2 {
 	    System.out.println("\n~~~ Soldados ordenados Metodo de Selección ~~~");
         mostrarSoldados(ejercito2);
 	    System.out.println("\nEl soldado con mayor nivel de vida del ejercito 2 es:\n"+ mayorNivelVida(ejercito2).mostrar());
-        System.out.println("		~TABLERO~");
+        System.out.println("\n		~TABLERO~");
         mostrarTablero();
+//Gana el ejercito con mayor cantidad de puntos
+        if(total1 <= total2){
+            if(total2 > total1){
+                System.out.println("GANO EL EJERCITO 1");
+            }
+            else{
+                System.out.println("EMPATE");
+            }
+        }
+        else{
+            System.out.println("GANO EL EJERCITO 1");
+        }
     }
 
     public static ArrayList <Soldado> creandoEjercito(String color) {
@@ -92,14 +106,21 @@ public class VideoJuego2 {
     }
 
     public static void mostrarTablero(){
-    	
+        int maxF = 0;
+        for (ArrayList<Soldado> fila : tablero) {
+            int lenFila = fila.size();
+            if (lenFila > maxF) {
+                maxF = lenFila;
+            }
+        } 
+
         for(int i = 0; i < tablero.size(); i++){
 	    	String fila = "|";
-	    	for(int j = 0; j < tablero.get(i).size(); j++){
-	            if(tablero.get(i).get(j) == null){
-					fila = fila +" - " + "|"; 
-				}else{
+	    	for(int j = 0; j < maxF; j++){
+	            if(j < tablero.get(i).size() && tablero.get(i).get(j) != null){
 					fila = fila + tablero.get(i).get(j).getColor() + "|";
+				}else{
+					fila = fila +" - " + "|"; 
 				}
 	    	}
 	    	System.out.println(fila);
