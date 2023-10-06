@@ -12,8 +12,7 @@ public class VideoJuego2 {
         ordenarPorNivelBurbuja(ejercito1);
 	    System.out.println("\n~~~ Soldados ordenados Metodo Burbuja ~~~");
         mostrarSoldados(ejercito1);
-	    System.out.println("El soldado con mayor nivel de vida del ejercito 1 es: ");
-        mayorNivelVida(ejercito1).getNombre();
+	    System.out.println("\nEl soldado con mayor nivel de vida del ejercito 1 es: \n"+ mayorNivelVida(ejercito1).mostrar());
     //Creamos el segundo ejercito
     	ArrayList <Soldado> ejercito2 = creandoEjercito();
 	    System.out.println("\nEl total de nivel de vida del ejercito 2 es :" + totalNivelVida(ejercito2));
@@ -23,8 +22,7 @@ public class VideoJuego2 {
         ordenarPorNivelSelección(ejercito2);//Ordenando el ejercito con el metodo de Selcción
 	    System.out.println("\n~~~ Soldados ordenados Metodo de Selección ~~~");
         mostrarSoldados(ejercito2);
-	    System.out.println("El soldado con mayor nivel de vida del ejercito 2 es: ");
-        mayorNivelVida(ejercito2).getNombre();
+	    System.out.println("\nEl soldado con mayor nivel de vida del ejercito 2 es:\n"+ mayorNivelVida(ejercito2).mostrar());
         System.out.println("		~TABLERO~");
         mostrarTablero();
     }
