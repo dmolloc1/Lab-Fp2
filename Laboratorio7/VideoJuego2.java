@@ -10,23 +10,13 @@ public class VideoJuego2 {
         String amarillo = "\u001B[31m";
 	    boolean continuar = true;
 	    while(continuar){
-		    datosEjercito(1, turqueza);
+		    int total1 = datosEjercito(1, turqueza);
             System.out.println("................................................................");
-		    datosEjercito(2, amarillo);
+		    int total2 = datosEjercito(2, amarillo);
             System.out.println("\n          ~~~TABLERO~~~");
             mostrarTablero();
-	//Se decide el ejercito ganador
-        /*    if(ejercitoGanador()){
-                if(total2 > total1){
-                    System.out.println("GANO EL EJERCITO 1");
-                }
-                else{
-                    System.out.println("EMPATE");
-                }
-            }
-            else{
-                System.out.println("GANO EL EJERCITO 1");
-            }*/
+	//Se decide el ejercito ganador 
+            ejercitoGanador(total1, total2);
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
         }
@@ -133,7 +123,7 @@ public class VideoJuego2 {
         }
     }
 
-    public static void datosEjercito(int n, String color){
+    public static int datosEjercito(int n, String color){
 	ArrayList <Soldado> ejercito = creandoEjercito(color);
         int total = totalNivelVida(ejercito);
         System.out.printf("\nEl total de nivel de vida del ejercito %d es : %d", n, total);
@@ -150,9 +140,19 @@ public class VideoJuego2 {
         mostrarSoldados(ejercito);
         System.out.printf("\nEl soldado con mayor nivel de vida del ejercito %d es: ", n );
         System.out.println("\n"+ ejercito.get(ejercito.size() - 1).mostrar());
+        return total;
     }
-    public static boolean ejercitoGanador(){
-    	return true;
+    public static void ejercitoGanador(int p1, int p2){
+    //Gana el ejercito con mayor puntaje acumulado
+        if(p1 > p2){
+            System.out.println("GANO EL EJERCITO 1");
+        }else{
+            if(p1 == p2){
+                System.out.println("EMPATE");
+            }
+            else{System.out.println("GANO EL EJERCITO 2");
+            }
+        }
     }
 }
 
