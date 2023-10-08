@@ -11,7 +11,10 @@ public class VideoJuego2 {
 	    boolean continuar = true;
 	    while(continuar){
 		    datosEjercito(1, turqueza);
+            System.out.println("................................................................");
 		    datosEjercito(2, amarillo);
+            System.out.println("\n          ~~~TABLERO~~~");
+            mostrarTablero();
 	//Se decide el ejercito ganador
         /*    if(ejercitoGanador()){
                 if(total2 > total1){
@@ -78,11 +81,6 @@ public class VideoJuego2 {
 		}
     }
 
-    public static Soldado mayorNivelVida(ArrayList <Soldado> soldados){
-                Soldado soldMayor = soldados.get(soldados.size() - 1);
-                return soldMayor;
-    }
-
     public static int totalNivelVida(ArrayList <Soldado> soldados) {
         int total = 0;
         for (Soldado soldado : soldados) {
@@ -140,7 +138,7 @@ public class VideoJuego2 {
         int total = totalNivelVida(ejercito);
         System.out.printf("\nEl total de nivel de vida del ejercito %d es : %d", n, total);
         System.out.printf("\nEl promedio de nivel de vida del ejercito %d es : %d", n, promedioNivelVida(ejercito));
-        System.out.printf("\n~~~ Soldados del ejercito %d ~~~", n);
+        System.out.printf("\n~~~ Soldados del ejercito %d ~~~\n", n);
         mostrarSoldados(ejercito);
         if(n == 1){
 	    	ordenarPorNivelBurbuja(ejercito);//Ordenando el ejercito con el método Burbuja
@@ -151,7 +149,7 @@ public class VideoJuego2 {
         }
         mostrarSoldados(ejercito);
         System.out.printf("\nEl soldado con mayor nivel de vida del ejercito %d es: ", n );
-        ejercito.get(ejercito.size() - 1).mostrar();
+        System.out.println("\n"+ ejercito.get(ejercito.size() - 1).mostrar());
     }
     public static boolean ejercitoGanador(){
     	return true;
