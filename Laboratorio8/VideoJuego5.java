@@ -2,21 +2,19 @@ import java.util.*;
 //Laboratorio A Fundamentos 2
 //Autor: Mollo Chuquicaña Dolly Yadhira
 public class VideoJuego5 {
-    static Soldado[][]tablero = new Soldado[10][10];
     public static void main(String[] args) {
     	Scanner sc = new  Scanner(System.in);
         HashMap <String, Soldado> ejercito1, ejercito2;
         String turqueza = "\u001B[30m";
         String amarillo = "\u001B[31m";
 	    boolean continuar = true;
-        ejercito1 = creandoEjercito(turqueza);
-	    mostrarTablero();
         while(continuar){
-		    int total1 = datosEjercito(1, turqueza);
+            Soldado[][] tablero = new Soldado[10][10];
+		    int total1 = datosEjercito(1, turqueza, tablero);
             System.out.println("................................................................");
-		    int total2 = datosEjercito(2, amarillo);
+		    int total2 = datosEjercito(2, amarillo, tablero);
             System.out.println("\n          ~~~TABLERO~~~");
-            mostrarTablero();
+            mostrarTablero(tablero);
 	//Se decide el ejercito ganador 
          //   ejercitoGanador(total1, total2);
             System.out.print("Desea continuar otra ronda (y/n): ");
@@ -25,7 +23,7 @@ public class VideoJuego5 {
     }
 
 
-    public static HashMap <String, Soldado> creandoEjercito(String color) {
+    public static HashMap <String, Soldado> creandoEjercito(String color, Soldado [][] tablero) {
         HashMap <String, Soldado> hashArmy = new  HashMap <String, Soldado>();
     	int nivelR = 0, filaR = 0, columnaR = 0;
         int armyLength = (int)(Math.random() * 10 + 1);
@@ -38,7 +36,7 @@ public class VideoJuego5 {
             while (!posicionValida) {
                 filaR = (int) (Math.random() * 9);
                 columnaR = (int) (Math.random() * 9);
-                if (rellenarTablero(filaR, columnaR, nuevo)) {
+                if (rellenarTablero(filaR, columnaR, nuevo, tablero)) {
                     posicionValida = true;
                 }
             }
@@ -50,14 +48,14 @@ public class VideoJuego5 {
     	return hashArmy;
     }
 
-    public static boolean rellenarTablero(int fila, int columna, Soldado sol) {
+    public static boolean rellenarTablero(int fila, int columna, Soldado sol, Soldado[][] tablero) {
         if (tablero[fila][columna] == null) {
             tablero[fila][columna] = sol;
             return true;
         }
         return false;
     }
-    public static void mostrarTablero(){
+    public static void mostrarTablero(Soldado [][] tablero){
     	for(int i = 0; i < tablero.length; i++){
 	    	String fila = "|";
 	    	for(int j = 0; j < tablero[i].length; j++){
@@ -123,8 +121,8 @@ public class VideoJuego5 {
         }
     }
 
-    public static int datosEjercito(int n, String color){
-        HashMap <String, Soldado> ejercito = creandoEjercito(color);
+    public static int datosEjercito(int n, String color, Soldado[][] tablero){
+        HashMap <String, Soldado> ejercito = creandoEjercito(color, tablero);
         Soldado [] soldKey = (ejercito.values()).toArray(new Soldado [0]);
         int total = totalNivelVida(soldKey);
         System.out.printf("\nEl total de nivel de vida del ejercito %d es : %d", n, total);
@@ -140,7 +138,7 @@ public class VideoJuego5 {
       //  }
         mostrarSoldados(soldKey);
         System.out.printf("\nEl soldado con mayor nivel de vida del ejercito %d es: ", n );
-        System.out.println("\n"+ ejercito.get("Soldado"+ ejercito.size()).mostrar());
+        System.out.println("\n"+ ejercito.get("Soldado_"+ ejercito.size()).mostrar());
         return total;
     }/*
     public static void ejercitoGanador(int p1, int p2){
