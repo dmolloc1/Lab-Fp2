@@ -133,15 +133,15 @@ public class VideoJuego5 {
         System.out.printf("\n~~~ Soldados del ejercito %d ~~~\n", n);
         mostrarSoldados(soldKey);
         if(n == 4){
-	    	ordenarPorNivelBurbuja(ejercito);//Ordenando el ejercito con el método Burbuja
+	    //	ordenarPorNivelBurbuja(ejercito);//Ordenando el ejercito con el método Burbuja
             System.out.println("\n       ~MÉTODO BURBUJA~");
 	    }
-    	else{ ordenarPorNivelSelección(ejercito);//Ordenando el ejercito con el método de Selección;
+    //	else{ ordenarPorNivelSelección(ejercito);//Ordenando el ejercito con el método de Selección;
 	        System.out.println("\n       ~MÉTODO DE SELECCIÓN~");
-        }
+      //  }
         mostrarSoldados(soldKey);
         System.out.printf("\nEl soldado con mayor nivel de vida del ejercito %d es: ", n );
-        System.out.println("\n"+ ejercito.get("Soldado"+ ejercito.size() - 1));
+        System.out.println("\n"+ ejercito.get("Soldado"+ (ejercito.size() - 1)));
         return total;
     }/*
     public static void ejercitoGanador(int p1, int p2){
