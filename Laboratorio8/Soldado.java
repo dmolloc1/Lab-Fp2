@@ -30,10 +30,10 @@ public class Soldado {
 		return columna;
 	}
 
-/*	public String mostrar(){
+	public String mostrar(){
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
             + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna; 	
-	}*/
+	}
   	public void setValorTablero(String color, String nivelVida){
       	valorTablero = color + nivelVida + "\u001B[0m"; 
    	}

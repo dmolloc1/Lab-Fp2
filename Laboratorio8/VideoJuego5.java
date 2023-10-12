@@ -119,8 +119,7 @@ public class VideoJuego5 {
 
     public static void mostrarSoldados(Soldado[] soldados){
         for (Soldado n : soldados) {
-            //System.out.println("---------------------------------\n"+n.mostrar());
-            System.out.println(n);
+            System.out.println("---------------------------------\n"+n.mostrar());
         }
     }
 
@@ -141,7 +140,7 @@ public class VideoJuego5 {
       //  }
         mostrarSoldados(soldKey);
         System.out.printf("\nEl soldado con mayor nivel de vida del ejercito %d es: ", n );
-        System.out.println("\n"+ ejercito.get("Soldado"+ (ejercito.size() - 1)));
+        System.out.println("\n"+ ejercito.get("Soldado"+ ejercito.size()).mostrar());
         return total;
     }/*
     public static void ejercitoGanador(int p1, int p2){
