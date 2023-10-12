@@ -1,15 +1,16 @@
 import java.util.*;
 //Laboratorio A Fundamentos 2
 //Autor: Mollo Chuquicaña Dolly Yadhira
-public class VideoJuego2 {
+public class VideoJuego5 {
     static Soldado[][]tablero = new Soldado[10][10];
     public static void main(String[] args) {
     	Scanner sc = new  Scanner(System.in);
-        List <Soldado> ejercito1, ejercito2;
+        HashMap <String, Soldado> ejercito1, ejercito2;
         String turqueza = "\u001B[30m";
         String amarillo = "\u001B[31m";
 	    boolean continuar = true;
-	    while(continuar){
+        ejercito1 = creandoEjercito(turqueza);
+	 /*   while(continuar){
 		    int total1 = datosEjercito(1, turqueza);
             System.out.println("................................................................");
 		    int total2 = datosEjercito(2, amarillo);
@@ -19,12 +20,12 @@ public class VideoJuego2 {
             ejercitoGanador(total1, total2);
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
-        }
+        }*/
     }
 
 
-    public static ArrayList <Soldado> creandoEjercito(String color) {
-        ArrayList <Soldado> listArmy = new ArrayList <Soldado>();
+    public static HashMap <String, Soldado> creandoEjercito(String color) {
+        HashMap <String, Soldado> hashArmy = new  HashMap <String, Soldado>();
     	int nivelR = 0, filaR = 0, columnaR = 0;
         int armyLength = (int)(Math.random() * 10 + 1);
 	    for (int i = 0; i < armyLength; i++) {
@@ -43,10 +44,9 @@ public class VideoJuego2 {
             nuevo.setFila(filaR + 1);
             nuevo.setColumna((char) (columnaR + 65));
             nuevo.setValorTablero(color,""+ nuevo.getNivelDeVida());
-            listArmy.add(nuevo);
+            hashArmy.put(nuevo.getNombre(), nuevo);
         }
-
-	return listArmy;
+    	return hashArmy;
     }
 
     public static boolean rellenarTablero(int fila, int columna, Soldado sol) {
@@ -56,7 +56,7 @@ public class VideoJuego2 {
         }
         return false;
     }
-
+/*
     public static void mostrarTablero(){
     	for(int i = 0; i < tablero.length; i++){
 	    	String fila = "|";
@@ -153,6 +153,6 @@ public class VideoJuego2 {
             else{System.out.println("GANO EL EJERCITO 2");
             }
         }
-    }
+    }*/
 }
 
