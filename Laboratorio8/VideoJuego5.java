@@ -74,7 +74,7 @@ public class VideoJuego5 {
     public static int totalNivelVida(Soldado [] soldados) {
         int total = 0;
         for (Soldado soldado : soldados) {
-            total += soldado.getNivelVida();
+            total += soldado.getNivelDeVida();
         }
         return total;
     }
@@ -85,7 +85,7 @@ public class VideoJuego5 {
 
     public static void mostrarNivelVida(Soldado [] soldados) {
         for (Soldado soldado : soldados) {
-            System.out.println(soldado.nivelDeVida());
+            System.out.println(soldado.getNivelDeVida());
         }
     }
 /*
@@ -126,10 +126,10 @@ public class VideoJuego5 {
 
     public static int datosEjercito(int n, String color){
         HashMap <String, Soldado> ejercito = creandoEjercito(color);
-        int total = totalNivelVida(ejercito);
-        Soldado [] soldKey = ejercito.values();
+        Soldado [] soldKey = (ejercito.values()).toArray(new Soldado [0]);
+        int total = totalNivelVida(soldKey);
         System.out.printf("\nEl total de nivel de vida del ejercito %d es : %d", n, total);
-        System.out.printf("\nEl promedio de nivel de vida del ejercito %d es : %d", n, promedioNivelVida(total, soldKey.size()));
+        System.out.printf("\nEl promedio de nivel de vida del ejercito %d es : %d", n, promedioNivelVida(total, ejercito.size()));
         System.out.printf("\n~~~ Soldados del ejercito %d ~~~\n", n);
         mostrarSoldados(soldKey);
         if(n == 4){
