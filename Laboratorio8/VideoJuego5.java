@@ -86,34 +86,38 @@ public class VideoJuego5 {
             System.out.println(soldado.getNivelDeVida());
         }
     }
-/*
-    public static void ordenarPorNivelBurbuja(HashMap <String, Soldado> soldados){
-        for(int i = 1; i< soldados.size(); i++){
-            for(int j = 0; j < soldados.size() - i; j++){
-                if(soldados.get(j).getNivelDeVida() > soldados.get(j + 1).getNivelDeVida()){
-                    intercambiar(soldados, j , j + 1);
+
+    public static return Soldado [] ordenarPorNivelBurbuja( Soldado [] soldkey){
+//Un hashMap no se puede ordenar debido a que no hay posiciones exactas por ello para ordenarlo lo que podemos hacer es usar el arreglo creado por sus objetos para ir comparando y ordenando
+        for(int i = 1; i< soldakey.size(); i++){
+            for(int j = 0; j < soldkey.size() - i; j++){
+                if(soldkey[j].getNivelDeVida() > soldkey[j + 1].getNivelDeVida()){
+                    intercambiar(soldkey, j , j + 1);
                 }
             }
         }
+        return soldkey;
     }
 
-    public static void ordenarPorNivelSelección(HashMap <String, Soldado> soldados){
-        for(int i = 0; i < soldados.size() - 1; i++){
+    public static return Soldado [] ordenarPorNivelSelección( Soldado[] soldkey){
+    //Para que esta lista ordenada se puedea utilizar debemos regresar el arreglo ordenado en lugar de imprimirlo directamente en el metodo
+        for(int i = 0; i < soldkey.size() - 1; i++){
             int min = i;
-            for(int j = i + 1; j < soldados.size(); j++){
-                if(soldados.get(min).getNivelDeVida() >  soldados.get(j).getNivelDeVida()){
+            for(int j = i + 1; j < soldkey.size(); j++){
+                if(soldkey[min].getNivelDeVida() > soldkey[j].getNivelDeVida()){
                     min = j;
                 }
             }
-            intercambiar(soldados, min, i);
+            intercambiar(soldkey, min, i);
         }
+        return soldkey;
     }
 
-    public static void intercambiar(HashMap <String, Soldado> lista, int i, int j){
-        Soldado vControl = lista.get(i);
-        lista.set(i,lista.get(j));
-        lista.set(j, vControl);
-    }*/
+    public static void intercambiar(HashMap < Soldado [] soldkey, int i, int j){
+        Soldado pivot = soldkey[i];
+        soldkey[i] = soldkey[j];
+        soldkey[j] = pivot;
+    }
 
     public static void mostrarSoldados(Soldado[] soldados){
         for (Soldado n : soldados) {
@@ -130,12 +134,12 @@ public class VideoJuego5 {
         System.out.printf("\n~~~ Soldados del ejercito %d ~~~\n", n);
         mostrarSoldados(soldKey);
         if(n == 4){
-	    //	ordenarPorNivelBurbuja(ejercito);//Ordenando el ejercito con el método Burbuja
+        	ordenarPorNivelBurbuja(ejercito, soldkey);//Ordenando el ejercito con el método Burbuja
             System.out.println("\n       ~MÉTODO BURBUJA~");
 	    }
-    //	else{ ordenarPorNivelSelección(ejercito);//Ordenando el ejercito con el método de Selección;
+    	else{ ordenarPorNivelSelección(ejercito);//Ordenando el ejercito con el método de Selección;
 	        System.out.println("\n       ~MÉTODO DE SELECCIÓN~");
-      //  }
+        }
         mostrarSoldados(soldKey);
         System.out.printf("\nEl soldado con mayor nivel de vida del ejercito %d es: ", n );
         System.out.println("\n"+ ejercito.get("Soldado_"+ ejercito.size()).mostrar());
