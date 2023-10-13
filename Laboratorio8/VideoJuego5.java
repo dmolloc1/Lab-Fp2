@@ -87,36 +87,38 @@ public class VideoJuego5 {
         }
     }
 
-    public static return Soldado [] ordenarPorNivelBurbuja( Soldado [] soldkey){
+    public static Soldado [] ordenarPorNivelBurbuja( Soldado [] soldKey){
 //Un hashMap no se puede ordenar debido a que no hay posiciones exactas por ello para ordenarlo lo que podemos hacer es usar el arreglo creado por sus objetos para ir comparando y ordenando
-        for(int i = 1; i< soldakey.size(); i++){
-            for(int j = 0; j < soldkey.size() - i; j++){
-                if(soldkey[j].getNivelDeVida() > soldkey[j + 1].getNivelDeVida()){
-                    intercambiar(soldkey, j , j + 1);
+        for(int i = 1; i< soldKey.length; i++){
+            for(int j = 0; j < soldKey.length - i; j++){
+                if(soldKey[j].getNivelDeVida() > soldKey[j + 1].getNivelDeVida()){
+                    soldKey = intercambiar(soldKey, j , j + 1);
                 }
             }
         }
-        return soldkey;
+        return soldKey;
     }
 
-    public static return Soldado [] ordenarPorNivelSelección( Soldado[] soldkey){
+    public static Soldado [] ordenarPorNivelSelección( Soldado[] soldKey){
     //Para que esta lista ordenada se puedea utilizar debemos regresar el arreglo ordenado en lugar de imprimirlo directamente en el metodo
-        for(int i = 0; i < soldkey.size() - 1; i++){
+        for(int i = 0; i < soldKey.length - 1; i++){
             int min = i;
-            for(int j = i + 1; j < soldkey.size(); j++){
-                if(soldkey[min].getNivelDeVida() > soldkey[j].getNivelDeVida()){
+            for(int j = i + 1; j < soldKey.length; j++){
+                if(soldKey[min].getNivelDeVida() > soldKey[j].getNivelDeVida()){
                     min = j;
                 }
             }
-            intercambiar(soldkey, min, i);
+            soldKey = intercambiar(soldKey, min, i);
         }
-        return soldkey;
+        return soldKey;
     }
 
-    public static void intercambiar(HashMap < Soldado [] soldkey, int i, int j){
-        Soldado pivot = soldkey[i];
-        soldkey[i] = soldkey[j];
-        soldkey[j] = pivot;
+    public static Soldado [] intercambiar(Soldado [] soldKey, int i, int j){
+        //Como ahora el arreglo no es estatico se debe actualizar el arreglo soldKey para tener el ordenamiento
+        Soldado pivot = soldKey[i];
+        soldKey[i] = soldKey[j];
+        soldKey[j] = pivot;
+        return soldKey;
     }
 
     public static void mostrarSoldados(Soldado[] soldados){
@@ -134,10 +136,10 @@ public class VideoJuego5 {
         System.out.printf("\n~~~ Soldados del ejercito %d ~~~\n", n);
         mostrarSoldados(soldKey);
         if(n == 4){
-        	ordenarPorNivelBurbuja(ejercito, soldkey);//Ordenando el ejercito con el método Burbuja
+        	ordenarPorNivelBurbuja(soldKey);//Ordenando el ejercito con el método Burbuja
             System.out.println("\n       ~MÉTODO BURBUJA~");
 	    }
-    	else{ ordenarPorNivelSelección(ejercito);//Ordenando el ejercito con el método de Selección;
+    	else{ ordenarPorNivelSelección(soldKey);//Ordenando el ejercito con el método de Selección;
 	        System.out.println("\n       ~MÉTODO DE SELECCIÓN~");
         }
         mostrarSoldados(soldKey);
