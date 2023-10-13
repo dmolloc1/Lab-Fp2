@@ -16,7 +16,7 @@ public class VideoJuego5 {
             System.out.println("\n          ~~~TABLERO~~~");
             mostrarTablero(tablero);
 	//Se decide el ejercito ganador 
-         //   ejercitoGanador(total1, total2);
+            ejercitoGanador(total1, total2);
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
         }
@@ -135,29 +135,29 @@ public class VideoJuego5 {
         System.out.printf("\nEl promedio de nivel de vida del ejercito %d es : %d", n, promedioNivelVida(total, ejercito.size()));
         System.out.printf("\n~~~ Soldados del ejercito %d ~~~\n", n);
         mostrarSoldados(soldKey);
-        if(n == 4){
-        	ordenarPorNivelBurbuja(soldKey);//Ordenando el ejercito con el método Burbuja
+        if(n == 1){
+        	soldKey = ordenarPorNivelBurbuja(soldKey);//Ordenando el ejercito con el método Burbuja
             System.out.println("\n       ~MÉTODO BURBUJA~");
 	    }
-    	else{ ordenarPorNivelSelección(soldKey);//Ordenando el ejercito con el método de Selección;
+    	else{ soldKey = ordenarPorNivelSelección(soldKey);//Ordenando el ejercito con el método de Selección;
 	        System.out.println("\n       ~MÉTODO DE SELECCIÓN~");
         }
         mostrarSoldados(soldKey);
         System.out.printf("\nEl soldado con mayor nivel de vida del ejercito %d es: ", n );
         System.out.println("\n"+ ejercito.get("Soldado_"+ ejercito.size()).mostrar());
         return total;
-    }/*
+    }
     public static void ejercitoGanador(int p1, int p2){
     //Gana el ejercito con mayor puntaje acumulado
         if(p1 > p2){
-            System.out.println("GANO EL EJERCITO 1");
+            System.out.println("\n\u001B[33m************* GANO EL EJERCITO 1 *****************\u001B[0m");
         }else{
             if(p1 == p2){
-                System.out.println("EMPATE");
+                System.out.println("\n\u001B[33m******************** EMPATE *******************\u001B[0m");
             }
-            else{System.out.println("GANO EL EJERCITO 2");
+            else{System.out.println("\n\u001B[33m****************** GANO EL EJERCITO 2 ***************\u001B[0m");
             }
         }
-    }*/
+    }
 }
 
