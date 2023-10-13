@@ -45,7 +45,7 @@ public class Soldado {
 	public char getColumna(){
 		return columna;
 	}
-
+//Metodos
 	public String mostrar(){
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
             + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna; 	
@@ -56,5 +56,25 @@ public class Soldado {
    	public String getValorTablero(){
        	return valorTablero;
    	}
+    public void atacar(){
+        this.velocidad = this.velocidad + 1;
+        this.actitud = "Atacar";
+    }
+    public void defender(){
+        this.velocidad = 0;
+        this.actitud = "Defender";
+    }
+    public void huir (){
+        this.velocidad = this.velocidad + 2;
+        this.actitud = "Huir";
+    }
+    public void retroceder(){
+        if(this.velocidad > 0)
+            this.velocidad = 0;
+            this.actitud = "Defender";
+        else
+            this.velocidad = this.velocidad - 1;
+    } 
+
 }
 
