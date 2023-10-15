@@ -16,7 +16,8 @@ public class Soldado {
         this.velocidad = velocidad;
     }
 
-    public Soldado(int fila, char columna ){//Atributos de ubicacion y nombre
+    public Soldado(String nombre,int fila, char columna ){//Atributos de ubicacion y nombre
+        this.nombre = nombre;
         this.fila = fila;
         this.columna = columna;
     }
@@ -110,5 +111,11 @@ public class Soldado {
         this.vive = false;
     }
 
+    public void setVidaActual(int vidaActual){
+        this.nivelVida = vidaActual;
+    }
+    public int getVidaActual(){
+        return nivelVida;
+    }
 }
 
