@@ -11,16 +11,16 @@ public class VideoJuego5 {
         String amarillo = "\u001B[31m";
 	    boolean continuar = true;
 	    while(continuar){
-		   /* int total1 = datosEjercito(1, turqueza);
+		    int total1 = datosEjercito(1, turqueza);
             System.out.println("................................................................");
 		    int total2 = datosEjercito(2, amarillo);
-           */ System.out.println("\n          ~~~TABLERO~~~");
+            System.out.println("\n          ~~~TABLERO~~~");
             mostrarTablero();
 	//Se decide el ejercito ganador 
-            //ejercitoGanador(total1, total2);
+            ejercitoGanador(total1, total2);
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
-           // tablero.clear();
+           
         }
     }
 
@@ -31,7 +31,6 @@ public class VideoJuego5 {
         int armyLength = (int)(Math.random() * 10 + 1);
 	    for (int i = 0; i < armyLength; i++) {
             Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);//Valores de combate
-            nuevo.setValorTablero(color,""+ nuevo.getNivelDeVida());
             // Este ciclo nos permitirá comprobar que los valores generados no coincidan con uno ya existente
             boolean posicionValida = false;
             while (!posicionValida) {
@@ -44,7 +43,8 @@ public class VideoJuego5 {
             nuevo.setFila(filaR + 1);
             nuevo.setColumna((char) (columnaR + 65));
             nuevo.setActitud("Neutro");
-		nuevo.setVive(true); //Valores por defecto
+	    	nuevo.setVive(true); //Valores por defecto
+            nuevo.setValorTablero(color,""+ nuevo.getNivelDeVida());
             listArmy.add(nuevo);
         }
 
@@ -73,7 +73,7 @@ public class VideoJuego5 {
 		}
     }
 
-/*    public static int totalNivelVida(ArrayList <Soldado> soldados) {
+    public static int totalNivelVida(ArrayList <Soldado> soldados) {
         int total = 0;
         for (Soldado soldado : soldados) {
             total += soldado.getNivelDeVida();
@@ -155,6 +155,6 @@ public class VideoJuego5 {
             else{System.out.println("GANO EL EJERCITO 2");
             }
         }
-    }*/
+    }
 }
 
