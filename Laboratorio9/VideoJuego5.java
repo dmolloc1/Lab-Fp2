@@ -30,7 +30,8 @@ public class VideoJuego5 {
     	int filaR = 0, columnaR = 0;
         int armyLength = (int)(Math.random() * 10 + 1);
 	    for (int i = 0; i < armyLength; i++) {
-            Soldado nuevo = new Soldado((int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);//Valores de combate
+            Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);//Valores de combate
+            nuevo.setValorTablero(color,""+ nuevo.getNivelDeVida());
             // Este ciclo nos permitirá comprobar que los valores generados no coincidan con uno ya existente
             boolean posicionValida = false;
             while (!posicionValida) {
@@ -40,9 +41,10 @@ public class VideoJuego5 {
                     posicionValida = true;
                 }
             }
-            nuevo = new Soldado("Soldado_" + (i + 1), filaR + 1, (char) (columnaR + 65));//Valores de posición y nombre
-            nuevo = new Soldado("Neutro", true); //Valores por defecto
-            nuevo.setValorTablero(color,""+ nuevo.getNivelDeVida());
+            nuevo.setFila(filaR + 1);
+            nuevo.setColumna((char) (columnaR + 65));
+            nuevo.setActitud("Neutro");
+		nuevo.setVive(true); //Valores por defecto
             listArmy.add(nuevo);
         }
 

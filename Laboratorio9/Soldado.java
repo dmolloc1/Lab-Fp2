@@ -9,15 +9,15 @@ public class Soldado {
     private String actitud;
     private boolean vive;
 
-    public Soldado(int nivelVida, int nivelAtaque, int nivelDefensa, int velocidad){//Atributos de batalla
+    public Soldado(String nombre, int nivelVida, int nivelAtaque, int nivelDefensa, int velocidad){//Atributos de batalla
+        this.nombre = nombre;
         this.nivelVida = nivelVida;
         this.nivelAtaque = nivelAtaque;
         this.nivelDefensa = nivelDefensa;
         this.velocidad = velocidad;
     }
 
-    public Soldado(String nombre,int fila, char columna ){//Atributos de ubicacion y nombre
-        this.nombre = nombre;
+    public Soldado(int fila, char columna ){//Atributos de ubicacion y nombre
         this.fila = fila;
         this.columna = columna;
     }
@@ -38,6 +38,12 @@ public class Soldado {
 	public void setColumna(char colum){
 		columna = colum;
 	}
+    public void setVive(boolean vivir){
+        vive = vivir;
+    }
+    public void setActitud (String a){
+        actitud = a ;
+    }
 
 	public String getNombre(){
 		return nombre;
@@ -54,6 +60,12 @@ public class Soldado {
 	public char getColumna(){
 		return columna;
 	}
+    public boolean getVive(){
+        return vive;
+    }
+    public String getActitud(){
+        return actitud;
+    }
 
 //Metodos
 	public String mostrar(){
