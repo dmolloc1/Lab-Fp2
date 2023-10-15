@@ -59,9 +59,9 @@ public class Soldado {
        	return valorTablero;
    	}
     public void atacar(){
+        this.velocidad += 1;
         this.avanzar();
-        velocidad = this.velocidad + 1;
-        actitud = "Atacar";
+        this.actitud = "Atacar";
     }
     public void defender(){
         this.velocidad = 0;
@@ -83,6 +83,9 @@ public class Soldado {
     } 
     public void avanzar(){
         velocidad += 1;
+    }
+    public void serAtacado(Soldado enemigo){
+        this.nivelVida -= enemigo.nivelVida;
     }
 
 }
