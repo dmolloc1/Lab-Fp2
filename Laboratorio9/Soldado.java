@@ -9,12 +9,11 @@ public class Soldado {
     private String actitud;
     private boolean vive;
 
-    public Soldado(int nivelVida, int nivelAtaque, int nivelDefensa, int velocidad, boolean vive){//Atributos de batalla
+    public Soldado(int nivelVida, int nivelAtaque, int nivelDefensa, int velocidad){//Atributos de batalla
         this.nivelVida = nivelVida;
         this.nivelAtaque = nivelAtaque;
         this.nivelDefensa = nivelDefensa;
         this.velocidad = velocidad;
-        this.vive = vive;
     }
 
     public Soldado(int fila, char columna ){//Atributos de ubicacion y nombre
@@ -22,55 +21,69 @@ public class Soldado {
         this.columna = columna;
     }
 
-    public Soldado(String nombre, String actitud){// Atributos de estado
-        this.nombre = nombre;
+    public Soldado(String actitud, boolean vive){// Atributos de estado
         this.actitud = actitud;
+        this.vive = vive;
     }
+
 	public void setNivelDeVida(int num){
 		nivelVida = num;
 	}
+
 	public void setFila(int num){
 		fila = num;
 	}
+
 	public void setColumna(char colum){
 		columna = colum;
 	}
+
 	public String getNombre(){
 		return nombre;
-	}	
+	}
+
 	public int getNivelDeVida(){
 		return nivelVida;
 	}
+
 	public int getFila(){
 		return fila;
 	}
+
 	public char getColumna(){
 		return columna;
 	}
+
 //Metodos
 	public String mostrar(){
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
             + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna; 	
 	}
+
   	public void setValorTablero(String color, String nivelVida){
       	valorTablero = color + nivelVida + "\u001B[0m"; 
    	}
+
    	public String getValorTablero(){
        	return valorTablero;
    	}
+
     public void atacar(){
         this.velocidad += 1;
         this.avanzar();
         this.actitud = "Atacar";
     }
+
     public void defender(){
         this.velocidad = 0;
         this.actitud = "Defender";
     }
+
     public void huir (){
         this.velocidad += 2;
         this.actitud = "Huir";
     }
+
     public void retroceder(){
         if(this.velocidad > 0){
             this.velocidad = 0;
@@ -80,12 +93,21 @@ public class Soldado {
         else{ 
             this.velocidad = this.velocidad - 1;
         }
-    } 
+    }
+
     public void avanzar(){
         velocidad += 1;
     }
+
     public void serAtacado(Soldado enemigo){
         this.nivelVida -= enemigo.nivelVida;
+        if(this.nivelVida <= 0){
+            this.morir();
+        }
+    }
+
+    public void morir(){
+        this.vive = false;
     }
 
 }
