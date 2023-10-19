@@ -70,7 +70,7 @@ public class Soldado {
 //Metodos
 	public String mostrar(){
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
-            + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna +"Estado: "+ actitud; 	
+            + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna +"\nEstado: "+ actitud; 	
 	}
 
   	public void setValorTablero(String color, String nivelVida){
@@ -109,14 +109,17 @@ public class Soldado {
     }
 
     public void avanzar(){
-        velocidad += 1;
+        this.velocidad += 1;
     }
 
-    public void serAtacado(Soldado enemigo){
+    public boolean serAtacado(Soldado enemigo){
         this.nivelVida -= enemigo.nivelVida;
         if(this.nivelVida <= 0){
+            enemigo.nivelVida = -(this.nivelVida);
             this.morir();
+            return true;//Retorna verdadero si muere
         }
+        return false;
     }
 
     public void morir(){
