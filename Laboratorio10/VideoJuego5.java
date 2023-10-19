@@ -41,7 +41,7 @@ public class VideoJuego5 {
                 }
             }
             nuevo.setFila(filaR + 1);
-            nuevo.setColumna((char) (columnaR + 65));
+            nuevo.setColumna(columnaR );
             nuevo.setActitud("Neutro");
 	    	nuevo.setVive(true); //Valores por defecto
             nuevo.setValorTablero(color,""+ nuevo.getNivelDeVida());
@@ -156,8 +156,9 @@ public class VideoJuego5 {
             }
         }
     }
-    public static void moverSoldado(Soldado sold, String comando){	
-	    switch (comando) {
+    public static void moverSoldado(Soldado, String comando){	
+	    
+        switch (comando) {
             case "N":
                 sold.avanzar();
                 
@@ -189,6 +190,7 @@ public class VideoJuego5 {
         Soldado enemigo = tablero[fila][columna]; 
         if (enemigo == null) {
             tablero[fila][columna] = sold;
+
         }
         else{sold.atacar(enemigo);
             if(enemigo.serAtacado(sold)) tablero[fila][columna] = sold;

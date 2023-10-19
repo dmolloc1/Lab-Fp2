@@ -35,8 +35,8 @@ public class Soldado {
 		fila = num;
 	}
 
-	public void setColumna(char colum){
-		columna = colum;
+	public void setColumna(int colum){
+		columna = char(colum + 65);
 	}
     public void setVive(boolean vivir){
         vive = vivir;
@@ -109,8 +109,10 @@ public class Soldado {
         }
     }
 
-    public void avanzar(){
+    public void avanzar(int fila, int columna){
         this.velocidad += 1;
+        setFila(fila);
+        setColumna(columna);
     }
 
     public boolean serAtacado(Soldado enemigo){
