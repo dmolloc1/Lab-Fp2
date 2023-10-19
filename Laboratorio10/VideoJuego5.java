@@ -160,6 +160,7 @@ public class VideoJuego5 {
 	    switch (comando) {
             case "N":
                 sold.avanzar();
+                
                 break;
             case "O":
                 sold.retroceder();
@@ -182,17 +183,21 @@ public class VideoJuego5 {
             case "NE":
                 sold.retroceder();
                 break;
-    }
-    public static void cambiarPosición(Soldado [][] tablero, Soldado sold){
-        if (tablero[fila][columna] == null) {
-            tablero[fila][columna] = sol;
-        }
-        else {
-            batalla(sol, tablero[fila][columna]);
         }
     }
-    public static void batalla(Soldado a, Soldado b){
+    public static void cambiarPosición(Soldado [][] tablero, Soldado sold, int fila, int columna){
+        Soldado enemigo = tablero[fila][columna]; 
+        if (enemigo == null) {
+            tablero[fila][columna] = sold;
+        }
+        else{sold.atacar(enemigo);
+            if(enemigo.serAtacado(sold)) tablero[fila][columna] = sold;
+            else tablero[fila][columna] = enemigo;
+        }
+    }
 
+    public static void batalla(Soldado a, Soldado b){
+        
     }
 }
 

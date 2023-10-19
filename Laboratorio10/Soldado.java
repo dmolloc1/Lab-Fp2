@@ -81,10 +81,11 @@ public class Soldado {
        	return valorTablero;
    	}
 
-    public void atacar(){
+    public void atacar(Soldado enemigo){
         this.velocidad += 1;
         this.avanzar();
         this.actitud = "Atacar";
+        
     }
 
     public void defender(){
