@@ -156,5 +156,43 @@ public class VideoJuego5 {
             }
         }
     }
+    public static void moverSoldado(Soldado sold, String comando){	
+	    switch (comando) {
+            case "N":
+                sold.avanzar();
+                break;
+            case "O":
+                sold.retroceder();
+                break;
+            case "S":
+                sold.retroceder();
+                break;
+            case "E":
+                sold.avanzar();
+                break;
+            case "NO":
+                sold.retroceder();
+                break;
+            case "SO":
+                sold.retroceder();
+                break;
+            case "SE":
+                sold.retroceder();
+                break;
+            case "NE":
+                sold.retroceder();
+                break;
+    }
+    public static void cambiarPosición(Soldado [][] tablero, Soldado sold){
+        if (tablero[fila][columna] == null) {
+            tablero[fila][columna] = sol;
+        }
+        else {
+            batalla(sol, tablero[fila][columna]);
+        }
+    }
+    public static void batalla(Soldado a, Soldado b){
+
+    }
 }
 
