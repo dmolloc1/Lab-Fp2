@@ -44,7 +44,7 @@ public class VideoJuego5 {
             nuevo.setColumna(columnaR );
             nuevo.setActitud("Neutro");
 	    	nuevo.setVive(true); //Valores por defecto
-            nuevo.setValorTablero(color,""+ nuevo.getNivelDeVida());
+            nuevo.setColor(color);
             listArmy.add(nuevo);
         }
 
@@ -66,7 +66,7 @@ public class VideoJuego5 {
 	            if(tablero[i][j] == null){
 					fila = fila +" - " + "|"; 
 				}else{
-					fila = fila + " " + tablero[i][j].getValorTablero() + " |";
+					fila = fila + " " + tablero[i][j].getColor() + tablero[i][j].getNivelDeVida()  + "\u001B[0m |";
 				}
 	    	}
 	    	System.out.println(fila);
@@ -245,6 +245,7 @@ public class VideoJuego5 {
 	        String dir = sc.next();
 	        posValida = moverSoldado(tablero, fila, columna, dir);
         }
+        tablero[fila][columna] = null;
         mostrarTablero(tablero);
     }
 }
