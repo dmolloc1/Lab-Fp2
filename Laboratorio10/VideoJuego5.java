@@ -159,55 +159,55 @@ public class VideoJuego5 {
     public static boolean moverSoldado(Soldado [][] tablero, int fila, int columna, String comando){	
 	    Soldado sold = tablero[fila][columna];
         switch (comando) {
-            case "I":
-                fila = fila - 1;
-                if(fila <= 0){
-			        return true;
-		        }
-                break;
-            case "D":
-                fila = fila + 1;
-                if(fila < 10){
-			        return true;
-		        }
-                break;
             case "A":
-                columna =  columna - 1;
-                if(columna  <= 0){
+                fila = fila - 1;
+                if(fila < 0){
 			        return true;
 		        }
                 break;
             case "B":
-                columna = columna + 1;
-                if(columna < 10){
+                fila = fila + 1;
+                if(fila > 9){
 			        return true;
 		        }
                 break;
-            case "DDS":
+            case "I":
+                columna =  columna - 1;
+                if(columna  < 0){
+			        return true;
+		        }
+                break;
+            case "D":
+                columna = columna + 1;
+                if(columna > 9){
+			        return true;
+		        }
+                break;
+            case "DII":
                 fila = fila + 1;
                 columna =  columna - 1;
-                if(fila < 10 && columna >= 0){
+                if(fila > 9 || columna < 0){
 			        return true;
 		        }
                 break;
             case "DDI":
                 fila = fila + 1;
                 columna =  columna + 1;
-                if(fila < 10 && columna < 10){
+                if(fila > 9 || columna > 9){
 			        return true;
 		        }
                 break;
             case "DIS":
                 fila = fila - 1;
                 columna =  columna - 1;
-                if(fila >= 0 && columna >= 0){
+                if(fila < 0 || columna < 0){
 			        return true;
 		        }
                 break;
-            case "DII":
+            case "DDS":
                 fila = fila - 1;
                 columna =  columna + 1;
-                if(fila >= 0 && columna < 10){
+                if(fila < 0 || columna > 9){
 			        return true;
 		        }
                 break;
@@ -217,12 +217,12 @@ public class VideoJuego5 {
         return false;
     }
     public static void cambiarPosición(Soldado [][] tablero, Soldado sold, int fila, int columna){
-        Soldado enemigo = tablero[fila][columna]; 
-        if (enemigo == null) {
+        if (tablero[fila][columna] == null) {
             tablero[fila][columna] = sold;
             sold.avanzar(fila, columna);
         }
         else{
+            Soldado enemigo = tablero[fila][columna]; 
             sold.atacar(enemigo);
             if(enemigo.serAtacado(sold)){
                 tablero[fila][columna] = sold;
@@ -241,7 +241,7 @@ public class VideoJuego5 {
         System.out.print(fila +" "+ columna);
       	boolean posValida = true;
         while (posValida){
-            System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬋ ):");
+            System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ ):");
 	        String dir = sc.next();
 	        posValida = moverSoldado(tablero, fila, columna, dir);
         }
