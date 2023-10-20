@@ -36,7 +36,7 @@ public class Soldado {
 	}
 
 	public void setColumna(int colum){
-		columna = char(colum + 65);
+		columna = (char)(colum + 65);
 	}
     public void setVive(boolean vivir){
         vive = vivir;
@@ -83,7 +83,6 @@ public class Soldado {
 
     public void atacar(Soldado enemigo){
         this.velocidad += 1;
-        this.avanzar();
         this.actitud = "Atacar";
         
     }

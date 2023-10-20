@@ -11,13 +11,13 @@ public class VideoJuego5 {
 	    boolean continuar = true;
 	    while(continuar){
             Soldado[][]tablero = new Soldado[10][10];
-	        datosEjercito(1, turqueza, tablero);
+	        ArrayList <Soldado> ejercito_1 = datosEjercito(1, turqueza, tablero);
             System.out.println("................................................................");
-		    datosEjercito(2, amarillo, tablero);
+		    ArrayList <Soldado> ejercito_2 = datosEjercito(2, amarillo, tablero);
             System.out.println("\n          ~~~TABLERO~~~");
             mostrarTablero(tablero);
 	//Se decide el ejercito ganador 
-            
+            jugar(tablero);
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
            
@@ -125,7 +125,7 @@ public class VideoJuego5 {
         }
     }
 
-    public static int datosEjercito(int n, String color, Soldado [][] tablero){
+    public static ArrayList<Soldado> datosEjercito(int n, String color, Soldado [][] tablero){
 	ArrayList <Soldado> ejercito = creandoEjercito(color, tablero);
         int total = totalNivelVida(ejercito);
         System.out.printf("\nEl total de nivel de vida del ejercito %d es : %d", n, total);
@@ -142,7 +142,7 @@ public class VideoJuego5 {
         mostrarSoldados(ejercito);
         System.out.printf("\nEl soldado con mayor nivel de vida del ejercito %d es: ", n );
         System.out.println("\n"+ ejercito.get(ejercito.size() - 1).mostrar());
-        return total;
+        return ejercito;
     }
     public static void ejercitoGanador(int p1, int p2){
     //Gana el ejercito con mayor puntaje acumulado
@@ -156,7 +156,7 @@ public class VideoJuego5 {
             }
         }
     }
-    public static void moverSoldado(Soldado, String comando){	
+   /* public static void moverSoldado(Soldado [][] tablero, String comando){	
 	    
         switch (comando) {
             case "N":
@@ -185,21 +185,29 @@ public class VideoJuego5 {
                 sold.retroceder();
                 break;
         }
-    }
+    }*/
     public static void cambiarPosición(Soldado [][] tablero, Soldado sold, int fila, int columna){
         Soldado enemigo = tablero[fila][columna]; 
         if (enemigo == null) {
             tablero[fila][columna] = sold;
-
+            sold.avanzar(fila, columna);
         }
-        else{sold.atacar(enemigo);
-            if(enemigo.serAtacado(sold)) tablero[fila][columna] = sold;
+        else{
+            sold.atacar(enemigo);
+            if(enemigo.serAtacado(sold)){
+                tablero[fila][columna] = sold;
+                sold.avanzar(fila, columna);
+            } 
             else tablero[fila][columna] = enemigo;
         }
     }
 
-    public static void batalla(Soldado a, Soldado b){
-        
+    public static void jugar(Soldado[][] tablero){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Posición del soldado a mover:" + "\nFila: ");
+        int fila = sc.nextInt();
+        System.out.print("\nColumna: ");
+        int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
     }
 }
 
