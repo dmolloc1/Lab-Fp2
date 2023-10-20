@@ -17,7 +17,14 @@ public class VideoJuego5 {
             System.out.println("\n          ~~~TABLERO~~~");
             mostrarTablero(tablero);
 	//Se decide el ejercito ganador 
-            jugar(tablero);
+            while (totalNivelVida(ejercito_1) != 0 || totalNivelVida(ejercito_2) != 0){
+                System.out.println("Turno del primer jugador(celeste)");
+                jugar(tablero);
+                System.out.println("Turno del segundo jugador(amarillo)");
+                jugar(tablero);
+            }
+            mostrarSoldados(ejercito_1);
+            mostrarSoldados(ejercito_2);
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
            
@@ -28,7 +35,7 @@ public class VideoJuego5 {
     public static ArrayList <Soldado> creandoEjercito(String color, Soldado[][] tablero) {
         ArrayList <Soldado> listArmy = new ArrayList <Soldado>();
     	int filaR = 0, columnaR = 0;
-        int armyLength = (int)(Math.random() * 10 + 1);
+        int armyLength = (int)(Math.random() * 3 + 1);
 	    for (int i = 0; i < armyLength; i++) {
             Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);//Valores de combate
             // Este ciclo nos permitirá comprobar que los valores generados no coincidan con uno ya existente
@@ -144,18 +151,6 @@ public class VideoJuego5 {
         System.out.println("\n"+ ejercito.get(ejercito.size() - 1).mostrar());
         return ejercito;
     }
-    public static void ejercitoGanador(int p1, int p2){
-    //Gana el ejercito con mayor puntaje acumulado
-        if(p1 > p2){
-            System.out.println("GANO EL EJERCITO 1");
-        }else{
-            if(p1 == p2){
-                System.out.println("EMPATE");
-            }
-            else{System.out.println("GANO EL EJERCITO 2");
-            }
-        }
-    }
     public static boolean moverSoldado(Soldado [][] tablero, int fila, int columna, String comando){	
 	    Soldado sold = tablero[fila][columna];
         switch (comando) {
@@ -222,13 +217,11 @@ public class VideoJuego5 {
             sold.avanzar(fila, columna);
         }
         else{
-            Soldado enemigo = tablero[fila][columna]; 
-            sold.atacar(enemigo);
-            if(enemigo.serAtacado(sold)){
+            sold.atacar(tablero[fila][columna]);
+            if(tablero[fila][columna].serAtacado(sold)){
                 tablero[fila][columna] = sold;
                 sold.avanzar(fila, columna);
             } 
-            else tablero[fila][columna] = enemigo;
         }
     }
 
@@ -237,7 +230,7 @@ public class VideoJuego5 {
         System.out.print("Posición del soldado a mover:" + "\nFila: ");
         int fila = sc.nextInt() - 1;
         System.out.print("\nColumna: ");
-        int columna = Integer.valueOf(sc.next().charAt(0)) - 65;
+        int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
         System.out.print(fila +" "+ columna);
       	boolean posValida = true;
         while (posValida){
