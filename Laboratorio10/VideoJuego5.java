@@ -162,58 +162,59 @@ public class VideoJuego5 {
             case "I":
                 fila = fila - 1;
                 if(fila <= 0){
-			        return false;
+			        return true;
 		        }
                 break;
             case "D":
                 fila = fila + 1;
                 if(fila < 10){
-			        return false;
+			        return true;
 		        }
                 break;
             case "A":
                 columna =  columna - 1;
                 if(columna  <= 0){
-			        return false;
+			        return true;
 		        }
                 break;
             case "B":
                 columna = columna + 1;
                 if(columna < 10){
-			        return false;
+			        return true;
 		        }
                 break;
             case "DDS":
                 fila = fila + 1;
                 columna =  columna - 1;
                 if(fila < 10 && columna >= 0){
-			        return false;
+			        return true;
 		        }
                 break;
             case "DDI":
                 fila = fila + 1;
                 columna =  columna + 1;
                 if(fila < 10 && columna < 10){
-			        return false;
+			        return true;
 		        }
                 break;
             case "DIS":
                 fila = fila - 1;
                 columna =  columna - 1;
                 if(fila >= 0 && columna >= 0){
-			        return false;
+			        return true;
 		        }
                 break;
             case "DII":
                 fila = fila - 1;
                 columna =  columna + 1;
                 if(fila >= 0 && columna < 10){
-			        return false;
+			        return true;
 		        }
                 break;
         }
+        System.out.println(fila+ " "+ columna);
         cambiarPosición(tablero, sold, fila , columna);
-        return true;
+        return false;
     }
     public static void cambiarPosición(Soldado [][] tablero, Soldado sold, int fila, int columna){
         Soldado enemigo = tablero[fila][columna]; 
@@ -234,9 +235,10 @@ public class VideoJuego5 {
     public static void jugar(Soldado[][] tablero){
         Scanner sc = new Scanner(System.in);
         System.out.print("Posición del soldado a mover:" + "\nFila: ");
-        int fila = sc.nextInt();
+        int fila = sc.nextInt() - 1;
         System.out.print("\nColumna: ");
-        int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+        int columna = Integer.valueOf(sc.next().charAt(0)) - 65;
+        System.out.print(fila +" "+ columna);
       	boolean posValida = true;
         while (posValida){
             System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬋ ):");
