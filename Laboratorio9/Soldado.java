@@ -70,7 +70,7 @@ public class Soldado {
 //Metodos
 	public String mostrar(){
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
-            + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna; 	
+            + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna +"Estado: "+ actitud; 	
 	}
 
   	public void setValorTablero(String color, String nivelVida){
