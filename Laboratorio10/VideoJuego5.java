@@ -18,13 +18,13 @@ public class VideoJuego5 {
             System.out.println("\n          ~~~TABLERO~~~");
             mostrarTablero(tablero);
 	//Se decide el ejercito ganador 
-            while (ejercito_1.size() != 0 || ejercito_2.size() != 0){
+            do{
                 System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
                 jugar(tablero, 1);
 
                 System.out.println("Turno del segundo jugador(amarillo) "+ ejercito_2.size());
                 jugar(tablero, 2);
-            }
+            } while (ejercito_1.size() > 0 || ejercito_2.size() > 0);
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
            
