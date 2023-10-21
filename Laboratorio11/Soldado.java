@@ -84,9 +84,6 @@ public class Soldado {
     public void atacar(Soldado enemigo){
         this.velocidad += 1;
         this.actitud = "Atacar";
-        if(this.nivelVida == enemigo.nivelVida){
-            this.vive = false;
-        }
         
     }
 
@@ -117,14 +114,11 @@ public class Soldado {
         setColumna(columna);
     }
 
-    public boolean serAtacado(Soldado enemigo){
-        this.nivelVida -= enemigo.nivelVida;
-        if(this.nivelVida <= 0){
-            enemigo.nivelVida = -(this.nivelVida);
-            this.morir();
-            return true;//Retorna verdadero si muere
+    public void serAtacado(boolean gano){
+        if(gano){
+            this.nivelVida += 1;
         }
-        return false;
+        else{morir();}
     }
 
     public void morir(){
