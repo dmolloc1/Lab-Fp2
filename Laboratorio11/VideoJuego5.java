@@ -243,9 +243,15 @@ public class VideoJuego5 {
         Scanner sc = new Scanner(System.in);
         System.out.print("Posición del soldado a mover:" + "\nFila: ");
         int fila = sc.nextInt() - 1;
-        System.out.print("\nColumna: ");
+        System.out.print("Columna: ");
         int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
-        System.out.print(fila +" "+ columna);
+        while(tablero[fila][columna] == null){
+            System.out.print("Posición invalida");
+            System.out.print("Posición del soldado a mover:" + "\nFila: ");
+            fila = sc.nextInt() - 1;
+            System.out.print("Columna: ");
+            columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+        }
       	boolean posValida = true;
         while (posValida){
             System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ ):");
