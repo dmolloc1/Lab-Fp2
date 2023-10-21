@@ -6,7 +6,6 @@ public class VideoJuego5 {
     static  ArrayList <Soldado> ejercito_1, ejercito_2;
     public static void main(String[] args) {
     	Scanner sc = new  Scanner(System.in);
-        List <Soldado> ejercito1, ejercito2;
         String turqueza = "\u001B[30m";
         String amarillo = "\u001B[31m";
 	    boolean continuar = true;
@@ -18,13 +17,13 @@ public class VideoJuego5 {
             System.out.println("\n          ~~~TABLERO~~~");
             mostrarTablero(tablero);
 	//Se decide el ejercito ganador 
-            do{
+            while (ejercito_1.size() > 0 && ejercito_2.size() > 0){
                 System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
                 jugar(tablero, 1);
 
                 System.out.println("Turno del segundo jugador(amarillo) "+ ejercito_2.size());
                 jugar(tablero, 2);
-            } while (ejercito_1.size() > 0 || ejercito_2.size() > 0);
+            } 
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
            
@@ -222,17 +221,22 @@ public class VideoJuego5 {
             if(enemigo.serAtacado(sold)){
                 tablero[fila][columna] = sold;
                 sold.avanzar(fila, columna);
-            } 
-            if(ejercito == 1){
-                if(!sold.getVive()){
-                    ejercito_1.remove(sold);
-                }
-                else{ejercito_2.remove(sold);}
-                if(!enemigo.getVive()){
+            }
+            if(!enemigo.getVive()){
+                if(ejercito == 1){
                     ejercito_2.remove(enemigo);
                 }
                 else{ejercito_1.remove(enemigo);}
             }
+        }
+        if(ejercito == 1){
+            if(!sold.getVive()){
+                ejercito_1.remove(sold);
+            }    
+        }else{
+            if(!sold.getVive()){
+                ejercito_2.remove(sold);
+            }    
         }
     }
 
