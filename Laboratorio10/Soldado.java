@@ -84,6 +84,9 @@ public class Soldado {
     public void atacar(Soldado enemigo){
         this.velocidad += 1;
         this.actitud = "Atacar";
+        if(this.nivelVida == enemigo.nivelVida){
+            this.vive = false;
+        }
         
     }
 
