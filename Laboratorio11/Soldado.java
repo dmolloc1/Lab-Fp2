@@ -3,7 +3,7 @@ public class Soldado {
 	private String nombre;
 	private int nivelVida, fila;
 	private char columna;
-    private String valorTablero;
+    private String color;
     //nuevos atributos
     private int nivelAtaque, nivelDefensa, vidaActual, velocidad;
     private String actitud;
@@ -73,17 +73,20 @@ public class Soldado {
             + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna +"\nEstado: "+ actitud; 	
 	}
 
-  	public void setValorTablero(String color, String nivelVida){
-      	valorTablero = color + nivelVida + "\u001B[0m"; 
+  	public void setColor(String color){
+      	this.color = color; 
    	}
 
-   	public String getValorTablero(){
-       	return valorTablero;
+   	public String getColor(){
+       	return  color;
    	}
 
     public void atacar(Soldado enemigo){
         this.velocidad += 1;
         this.actitud = "Atacar";
+        if(this.nivelVida == enemigo.nivelVida){
+            this.vive = false;
+        }
         
     }
 
