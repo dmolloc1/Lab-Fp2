@@ -277,13 +277,13 @@ public class VideoJuego5 {
         System.out.println("Probabilidad de vencer para Soldado 1: " + prob1 + "%");
         System.out.println("Probabilidad de vencer para Soldado 2: " + prob2 + "%");
 	    
-        double randomValue = Math.random() * (vida1 + vida2);
+        double randomValue = Math.random() * (vida1 + vida2) + 1 ;
         System.out.printf("\nEl número aleatorio es %.2f", randomValue);
         if (randomValue <= prob1) {
-            System.out.printf("\nSoldado  gana porque es mayor o igual a %.2f", randomValue);
+            System.out.printf("\nSoldado  gana porque es mayor o igual a %.2f\n", randomValue);
             return true;
         } else {
-            System.out.printf("\nSoldado enemigo gana porque es menor a %.2f", randomValue);
+            System.out.printf("\nSoldado enemigo gana porque es menor a %.2f\n", randomValue);
             return false;
         }
 	}
