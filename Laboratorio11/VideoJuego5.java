@@ -22,14 +22,14 @@ public class VideoJuego5 {
                 System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
                 jugar(tablero, 1);
                 if(ejercito_1.size() == 0){
-                    System.out.println("GANO EL EJERCITO_2");
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_2 ~~~~~~~~~~~~~~~~~");
                     break;
                 }
                 System.out.println("Turno del segundo jugador(amarillo) "+ ejercito_2.size());
                 jugar(tablero, 2);
             } 
             if(ejercito_2.size() == 0){
-                System.out.println("GANO EL EJERCITO_1");
+                System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
             }
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
@@ -72,7 +72,9 @@ public class VideoJuego5 {
     }
 
     public static void mostrarTablero(Soldado[][] tablero){
-    	for(int i = 0; i < tablero.length; i++){
+    	System.out.println("* | A | B | C | D | E | F | G | H | I | J |\n"+
+                           "-------------------------------------------");
+        for(int i = 0; i < tablero.length; i++){
 	    	String fila = "|";
 	    	for(int j = 0; j < tablero[i].length; j++){
 	            if(tablero[i][j] == null){
@@ -81,8 +83,11 @@ public class VideoJuego5 {
 					fila = fila + " " + tablero[i][j].getColor() + tablero[i][j].getNivelDeVida()  + "\u001B[0m |";
 				}
 	    	}
-	    	System.out.println(fila);
-		}
+            if(i == 9){
+	    	    System.out.println((i + 1)  + fila);
+            }
+            else System.out.println((i + 1) +" " + fila);
+        }
     }
 
     public static int totalNivelVida(ArrayList <Soldado> soldados) {
