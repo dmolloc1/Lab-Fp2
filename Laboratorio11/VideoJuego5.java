@@ -8,62 +8,62 @@ public class VideoJuego5 {
     	Scanner sc = new  Scanner(System.in);
         String turqueza = "\u001B[30m";
         String amarillo = "\u001B[31m";
-	    boolean continuar = true;
-	    while(continuar){
+	boolean continuar = true;
+	while(continuar){
             Soldado[][]tablero = new Soldado[10][10];
-				ejercito_1 = datosEjercito(1, turqueza, tablero);
+	    ejercito_1 = datosEjercito(1, turqueza, tablero);
             System.out.println("................................................................");
-				ejercito_2 = datosEjercito(2, amarillo, tablero);
+	    ejercito_2 = datosEjercito(2, amarillo, tablero);
             System.out.println("\n          ~~~TABLERO~~~");
             mostrarTablero(tablero);
 
 	//Se decide el ejercito ganador 
-            while (ejercito_1.size() > 0 && ejercito_2.size() > 0){    
-                System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
-                jugar(tablero, 1);
-                if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
-                    if(ejercito_1.size() == 0){
-                    System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_2 ~~~~~~~~~~~~~~~~~");
-                       break;
-                    }
-                    else {System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
+        while (ejercito_1.size() > 0 && ejercito_2.size() > 0){    
+             System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
+             jugar(tablero, 1);
+             if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
+                  if(ejercito_1.size() == 0){
+            	        System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_2 ~~~~~~~~~~~~~~~~~");
+                	break;
+                  }
+                  else {System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
                         break;
-                    }
-                }
-                System.out.println("Turno del segundo jugador(amarillo) "+ ejercito_2.size());
-                jugar(tablero, 2);
-            } 
-            if(ejercito_2.size() == 0){
-                System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
-            }
-            System.out.print("Desea continuar otra ronda (y/n): ");
-            continuar = (sc.next().equals("y"));
+		  }
+	     }
+             System.out.println("Turno del segundo jugador(amarillo) "+ ejercito_2.size());
+             jugar(tablero, 2);
+        } 
+        if(ejercito_2.size() == 0){
+               System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+        System.out.print("Desea continuar otra ronda (y/n): ");
+        continuar = (sc.next().equals("y"));
         }
     }
 
     public static ArrayList <Soldado> creandoEjercito(String color, Soldado[][] tablero) {
-				ArrayList <Soldado> listArmy = new ArrayList <Soldado>();
-    			int filaR = 0, columnaR = 0;
-        		int armyLength = (int)(Math.random() * 2 + 1);
-	    		for (int i = 0; i < armyLength; i++) {
+	ArrayList <Soldado> listArmy = new ArrayList <Soldado>();
+    	int filaR = 0, columnaR = 0;
+        int armyLength = (int)(Math.random() * 2 + 1);
+	for (int i = 0; i < armyLength; i++) {
             	Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);//Valores de combate
             // Este ciclo nos permitirá comprobar que los valores generados no coincidan con uno ya existente
             	boolean posicionValida = false;
             	while (!posicionValida) {
-               	filaR = (int) (Math.random() * 9);
-               	columnaR = (int) (Math.random() * 9);
-               	if (rellenarTablero(filaR, columnaR, nuevo, tablero)) {
-                  	posicionValida = true;
+        	       	filaR = (int) (Math.random() * 9);
+               		columnaR = (int) (Math.random() * 9);
+               		if (rellenarTablero(filaR, columnaR, nuevo, tablero)) {
+                  		posicionValida = true;
                 	}
             	}
             	nuevo.setFila(filaR + 1);
             	nuevo.setColumna(columnaR );
             	nuevo.setActitud("Neutro");
-	    			nuevo.setVive(true); //Valores por defecto
+	    	nuevo.setVive(true); //Valores por defecto
             	nuevo.setColor(color);
             	listArmy.add(nuevo);
-        		}
-				return listArmy;
+	}
+	return listArmy;
     }
 
     public static boolean rellenarTablero(int fila, int columna, Soldado sol, Soldado[][] tablero) {
@@ -80,16 +80,13 @@ public class VideoJuego5 {
         for(int i = 0; i < tablero.length; i++){
 	    	String fila = "|";
 	    	for(int j = 0; j < tablero[i].length; j++){
-	            if(tablero[i][j] == null){
-					fila = fila +" - " + "|"; 
-		}else{
-					fila = fila + " " + tablero[i][j].getColor() + tablero[i][j].getNivelDeVida()  + "\u001B[0m |";
-				}
+	            if(tablero[i][j] == null){ fila = fila +" - " + "|";
+		    }else fila = fila + " " + tablero[i][j].getColor() + tablero[i][j].getNivelDeVida()  + "\u001B[0m |";				
 	    	}
-            if(i == 9){
+            	if(i == 9){
 	    	    System.out.println((i + 1)  + fila);
-            }
-            else System.out.println((i + 1) +" " + fila);
+            	}
+            	else System.out.println((i + 1) +" " + fila);
         }
     }
 
@@ -146,18 +143,18 @@ public class VideoJuego5 {
     }
 
     public static ArrayList<Soldado> datosEjercito(int n, String color, Soldado [][] tablero){
-	    ArrayList <Soldado> ejercito = creandoEjercito(color, tablero);
+	ArrayList <Soldado> ejercito = creandoEjercito(color, tablero);
         int total = totalNivelVida(ejercito);
         System.out.printf("\nEl total de nivel de vida del ejercito %d es : %d", n, total);
         System.out.printf("\nEl promedio de nivel de vida del ejercito %d es : %d", n, promedioNivelVida(ejercito));
         System.out.printf("\n~~~ Soldados del ejercito %d ~~~\n", n);
         mostrarSoldados(ejercito);
         if(n == 1){
-	    		ordenarPorNivelBurbuja(ejercito);//Ordenando el ejercito con el método Burbuja
-            System.out.println("\n       ~MÉTODO BURBUJA~");
-		  }
-		  else{ ordenarPorNivelSelección(ejercito);//Ordenando el ejercito con el método de Selección;
-	        	System.out.println("\n       ~MÉTODO DE SELECCIÓN~");
+		ordenarPorNivelBurbuja(ejercito);//Ordenando el ejercito con el método Burbuja
+        	System.out.println("\n       ~MÉTODO BURBUJA~");
+	}
+	else{ ordenarPorNivelSelección(ejercito);//Ordenando el ejercito con el método de Selección;
+	       	System.out.println("\n       ~MÉTODO DE SELECCIÓN~");
         }
         mostrarSoldados(ejercito);
         System.out.printf("\nEl soldado con mayor nivel de vida del ejercito %d es: ", n );
@@ -166,59 +163,43 @@ public class VideoJuego5 {
     }
 
     public static boolean moverSoldado(Soldado [][] tablero, int fila, int columna, String comando, int ejercito){	
-			Soldado sold = tablero[fila][columna];
-        	switch (comando) {
+	Soldado sold = tablero[fila][columna];
+        switch (comando) {
             case "A":
                 fila = fila - 1;
-                if(fila < 0){
-			        return true;
-		        }
+                if(fila < 0){return true;}
                 break;
             case "B":
                 fila = fila + 1;
-                if(fila > 9){
-			        return true;
-		        }
+                if(fila > 9){return true;}
                 break;
             case "I":
                 columna =  columna - 1;
-                if(columna  < 0){
-			        return true;
-		        }
+                if(columna  < 0){return true;}
                 break;
             case "D":
                 columna = columna + 1;
-                if(columna > 9){
-			        return true;
-		        }
+                if(columna > 9){return true;}
                 break;
             case "DII":
                 fila = fila + 1;
                 columna =  columna - 1;
-                if(fila > 9 || columna < 0){
-			        return true;
-		        }
-                break;
+                if(fila > 9 || columna < 0){return true;}
+		break;
             case "DDI":
                 fila = fila + 1;
                 columna =  columna + 1;
-                if(fila > 9 || columna > 9){
-			        return true;
-		        }
+                if(fila > 9 || columna > 9){return true;}
                 break;
             case "DIS":
                 fila = fila - 1;
                 columna =  columna - 1;
-                if(fila < 0 || columna < 0){
-			        return true;
-		        }
+                if(fila < 0 || columna < 0){return true;}
                 break;
             case "DDS":
                 fila = fila - 1;
                 columna =  columna + 1;
-                if(fila < 0 || columna > 9){
-			        return true;
-		        }
+                if(fila < 0 || columna > 9){return true;}
                 break;
         }
         System.out.println(fila+ " "+ columna);
@@ -268,18 +249,18 @@ public class VideoJuego5 {
             System.out.print("Posición del soldado a mover:" + "\nFila: ");
             fila = sc.nextInt() - 1;
             System.out.print("Columna: ");
-         	columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
-        	}
-			boolean posValida = true;
-        	while (posValida){
-         	   System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ ):");
-	     			String dir = sc.next();
-	     			posValida = moverSoldado(tablero, fila, columna, dir, ejercito);
+	    columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+        }
+	boolean posValida = true;
+        while (posValida){
+        	System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ ):");
+	     	String dir = sc.next();
+	     	posValida = moverSoldado(tablero, fila, columna, dir, ejercito);
         }
         tablero[fila][columna]= null;
         mostrarTablero(tablero);
     }
-	public static boolean definirGanador(int vida1 , int vida2){
+    public static boolean definirGanador(int vida1 , int vida2){
     	double prob1 = (vida1 * 100.0) / (vida1 + vida2);
         double prob2 = (vida2 * 100.0) / (vida1 + vida2);
 
@@ -295,6 +276,6 @@ public class VideoJuego5 {
             System.out.printf("\nSoldado enemigo gana porque es menor a %.2f\n", randomValue);
             return false;
         }
-	}
+    }
 }
 
