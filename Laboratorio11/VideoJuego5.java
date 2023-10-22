@@ -18,12 +18,19 @@ public class VideoJuego5 {
             mostrarTablero(tablero);
 	//Se decide el ejercito ganador 
             while (ejercito_1.size() > 0 && ejercito_2.size() > 0){
+                
                 System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
                 jugar(tablero, 1);
-
+                if(ejercito_1.size() == 0){
+                    System.out.println("GANO EL EJERCITO_2");
+                    break;
+                }
                 System.out.println("Turno del segundo jugador(amarillo) "+ ejercito_2.size());
                 jugar(tablero, 2);
             } 
+            if(ejercito_2.size() == 0){
+                System.out.println("GANO EL EJERCITO_1");
+            }
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
            
@@ -216,8 +223,10 @@ public class VideoJuego5 {
             sold.avanzar(fila, columna);
         }
         else{
-            sold.atacar(enemigo);
-            if(enemigo.serAtacado(sold)){
+            boolean gano = definirGanador(sold.getNivelDeVida(), enemigo.getNivelDeVida());
+            sold.atacar(gano);
+            enemigo.serAtacado(gano);
+            if(gano){
                 tablero[fila][columna] = sold;
                 sold.avanzar(fila, columna);
             }
@@ -261,7 +270,7 @@ public class VideoJuego5 {
         tablero[fila][columna]= null;
         mostrarTablero(tablero);
     }
-	public static void ganador(int vida1 , int vida2){
+	public static boolean definirGanador(int vida1 , int vida2){
     	double prob1 = (vida1 * 100.0) / (vida1 + vida2);
         double prob2 = (vida2 * 100.0) / (vida1 + vida2);
 
@@ -269,11 +278,13 @@ public class VideoJuego5 {
         System.out.println("Probabilidad de vencer para Soldado 2: " + prob2 + "%");
 	    
         double randomValue = Math.random() * (vida1 + vida2);
-        System.out.printf("El número aleatorio es %.2f", randomValue);
+        System.out.printf("\nEl número aleatorio es %.2f", randomValue);
         if (randomValue <= prob1) {
-            System.out.printf("Soldado 1 gana porque es mayor o igual a %.2f", randomValue);
+            System.out.printf("\nSoldado  gana porque es mayor o igual a %.2f", randomValue);
+            return true;
         } else {
-            System.out.printf("Soldado 2 gana porque es menor a %.2f", randomValue);
+            System.out.printf("\nSoldado enemigo gana porque es menor a %.2f", randomValue);
+            return false;
         }
 	}
 }
