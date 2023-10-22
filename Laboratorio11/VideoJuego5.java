@@ -11,14 +11,14 @@ public class VideoJuego5 {
 	    boolean continuar = true;
 	    while(continuar){
             Soldado[][]tablero = new Soldado[10][10];
-	        ejercito_1 = datosEjercito(1, turqueza, tablero);
+				ejercito_1 = datosEjercito(1, turqueza, tablero);
             System.out.println("................................................................");
-		    ejercito_2 = datosEjercito(2, amarillo, tablero);
+				ejercito_2 = datosEjercito(2, amarillo, tablero);
             System.out.println("\n          ~~~TABLERO~~~");
             mostrarTablero(tablero);
+
 	//Se decide el ejercito ganador 
-            while (ejercito_1.size() > 0 && ejercito_2.size() > 0){
-                
+            while (ejercito_1.size() > 0 && ejercito_2.size() > 0){    
                 System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
                 jugar(tablero, 1);
                 if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
@@ -38,34 +38,32 @@ public class VideoJuego5 {
             }
             System.out.print("Desea continuar otra ronda (y/n): ");
             continuar = (sc.next().equals("y"));
-           
         }
     }
 
     public static ArrayList <Soldado> creandoEjercito(String color, Soldado[][] tablero) {
-        ArrayList <Soldado> listArmy = new ArrayList <Soldado>();
-    	int filaR = 0, columnaR = 0;
-        int armyLength = (int)(Math.random() * 2 + 1);
-	    for (int i = 0; i < armyLength; i++) {
-            Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);//Valores de combate
+				ArrayList <Soldado> listArmy = new ArrayList <Soldado>();
+    			int filaR = 0, columnaR = 0;
+        		int armyLength = (int)(Math.random() * 2 + 1);
+	    		for (int i = 0; i < armyLength; i++) {
+            	Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);//Valores de combate
             // Este ciclo nos permitirá comprobar que los valores generados no coincidan con uno ya existente
-            boolean posicionValida = false;
-            while (!posicionValida) {
-                filaR = (int) (Math.random() * 9);
-                columnaR = (int) (Math.random() * 9);
-                if (rellenarTablero(filaR, columnaR, nuevo, tablero)) {
-                    posicionValida = true;
-                }
-            }
-            nuevo.setFila(filaR + 1);
-            nuevo.setColumna(columnaR );
-            nuevo.setActitud("Neutro");
-	    	nuevo.setVive(true); //Valores por defecto
-            nuevo.setColor(color);
-            listArmy.add(nuevo);
-        }
-
-	return listArmy;
+            	boolean posicionValida = false;
+            	while (!posicionValida) {
+               	filaR = (int) (Math.random() * 9);
+               	columnaR = (int) (Math.random() * 9);
+               	if (rellenarTablero(filaR, columnaR, nuevo, tablero)) {
+                  	posicionValida = true;
+                	}
+            	}
+            	nuevo.setFila(filaR + 1);
+            	nuevo.setColumna(columnaR );
+            	nuevo.setActitud("Neutro");
+	    			nuevo.setVive(true); //Valores por defecto
+            	nuevo.setColor(color);
+            	listArmy.add(nuevo);
+        		}
+				return listArmy;
     }
 
     public static boolean rellenarTablero(int fila, int columna, Soldado sol, Soldado[][] tablero) {
@@ -84,7 +82,7 @@ public class VideoJuego5 {
 	    	for(int j = 0; j < tablero[i].length; j++){
 	            if(tablero[i][j] == null){
 					fila = fila +" - " + "|"; 
-				}else{
+		}else{
 					fila = fila + " " + tablero[i][j].getColor() + tablero[i][j].getNivelDeVida()  + "\u001B[0m |";
 				}
 	    	}
@@ -155,20 +153,21 @@ public class VideoJuego5 {
         System.out.printf("\n~~~ Soldados del ejercito %d ~~~\n", n);
         mostrarSoldados(ejercito);
         if(n == 1){
-	    	ordenarPorNivelBurbuja(ejercito);//Ordenando el ejercito con el método Burbuja
+	    		ordenarPorNivelBurbuja(ejercito);//Ordenando el ejercito con el método Burbuja
             System.out.println("\n       ~MÉTODO BURBUJA~");
-	    }
-    	else{ ordenarPorNivelSelección(ejercito);//Ordenando el ejercito con el método de Selección;
-	        System.out.println("\n       ~MÉTODO DE SELECCIÓN~");
+		  }
+		  else{ ordenarPorNivelSelección(ejercito);//Ordenando el ejercito con el método de Selección;
+	        	System.out.println("\n       ~MÉTODO DE SELECCIÓN~");
         }
         mostrarSoldados(ejercito);
         System.out.printf("\nEl soldado con mayor nivel de vida del ejercito %d es: ", n );
         System.out.println("\n"+ ejercito.get(ejercito.size() - 1).mostrar());
         return ejercito;
     }
+
     public static boolean moverSoldado(Soldado [][] tablero, int fila, int columna, String comando, int ejercito){	
-	    Soldado sold = tablero[fila][columna];
-        switch (comando) {
+			Soldado sold = tablero[fila][columna];
+        	switch (comando) {
             case "A":
                 fila = fila - 1;
                 if(fila < 0){
@@ -269,13 +268,13 @@ public class VideoJuego5 {
             System.out.print("Posición del soldado a mover:" + "\nFila: ");
             fila = sc.nextInt() - 1;
             System.out.print("Columna: ");
-            columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
-        }
-      	boolean posValida = true;
-        while (posValida){
-            System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ ):");
-	        String dir = sc.next();
-	        posValida = moverSoldado(tablero, fila, columna, dir, ejercito);
+         	columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+        	}
+			boolean posValida = true;
+        	while (posValida){
+         	   System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ ):");
+	     			String dir = sc.next();
+	     			posValida = moverSoldado(tablero, fila, columna, dir, ejercito);
         }
         tablero[fila][columna]= null;
         mostrarTablero(tablero);
