@@ -21,9 +21,14 @@ public class VideoJuego5 {
                 
                 System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
                 jugar(tablero, 1);
-                if(ejercito_1.size() == 0){
+                if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
+                    if(ejercito_1.size() == 0){
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_2 ~~~~~~~~~~~~~~~~~");
-                    break;
+                       break;
+                    }
+                    else {System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
+                        break;
+                    }
                 }
                 System.out.println("Turno del segundo jugador(amarillo) "+ ejercito_2.size());
                 jugar(tablero, 2);
