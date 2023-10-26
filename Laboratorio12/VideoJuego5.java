@@ -14,55 +14,59 @@ public class VideoJuego5 {
         int respond = sc.nextInt();
         switch(respond){
             case 1:
-                juegoRapido();
-                menuPrincipal();
+            //  startGam|e();
+              juegoRapido();
+                  menuPrincipal();
             case 2:
-                juegoPersonalizado();
-                menuPrincipal();
+        //        juegoPersonalizado();
+           //     menuPrincipal();
             case 3:
-                salir();
+                  break;
         }
     }
-
-    public static void startGame(){
+    public static void juegoRapido(){
         String turqueza = "\u001B[30m";
         String amarillo = "\u001B[31m";
         boolean continuar = true;
-	    while(continuar){
+        while(continuar){
             Soldado[][]tablero = new Soldado[10][10];
-	        ejercito_1 = datosEjercito(1, turqueza, tablero);
+            ejercito_1 = datosEjercito(1, turqueza, tablero);
             System.out.println("................................................................");
 	        ejercito_2 = datosEjercito(2, amarillo, tablero);
             System.out.println("\n          ~~~TABLERO~~~");
             mostrarTablero(tablero);
-
-	//Se decide el ejercito ganador 
-            while (ejercito_1.size() > 0 && ejercito_2.size() > 0 && continuar){    
-                continuar = sc.nextChar().equals('n');
-                System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
-                jugar(tablero, 1);
-                if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
-                    if(ejercito_1.size() == 0){
-            	        System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_2 ~~~~~~~~~~~~~~~~~");
-                	    break;
-                    }
-                    else {System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
-                        break;
-		               }
-	            }
-                System.out.println("Desea salir (y/n)");
-                continuar = sc.nextChar().equals('n');
-                System.out.println("Turno del segundo jugador(amarillo) "+ ejercito_2.size());
-                jugar(tablero, 2);
-                
-            } 
-            if(ejercito_2.size() == 0){
-                System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
-            }
+            startGame(ejercito_1,  ejercito_2, tablero); 
             System.out.print("Escoja una opción\n1.Empezar otra ronda nueva\n2. volver al menu principal: ");
-            continuar = sc.next() == 1;
+            continuar = sc.nextInt() == 1;
         }
         menuPrincipal();
+    }
+    public static void startGame(ArrayList <Soldado> ejercito_1, ArrayList <Soldado> ejercito_2, Soldado [][] tablero){ 
+        boolean continuar = true;
+        while (ejercito_1.size() > 0 && ejercito_2.size() > 0  && continuar){    
+            System.out.println("Desea salir (y/n)");
+            continuar = sc.next().charAt(0) == 'n';
+            if(!continuar) break;
+            System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
+            jugar(tablero, 1);
+            if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
+                if(ejercito_1.size() == 0){
+            	    System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_2 ~~~~~~~~~~~~~~~~~");
+                    break;
+                }else {
+                    System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
+                    break;
+		        }
+	        }
+            System.out.println("Desea salir (y/n)");
+            continuar = sc.next().charAt(0) == 'n';
+            System.out.println("Turno del segundo jugador(amarillo) "+ ejercito_2.size());
+            jugar(tablero, 2);
+                
+        } 
+        if(ejercito_2.size() == 0){
+            System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");    
+        }
     }
     public static ArrayList <Soldado> creandoEjercito(String color, Soldado[][] tablero) {
 	ArrayList <Soldado> listArmy = new ArrayList <Soldado>();
