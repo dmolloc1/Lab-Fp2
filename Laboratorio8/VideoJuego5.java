@@ -88,7 +88,8 @@ public class VideoJuego5 {
     }
 
     public static Soldado [] ordenarPorNivelBurbuja( Soldado [] soldKey){
-//Un hashMap no se puede ordenar debido a que no hay posiciones exactas por ello para ordenarlo lo que podemos hacer es usar el arreglo creado por sus objetos para ir comparando y ordenando
+//Un hashMap no se puede ordenar debido a que no hay posiciones exactas por ello para ordenarlo
+//lo que podemos hacer es usar el arreglo creado por sus objetos para ir comparando y ordenando
         for(int i = 1; i< soldKey.length; i++){
             for(int j = 0; j < soldKey.length - i; j++){
                 if(soldKey[j].getNivelDeVida() > soldKey[j + 1].getNivelDeVida()){
@@ -100,7 +101,8 @@ public class VideoJuego5 {
     }
 
     public static Soldado [] ordenarPorNivelSelección( Soldado[] soldKey){
-    //Para que esta lista ordenada se puedea utilizar debemos regresar el arreglo ordenado en lugar de imprimirlo directamente en el metodo
+//Para que esta lista ordenada se puedea utilizar debemos regresar el arreglo ordenado 
+//en lugar de imprimirlo directamente en el metodo
         for(int i = 0; i < soldKey.length - 1; i++){
             int min = i;
             for(int j = i + 1; j < soldKey.length; j++){

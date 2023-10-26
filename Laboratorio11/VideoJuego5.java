@@ -44,7 +44,7 @@ public class VideoJuego5 {
     public static ArrayList <Soldado> creandoEjercito(String color, Soldado[][] tablero) {
 	ArrayList <Soldado> listArmy = new ArrayList <Soldado>();
     	int filaR = 0, columnaR = 0;
-        int armyLength = (int)(Math.random() * 2 + 1);
+        int armyLength = (int)(Math.random() * 10 + 1);
 	for (int i = 0; i < armyLength; i++) {
             	Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);
             // Este ciclo nos permitirá comprobar que los valores generados no coincidan con uno ya existente

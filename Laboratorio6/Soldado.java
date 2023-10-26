@@ -26,12 +26,12 @@ public class Soldado {
 	public char getColumna(){
 		return columna;
 	}
-    public void setColor(String colorE){
-        color = colorE + " S \u001B[0m";
-    }
-    public String getColor(){
-        return color;
-    }
+   	public void setColor(String colorE){
+        	color = colorE + " S \u001B[0m";
+    	}
+    	public String getColor(){
+        	return color;
+    	}
 
 	public String mostrar(){
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
