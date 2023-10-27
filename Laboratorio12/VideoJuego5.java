@@ -52,6 +52,7 @@ public class VideoJuego5 {
         int num = sc.nextInt();
         System.out.println("1) Crear Soldado\n2) Eliminar Soldado\n3) Clonar Soldado\n4) Modificar Soldado\n5) Comparar Soldados" +
                "\n6)Intercambiar Soldados\n7) Ver soldado\n8) Ver ejército\n9) Sumar niveles\n10) Jugar\n11) Volver");
+        System.out.print("Ingrese su opción: ");
         int comando = sc.nextInt();
         int fila = 0, columna = 0;
         if (comando != 1 && comando < 8){
@@ -76,9 +77,11 @@ public class VideoJuego5 {
                 break;
             case 4:
                 modificarSoldado(tablero[fila][columna]);
-        /*    case 5:
-                compararSoldado();
-            case 6: 
+                break;
+            case 5:
+                compararSoldado(fila, columna, tablero);
+                break;
+        /*    case 6: 
                 intercambiarSoldado();
             case 7:
                 verSoldado();
@@ -174,6 +177,27 @@ public class VideoJuego5 {
         } while (opcion != 5);
  
     }
+
+    public static void compararSoldado(int fila , int columna, Soldado [][] tablero){
+        System.out.print("Posición del soldado a comparar :" + "\nFila: ");
+        int filaC = sc.nextInt() - 1;
+        System.out.print("Columna: ");
+        int columnaC = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+        Soldado soldado1 = tablero[fila][columna];
+        Soldado soldado2 = tablero[filaC][columnaC];
+        comparar("Nivel de Ataque", "" + soldado1.getNivelAtaque(), "" +soldado2.getNivelAtaque());
+        comparar("Nivel de Defensa", "" +soldado1.getNivelDefensa(), "" + soldado2.getNivelDefensa());
+        comparar("Vida Actual", "" + soldado1.getVidaActual(), "" +soldado2.getVidaActual());
+        comparar("Vive", "" + soldado1.getVive(), "" + soldado2.getVive());
+        
+    }
+    public static void comparar(String atributo, String a, String b){
+        if(a.equals(b)){
+            System.out.println(atributo + "es igual");
+        }
+        else System.out.println(atributo + "es diferente");
+    }
+
     public static void startGame(ArrayList <Soldado> ejercito_1, ArrayList <Soldado> ejercito_2, Soldado [][] tablero){ 
         boolean continuar = true;
         while (ejercito_1.size() > 0 && ejercito_2.size() > 0  && continuar){    

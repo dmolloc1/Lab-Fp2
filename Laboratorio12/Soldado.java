@@ -85,6 +85,14 @@ public class Soldado {
 	public String getActitud(){
         	return actitud;
     	}
+	
+	public int getNivelAtaque() {
+		return nivelAtaque;
+	}
+	public int getNivelDefensa() {
+		return nivelDefensa;
+	}
+
 
 	public void setColor(String color){
 		this.color = color; 
@@ -158,10 +166,11 @@ public class Soldado {
     	}
 
 	public void clonar(Soldado clon){
-		this.nombre = clon.nombre + ".clon";
+		this.nombre = clon.nombre;
 		this.velocidad = clon.velocidad;
 		this.nivelVida = clon.nivelVida;
 		this.nivelAtaque = clon.nivelAtaque;
 		this.nivelDefensa = clon.nivelDefensa;
 	}
+
 }
