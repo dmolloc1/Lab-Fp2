@@ -8,8 +8,8 @@ public class Soldado {
 	private int nivelVida, fila;
 	private char columna;
 	private String color;
-    public static final int limite = 10;
-    private static int nSoldados;
+    	public static final int limite = 10;
+    	private static int nSoldados;
     //nuevos atributos
     	private int nivelAtaque, nivelDefensa, vidaActual, velocidad;
     	private String actitud;
@@ -37,21 +37,22 @@ public class Soldado {
         public static int total(){
             return nSoldados;
         }
-    public void setNivelDeVida(int num){
+    	
+	public void setNivelDeVida(int num){
 		nivelVida = num;
 	}
 
-    public void setNivelAtaque(int num){
+    	public void setNivelAtaque(int num){
 		nivelAtaque = num;
 	}
-    public void setNivelDefensa(int num){
+    	public void setNivelDefensa(int num){
 		nivelDefensa = num;
 	}
-    public void setNombre(String nom){
-        this.nombre = nom;
-    }
+    	public void setNombre(String nom){
+        	this.nombre = nom;
+    	}
 
-    public void setFila(int num){
+    	public void setFila(int num){
 		fila = num;
 	}
 
