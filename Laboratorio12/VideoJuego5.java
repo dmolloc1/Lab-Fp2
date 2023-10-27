@@ -54,7 +54,7 @@ public class VideoJuego5 {
                "\n6)Intercambiar Soldados\n7) Ver soldado\n8) Ver ejército\n9) Sumar niveles\n10) Jugar\n11) Volver");
         int comando = sc.nextInt();
         int fila = 0, columna = 0;
-        if (num != 1 && num < 8){
+        if (comando != 1 && comando < 8){
             System.out.print("Posición del soldado :" + "\nFila: ");
             fila = sc.nextInt() - 1;
             System.out.print("Columna: ");
@@ -62,18 +62,18 @@ public class VideoJuego5 {
         }
         switch(comando){
             case 1:
-                if(num == 1) crearSoldado(ejercito_1, tablero);
-                else crearSoldado(ejercito_2, tablero);  
-                mostrarTablero(tablero);
+                if(num == 1) crearSoldado(ejercito_1, tablero, turqueza);
+                else crearSoldado(ejercito_2, tablero, amarillo);  
+                break;
             case 2:
                 if(num == 1 && ejercito_1.size() - 1 != 0) ejercito_1.remove(tablero[fila][columna]);
                 if(num == 2 && ejercito_2.size() - 1 != 0) ejercito_2.remove(tablero[fila][columna]);
-                mostrarTablero(tablero);
+                tablero[fila][columna] = null;
+                break;
             case 3:
-                if(num == 1 && ejercito_1.size() + 1 != 0) ejercito_1.add(tablero[fila][columna]);
-                if(num == 2 && ejercito_2.size() + 1 != 0) ejercito_2.add(tablero[fila][columna]);
-                clonarSoldado(tablero[fila][columna], tablero);
-                mostrarTablero(tablero);
+                if(num == 1 && ejercito_1.size() + 1 <= 10) clonarSoldado(fila, columna, ejercito_1, tablero, turqueza);
+                if(num == 2 && ejercito_2.size() + 1 <= 10) clonarSoldado(fila, columna, ejercito_2, tablero, amarillo);
+                break;
       /*      case 4:
                 modificarSoldado();
             case 5:
@@ -92,8 +92,10 @@ public class VideoJuego5 {
             case 11:
                 volver();*/
         }
+        mostrarTablero(tablero);
+    
     }
-     public static void crearSoldado(ArrayList <Soldado> ejercito, Soldado [][] tablero){
+     public static void crearSoldado(ArrayList <Soldado> ejercito, Soldado [][] tablero, String color){
         if(ejercito.size() + 1 <= 10){
             Soldado nuevo = new Soldado("Neutro", true);
             System.out.print("Nombre del Soldado:");
@@ -104,17 +106,21 @@ public class VideoJuego5 {
             nuevo.setNivelAtaque(sc.nextInt());
             System.out.print("\nNivel de defensa(1 - 5):");
             nuevo.setNivelDefensa(sc.nextInt());
-            System.out.print("\nFila/Columna");
-            int fila = sc.nextInt();
+            System.out.print("\nFila");
+            int fila = sc.nextInt() - 1;
+            System.out.print("\nColumna:");
             int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
             rellenarTablero(fila, columna, nuevo, tablero);
             nuevo.setFila(fila);
             nuevo.setColumna(columna);
+            nuevo.setColor(color);
             ejercito.add(nuevo);
             
         }
     }
-    public static void clonarSoldado(Soldado sold, Soldado[][] tablero){
+    public static void clonarSoldado(int filap , int columnap , ArrayList <Soldado> ejercito, Soldado[][] tablero, String color){
+        Soldado sold = new Soldado("Reposo", true);
+        sold.clonar(tablero[filap][columnap]);//Metodo del objeto soldado
         System.out.print("Nueva posición del soldado clonado :" + "\nFila: ");
         int fila = sc.nextInt() - 1;
         System.out.print("Columna: ");
@@ -122,6 +128,8 @@ public class VideoJuego5 {
         rellenarTablero(fila, columna, sold, tablero);
         sold.setFila(fila);
         sold.setColumna(columna);
+        sold.setColor(color);
+        ejercito.add(sold);
     }
     public static void startGame(ArrayList <Soldado> ejercito_1, ArrayList <Soldado> ejercito_2, Soldado [][] tablero){ 
         boolean continuar = true;

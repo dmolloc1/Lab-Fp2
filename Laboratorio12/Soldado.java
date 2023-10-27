@@ -32,21 +32,21 @@ public class Soldado {
     	}
 
     
-    public void setNivelDeVida(int num){
+	public void setNivelDeVida(int num){
 		nivelVida = num;
 	}
 
-    public void setNivelAtaque(int num){
+	public void setNivelAtaque(int num){
 		nivelAtaque = num;
 	}
-    public void setNivelDefensa(int num){
+	public void setNivelDefensa(int num){
 		nivelDefensa = num;
 	}
-    public void setNombre(String nom){
-        this.nombre = nom;
-    }
+	public void setNombre(String nom){
+		this.nombre = nom;
+	}
 
-    public void setFila(int num){
+	public void setFila(int num){
 		fila = num;
 	}
 
@@ -155,4 +155,12 @@ public class Soldado {
     	public void morir(){
         	this.vive = false;
     	}
+
+	public void clonar(Soldado clon){
+		this.nombre = clon.nombre + ".clon";
+		this.velocidad = clon.velocidad;
+		this.nivelVida = clon.nivelVida;
+		this.nivelAtaque = clon.nivelAtaque;
+		this.nivelDefensa = clon.nivelDefensa;
+	}
 }
