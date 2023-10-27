@@ -74,9 +74,9 @@ public class VideoJuego5 {
                 if(num == 1 && ejercito_1.size() + 1 <= 10) clonarSoldado(fila, columna, ejercito_1, tablero, turqueza);
                 if(num == 2 && ejercito_2.size() + 1 <= 10) clonarSoldado(fila, columna, ejercito_2, tablero, amarillo);
                 break;
-      /*      case 4:
-                modificarSoldado();
-            case 5:
+            case 4:
+                modificarSoldado(tablero[fila][columna]);
+        /*    case 5:
                 compararSoldado();
             case 6: 
                 intercambiarSoldado();
@@ -130,6 +130,49 @@ public class VideoJuego5 {
         sold.setColumna(columna);
         sold.setColor(color);
         ejercito.add(sold);
+    }
+    public static void modificarSoldado(Soldado soldado){
+       int opcion;
+
+        do {
+            System.out.println("Menú de Opciones:");
+            System.out.println("1. Modificar nivel de ataque");
+            System.out.println("2. Modificar nivel de defensa");
+            System.out.println("3. Modificar vida actual");
+            System.out.println("4. Mostrar información del soldado");
+            System.out.println("5. Salir");
+            System.out.print("Ingrese su opción: ");
+
+            opcion = sc.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese nuevo nivel de ataque: ");
+                    int nuevoAtaque = sc.nextInt();
+                    soldado.setNivelAtaque(nuevoAtaque);
+                    break;
+                case 2:
+                    System.out.print("Ingrese nuevo nivel de defensa: ");
+                    int nuevaDefensa = sc.nextInt();
+                    soldado.setNivelDefensa(nuevaDefensa);
+                    break;
+                case 3:
+                    System.out.print("Ingrese nueva vida actual: ");
+                    int nuevaVida = sc.nextInt();
+                    soldado.setVidaActual(nuevaVida);
+                    break;
+                case 4:
+                    System.out.println(soldado.mostrar());
+		            break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
+                    break;
+            }
+
+        } while (opcion != 5);
+ 
     }
     public static void startGame(ArrayList <Soldado> ejercito_1, ArrayList <Soldado> ejercito_2, Soldado [][] tablero){ 
         boolean continuar = true;

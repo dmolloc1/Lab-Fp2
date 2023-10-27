@@ -105,7 +105,8 @@ public class Soldado {
 //Metodos
 	public String mostrar(){
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
-            + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna +"\nEstado: "+ actitud; 	
+            + nivelVida + "\n	-Nivel de Ataque: " + nivelAtaque + "\n	-Nivel de Defensa: " + nivelDefensa +
+ 	"\n	-Fila/Columna: "+ fila + " / "+ columna +"\nEstado: "+ actitud; 	
 	}
 
 	public void atacar(boolean gano){
