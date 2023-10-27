@@ -9,16 +9,14 @@ public class VideoJuego5 {
         menuPrincipal();
     }
     public static void menuPrincipal(){
-    	System.out.println("--------------- MENU PRINCIPAL -----------\n1. Juego rápido\n2. Juego personalizado\n3.Salir");
+    	System.out.println("--------------- MENU PRINCIPAL -----------\n1. Juego rápido\n2. Juego personalizado\n3. Salir");
         System.out.print("Escoge una opción(1, 2 o 3): ");
         int respond = sc.nextInt();
         switch(respond){
             case 1:
-            //  startGam|e();
-              juegoRapido();
-                  menuPrincipal();
+                juegoRapido();
             case 2:
-        //        juegoPersonalizado();
+                juegoPersonalizado();
            //     menuPrincipal();
             case 3:
                   break;
@@ -41,13 +39,75 @@ public class VideoJuego5 {
         }
         menuPrincipal();
     }
+    public static void juegoPersonalizado(){
+        String turqueza = "\u001B[30m";
+        String amarillo = "\u001B[31m";
+        Soldado[][]tablero = new Soldado[10][10];
+        ejercito_1 = datosEjercito(1, turqueza, tablero);
+        System.out.println("................................................................");
+	    ejercito_2 = datosEjercito(2, amarillo, tablero);
+        System.out.println("\n          ~~~TABLERO~~~");
+        mostrarTablero(tablero);
+        System.out.println("Elija que ejercito manipular(1 o 2):");
+        int num = sc.nextInt();
+        System.out.println("1) Crear Soldado\n2) Eliminar Soldado\n3) Clonar Soldado\n4) Modificar Soldado\n5) Comparar Soldados" +
+               "\n6)Intercambiar Soldados\n7) Ver soldado\n8) Ver ejército\n9) Sumar niveles\n10) Jugar\n11) Volver");
+        int comando = sc.nextInt();
+        switch(comando){
+            case 1:
+                if(num == 1) crearSoldado(ejercito_1, tablero);
+                else crearSoldado(ejercito_2, tablero);  
+           /* case 2:
+                ejercito.remove(tablero[fila][columna]);
+            case 3:
+                ejercito.add(tablero[fila])clonarSoldado();
+            case 4:
+                modificarSoldado();
+            case 5:
+                compararSoldado();
+            case 6: 
+                intercambiarSoldado();
+            case 7:
+                verSoldado();
+            case 8:
+                verEjercito();
+            case 9: 
+                sumarNiveles();
+
+            case 10:
+                startGame(ejercito_1, ejercito_2, tablero);
+            case 11:
+                volver();*/
+        }
+    }
+     public static void crearSoldado(ArrayList <Soldado> ejercito, Soldado [][] tablero){
+        if(ejercito.size() + 1 <= 10){
+            Soldado nuevo = new Soldado("Neutro", true);
+            System.out.print("Nombre del Soldado:");
+            nuevo.setNombre(sc.next());
+            System.out.print("\nNivel de vida (1 - 5):");
+            nuevo.setNivelDeVida(sc.nextInt());
+            System.out.print("\nNivel de ataque(1 - 5):");
+            nuevo.setNivelAtaque(sc.nextInt());
+            System.out.print("\nNivel de defensa(1 - 5):");
+            nuevo.setNivelDefensa(sc.nextInt());
+            System.out.print("\nFila/Columna");
+            int fila = sc.nextInt();
+            int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+            rellenarTablero(fila, columna, nuevo, tablero);
+            nuevo.setFila(fila);
+            nuevo.setColumna(columna);
+            ejercito.add(nuevo);
+            
+        }
+    }
     public static void startGame(ArrayList <Soldado> ejercito_1, ArrayList <Soldado> ejercito_2, Soldado [][] tablero){ 
         boolean continuar = true;
         while (ejercito_1.size() > 0 && ejercito_2.size() > 0  && continuar){    
-            System.out.println("Desea salir (y/n)");
+            System.out.print("Desea salir (y/n)");
             continuar = sc.next().charAt(0) == 'n';
             if(!continuar) break;
-            System.out.println("Turno del primer jugador(celeste) "+ ejercito_1.size());
+            System.out.println("\nTurno del primer jugador(celeste) "+ ejercito_1.size());
             jugar(tablero, 1);
             if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
                 if(ejercito_1.size() == 0){
@@ -58,9 +118,9 @@ public class VideoJuego5 {
                     break;
 		        }
 	        }
-            System.out.println("Desea salir (y/n)");
+            System.out.print("Desea salir (y/n)");
             continuar = sc.next().charAt(0) == 'n';
-            System.out.println("Turno del segundo jugador(amarillo) "+ ejercito_2.size());
+            System.out.println("\nTurno del segundo jugador(amarillo) "+ ejercito_2.size());
             jugar(tablero, 2);
                 
         } 

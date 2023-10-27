@@ -31,11 +31,22 @@ public class Soldado {
         	this.vive = vive;
     	}
 
-	public void setNivelDeVida(int num){
+    
+    public void setNivelDeVida(int num){
 		nivelVida = num;
 	}
 
-	public void setFila(int num){
+    public void setNivelAtaque(int num){
+		nivelAtaque = num;
+	}
+    public void setNivelDefensa(int num){
+		nivelDefensa = num;
+	}
+    public void setNombre(String nom){
+        this.nombre = nom;
+    }
+
+    public void setFila(int num){
 		fila = num;
 	}
 
