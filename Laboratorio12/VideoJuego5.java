@@ -192,10 +192,11 @@ public class VideoJuego5 {
         
     }
     public static void comparar(String atributo, String a, String b){
-        if(a.equals(b)){
-            System.out.println(atributo + "es igual");
-        }
-        else System.out.println(atributo + "es diferente");
+    int comp = a.compareTo(b);    
+    if(comp == 0  ){
+            System.out.println(atributo + " es igual");
+    }else if(comp > 0) System.out.println(atributo + " es menor");
+    else System.out.println(atributo + "es mayor");
     }
 
     public static void startGame(ArrayList <Soldado> ejercito_1, ArrayList <Soldado> ejercito_2, Soldado [][] tablero){ 
