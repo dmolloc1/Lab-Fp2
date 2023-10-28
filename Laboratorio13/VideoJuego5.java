@@ -33,7 +33,6 @@ public class VideoJuego5 {
             System.out.println("................................................................");
 	        ejercito_2 = datosEjercito(2, amarillo, tablero);
             System.out.println("\n          ~~~TABLERO~~~");
-            mostrarTablero(tablero);
             startGame(ejercito_1,  ejercito_2, tablero); 
             System.out.print("Escoja una opción\n1.Empezar otra ronda nueva\n2. volver al menu principal: ");
             continuar = sc.nextInt() == 1;
@@ -167,7 +166,7 @@ public class VideoJuego5 {
                 total = total.sumar(ejercito.get(i));
                 break;
             }
-            total = total.sumar(ejercito.get(i).sumar(ejercito.get(i + 1)));
+            total = total.sumar(ejercito.get(i)).sumar(ejercito.get(i + 1));
         }
         total.setNombre("Total de puntaje del ejercito:");
         System.out.println(total.mostrar());
@@ -288,11 +287,12 @@ public class VideoJuego5 {
     }
 
     public static void startGame(ArrayList <Soldado> ejercito_1, ArrayList <Soldado> ejercito_2, Soldado [][] tablero){ 
+        mostrarTablero(tablero);
         boolean continuar = true;
+        System.out.println("Cantidad total de soldados creados: " + Soldado.creados());
         while (Soldado.cantidad(ejercito_1) > 0 && Soldado.cantidad(ejercito_2) > 0  && continuar){    
             System.out.print("Desea salir (y/n): ");
             continuar = sc.next().charAt(0) == 'n';
-            System.out.println("Cantidad total de soldados creados: " + Soldado.creados());
             if(!continuar) break;
             System.out.println("\nTurno del primer jugador(celeste) ");
             jugar(tablero, 1);
@@ -309,6 +309,7 @@ public class VideoJuego5 {
 	        }
             System.out.print("Desea salir (y/n)");
             continuar = sc.next().charAt(0) == 'n';
+            if(!continuar) break;
             System.out.println("\nTurno del segundo jugador(amarillo) ");
             jugar(tablero, 2);
             System.out.println("Cantidad de soldados del Ejercito 1: " + Soldado.cantidad(ejercito_1));
