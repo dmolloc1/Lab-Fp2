@@ -172,5 +172,9 @@ public class Soldado {
 		this.nivelAtaque = clon.nivelAtaque;
 		this.nivelDefensa = clon.nivelDefensa;
 	}
+	public Soldado sumar(Soldado sumar){
+		this.nivelVida += sumar.nivelVida;
+		return this;
+	}
 
 }

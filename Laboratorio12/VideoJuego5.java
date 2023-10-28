@@ -83,21 +83,39 @@ public class VideoJuego5 {
                 break;
             case 6: 
                 if(num == 1) intercambiarSoldado(tablero[fila][columna], ejercito_1, ejercito_2, tablero, turqueza);
-                if(num == 2) intercambiarSoldado(tablero[fila][columna], ejercito_2, ejercito_1, tablero, amarillo);
+                else intercambiarSoldado(tablero[fila][columna], ejercito_2, ejercito_1, tablero, amarillo);
+                break;
             case 7:
                 tablero[fila][columna].mostrar();
-       /*     case 8:
-                verEjercito();
+                break;
+            case 8:
+                System.out.println("Datos del ejercito " + num);
+                if(num == 1) mostrarSoldados(ejercito_1);
+                else mostrarSoldados(ejercito_2);
+                break;
             case 9: 
-                sumarNiveles();
+                if(num == 1) sumarNiveles(ejercito_1);
+                else sumarNiveles(ejercito_2);
+                break;
 
             case 10:
                 startGame(ejercito_1, ejercito_2, tablero);
             case 11:
-                volver();*/
+                menuPrincipal();
         }
         mostrarTablero(tablero);
     
+    }
+    public static void sumarNiveles(ArrayList <Soldado> ejercito){
+        Soldado total =  new Soldado("Neutro", true);
+        for(int i = 0; i < ejercito.size(); i += 2){
+            if(ejercito.get(i + 2) == null){
+                total = total.sumar(ejercito.get(i));
+                break;
+            }
+            total = total.sumar(ejercito.get(i).sumar(ejercito.get(i +1)));
+        }
+
     }
      public static void crearSoldado(ArrayList <Soldado> ejercito, Soldado [][] tablero, String color){
         if(ejercito.size() + 1 <= 10){
