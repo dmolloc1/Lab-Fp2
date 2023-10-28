@@ -81,11 +81,12 @@ public class VideoJuego5 {
             case 5:
                 compararSoldado(fila, columna, tablero);
                 break;
-        /*    case 6: 
-                intercambiarSoldado();
+            case 6: 
+                if(num == 1) intercambiarSoldado(tablero[fila][columna], ejercito_1, ejercito_2, tablero, turqueza);
+                if(num == 2) intercambiarSoldado(tablero[fila][columna], ejercito_2, ejercito_1, tablero, amarillo);
             case 7:
-                verSoldado();
-            case 8:
+                tablero[fila][columna].mostrar();
+       /*     case 8:
                 verEjercito();
             case 9: 
                 sumarNiveles();
@@ -179,7 +180,7 @@ public class VideoJuego5 {
     }
 
     public static void compararSoldado(int fila , int columna, Soldado [][] tablero){
-        System.out.print("Posición del soldado a comparar :" + "\nFila: ");
+        System.out.print("Posición del soldado a ser comparado :" + "\nFila: ");
         int filaC = sc.nextInt() - 1;
         System.out.print("Columna: ");
         int columnaC = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
@@ -192,11 +193,25 @@ public class VideoJuego5 {
         
     }
     public static void comparar(String atributo, String a, String b){
-    int comp = a.compareTo(b);    
-    if(comp == 0  ){
+        int comp = a.compareTo(b);    
+        if(comp == 0  ){
             System.out.println(atributo + " es igual");
-    }else if(comp > 0) System.out.println(atributo + " es menor");
-    else System.out.println(atributo + "es mayor");
+        }else if(comp > 0) System.out.println(atributo + " es menor");
+        else System.out.println(atributo + "es mayor");
+    }
+
+    public static void intercambiarSoldado(Soldado soldado1, ArrayList <Soldado> original, ArrayList <Soldado> migrar, Soldado[][] tablero, String color){
+        System.out.print("Posición del soldado a ser intercambiado :" + "\nFila: ");
+        int fila = sc.nextInt() - 1;
+        System.out.print("Columna: ");
+        int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+        Soldado soldado2 = tablero[fila][columna];
+        soldado1.setColor(soldado2.getColor());
+        soldado2.setColor(color);
+        migrar.add(soldado1);
+        original.remove(soldado1);
+        original.add(soldado2);
+        migrar.remove(soldado2);
     }
 
     public static void startGame(ArrayList <Soldado> ejercito_1, ArrayList <Soldado> ejercito_2, Soldado [][] tablero){ 
