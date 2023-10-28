@@ -3,71 +3,87 @@ import java.util.*;
 //Laboratorio A Fundamentos 2
 //Autor: Mollo Chuquicaña Dolly Yadhira
 public class Soldado {
-
+	//Variables de clase
+	public static final int MAX_SIZE = 10;
+       	private static int cantidad;	
+	private static int totalSoldados;
+	//Atributos de objeto
 	private String nombre;
 	private int nivelVida, fila;
 	private char columna;
 	private String color;
-    	public static final int limite = 10;
-    	private static int nSoldados;
-    //nuevos atributos
-    	private int nivelAtaque, nivelDefensa, vidaActual, velocidad;
+      	private int nivelAtaque, nivelDefensa, vidaActual, velocidad;
     	private String actitud;
     	private boolean vive;
-
+//Metodos de clase
+	public static int creados(){
+		return totalSoldados;
+	}
+	public static int cantidad(ArrayList <Soldado> ejercito){
+		cantidad = ejercito.size();
+		return cantidad;
+	}
+//Constructores
     	public Soldado(String nombre, int nivelVida, int nivelAtaque, int nivelDefensa, int velocidad){//Atributos de batalla
         	this.nombre = nombre;
         	this.nivelVida = nivelVida;
         	this.nivelAtaque = nivelAtaque;
         	this.nivelDefensa = nivelDefensa;
         	this.velocidad = velocidad;
-            n.Soldados += 1;
+		totalSoldados += 1;
     	}
 
     	public Soldado(int fila, char columna ){//Atributos de ubicacion y nombre
         	this.fila = fila;
         	this.columna = columna;
+		totalSoldados += 1;
     	}
 
     	public Soldado(String actitud, boolean vive){// Atributos de estado
            	this.actitud = actitud;
         	this.vive = vive;
+		totalSoldados += 1;
     	}
-    
-        public static int total(){
-            return nSoldados;
-        }
-    	
+ //Getters and Setters
 	public void setNivelDeVida(int num){
-		nivelVida = num;
+		this.nivelVida = num;
 	}
 
-    	public void setNivelAtaque(int num){
-		nivelAtaque = num;
+	public void setNivelAtaque(int num){
+		this.nivelAtaque = num;
 	}
-    	public void setNivelDefensa(int num){
-		nivelDefensa = num;
+	
+	public void setNivelDefensa(int num){
+		this.nivelDefensa = num;
 	}
-    	public void setNombre(String nom){
-        	this.nombre = nom;
-    	}
+	
+	public void setNombre(String nom){
+		this.nombre = nom;
+	}
 
-    	public void setFila(int num){
-		fila = num;
+	public void setFila(int num){
+		this.fila = num;
 	}
 
 	public void setColumna(int colum){
-		columna = (char)(colum + 65);
+		this.columna = (char)(colum + 65);
 	}
     	
 	public void setVive(boolean vivir){
-        	vive = vivir;
+        	this.vive = vivir;
     	}
     	
 	public void setActitud (String a){
-    		actitud = a ;
+    		this.actitud = a ;
     	}
 
+	public void setVidaActual(int vidaActual){
+        	this.nivelVida = vidaActual;
+    	}
+	
+	public void setColor(String color){
+		this.color = color; 
+	}
 	public String getNombre(){
 		return nombre;
 	}	
@@ -91,19 +107,18 @@ public class Soldado {
 	public String getActitud(){
         	return actitud;
     	}
-
-	public void setColor(String color){
-		this.color = color; 
+	
+	public int getNivelAtaque() {
+		return nivelAtaque;
+	}
+	public int getNivelDefensa() {
+		return nivelDefensa;
 	}
 
    	public String getColor(){
        		return  color;
 	}
-    	
-	public void setVidaActual(int vidaActual){
-        	this.nivelVida = vidaActual;
-    	}
-    	
+    	    	
 	public int getVidaActual(){
         	return nivelVida;
     	}
@@ -111,7 +126,8 @@ public class Soldado {
 //Metodos
 	public String mostrar(){
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
-            + nivelVida + "\n	-Fila/Columna: "+ fila + " / "+ columna +"\nEstado: "+ actitud; 	
+            + nivelVida + "\n	-Nivel de Ataque: " + nivelAtaque + "\n	-Nivel de Defensa: " + nivelDefensa +
+ 	"\n	-Velocidad: "+ velocidad +"\nEstado: "+ actitud; 	
 	}
 
 	public void atacar(boolean gano){
@@ -140,9 +156,8 @@ public class Soldado {
         	    this.actitud = "Defender";
         	    this.defender();
         	}
-        	else{ 
-        	    this.velocidad = this.velocidad - 1;
-        	}
+        	else this.velocidad = this.velocidad - 1;
+        	
     	}
 
     	public void avanzar(int fila, int columna){
@@ -161,4 +176,20 @@ public class Soldado {
     	public void morir(){
         	this.vive = false;
     	}
+
+	public void clonar(Soldado clon){
+		this.nombre = clon.nombre;
+		this.velocidad = clon.velocidad;
+		this.nivelVida = clon.nivelVida;
+		this.nivelAtaque = clon.nivelAtaque;
+		this.nivelDefensa = clon.nivelDefensa;
+	}
+	
+	public Soldado sumar(Soldado sumar){
+		this.nivelVida += sumar.nivelVida;
+		this.nivelAtaque += sumar.nivelAtaque;
+		this.nivelDefensa += sumar.nivelDefensa;
+		this.velocidad += sumar.velocidad;
+		return this;
+	}
 }
