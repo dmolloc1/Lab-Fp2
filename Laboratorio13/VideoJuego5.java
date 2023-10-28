@@ -1,4 +1,3 @@
-
 import java.util.*;
 //Laboratorio A Fundamentos 2
 //Autor: Mollo Chuquicaña Dolly Yadhira
@@ -17,7 +16,6 @@ public class VideoJuego5 {
                 juegoRapido();
             case 2:
                 juegoPersonalizado();
-           //     menuPrincipal();
             case 3:
                 System.out.println("Saliendo del juego");
                   break;
@@ -31,7 +29,7 @@ public class VideoJuego5 {
             Soldado[][]tablero = new Soldado[10][10];
             ejercito_1 = datosEjercito(1, turqueza, tablero);
             System.out.println("................................................................");
-	        ejercito_2 = datosEjercito(2, amarillo, tablero);
+	    ejercito_2 = datosEjercito(2, amarillo, tablero);
             System.out.println("\n          ~~~TABLERO~~~");
             startGame(ejercito_1,  ejercito_2, tablero); 
             System.out.print("Escoja una opción\n1.Empezar otra ronda nueva\n2. volver al menu principal: ");
@@ -45,7 +43,7 @@ public class VideoJuego5 {
         Soldado[][]tablero = new Soldado[10][10];
         ejercito_1 = datosEjercito(1, turqueza, tablero);
         System.out.println("................................................................");
-	    ejercito_2 = datosEjercito(2, amarillo, tablero);
+	ejercito_2 = datosEjercito(2, amarillo, tablero);
         System.out.println("\n          ~~~TABLERO~~~");
         mostrarTablero(tablero);
         int comando = 0;
@@ -88,15 +86,14 @@ public class VideoJuego5 {
                     else intercambiarSoldado(tablero[fila][columna], ejercito_2, ejercito_1, tablero, amarillo);
                     break;
                 case 7:
-	                System.out.println("Nombre:");
-	                String nom = sc.next();
-                    if(num == 1 ) {insertionSortName(ejercito_1);
+	            System.out.println("Nombre:");
+	            String nom = sc.next();
+                    if(num == 1 ) { insertionSortName(ejercito_1);
 			            buscarPorNombre( ejercito_1, nom);
-		            }else { insertionSortName(ejercito_2);
-			                buscarPorNombre(ejercito_2, nom);
-
-	                }
-	                break;
+		    } else { insertionSortName(ejercito_2);
+			    buscarPorNombre(ejercito_2, nom);
+	            }
+		    break;
                 case 8:
                     System.out.println("Datos del ejercito " + num);
                     if(num == 1) mostrarSoldados(ejercito_1);
@@ -114,7 +111,6 @@ public class VideoJuego5 {
             mostrarTablero(tablero);
         }while(comando != 11);
         menuPrincipal();
-    
     }
 
     public static void insertionSortName (ArrayList <Soldado> ejercito){
@@ -130,13 +126,13 @@ public class VideoJuego5 {
       	    ejercito.set((j + 1), pivot);
 	    }
     }
-
-	private static boolean compareString(String word1, String word2){
+    private static boolean compareString(String word1, String word2){
     		word1 = word1.toUpperCase();
     		word2 = word2.toUpperCase();
     		if (word1.compareTo(word2) <= 0) return false;
     		return true;
-  	}
+    }
+    
     public static void buscarPorNombre(ArrayList<Soldado> soldados, String nBuscado) {
         int izq = 0;
         int der = Soldado.cantidad(soldados) - 1;
@@ -190,10 +186,10 @@ public class VideoJuego5 {
             nuevo.setFila(fila);
             nuevo.setColumna(columna);
             nuevo.setColor(color);
-            ejercito.add(nuevo);
-            
+            ejercito.add(nuevo);        
         }
     }
+	
     public static void clonarSoldado(int filap , int columnap , ArrayList <Soldado> ejercito, Soldado[][] tablero, String color){
         Soldado sold = new Soldado("Reposo", true);
         sold.clonar(tablero[filap][columnap]);//Metodo del objeto soldado
@@ -207,9 +203,9 @@ public class VideoJuego5 {
         sold.setColor(color);
         ejercito.add(sold);
     }
+	
     public static void modificarSoldado(Soldado soldado){
-       int opcion;
-
+        int opcion;
         do {
             System.out.println("Menú de Opciones:");
             System.out.println("1. Modificar nivel de ataque");
@@ -239,16 +235,14 @@ public class VideoJuego5 {
                     break;
                 case 4:
                     System.out.println(soldado.mostrar());
-		            break;
+		    break;
                 case 5:
                     break;
                 default:
                     System.out.println("Opción no válida. Por favor, ingrese una opción válida.");
                     break;
             }
-
         } while (opcion != 5);
- 
     }
 
     public static void compararSoldado(int fila , int columna, Soldado [][] tablero){
