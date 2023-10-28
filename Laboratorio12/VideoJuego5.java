@@ -89,8 +89,12 @@ public class VideoJuego5 {
                     else intercambiarSoldado(tablero[fila][columna], ejercito_2, ejercito_1, tablero, amarillo);
                     break;
                 case 7:
-                    tablero[fila][columna].mostrar();
-                    break;
+		    System.out.println("Nombre:");
+		    String nom = sc.next();
+                    if(num == 1 ) buscarPorNombres( ejercito_1, nom);
+		    else {  buscarPorNombres(ejercito_2, nom);
+		    }
+		    break;
                 case 8:
                     System.out.println("Datos del ejercito " + num);
                     if(num == 1) mostrarSoldados(ejercito_1);
@@ -110,6 +114,28 @@ public class VideoJuego5 {
         menuPrincipal();
     
     }
+    public static Soldado buscarPorNombre(ArrayList<Soldado> soldados, String nombreBuscado) {
+        int izq = 0;
+        int der = soldados.size() - 1;
+
+        while (izq <= der) {
+            int medio = izq + (der - izq) / 2;
+            String nombreMedio = soldados.get(medio).getNombre();
+            int comparacion = nombreMedio.compareTo(nombreBuscado);
+
+            if (comparacion == 0) {
+                return soldados.get(medio);
+            }
+
+            if (comparacion < 0) {
+                izq = medio + 1;
+            } else {
+                der = medio - 1;
+            }
+        }
+        return null;
+    }
+
     public static void sumarNiveles(ArrayList <Soldado> ejercito){
         Soldado total =  new Soldado("Neutro", true);
         for(int i = 0; i < ejercito.size(); i += 2){
@@ -312,7 +338,7 @@ public class VideoJuego5 {
             	else System.out.println((i + 1) +" " + fila);
         }
     }
-
+    
     public static int totalNivelVida(ArrayList <Soldado> soldados) {
         int total = 0;
         for (Soldado soldado : soldados) {
