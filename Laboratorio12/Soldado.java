@@ -114,7 +114,7 @@ public class Soldado {
 	public String mostrar(){
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
             + nivelVida + "\n	-Nivel de Ataque: " + nivelAtaque + "\n	-Nivel de Defensa: " + nivelDefensa +
- 	"\n	-Fila/Columna: "+ fila + " / "+ columna +"\nEstado: "+ actitud; 	
+ 	"\n	-Velocidad: "+ velocidad +"\nEstado: "+ actitud; 	
 	}
 
 	public void atacar(boolean gano){
@@ -174,6 +174,9 @@ public class Soldado {
 	}
 	public Soldado sumar(Soldado sumar){
 		this.nivelVida += sumar.nivelVida;
+		this.nivelAtaque += sumar.nivelAtaque;
+		this.nivelDefensa += sumar.nivelDefensa;
+		this.velocidad += sumar.velocidad;
 		return this;
 	}
 

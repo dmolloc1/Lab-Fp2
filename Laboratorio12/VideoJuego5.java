@@ -19,6 +19,7 @@ public class VideoJuego5 {
                 juegoPersonalizado();
            //     menuPrincipal();
             case 3:
+                System.out.println("Saliendo del juego");
                   break;
         }
     }
@@ -48,74 +49,78 @@ public class VideoJuego5 {
 	    ejercito_2 = datosEjercito(2, amarillo, tablero);
         System.out.println("\n          ~~~TABLERO~~~");
         mostrarTablero(tablero);
-        System.out.println("Elija que ejercito manipular(1 o 2):");
-        int num = sc.nextInt();
-        System.out.println("1) Crear Soldado\n2) Eliminar Soldado\n3) Clonar Soldado\n4) Modificar Soldado\n5) Comparar Soldados" +
+        int comando = 0;
+        do{
+            System.out.println("Elija que ejercito manipular(1 o 2):");
+            int num = sc.nextInt();
+            System.out.println("1) Crear Soldado\n2) Eliminar Soldado\n3) Clonar Soldado\n4) Modificar Soldado\n5) Comparar Soldados" +
                "\n6)Intercambiar Soldados\n7) Ver soldado\n8) Ver ejército\n9) Sumar niveles\n10) Jugar\n11) Volver");
-        System.out.print("Ingrese su opción: ");
-        int comando = sc.nextInt();
-        int fila = 0, columna = 0;
-        if (comando != 1 && comando < 8){
-            System.out.print("Posición del soldado :" + "\nFila: ");
-            fila = sc.nextInt() - 1;
-            System.out.print("Columna: ");
-            columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
-        }
-        switch(comando){
-            case 1:
-                if(num == 1) crearSoldado(ejercito_1, tablero, turqueza);
-                else crearSoldado(ejercito_2, tablero, amarillo);  
-                break;
-            case 2:
-                if(num == 1 && ejercito_1.size() - 1 != 0) ejercito_1.remove(tablero[fila][columna]);
-                if(num == 2 && ejercito_2.size() - 1 != 0) ejercito_2.remove(tablero[fila][columna]);
-                tablero[fila][columna] = null;
-                break;
-            case 3:
-                if(num == 1 && ejercito_1.size() + 1 <= 10) clonarSoldado(fila, columna, ejercito_1, tablero, turqueza);
-                if(num == 2 && ejercito_2.size() + 1 <= 10) clonarSoldado(fila, columna, ejercito_2, tablero, amarillo);
-                break;
-            case 4:
-                modificarSoldado(tablero[fila][columna]);
-                break;
-            case 5:
-                compararSoldado(fila, columna, tablero);
-                break;
-            case 6: 
-                if(num == 1) intercambiarSoldado(tablero[fila][columna], ejercito_1, ejercito_2, tablero, turqueza);
-                else intercambiarSoldado(tablero[fila][columna], ejercito_2, ejercito_1, tablero, amarillo);
-                break;
-            case 7:
-                tablero[fila][columna].mostrar();
-                break;
-            case 8:
-                System.out.println("Datos del ejercito " + num);
-                if(num == 1) mostrarSoldados(ejercito_1);
-                else mostrarSoldados(ejercito_2);
-                break;
-            case 9: 
-                if(num == 1) sumarNiveles(ejercito_1);
-                else sumarNiveles(ejercito_2);
-                break;
+            System.out.print("Ingrese su opción: ");
+            comando = sc.nextInt();
+            int fila = 0, columna = 0;
+            if (comando != 1 && comando < 8){
+                System.out.print("Posición del soldado :" + "\nFila: ");
+                fila = sc.nextInt() - 1;
+                System.out.print("Columna: ");
+                columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+            }
+            switch(comando){
+                case 1:
+                    if(num == 1) crearSoldado(ejercito_1, tablero, turqueza);
+                    else crearSoldado(ejercito_2, tablero, amarillo);  
+                    break;
+                case 2:
+                    if(num == 1 && ejercito_1.size() - 1 != 0) ejercito_1.remove(tablero[fila][columna]);
+                    if(num == 2 && ejercito_2.size() - 1 != 0) ejercito_2.remove(tablero[fila][columna]);
+                    tablero[fila][columna] = null;
+                    break;
+                case 3:
+                    if(num == 1 && ejercito_1.size() + 1 <= 10) clonarSoldado(fila, columna, ejercito_1, tablero, turqueza);
+                    if(num == 2 && ejercito_2.size() + 1 <= 10) clonarSoldado(fila, columna, ejercito_2, tablero, amarillo);
+                    break;
+                case 4:
+                    modificarSoldado(tablero[fila][columna]);
+                    break;
+                case 5:
+                    compararSoldado(fila, columna, tablero);
+                    break;
+                case 6: 
+                    if(num == 1) intercambiarSoldado(tablero[fila][columna], ejercito_1, ejercito_2, tablero, turqueza);
+                    else intercambiarSoldado(tablero[fila][columna], ejercito_2, ejercito_1, tablero, amarillo);
+                    break;
+                case 7:
+                    tablero[fila][columna].mostrar();
+                    break;
+                case 8:
+                    System.out.println("Datos del ejercito " + num);
+                    if(num == 1) mostrarSoldados(ejercito_1);
+                    else mostrarSoldados(ejercito_2);
+                    break;
+                case 9: 
+                    if(num == 1) sumarNiveles(ejercito_1);
+                    else sumarNiveles(ejercito_2);
+                    break;
 
-            case 10:
-                startGame(ejercito_1, ejercito_2, tablero);
-            case 11:
-                menuPrincipal();
-        }
-        mostrarTablero(tablero);
+                case 10:
+                    startGame(ejercito_1, ejercito_2, tablero);
+                    break;
+            }
+            mostrarTablero(tablero);
+        }while(comando != 11);
+        menuPrincipal();
     
     }
     public static void sumarNiveles(ArrayList <Soldado> ejercito){
         Soldado total =  new Soldado("Neutro", true);
         for(int i = 0; i < ejercito.size(); i += 2){
-            if(ejercito.get(i + 2) == null){
+            if(!(ejercito.size() > i + 1)){
                 total = total.sumar(ejercito.get(i));
                 break;
             }
-            total = total.sumar(ejercito.get(i).sumar(ejercito.get(i +1)));
+            total = total.sumar(ejercito.get(i).sumar(ejercito.get(i + 1)));
         }
-
+        total.setNombre("Total de puntaje del ejercito:");
+        System.out.println(total.mostrar());
     }
      public static void crearSoldado(ArrayList <Soldado> ejercito, Soldado [][] tablero, String color){
         if(ejercito.size() + 1 <= 10){
