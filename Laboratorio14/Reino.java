@@ -1,15 +1,13 @@
+import java.util.*;
 public class Reino{
     private int totalEjercitos;
     private ArrayList<Ejercito> listArmy;
-    public static int cantidad(ArmyList<Ejercito> listArmy){
-        
-    }
     public Reino(){
-        this.reino = new ArrayList <>();
+        this.listArmy = new ArrayList <>();
     }
    
     public void reclutar(Ejercito army){
-        this.reino.add(army);
+        this.listArmy.add(army);
     }
 
     public static  ArrayList <ArrayList<Soldado>> ejercitos(){
