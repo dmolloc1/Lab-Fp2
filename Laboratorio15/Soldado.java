@@ -19,9 +19,6 @@ public class Soldado {
 	public static int creados(){
 		return totalSoldados;
 	}
-	public static int cantidad(Ejercito ejercito){
-		return ejercito.size();
-	}
 //Constructores
     	public Soldado(String nombre, int nivelVida, int nivelAtaque, int nivelDefensa, int velocidad){//Atributos de batalla
         	this.nombre = nombre;
