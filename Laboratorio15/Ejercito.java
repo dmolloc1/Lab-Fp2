@@ -17,7 +17,7 @@ public class Ejercito{
     public void setReino(String miReino){
         this.reino = miReino;
     } 
-    public Reino getReino(){
+    public String getReino(){
         return this.reino;
     } 
     public int size(){
@@ -38,9 +38,11 @@ public class Ejercito{
     public String getColor(){
         return  color;
     }
-    public void toString(){
+    public String toString(){
+        String mostrar = "";
         for(Soldado a : this.misSoldados){
-            System.out.println(a.mostrar());
+            mostrar += "\n"+ a.mostrar() ;
         }
+        return mostrar;
     }
 }

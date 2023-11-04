@@ -8,6 +8,7 @@ public class Soldado {
        	private static int cantidad;	
 	private static int totalSoldados;
 	//Atributos de objeto
+	private Ejercito ejercito;
 	private String nombre;
 	private int nivelVida, fila;
 	private char columna;
@@ -52,7 +53,9 @@ public class Soldado {
 	public void setNivelDefensa(int num){
 		this.nivelDefensa = num;
 	}
-	
+	public void setEjercito(Ejercito eje){
+		this.ejercito = eje;
+	}
 	public void setNombre(String nom){
 		this.nombre = nom;
 	}

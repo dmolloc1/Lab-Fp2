@@ -5,7 +5,7 @@ public class Reino{
     
     public Reino(String nom){
         this.listArmy = new ArrayList <>();
-        this.nombre = "" + :nom.charAt(0);
+        this.nombre = nom;
     }
    
     public void reclutar(Ejercito army){
