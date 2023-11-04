@@ -1,26 +1,22 @@
-
 import java.util.*;
 //Laboratorio A Fundamentos 2
 //Autor: Mollo Chuquicaña Dolly Yadhira
 public class Soldado {
 	//Variables de clase
-	public static final int MAX_SIZE = 10;
-       	private static int cantidad;	
+	public static final int MAX_SIZE = 10;	
 	private static int totalSoldados;
 	//Atributos de objeto
 	private String nombre;
 	private int nivelVida, fila;
 	private char columna;
 	private String color;
-      	private int nivelAtaque, nivelDefensa, vidaActual, velocidad;
-    	private String actitud;
-    	private boolean vive;
-//Metodos de clase
+    private int nivelAtaque, nivelDefensa, vidaActual, velocidad;
+    private String actitud;
+    private boolean vive;
+	private Ejercito ejercito;
+	//Metodos de clase
 	public static int creados(){
 		return totalSoldados;
-	}
-	public static int cantidad(Ejercito ejercito){
-		return ejercito.size();
 	}
 //Constructores
     	public Soldado(String nombre, int nivelVida, int nivelAtaque, int nivelDefensa, int velocidad){//Atributos de batalla
@@ -46,6 +42,10 @@ public class Soldado {
  //Getters and Setters
 	public void setNivelDeVida(int num){
 		this.nivelVida = num;
+	}
+	
+	public void setEjercito(Ejercito ejer){
+		this.ejercito = ejer;
 	}
 
 	public void setNivelAtaque(int num){
@@ -87,6 +87,9 @@ public class Soldado {
 		return nombre;
 	}	
 
+	public Ejercito getEjercito(){
+		return this.ejercito;
+	}	
 	public int getNivelDeVida(){
 		return nivelVida;
 	}

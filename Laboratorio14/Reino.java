@@ -1,7 +1,7 @@
 import java.util.*;
 public class Reino{
-    private int totalEjercitos;
     private ArrayList<Ejercito> listArmy;
+    
     public Reino(){
         this.listArmy = new ArrayList <>();
     }
@@ -11,10 +11,10 @@ public class Reino{
         army.setReino(this);
     }
 
-    public   ArrayList <Ejercito> ejercitos(){
+    public ArrayList <Ejercito> getEjercitos(){
         return listArmy;
     }
-    public static int cantidad(Reino reino){
-        return reino.listArmy.size();
+    public int size(){
+        return this.listArmy.size();
     }
 }
