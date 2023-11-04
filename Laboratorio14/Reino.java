@@ -8,10 +8,13 @@ public class Reino{
    
     public void reclutar(Ejercito army){
         this.listArmy.add(army);
+        army.setReino(this);
     }
 
-    public static  ArrayList <ArrayList<Soldado>> ejercitos(){
+    public   ArrayList <Ejercito> ejercitos(){
         return listArmy;
     }
-
+    public static int cantidad(Reino reino){
+        return reino.listArmy.size();
+    }
 }
