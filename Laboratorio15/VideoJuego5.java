@@ -5,10 +5,12 @@ public class VideoJuego5 {
     static ArrayList <Ejercito> inglaterra, francia;
     //static  ArrayList <Soldado> ejercito_1, ejercito_2;
     static Scanner sc = new  Scanner(System.in);
+    static final String turqueza = "\u001B[30m";
+    static final String amarillo = "\u001B[31m";
     public static void main(String[] args) {
         Ejercito[][] tablero =  new Ejercito[10][10];
-        inglaterra = crearReino("I", "\u001B[30m" , tablero);
-        francia = crearReino("F", "\\u001B[31m" , tablero);
+        inglaterra = crearReino("I", turqueza, tablero);
+        francia = crearReino("F", amarillo , tablero);
         mostrarTableroEje(tablero);
         boolean continuar = true;
         while(continuar && inglaterra.size() > 0 && francia.size() > 0){
@@ -59,34 +61,60 @@ public class VideoJuego5 {
             	nuevo.setColumna(columnaR );
             	nuevo.setColor(color);
             	reino.add(nuevo);
-                nuevo.crearEjercito();
 	    }
 	    return reino;
     }
     public static boolean menuPrincipal(Ejercito eje1, Ejercito eje2){
-        
+        //Se rellenan los ejercitos
+        Soldado[][]tablero = new Soldado[10][10];
+        llenarEjercito(tablero, turqueza, eje1);
+        llenarEjercito(tablero, amarillo, eje2);
+
     	System.out.println("--------------- MENU PRINCIPAL -----------\n1. Juego rápido\n2. Juego personalizado\n3. Salir");
-        System.out.print("Escoge una opción(1, 2 o 3): ");
+        System.out.print("Escoge una opción(1 o 2): ");
         int respond = sc.nextInt();
         switch(respond){
             case 1:
-                juegoRapido(eje1, eje2);
+                return juegoRapido(eje1, eje2);
             case 2:
-                juegoPersonalizado();
-            case 3:
-                System.out.println("Saliendo del juego");
-                  break;
+                return juegoPersonalizado(eje1, eje2);
         }
     }
-    public static void juegoRapido(){
-        String turqueza = "\u001B[30m";
-        String amarillo = "\u001B[31m";
+    public static void llenarEjercito(Soldado[][] tablero, String color, Ejercito eje){
+        System.out.print("Generar ejercito:\n1. Aleatoria\n2. Manualmente");
+        int n = sc.nextInt();
+        if(n == 1){
+            eje.ingresarDatosAleatorio(color, tablero); 
+            System.out.println(eje.toString());
+            System.out.println("................................................................");   
+        }
+        else{
+            eje.ingresarDatosManual(tablero, color);
+            System.out.println(eje.toString());
+        }
+        datosEjercito(eje, tablero);
+    }
+    public static void juegoRapido(Ejercito ejercito_1, Ejercito ejercito_2){
+        
         boolean continuar = true;
         while(continuar){
             Soldado[][]tablero = new Soldado[10][10];
-            ejercito_1 = crearEjercito(1, turqueza, tablero);
-            System.out.println("................................................................");
-	    ejercito_2 = datosEjercito(2, amarillo, tablero);
+            System.out.print("Generar ejercito:\n1. Aleatoria\n2. Manualmente");
+            int n = sc.nextInt();
+            if(n == 1){
+                ejercito_1.ingresarDatosAleatorio(turqueza, tablero); 
+                System.out.println(ejercito_1.toString());
+                System.out.println("................................................................");
+	            ejercito_2.ingresarDatosAleatorio(amarillo, tablero);
+                System.out.println(ejercito_2.toString());
+            }
+            else{
+                ejercito_1.ingresarDatosManual(tablero, turqueza);
+                System.out.println(ejercito_1.toString());
+                System.out.println("................................................................");
+	            ejercito_2.ingresarDatosManual(tablero, amarillo);
+                System.out.println(ejercito_2.toString());
+            }
             System.out.println("\n          ~~~TABLERO~~~");
             startGame(ejercito_1,  ejercito_2, tablero); 
             System.out.print("Escoja una opción\n1.Empezar otra ronda nueva\n2. volver al menu principal: ");
