@@ -14,7 +14,7 @@ public class VideoJuego5 {
         mostrarTableroEje(tablero);
         boolean continuar = true;
         while(continuar && inglaterra.size() > 0 && francia.size() > 0){
-            System.out.println("\nTurno del primer jugador(celeste) ")
+            System.out.println("\nTurno del primer jugador(celeste) ");
             jugarE(tablero, 1);
             System.out.println("Cantidad de ejercitos del Inglaterra: " + inglaterra.size());
             System.out.println("Cantidad de ejercitos del Francia: " + francia.size());
@@ -75,9 +75,9 @@ public class VideoJuego5 {
         int respond = sc.nextInt();
         switch(respond){
             case 1:
-                return juegoRapido(eje1, eje2);
+                return juegoRapido(eje1, eje2, tablero);
             case 2:
-                return juegoPersonalizado(eje1, eje2);
+                return juegoPersonalizado(eje1, eje2, tablero);
         }
     }
     public static void llenarEjercito(Soldado[][] tablero, String color, Ejercito eje){
@@ -94,33 +94,9 @@ public class VideoJuego5 {
         }
         datosEjercito(eje, tablero);
     }
-    public static void juegoRapido(Ejercito ejercito_1, Ejercito ejercito_2){
-        
-        boolean continuar = true;
-        while(continuar){
-            Soldado[][]tablero = new Soldado[10][10];
-            System.out.print("Generar ejercito:\n1. Aleatoria\n2. Manualmente");
-            int n = sc.nextInt();
-            if(n == 1){
-                ejercito_1.ingresarDatosAleatorio(turqueza, tablero); 
-                System.out.println(ejercito_1.toString());
-                System.out.println("................................................................");
-	            ejercito_2.ingresarDatosAleatorio(amarillo, tablero);
-                System.out.println(ejercito_2.toString());
-            }
-            else{
-                ejercito_1.ingresarDatosManual(tablero, turqueza);
-                System.out.println(ejercito_1.toString());
-                System.out.println("................................................................");
-	            ejercito_2.ingresarDatosManual(tablero, amarillo);
-                System.out.println(ejercito_2.toString());
-            }
-            System.out.println("\n          ~~~TABLERO~~~");
-            startGame(ejercito_1,  ejercito_2, tablero); 
-            System.out.print("Escoja una opción\n1.Empezar otra ronda nueva\n2. volver al menu principal: ");
-            continuar = sc.nextInt() == 1;
-        }
-        menuPrincipal();
+    public static boolean juegoRapido(Ejercito ejercito_1, Ejercito ejercito_2, Soldado [][] tablero){
+        System.out.println("\n          ~~~TABLERO~~~");
+        return startGame(ejercito_1,  ejercito_2, tablero); 
     }
  /*   public static void juegoPersonalizado(){
         String turqueza = "\u001B[30m";
@@ -198,37 +174,25 @@ public class VideoJuego5 {
         }while(comando != 11);
         menuPrincipal();
     }
-
-    public static void insertionSortName (ArrayList <Soldado> ejercito){
-    	int j;
-    	Soldado pivot;
-    	for(int i = 0; i < Soldado.cantidad(ejercito); i++){
-    		j = i - 1;
-    		pivot = ejercito.get(i);
-    		while(j >= 0 && compareString(ejercito.get(j).getNombre(), pivot.getNombre())){
-			    ejercito.set((j + 1), ejercito.get(j));
-			    j--;
-      		}
-      	    ejercito.set((j + 1), pivot);
-	    }
-    }
-    private static boolean compareString(String word1, String word2){
+*/
+    public static boolean compareString(String word1, String word2){
     		word1 = word1.toUpperCase();
     		word2 = word2.toUpperCase();
     		if (word1.compareTo(word2) <= 0) return false;
     		return true;
     }
     
-    public static void buscarPorNombre(ArrayList<Soldado> soldados, String nBuscado) {
+    public static void buscarPorNombre(Ejercito eje, String nBuscado) {
         int izq = 0;
-        int der = Soldado.cantidad(soldados) - 1;
+        int der = eje.size() - 1;
 
         while (izq <= der) {
             int medio = izq + (der - izq) / 2;
-            String nMedio = soldados.get(medio).getNombre().toUpperCase();
+            String nMedio = eje.getSoldado(medio).getNombre().toUpperCase();
             int comparacion = nMedio.compareTo(nBuscado.toUpperCase());
             if (comparacion == 0) {
-                System.out.println(soldados.get(medio).mostrar());
+                Soldado sold = eje.getSoldado(medio);
+                System.out.println(sold.mostrar());
                 break;
             }
 
@@ -241,19 +205,18 @@ public class VideoJuego5 {
         if(izq > der) System.out.println("Soldado no encontrado");
     }
 
-    public static void sumarNiveles(ArrayList <Soldado> ejercito){
+    public static void sumarNiveles(Ejercito ejercito){
         Soldado total =  new Soldado("Neutro", true);
-        for(int i = 0; i < Soldado.cantidad(ejercito); i += 2){
-            if(!(Soldado.cantidad(ejercito) > i + 1)){
-                total = total.sumar(ejercito.get(i));
+        for(int i = 0; i < ejercito.size(); i += 2){
+            if(!(ejercito.size() > i + 1)){
+                total = total.sumar(ejercito.getSoldado(i));
                 break;
             }
-            total = total.sumar(ejercito.get(i)).sumar(ejercito.get(i + 1));
+            total = total.sumar(ejercito.getSoldado(i)).sumar(ejercito.getSoldado(i + 1));
         }
         total.setNombre("Total de puntaje del ejercito:");
         System.out.println(total.mostrar());
-    }
-  */   
+    }   
 	
     public static void clonarSoldado(int filap , int columnap , ArrayList <Soldado> ejercito, Soldado[][] tablero, String color){
         Soldado sold = new Soldado("Reposo", true);
@@ -306,8 +269,7 @@ public class VideoJuego5 {
         migrar.remove(soldado2);
     }
 
-    public static void startGame(Ejercito ejercito_1,Ejercito ejercito_2, Soldado [][] tablero){ 
-
+    public static boolean startGame(Ejercito ejercito_1,Ejercito ejercito_2, Soldado [][] tablero){ 
         mostrarTablero(tablero);
         boolean continuar = true;
         System.out.println("Cantidad total de soldados creados: " + Soldado.creados());
@@ -319,10 +281,10 @@ public class VideoJuego5 {
             if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
                 if(ejercito_1.size() == 0){
             	    System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_2 ~~~~~~~~~~~~~~~~~");
-                    break;
+                    return false;
                 }else {
                     System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
-                    break;
+                    return true;
 		        }
 	        }
             System.out.print("Desea salir (y/n)");
@@ -337,7 +299,9 @@ public class VideoJuego5 {
         } 
         if(ejercito_2.size() == 0){
             System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");    
+            return true;
         }
+        return false;
     }
 
     

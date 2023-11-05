@@ -193,5 +193,20 @@ public class Ejercito{
         lista.misSoldados.set(i,lista.misSoldados.get(j));
         lista.misSoldados.set(j, vControl);
     }
+//Metodo de ordenamiento por nombre
+    public void insertionSortName (){
+    	int j;
+    	Soldado pivot;
+    	for(int i = 0; i < this.size(); i++){
+    		j = i - 1;
+    		pivot = this.misSoldados.get(i);
+    		while(j >= 0 && VideoJuego5.compareString(this.misSoldados.get(j).getNombre(), pivot.getNombre())){
+			    this.misSoldados.set((j + 1), this.misSoldados.get(j));
+			    j--;
+      		}
+      	    this.misSoldados.set((j + 1), pivot);
+	    }
+    }
+    
 
 }
