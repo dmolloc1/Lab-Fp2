@@ -53,6 +53,36 @@ public class Ejercito{
         setFila(fila);
         setColumna(columna);
     }
+//Metodo para rellenar a el ejercito sus soldados
+    public  void ingresarDatosAleatorio(String color, Soldado[][] tablero) {
+        int filaR = 0, columnaR = 0;
+        int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
+        for (int i = 0; i < armyLength; i++) {
+                Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);
+            // Este ciclo nos permitirá comprobar que los valores generados no coincidan con uno ya existente
+                boolean posicionValida = false;
+                while (!posicionValida) {
+                    filaR = (int) (Math.random() * 9);
+                    columnaR = (int) (Math.random() * 9);
+                    if (VideoJuego5.rellenarTablero(filaR, columnaR, nuevo, tablero)) {
+                        posicionValida = true;
+                    }
+                }
+                nuevo.setFila(filaR + 1);
+                nuevo.setColumna(columnaR );
+                nuevo.setActitud("Neutro");
+                nuevo.setVive(true); //Valores por defecto
+                nuevo.setColor(color);
+                this.misSoldados.add(nuevo);
+        }
+    }
+    public void ingresarDatosManual(Soldado [][] tablero, String color){
+        int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
+        System.out.println("Ingrese los datos de Soldados. Cantidad:" + armyLength);
+        for(int i = 0; i < armyLength; i++){
+            this.crearSoldado(tablero, color);
+        }
+    }
 //Metodos para editar al soldado
     public void crearSoldado( Soldado [][] tablero, String color){
         if(this.size() + 1 <= Soldado.MAX_SIZE){
