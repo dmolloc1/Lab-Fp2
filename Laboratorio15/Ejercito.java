@@ -3,7 +3,7 @@ public class Ejercito{
     Scanner sc = new Scanner(System.in);
     public static final int MAX_SIZE = 10;
     private String nombre, color;
-    private int fila;
+    private int fila, totalNivelVida;
 	private char columna;
     private String reino;
     private ArrayList <Soldado> misSoldados ;
@@ -18,6 +18,9 @@ public class Ejercito{
     public void setReino(String miReino){
         this.reino = miReino;
     } 
+    public String getNombre(){
+        return this.nombre;
+    }
     public String getReino(){
         return this.reino;
     } 
@@ -50,7 +53,7 @@ public class Ejercito{
         setFila(fila);
         setColumna(columna);
     }
-
+//Metodos para editar al soldado
     public void crearSoldado( Soldado [][] tablero, String color){
         if(this.size() + 1 <= Soldado.MAX_SIZE){
             Soldado nuevo = new Soldado("Neutro", true);
@@ -113,6 +116,52 @@ public class Ejercito{
                     break;
             }
         } while (opcion != 5);
+    }
+    public void remove(Soldado sold){
+        this.misSoldados.remove(sold);
+    }
+//Metodos para saber caracteristicas del ejercito
+    public int totalNivelVida() {
+        int total = 0;
+        for (Soldado soldado : this.misSoldados) {
+            total += soldado.getNivelDeVida();
+        }
+        this.totalNivelVida = total;
+        return total;
+    }
+
+    public int promedioNivelVida(){
+        return this.totalNivelVida()/ this.size();
+    }
+    public Soldado getSoldado(int n){
+        return this.misSoldados.get(n);
+    }
+// Metodos de ordenamiento
+    public void ordenarPorNivelBurbuja(){
+        for(int i = 1; i< this.size(); i++){
+            for(int j = 0; j < this.size() - i; j++){
+                if(this.misSoldados.get(j).getNivelDeVida() > this.misSoldados.get(j + 1).getNivelDeVida()){
+                    Ejercito.intercambiar(this, j , j + 1);
+                }
+            }
+        }
+    }
+    public  void ordenarPorNivelSelección(){
+        for(int i = 0; i < this.size() - 1; i++){
+            int min = i;
+            for(int j = i + 1; j < this.size(); j++){
+                if(this.misSoldados.get(min).getNivelDeVida() >  this.misSoldados.get(j).getNivelDeVida()){
+                    min = j;
+                }
+            }
+            Ejercito.intercambiar( this, min, i);
+        }
+    }
+
+    public static void intercambiar( Ejercito lista, int i, int j){
+        Soldado vControl = lista.misSoldados.get(i);
+        lista.misSoldados.set(i,lista.misSoldados.get(j));
+        lista.misSoldados.set(j, vControl);
     }
 
 }
