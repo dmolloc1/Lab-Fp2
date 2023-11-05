@@ -12,6 +12,8 @@ public class VideoJuego5 {
         inglaterra = crearReino("I", turqueza, tablero);
         francia = crearReino("F", amarillo , tablero);
         mostrarTableroEje(tablero);
+        generarEjercito(inglaterra, 1);
+        generarEjercito(francia, 2);
         boolean continuar = true;
         while(continuar && inglaterra.size() > 0 && francia.size() > 0){
             System.out.println("\nTurno del primer jugador(celeste) ");
@@ -39,6 +41,23 @@ public class VideoJuego5 {
         } 
         if(francia.size() == 0){
             System.out.println("~~~~~~~~~~~~~~~~~~~ GANO INGLATERRA ~~~~~~~~~~~~~~~~~~~~~~~~");    
+        }
+    }
+    public static void generarEjercito(ArrayList <Ejercito> reino, int num){
+        if(num == 1){
+            System.out.println("Desea agregar un nuevo ejercito y/n a Inglaterra ");
+        }else System.out.println("Desea agregar un nuevo ejercito y/n al Francia ");
+        boolean si = sc.next().charAt(0) == 'y';
+        if(si){
+            int filaR = 0, columnaR = 0;
+            Ejercito nuevo = new Ejercito("Ejercito_"+ num + "X"+ "aleatorio");
+            filaR = (int) (Math.random() * 9);
+            columnaR = (int) (Math.random() * 9);
+            nuevo.setFila(filaR + 1);
+            nuevo.setColumna(columnaR );
+            if(num == 1) nuevo.setColor(turqueza);
+            else nuevo.setColor(amarillo);
+            reino.add(nuevo);
         }
     }
     public static ArrayList <Ejercito> crearReino(String num, String color, Ejercito [][] tablero){
