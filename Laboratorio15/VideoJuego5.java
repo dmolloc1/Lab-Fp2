@@ -69,16 +69,19 @@ public class VideoJuego5 {
         Soldado[][]tablero = new Soldado[10][10];
         ejercito_1 = llenarEjercito(tablero, turqueza, eje1);
         ejercito_2 = llenarEjercito(tablero, amarillo, eje2);
-
-    	System.out.println("--------------- MENU PRINCIPAL -----------\n1. Juego rápido\n2. Juego personalizado\n3. Salir");
-        System.out.print("Escoge una opción(1 o 2): ");
-        int respond = sc.nextInt();
-        switch(respond){
-            case 1:
-                return juegoRapido(tablero);
-            case 2:
-                return juegoPersonalizado(tablero);
-        }
+        System.out.println("Batalla :\n1.Automatico\n2.PorTablero");
+        if(sc.nextInt() == 2){
+            System.out.println("--------------- MENU PRINCIPAL -----------\n1. Juego rápido\n2. Juego personalizado\n3. Salir");
+            System.out.print("Escoge una opción(1 o 2): ");
+            int respond = sc.nextInt();
+            switch(respond){
+                case 1:
+                    return juegoRapido(tablero);
+                case 2:
+                    return juegoPersonalizado(tablero);
+            }
+        }else return definirGanador(ejercito_1.totalNivelVida(), ejercito_2.totalNivelVida());
+    
         return false;
     }
     public static Ejercito llenarEjercito(Soldado[][] tablero, String color, Ejercito eje){
@@ -483,16 +486,16 @@ public class VideoJuego5 {
     	double prob1 = (vida1 * 100.0) / (vida1 + vida2);
         double prob2 = (vida2 * 100.0) / (vida1 + vida2);
 
-        System.out.println("Probabilidad de vencer para Soldado 1: " + prob1 + "%");
-        System.out.println("Probabilidad de vencer para Soldado 2: " + prob2 + "%");
+        System.out.println("Probabilidad de vencer para el primero 1: " + prob1 + "%");
+        System.out.println("Probabilidad de vencer para el segundo 2: " + prob2 + "%");
 	    Random ran = new Random();
         double randomValue = ran.nextDouble() * 100 + 1 ;
         System.out.printf("\nEl número aleatorio es %.2f", randomValue);
         if (randomValue <= prob1) {
-            System.out.printf("\nSoldado  gana porque es mayor o igual a %.2f\n", randomValue);
+            System.out.printf("\nEl primero  gana porque es mayor o igual a %.2f\n", randomValue);
             return true;
         } else {
-            System.out.printf("\nSoldado enemigo gana porque es menor a %.2f\n", randomValue);
+            System.out.printf("\nEl segundo  gana porque es menor a %.2f\n", randomValue);
             return false;
         }
     }

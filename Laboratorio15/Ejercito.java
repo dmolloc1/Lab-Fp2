@@ -207,6 +207,4 @@ public class Ejercito{
       	    this.misSoldados.set((j + 1), pivot);
 	    }
     }
-    
-
 }
