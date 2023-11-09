@@ -139,6 +139,7 @@ public class VideoJuego5 {
                 System.out.print("Posición del soldado :" + "\nFila: ");
                 fila = sc.nextInt() - 1;
                 System.out.print("Columna: ");
+		
                 columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
             }
             switch(comando){
