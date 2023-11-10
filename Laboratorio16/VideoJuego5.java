@@ -2,26 +2,32 @@ import java.util.*;
 //Laboratorio A Fundamentos 2
 //Autor: Mollo Chuquicaña Dolly Yadhira
 public class VideoJuego5 {
-    static ArrayList <Ejercito> inglaterra, francia;
+    static ArrayList <Ejercito> reino1, reino2;
     static Ejercito ejercito_1, ejercito_2;
     static Scanner sc = new  Scanner(System.in);
     static final String turqueza = "\u001B[30m";
     static final String amarillo = "\u001B[31m";
     public static void main(String[] args) {
         Ejercito[][] tablero =  new Ejercito[10][10];
-        inglaterra = crearReino("I", turqueza, tablero);
-        francia = crearReino("F", amarillo , tablero);
+        int num1 = Math.random()*5 + 1;
+        int num2 = 0;
+        while (num1 == num2){
+            num2 = Math.random()*5 + 1;
+        }
+        
+        reino1 = crearReino(num1, turqueza, tablero);
+        reino2 = crearReino(num2, amarillo , tablero);
         mostrarTableroEje(tablero);
-        generarEjercito(inglaterra, 1);
-        generarEjercito(francia, 2); 
-        boolean continuar = true;
-        while(continuar && inglaterra.size() > 0 && francia.size() > 0){
+        generarEjercito(reino1, 1);
+        generarEjercito(reino2, 2); 
+       /* boolean continuar = true;
+        while(continuar && reino1.size() > 0 && reino2.size() > 0){
             System.out.println("\nTurno del primer jugador(celeste) ");
             jugarE(tablero, 1);
-            System.out.println("Cantidad de ejercitos del Inglaterra: " + inglaterra.size());
-            System.out.println("Cantidad de ejercitos del Francia: " + francia.size());
-            if(inglaterra.size() == 0 || francia.size() == 0){
-                if(inglaterra.size() == 0){
+            System.out.println("Cantidad de ejercitos del Inglaterra: " + reino1.size());
+            System.out.println("Cantidad de ejercitos del Francia: " + reino2.size());
+            if(reino1.size() == 0 || reino2.size() == 0){
+                if(reino1.size() == 0){
             	    System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO FRANCIA ~~~~~~~~~~~~~~~~~");
                     break;
                 }else {
@@ -34,15 +40,16 @@ public class VideoJuego5 {
             if(!continuar) break;
             System.out.println("\nTurno del segundo jugador(amarillo) ");
             jugarE(tablero, 2);
-            System.out.println("Cantidad de ejercitos del Inglaterra: " + inglaterra.size());
-            System.out.println("Cantidad de ejercitos del Francia: " + francia.size());
+            System.out.println("Cantidad de ejercitos del Inglaterra: " + reino1.size());
+            System.out.println("Cantidad de ejercitos del Francia: " + reino2.size());
             System.out.print("\nDesea salir (y/n): ");
             continuar = sc.next().charAt(0) == 'n';
         } 
-        if(francia.size() == 0){
+        if(reino2.size() == 0){
             System.out.println("~~~~~~~~~~~~~~~~~~~ GANO INGLATERRA ~~~~~~~~~~~~~~~~~~~~~~~~");    
-        }
+        }*/
     }
+    
     public static void generarEjercito(ArrayList <Ejercito> reino, int num){
         if(num == 1){
             System.out.println("Desea agregar un nuevo ejercito y/n a Inglaterra ");
@@ -60,26 +67,15 @@ public class VideoJuego5 {
             reino.add(nuevo);
         }
     }
-    public static ArrayList <Ejercito> crearReino(String num, String color, Ejercito [][] tablero){
+    public static ArrayList <Ejercito> crearReino(int num, String color, Ejercito [][] tablero){
         ArrayList <Ejercito> reino = new ArrayList<>();
-    	int filaR = 0, columnaR = 0;
         int armyLength = (int)(Math.random() * Ejercito.MAX_SIZE + 1);
-	    for (int i = 0; i < armyLength; i++) {
-            	Ejercito nuevo = new Ejercito("Ejercito_"+ num + "X"+ (i + 1));
-            // Este ciclo nos permitirá comprobar que los valores generados no coincidan con uno ya existente
-            	boolean posicionValida = false;
-            	while (!posicionValida) {
-        	       	filaR = (int) (Math.random() * 9);
-               		columnaR = (int) (Math.random() * 9);
-               		
-                    if (rellenarTableroEje(filaR, columnaR, nuevo, tablero)) {
-                  		posicionValida = true;
-                	}
-            	}
-            	nuevo.setFila(filaR + 1);
-            	nuevo.setColumna(columnaR );
-            	nuevo.setColor(color);
-            	reino.add(nuevo);
+	    
+        for (int i = 0; i < armyLength; i++) {
+           	Ejercito nuevo = new Ejercito("Ejercito_"+ num + "X"+ (i + 1));
+           	nuevo.setColor(color);
+            nuevo.setReino(num);
+            reino.add(nuevo);
 	    }
 	    return reino;
     }
@@ -207,10 +203,10 @@ public class VideoJuego5 {
 
         while (izq <= der) {
             int medio = izq + (der - izq) / 2;
-            String nMedio = eje.getSoldado(medio).getNombre().toUpperCase();
+            String nMedio = eje.get(medio).getNombre().toUpperCase();
             int comparacion = nMedio.compareTo(nBuscado.toUpperCase());
             if (comparacion == 0) {
-                Soldado sold = eje.getSoldado(medio);
+                Soldado sold = eje.get(medio);
                 System.out.println(sold.mostrar());
                 break;
             }
@@ -228,10 +224,10 @@ public class VideoJuego5 {
         Soldado total =  new Soldado("Neutro", true);
         for(int i = 0; i < ejercito.size(); i += 2){
             if(!(ejercito.size() > i + 1)){
-                total = total.sumar(ejercito.getSoldado(i));
+                total = total.sumar(ejercito.get(i));
                 break;
             }
-            total = total.sumar(ejercito.getSoldado(i)).sumar(ejercito.getSoldado(i + 1));
+            total = total.sumar(ejercito.get(i)).sumar(ejercito.getSoldado(i + 1));
         }
         total.setNombre("Total de puntaje del ejercito:");
         System.out.println(total.mostrar());
@@ -400,7 +396,7 @@ public class VideoJuego5 {
                 case 6:
                     System.out.println("\nEl soldado con mayor nivel de vida del ejercito es: " );
                     eje.ordenarPorNivelSelección();
-                    System.out.println("\n"+ eje.getSoldado(eje.size() - 1).mostrar());
+                    System.out.println("\n"+ eje.get(eje.size() - 1).mostrar());
                     break;
             }
         }while(comando != 7);
@@ -601,18 +597,18 @@ public class VideoJuego5 {
             }
             if(enemigo.size() == 0){
                 if(ejercito == 1){
-                    francia.remove(enemigo);
+                    reino2.remove(enemigo);
                 }
-                else{inglaterra.remove(enemigo);}
+                else{reino1.remove(enemigo);}
             }
         }
         if(ejercito == 1){
             if(eje.size() == 0){
-                inglaterra.remove(eje);
+                reino1.remove(eje);
             }    
         }else{
             if(eje.size() == 0){
-                francia.remove(eje);
+                reino2.remove(eje);
             }    
         }
     }
