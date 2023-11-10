@@ -1,5 +1,6 @@
 import java.util.*;
 public class Mapa{
+    char bonificación;
     String territorio;
     Ejercito [][] mapa;
     
@@ -8,46 +9,36 @@ public class Mapa{
         int n = (int)Math.random()* 5 + 1;
         this.setTerritorio(n);
     }
-    lic void setTerritorio(int n){
+
+    public void setTerritorio(int n){
         switch(n){
             case 1:
+                this.bonificación = '1';
                 this.territorio = "bosque";
                 break;
             case 2:
+                this.bonificación = '2';
                 this.territorio = "campoAbierto";
                 break;
             case 3:
+                this.bonificación = '3';
                 this.territorio = "montaña";
                 break;
             case 4:
+                this.bonificación = '4';
                 this.territorio = "desierto";
                 break;
             case 5:
-                this.territorio = "playa";
-                break;
-        }
-    }public void setTerritorio(int n){
-        switch(n){
-            case 1:
-                this.territorio = "bosque";
-                break;
-            case 2:
-                this.territorio = "campoAbierto";
-                break;
-            case 3:
-                this.territorio = "montaña";
-                break;
-            case 4:
-                this.territorio = "desierto";
-                break;
-            case 5:
+                this.bonificación = '5';
                 this.territorio = "playa";
                 break;
         }
     }
-    public void bonificación(Ejercito e){
-   //     if(e.getReino){}
-
+    public void bonificación(ArrayList <Ejercito> reino){
+        Ejercito e = reino.get(1);
+        if(e.getBono().charAt(0) == this.bonificación){
+            Ejercito.bono(reino);
+        }
     }
     public boolean posiciónValida(int fila, int columna, Ejercito eje) {
         if (this.mapa[fila][columna] == null) {
@@ -56,7 +47,7 @@ public class Mapa{
         }
         return false;
     }
-    public void mostrarTablero(){
+    public void mostrar(){
         System.out.println("* | A | B | C | D | E | F | G | H | I | J |\n"+
                            "-------------------------------------------");
         for(int i = 0; i < this.mapa.length; i++){
@@ -71,7 +62,7 @@ public class Mapa{
                 else System.out.println((i + 1) +" " + fila);
         }
     }
-    public void rellenarTablero(ArrayList <Ejercito> ejercito){
+    public void rellenar(ArrayList <Ejercito> ejercito){
         int fila = 0, columna = 0;
         for(Ejercito e : ejercito){
             boolean posicionValida = false;

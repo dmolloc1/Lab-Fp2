@@ -8,18 +8,18 @@ public class VideoJuego5 {
     static final String turqueza = "\u001B[30m";
     static final String amarillo = "\u001B[31m";
     public static void main(String[] args) {
-        Ejercito[][] tablero =  new Ejercito[10][10];
-        int num1 = Math.random()*5 + 1;
+        Mapa map = new Mapa();
+        int num1 = (int) Math.random()*5 + 1;
         int num2 = 0;
         while (num1 == num2){
-            num2 = Math.random()*5 + 1;
+            num2 = (int)Math.random()*5 + 1;
         }
         
-        reino1 = crearReino(num1, turqueza, tablero);
-        reino2 = crearReino(num2, amarillo , tablero);
-        mostrarTableroEje(tablero);
-        generarEjercito(reino1, 1);
-        generarEjercito(reino2, 2); 
+        reino1 = crearReino(num1, turqueza);
+        map.rellenar(reino1);
+        reino2 = crearReino(num2, amarillo);
+        map.rellenar(reino2);
+        map.mostrar();
        /* boolean continuar = true;
         while(continuar && reino1.size() > 0 && reino2.size() > 0){
             System.out.println("\nTurno del primer jugador(celeste) ");
@@ -49,7 +49,7 @@ public class VideoJuego5 {
             System.out.println("~~~~~~~~~~~~~~~~~~~ GANO INGLATERRA ~~~~~~~~~~~~~~~~~~~~~~~~");    
         }*/
     }
-    
+    /*
     public static void generarEjercito(ArrayList <Ejercito> reino, int num){
         if(num == 1){
             System.out.println("Desea agregar un nuevo ejercito y/n a Inglaterra ");
@@ -66,8 +66,8 @@ public class VideoJuego5 {
             else nuevo.setColor(amarillo);
             reino.add(nuevo);
         }
-    }
-    public static ArrayList <Ejercito> crearReino(int num, String color, Ejercito [][] tablero){
+    }*/
+    public static ArrayList <Ejercito> crearReino(int num, String color){
         ArrayList <Ejercito> reino = new ArrayList<>();
         int armyLength = (int)(Math.random() * Ejercito.MAX_SIZE + 1);
 	    
@@ -75,11 +75,12 @@ public class VideoJuego5 {
            	Ejercito nuevo = new Ejercito("Ejercito_"+ num + "X"+ (i + 1));
            	nuevo.setColor(color);
             nuevo.setReino(num);
+            nuevo.ingresarDatosAleatorio(color);
             reino.add(nuevo);
 	    }
 	    return reino;
     }
-    public static boolean menuPrincipal(Ejercito eje1, Ejercito eje2){
+ /*   public static boolean menuPrincipal(Ejercito eje1, Ejercito eje2){
         //Se rellenan los ejercitos
         Soldado[][]tablero = new Soldado[10][10];
         ejercito_1 = llenarEjercito(tablero, turqueza, eje1);
@@ -190,12 +191,6 @@ public class VideoJuego5 {
         return false;
     }
 
-    public static boolean compareString(String word1, String word2){
-    		word1 = word1.toUpperCase();
-    		word2 = word2.toUpperCase();
-    		if (word1.compareTo(word2) <= 0) return false;
-    		return true;
-    }
     
     public static void buscarPorNombre(Ejercito eje, String nBuscado) {
         int izq = 0;
@@ -219,7 +214,13 @@ public class VideoJuego5 {
         }
         if(izq > der) System.out.println("Soldado no encontrado");
     }
-
+*/
+    public static boolean compareString(String word1, String word2){
+    		word1 = word1.toUpperCase();
+    		word2 = word2.toUpperCase();
+    		if (word1.compareTo(word2) <= 0) return false;
+    		return true;
+    }
     public static void sumarNiveles(Ejercito ejercito){
         Soldado total =  new Soldado("Neutro", true);
         for(int i = 0; i < ejercito.size(); i += 2){
@@ -227,13 +228,13 @@ public class VideoJuego5 {
                 total = total.sumar(ejercito.get(i));
                 break;
             }
-            total = total.sumar(ejercito.get(i)).sumar(ejercito.getSoldado(i + 1));
+            total = total.sumar(ejercito.get(i)).sumar(ejercito.get(i + 1));
         }
         total.setNombre("Total de puntaje del ejercito:");
         System.out.println(total.mostrar());
     }   
 	
-    public static void clonarSoldado(int filap , int columnap , Ejercito ejercito, Soldado[][] tablero, String color){
+  /*  public static void clonarSoldado(int filap , int columnap , Ejercito ejercito, Soldado[][] tablero, String color){
         Soldado sold = new Soldado("Reposo", true);
         sold.clonar(tablero[filap][columnap]);//Metodo del objeto soldado
         System.out.print("Nueva posición del soldado clonado :" + "\nFila: ");
@@ -499,7 +500,7 @@ public class VideoJuego5 {
         tablero[fila][columna]= null;
         mostrarTablero(tablero);
     }
-    public static boolean definirGanador(int vida1 , int vida2){
+    */public static boolean definirGanador(int vida1 , int vida2){
     	double prob1 = (vida1 * 100.0) / (vida1 + vida2);
         double prob2 = (vida2 * 100.0) / (vida1 + vida2);
 
@@ -517,7 +518,7 @@ public class VideoJuego5 {
         }
     }
 //Metodos de ejercito
-    public static void jugarE(Ejercito [][] tablero, int ejercito){
+   /* public static void jugarE(Ejercito [][] tablero, int ejercito){
         System.out.print("Posición del ejercito a mover:" + "\nFila: ");
         int fila = sc.nextInt() - 1;
         System.out.print("Columna: ");
@@ -612,6 +613,6 @@ public class VideoJuego5 {
             }    
         }
     }
-
+*/
 }
 
