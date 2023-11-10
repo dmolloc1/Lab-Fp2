@@ -48,13 +48,25 @@ public class Mapa{
         return false;
     }
     public void mostrar(){
-        System.out.println("* | A | B | C | D | E | F | G | H | I | J |\n"+
-                           "-------------------------------------------");
+        System.out.println("* |   A   |   B   |   C   |   D   |   E   |   F   |   G   |   H   |   I   |   J   |\n"+
+                           "-----------------------------------------------------------------------------------");
         for(int i = 0; i < this.mapa.length; i++){
                 String fila = "|";
                 for(int j = 0; j <this.mapa[i].length; j++){
-                    if(this.mapa[i][j] == null){ fila = fila +" - " + "|";
-                    }else fila = fila + " " + this.mapa[i][j].getColor() + this.mapa[i][j].size() + " - " + this.mapa[i][j].totalNivelVida()  + "\u001B[0m |";
+                    if(this.mapa[i][j] == null){ fila = fila +"  ---  " + "|";
+                    }else{
+                        if(this.mapa[i][j].size() > 9){
+                            fila += " " + this.mapa[i][j].getColor() + this.mapa[i][j].size() + "-";
+                        }
+                        else{fila += "  " + this.mapa[i][j].getColor() + this.mapa[i][j].size() + "-";}
+                        
+                        if(this.mapa[i][j].totalNivelVida() > 9 ){
+                            fila += this.mapa[i][j].totalNivelVida()  + "\u001B[0m |";
+                        }
+                        else {
+                            fila += " " + this.mapa[i][j].totalNivelVida()  + "\u001B[0m |";
+                        }
+                    }
                 }
                 if(i == 9){
                     System.out.println((i + 1)  + fila);

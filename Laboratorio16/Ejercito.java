@@ -92,6 +92,7 @@ public class Ejercito{
     }
 //Metodo para rellenar a el ejercito sus soldados
     public  void ingresarDatosAleatorio(String color) {
+        this.misSoldados.clear();
         int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
         for (int i = 0; i < armyLength; i++) {
                 Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);
@@ -101,6 +102,7 @@ public class Ejercito{
         }
     }
     public void ingresarDatosManual(Soldado [][] tablero, String color){
+        this.misSoldados.clear();
         int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
         System.out.println("Ingrese los datos de Soldados. Cantidad:" + armyLength);
         for(int i = 0; i < armyLength; i++){
