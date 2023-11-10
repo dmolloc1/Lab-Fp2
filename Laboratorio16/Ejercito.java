@@ -5,8 +5,9 @@ public class Ejercito{
     private String nombre, color;
     private int fila, totalNivelVida;
 	private char columna;
-    private String reino;
+    private String reino, bonificación;
     private ArrayList <Soldado> misSoldados ;
+
     public Ejercito(String nom){
         this.misSoldados = new ArrayList <>(1);
         this.nombre = nom;
@@ -15,15 +16,43 @@ public class Ejercito{
         this.misSoldados.add(sold);
         sold.setEjercito(this);
     }
-    public void setReino(String miReino){
-        this.reino = miReino;
-    } 
+    public void setReino(int n ){
+        switch(n){
+            case 1:
+                this.bonificación = "1";
+                this.reino = "Inglaterra";
+                break;
+            case 2:
+                this.bonificación = "2";
+                this.reino = "Francia";
+                break;
+            case 3:
+                this.bonificación = "3";
+                this.reino = "Castilla-Aragon";
+                break;
+            case 4:
+                this.bonificación = "4";
+                this.reino = "Moros";
+                break;
+            case 5:
+                this.bonificación = "125";
+                this.reino = "Sacro Imperio Romano Germánico";
+                break;
+        }
+    }
+    public String getBono(){
+        return this.bonificación;
+    }
+         
     public String getNombre(){
         return this.nombre;
     }
     public String getReino(){
         return this.reino;
     } 
+    public ArrayList <Soldado> getSoldados(){
+        return this.misSoldados;
+    }
     public int size(){
         return this.misSoldados.size();
     }
@@ -53,24 +82,20 @@ public class Ejercito{
         setFila(fila);
         setColumna(columna);
     }
+
+    public static void bono(ArrayList <Ejercito> ejercitos){
+        for(Ejercito e : ejercitos){
+            for(Soldado s : e.getSoldados()){
+                s.aumentarVida(1);
+            }
+        }
+    }
 //Metodo para rellenar a el ejercito sus soldados
     public  void ingresarDatosAleatorio(String color, Soldado[][] tablero) {
         int filaR = 0, columnaR = 0;
         int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
         for (int i = 0; i < armyLength; i++) {
                 Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);
-            // Este ciclo nos permitirá comprobar que los valores generados no coincidan con uno ya existente
-                boolean posicionValida = false;
-                while (!posicionValida) {
-                    filaR = (int) (Math.random() * 9);
-                    columnaR = (int) (Math.random() * 9);
-                    if (VideoJuego5.rellenarTablero(filaR, columnaR, nuevo, tablero)) {
-                        posicionValida = true;
-                    }
-                }
-                nuevo.setFila(filaR + 1);
-                nuevo.setColumna(columnaR );
-                nuevo.setActitud("Neutro");
                 nuevo.setVive(true); //Valores por defecto
                 nuevo.setColor(color);
                 this.misSoldados.add(nuevo);
@@ -163,7 +188,7 @@ public class Ejercito{
     public int promedioNivelVida(){
         return this.totalNivelVida()/ this.size();
     }
-    public Soldado getSoldado(int n){
+    public Soldado get(int n){
         return this.misSoldados.get(n);
     }
 // Metodos de ordenamiento

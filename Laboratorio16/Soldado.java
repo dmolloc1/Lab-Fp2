@@ -45,7 +45,9 @@ public class Soldado {
 	public void setNivelDeVida(int num){
 		this.nivelVida = num;
 	}
-
+	public void aumentarVida(int n){
+		this.nivelVida += n;
+	}
 	public void setNivelAtaque(int num){
 		this.nivelAtaque = num;
 	}

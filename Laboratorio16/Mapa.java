@@ -1,10 +1,53 @@
 import java.util.*;
 public class Mapa{
-    String tipo;
+    String territorio;
     Ejercito [][] mapa;
     
     public Mapa(){
         mapa = new Ejercito [10][10];
+        int n = (int)Math.random()* 5 + 1;
+        this.setTerritorio(n);
+    }
+    lic void setTerritorio(int n){
+        switch(n){
+            case 1:
+                this.territorio = "bosque";
+                break;
+            case 2:
+                this.territorio = "campoAbierto";
+                break;
+            case 3:
+                this.territorio = "montaña";
+                break;
+            case 4:
+                this.territorio = "desierto";
+                break;
+            case 5:
+                this.territorio = "playa";
+                break;
+        }
+    }public void setTerritorio(int n){
+        switch(n){
+            case 1:
+                this.territorio = "bosque";
+                break;
+            case 2:
+                this.territorio = "campoAbierto";
+                break;
+            case 3:
+                this.territorio = "montaña";
+                break;
+            case 4:
+                this.territorio = "desierto";
+                break;
+            case 5:
+                this.territorio = "playa";
+                break;
+        }
+    }
+    public void bonificación(Ejercito e){
+   //     if(e.getReino){}
+
     }
     public boolean posiciónValida(int fila, int columna, Ejercito eje) {
         if (this.mapa[fila][columna] == null) {
@@ -20,7 +63,7 @@ public class Mapa{
                 String fila = "|";
                 for(int j = 0; j <this.mapa[i].length; j++){
                     if(this.mapa[i][j] == null){ fila = fila +" - " + "|";
-                    }else fila = fila + " " + this.mapa[i][j].getColor() + "E"  + "\u001B[0m |";
+                    }else fila = fila + " " + this.mapa[i][j].getColor() + this.mapa[i][j].size() + " - " + this.mapa[i][j].totalNivelVida()  + "\u001B[0m |";
                 }
                 if(i == 9){
                     System.out.println((i + 1)  + fila);
