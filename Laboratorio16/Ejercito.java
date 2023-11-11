@@ -71,9 +71,9 @@ public class Ejercito{
     public String getColor(){
         return  color;
     }
-    public static int totalSoldados(ArrayList <Ejercito > r){
-        int total;
-        for(Ejercito ejer : r){
+    public static int totalSoldados(ArrayList <Ejercito> rei){
+        int total = 0;
+        for(Ejercito ejer : rei){
             total  += ejer.size();
         }
         return total;

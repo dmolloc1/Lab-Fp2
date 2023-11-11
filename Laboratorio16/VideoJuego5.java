@@ -26,37 +26,42 @@ public class VideoJuego5 {
             continuar = sc.next().charAt(0) == 'y';
         }
         
-        public static void  metodoGanador(ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){
-            int puntos1, puntos2;
-            System.out.println("Primera metrica: Que ejercito tiene mayor nivel de vida en total");
-            int t1 = sumarNiveles(r1);
-            int t2 = sumarNiveles(r2);
-            if(t1 > t2){
-                System.out.println("El ganador es " + r1.get(0).getReino());
-                puntos1 ++;
-            }else if( t1 == t2){System.out.println("Empate");}
-             else{ 
-                System.out.println("El ganador es " + r2.get(0).getReino());
-                puntos2++;
-            }
-            System.out.println("Segunda metrica: De forma aleatoria se escogera entre su número de Ejercitos");
-            if(definirGanador(r1.size(), r2.size())){
-                puntos1++;
-            }else puntos2 ++;
-        
-            System.out.println("Tercera metrica: De forma aleatoria se escogera entre su número de Soldados");
-            if(definirGanador(r1.size(), r2.size())){
-                puntos1++;
-            }else puntos2 ++;
-            t1 = Ejercito.totalSoldados(t1);
-            t2 = Ejercito.totalSoldados(t2);
-            if(t1 < t2){
-                System.out.println("El ganador total es " + r2.get(0).getReino());
-            }else{
-                if(t1 == t2){
-                    System.out.println("Empate");
-                }else System.out.println("El ganador total es " + r1.get(0).getReino());
-            }
+        public static void  metodoGanar(ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){
+            int puntos1 = 0, puntos2 = 0;
+        System.out.println("Primera metrica: Que ejercito tiene mayor nivel de vida en total");
+        int t1 = sumarNiveles(r1);
+        int t2 = sumarNiveles(r2);
+        if (t1 > t2) {
+            System.out.println("El ganador es " + r1.get(0).getReino());
+            puntos1++;
+        } else if (t1 == t2) {
+            System.out.println("Empate");
+        } else {
+            System.out.println("El ganador es " + r2.get(0).getReino());
+            puntos2++;
+        }
+
+        System.out.println("Segunda metrica: De forma aleatoria se escogerá entre su número de Ejercitos");
+        if (definirGanador(r1.size(), r2.size())) {
+            puntos1++;
+        } else
+            puntos2++;
+
+        System.out.println("Tercera metrica: De forma aleatoria se escogerá entre su número de Soldados");
+        if (definirGanador(r1.size(), r2.size())) {
+            puntos1++;
+        } else
+            puntos2++;
+        t1 = Ejercito.totalSoldados(t1);
+        t2 = Ejercito.totalSoldados(t2);
+        if (t1 < t2) {
+            System.out.println("El ganador total es " + r2.get(0).getReino());
+        } else {
+            if (t1 == t2) {
+                System.out.println("Empate");
+            } else
+                System.out.println("El ganador total es " + r1.get(0).getReino());
+        }
         }
        /* boolean continuar = true;
         while(continuar && reino1.size() > 0 && reino2.size() > 0){
@@ -117,6 +122,23 @@ public class VideoJuego5 {
             reino.add(nuevo);
 	    }
 	    return reino;
+    }
+    public static boolean definirGanador(int vida1 , int vida2){
+    	double prob1 = (vida1 * 100.0) / (vida1 + vida2);
+        double prob2 = (vida2 * 100.0) / (vida1 + vida2);
+
+        System.out.println("Probabilidad de vencer para el primero 1: " + prob1 + "%");
+        System.out.println("Probabilidad de vencer para el segundo 2: " + prob2 + "%");
+	    Random ran = new Random();
+        double randomValue = ran.nextDouble() * 100 + 1 ;
+        System.out.printf("\nEl número aleatorio es %.2f", randomValue);
+        if (randomValue <= prob1) {
+            System.out.printf("\nEl primero  gana porque es mayor o igual a %.2f\n", randomValue);
+            return true;
+        } else {
+            System.out.printf("\nEl segundo  gana porque es menor a %.2f\n", randomValue);
+            return false;
+        }
     }
  /*   public static boolean menuPrincipal(Ejercito eje1, Ejercito eje2){
         //Se rellenan los ejercitos
@@ -261,10 +283,12 @@ public class VideoJuego5 {
     }
     public static int sumarNiveles(ArrayList<Ejercito> reino){
         int total =  0;
+        Ejercito e = reino.get(0);
         for( Ejercito eje : reino){
             total += eje.totalNivelVida();
         }
-        System.out.println( "Total de puntaje del reino " + eje.getReino() + " :"+ total);
+
+        System.out.println( "Total de puntaje del reino " + e.getReino() + " :"+ total);
         return total;
     }   
 	
@@ -533,23 +557,6 @@ public class VideoJuego5 {
         }
         tablero[fila][columna]= null;
         mostrarTablero(tablero);
-    }
-    */public static boolean definirGanador(int vida1 , int vida2){
-    	double prob1 = (vida1 * 100.0) / (vida1 + vida2);
-        double prob2 = (vida2 * 100.0) / (vida1 + vida2);
-
-        System.out.println("Probabilidad de vencer para el primero 1: " + prob1 + "%");
-        System.out.println("Probabilidad de vencer para el segundo 2: " + prob2 + "%");
-	    Random ran = new Random();
-        double randomValue = ran.nextDouble() * 100 + 1 ;
-        System.out.printf("\nEl número aleatorio es %.2f", randomValue);
-        if (randomValue <= prob1) {
-            System.out.printf("\nEl primero  gana porque es mayor o igual a %.2f\n", randomValue);
-            return true;
-        } else {
-            System.out.printf("\nEl segundo  gana porque es menor a %.2f\n", randomValue);
-            return false;
-        }
     }
 //Metodos de ejercito
    /* public static void jugarE(Ejercito [][] tablero, int ejercito){
