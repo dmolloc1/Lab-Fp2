@@ -5,7 +5,7 @@ import java.util.*;
 public class Soldado {
 	//Variables de clase
 	public static final int MAX_SIZE = 10;
-       	private static int cantidad;	
+    private static int cantidad;	
 	private static int totalSoldados;
 	//Atributos de objeto
 	private Ejercito ejercito;
@@ -13,9 +13,9 @@ public class Soldado {
 	private int nivelVida, fila;
 	private char columna;
 	private String color;
-      	private int nivelAtaque, nivelDefensa, vidaActual, velocidad;
-    	private String actitud;
-    	private boolean vive;
+    private int nivelAtaque, nivelDefensa, vidaActual, velocidad;
+    private String actitud;
+    private boolean vive;
 //Metodos de clase
 	public static int creados(){
 		return totalSoldados;

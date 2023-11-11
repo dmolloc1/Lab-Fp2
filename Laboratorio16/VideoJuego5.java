@@ -8,18 +8,53 @@ public class VideoJuego5 {
     static final String turqueza = "\u001B[30m";
     static final String amarillo = "\u001B[31m";
     public static void main(String[] args) {
-        Mapa map = new Mapa();
-        int num1 = (int) Math.random()*5 + 1;
-        int num2 = 0;
-        while (num1 == num2){
-            num2 = (int)Math.random()*5 + 1;
+        boolean continuar = true;
+        while(continuar){
+            Mapa map = new Mapa();
+            int num1 = (int) Math.random()*5 + 1;
+            int num2 = 0;
+            while (num1 == num2){
+                num2 = (int)Math.random()*5 + 1;
+            }
+            reino1 = crearReino(num1, turqueza);
+            map.rellenar(reino1);
+            reino2 = crearReino(num2, amarillo);
+            map.rellenar(reino2);
+            map.mostrar();
+            if(metodoGanador(reino1, reino2));
         }
         
-        reino1 = crearReino(num1, turqueza);
-        map.rellenar(reino1);
-        reino2 = crearReino(num2, amarillo);
-        map.rellenar(reino2);
-        map.mostrar();
+        public static boolean metodoGanador(ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){
+            int puntos1, puntos2;
+            System.err.println("Primera metrica: Que ejercito tiene mayor nivel de vida en total");
+            int t1 = sumarNiveles(r1);
+            int t2 = sumarNiveles(r2);
+            if(t1 > t2){
+                System.out.println("El ganador es " + r1.get(0).getReino());
+                t1 ++;
+            }else if( t1 == t2){System.out.println("Empate");}
+             else{ 
+                System.out.println("El ganador es " + r2.get(0).getReino());
+                t2++;
+            }
+            System.err.println("Segunda metrica: De forma aleatoria se escogera entre su número de Ejercitos");
+            if(definirGanador(r1.size(), r2.size())){
+                t1++;
+            }else t2 ++;
+        
+            System.err.println("Tercera metrica: De forma aleatoria se escogera entre su número de Soldados");
+            if(definirGanador(r1.size(), r2.size())){
+                t1++;
+            }else t2 ++;
+            if(t1 < t2){
+                System.out.println("El ganador total es " + r2.get(0).getReino());
+            }else{
+                if(t1 == t2){
+                    System.out.println("Empate");
+                }else System.out.println("El ganador total es " + r1.get(0).getReino());
+            }
+
+        }
        /* boolean continuar = true;
         while(continuar && reino1.size() > 0 && reino2.size() > 0){
             System.out.println("\nTurno del primer jugador(celeste) ");
@@ -221,17 +256,13 @@ public class VideoJuego5 {
     		if (word1.compareTo(word2) <= 0) return false;
     		return true;
     }
-    public static void sumarNiveles(Ejercito ejercito){
-        Soldado total =  new Soldado("Neutro", true);
-        for(int i = 0; i < ejercito.size(); i += 2){
-            if(!(ejercito.size() > i + 1)){
-                total = total.sumar(ejercito.get(i));
-                break;
-            }
-            total = total.sumar(ejercito.get(i)).sumar(ejercito.get(i + 1));
+    public static int sumarNiveles(ArrayList<Ejercito> reino){
+        int total =  0;
+        for( Ejercito eje : reino){
+            total += eje.totalNivelVida();
         }
-        total.setNombre("Total de puntaje del ejercito:");
-        System.out.println(total.mostrar());
+        System.out.println( "Total de puntaje del reino " + eje.getReino() + " :"+ total);
+        return total;
     }   
 	
   /*  public static void clonarSoldado(int filap , int columnap , Ejercito ejercito, Soldado[][] tablero, String color){
