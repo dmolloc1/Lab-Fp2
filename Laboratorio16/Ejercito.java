@@ -71,6 +71,13 @@ public class Ejercito{
     public String getColor(){
         return  color;
     }
+    public static int totalSoldados(ArrayList <Ejercito > r){
+        int total;
+        for(Ejercito ejer : r){
+            total  += ejer.size();
+        }
+        return total;
+    }
     public String toString(){
         String mostrar = "";
         for(Soldado a : this.misSoldados){
