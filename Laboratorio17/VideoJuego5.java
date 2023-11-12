@@ -13,7 +13,7 @@ public class VideoJuego5 {
         while(continuar){
             Mapa map = new Mapa();
             int num1 = (int) Math.random()*5 + 1;
-            int num2 = 0;
+            int num2 = (int) Math.random()*5 + 1;
             while (num1 == num2){
                 num2 = (int)Math.random()*5 + 1;
             }
@@ -25,7 +25,11 @@ public class VideoJuego5 {
             nR2 = reino2.get(0).getReino();
             map.rellenar(reino2);
             map.mostrar();
-            startGameR(map, nR1, nR2);
+            //map.bonificación(reino1);
+            map.mostrar();
+            //map.bonificación(reino2);
+           // map.mostrar();
+            //startGameR(map, nR1, nR2);
             System.out.println("Desea continuar (y/n) :");
             continuar = sc.next().charAt(0) == 'y';
         }

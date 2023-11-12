@@ -89,7 +89,8 @@ public class Mapa{
     }
    //Metodos para mover el tablero
     public void jugar(int ejercito, ArrayList <Ejercito> reino1, ArrayList <Ejercito> reino2){
-        Scanner sc = new Scanner (System.in);
+        
+	Scanner sc = new Scanner (System.in);
         System.out.print("Posición del ejercito a mover:" + "\nFila: ");
         int fila = sc.nextInt() - 1;
         System.out.print("Columna: ");
