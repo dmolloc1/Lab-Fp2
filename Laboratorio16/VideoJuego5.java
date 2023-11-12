@@ -21,48 +21,11 @@ public class VideoJuego5 {
             reino2 = crearReino(num2, amarillo);
             map.rellenar(reino2);
             map.mostrar();
-            metodoGanador(reino1, reino2);
+//            metodoGanador(reino1, reino2);
             System.out.println("Desea continuar (y/n) :");
             continuar = sc.next().charAt(0) == 'y';
         }
-        
-        public static void  metodoGanar(ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){
-            int puntos1 = 0, puntos2 = 0;
-        System.out.println("Primera metrica: Que ejercito tiene mayor nivel de vida en total");
-        int t1 = sumarNiveles(r1);
-        int t2 = sumarNiveles(r2);
-        if (t1 > t2) {
-            System.out.println("El ganador es " + r1.get(0).getReino());
-            puntos1++;
-        } else if (t1 == t2) {
-            System.out.println("Empate");
-        } else {
-            System.out.println("El ganador es " + r2.get(0).getReino());
-            puntos2++;
-        }
-
-        System.out.println("Segunda metrica: De forma aleatoria se escogerá entre su número de Ejercitos");
-        if (definirGanador(r1.size(), r2.size())) {
-            puntos1++;
-        } else
-            puntos2++;
-
-        System.out.println("Tercera metrica: De forma aleatoria se escogerá entre su número de Soldados");
-        if (definirGanador(r1.size(), r2.size())) {
-            puntos1++;
-        } else
-            puntos2++;
-        t1 = Ejercito.totalSoldados(t1);
-        t2 = Ejercito.totalSoldados(t2);
-        if (t1 < t2) {
-            System.out.println("El ganador total es " + r2.get(0).getReino());
-        } else {
-            if (t1 == t2) {
-                System.out.println("Empate");
-            } else
-                System.out.println("El ganador total es " + r1.get(0).getReino());
-        }
-        }
+      }
        /* boolean continuar = true;
         while(continuar && reino1.size() > 0 && reino2.size() > 0){
             System.out.println("\nTurno del primer jugador(celeste) ");
