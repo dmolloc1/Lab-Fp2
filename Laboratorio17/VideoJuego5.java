@@ -12,11 +12,12 @@ public class VideoJuego5 {
         boolean continuar = true;
         while(continuar){
             Mapa map = new Mapa();
-            int num1 = (int) Math.random()*5 + 1;
-            int num2 = (int) Math.random()*5 + 1;
+            int num1 = (int) (Math.random()*5) + 1;
+            int num2 = (int) (Math.random()*5) + 1;
             while (num1 == num2){
                 num2 = (int)Math.random()*5 + 1;
             }
+            System.out.println(num1 + " " + num2 );
             reino1 = crearReino(num1, turqueza);
             nR1 = reino1.get(0).getReino();
             map.rellenar(reino1);
@@ -25,12 +26,15 @@ public class VideoJuego5 {
             nR2 = reino2.get(0).getReino();
             map.rellenar(reino2);
             map.mostrar();
-            //map.bonificación(reino1);
+            System.out.println("El tipo de terreno del mapa es " +map.getTerritorio() + "\nSe procedera a efectuar la bonificación");
+            System.out.println("El reino 1 es :"+ reino1.get(0).getReino()+ "\nEl reino 2 es :" + reino2.get(0).getReino());
+            map.bonificación(reino1);
+            map.bonificación(reino2);
             map.mostrar();
-            //map.bonificación(reino2);
-           // map.mostrar();
-            //startGameR(map, nR1, nR2);
-            System.out.println("Desea continuar (y/n) :");
+            Ejercito.bono(reino1);
+            map.mostrar();
+            startGameR(map, nR1, nR2);
+            System.out.println("Iniciar una nueva partida (y/n) :");
             continuar = sc.next().charAt(0) == 'y';
         }
       }
@@ -96,6 +100,22 @@ public class VideoJuego5 {
             reino.add(nuevo);
 	    }
 	    return reino;
+    }
+    public static boolean ganador(Ejercito my, Ejercito enemigo, int fila, int columna, int ejercito){
+        boolean gano = definirGanador(my.totalNivelVida(), enemigo.totalNivelVida());
+        if(gano){
+            if(ejercito == 1){
+                Ejercito.bono(reino1);
+            
+                reino2.remove(enemigo);
+                System.out.println("----------------r1" +reino1.size());
+            }else {
+                Ejercito.bono(reino2);
+                reino1.remove(my);
+                System.out.println("_-------------------------r2"+reino2.size());
+            }
+        }
+        return gano;
     }
     public static boolean definirGanador(int vida1 , int vida2){
     	double prob1 = (vida1 * 100.0) / (vida1 + vida2);

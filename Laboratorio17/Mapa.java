@@ -9,7 +9,9 @@ public class Mapa{
         int n = (int)Math.random()* 5 + 1;
         this.setTerritorio(n);
     }
-
+    public String getTerritorio(){
+        return this.territorio;
+    }
     public void setTerritorio(int n){
         switch(n){
             case 1:
@@ -35,10 +37,11 @@ public class Mapa{
         }
     }
     public void bonificación(ArrayList <Ejercito> reino){
-        Ejercito e = reino.get(1);
-        if(e.getBono().charAt(0) == this.bonificación){
-            Ejercito.bono(reino);
+        Ejercito e = reino.get(0);
+        for(int i = 0; i < e.getBono().length(); i++){
+            if(e.getBono().charAt(i) == this.bonificación) {Ejercito.bono(reino);}
         }
+        
     }
     public boolean posiciónValida(int fila, int columna, Ejercito eje) {
         if (this.mapa[fila][columna] == null) {
@@ -89,8 +92,8 @@ public class Mapa{
     }
    //Metodos para mover el tablero
     public void jugar(int ejercito, ArrayList <Ejercito> reino1, ArrayList <Ejercito> reino2){
-        
-	Scanner sc = new Scanner (System.in);
+       
+	    Scanner sc = new Scanner (System.in);
         System.out.print("Posición del ejercito a mover:" + "\nFila: ");
         int fila = sc.nextInt() - 1;
         System.out.print("Columna: ");
@@ -163,30 +166,11 @@ public class Mapa{
         }
 
         else{
-            boolean gano = VideoJuego5.definirGanador(eje.totalNivelVida(), enemigo.totalNivelVida());
-            if(gano){
-                this.mapa[fila][columna] = eje;
+            if(VideoJuego5.ganador(eje, enemigo, fila, columna, ejercito)){
+                mapa[fila][columna] = eje;
                 eje.avanzar(fila, columna);
-                if(ejercito == 1){
-                    Ejercito.bono(reino1);
-                }else Ejercito.bono(reino2);
             }
-            if(enemigo.size() == 0){
-                
-                if(ejercito == 1){
-                    reino2.remove(enemigo);
-                }
-                else{reino1.remove(enemigo);}
-            }
-        }
-        if(ejercito == 1){
-            if(eje.size() == 0){
-                reino1.remove(eje);
-            }    
-        }else{
-            if(eje.size() == 0){
-                reino2.remove(eje);
-            }    
+            
         }
     } 
             
