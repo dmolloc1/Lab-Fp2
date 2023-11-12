@@ -166,8 +166,12 @@ public class Mapa{
             if(gano){
                 this.mapa[fila][columna] = eje;
                 eje.avanzar(fila, columna);
+                if(ejercito == 1){
+                    Ejercito.bono(reino1);
+                }else Ejercito.bono(reino2);
             }
             if(enemigo.size() == 0){
+                
                 if(ejercito == 1){
                     reino2.remove(enemigo);
                 }

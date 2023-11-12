@@ -22,7 +22,7 @@ public class VideoJuego5 {
             map.rellenar(reino1);
             
             reino2 = crearReino(num2, amarillo);
-            nR2 = reino1.get(0).getReino();
+            nR2 = reino2.get(0).getReino();
             map.rellenar(reino2);
             map.mostrar();
             startGameR(map, nR1, nR2);
@@ -36,8 +36,8 @@ public class VideoJuego5 {
             System.out.println("\nTurno del primer jugador(celeste) ");
             mapa.jugar(1, reino1, reino2);
             mapa.mostrar();
-            System.out.println("Cantidad de ejercitos de" + nR1+" :" + reino1.size());
-            System.out.println("Cantidad de ejercitos de" + nR2 + " :" + reino2.size());
+            System.out.println("Cantidad de ejercitos de " + nR1+" :" + reino1.size());
+            System.out.println("Cantidad de ejercitos de " + nR2 + " :" + reino2.size());
             if(reino1.size() == 0 || reino2.size() == 0){
                 if(reino1.size() == 0){
             	    System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO "+ nR2 + " ~~~~~~~~~~~~~~~~~");
@@ -53,8 +53,8 @@ public class VideoJuego5 {
             System.out.println("\nTurno del segundo jugador(amarillo) ");
             mapa.jugar(2, reino1, reino2);
             mapa.mostrar();
-            System.out.println("Cantidad de ejercitos de" + nR1+" :" + reino1.size());
-            System.out.println("Cantidad de ejercitos de" + nR2 + " :"+ reino2.size());
+            System.out.println("Cantidad de ejercitos de " + nR1+" :" + reino1.size());
+            System.out.println("Cantidad de ejercitos de " + nR2 + " :"+ reino2.size());
             System.out.print("\nDesea salir (y/n): ");
             continuar = sc.next().charAt(0) == 'n';
         } 
