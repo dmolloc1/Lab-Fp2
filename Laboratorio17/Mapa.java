@@ -87,4 +87,104 @@ public class Mapa{
             e.setColumna(columna);
         }
     }
+   //Metodos para mover el tablero
+    public void jugar(int ejercito, ArrayList <Ejercito> reino1, ArrayList <Ejercito> reino2){
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Posición del ejercito a mover:" + "\nFila: ");
+        int fila = sc.nextInt() - 1;
+        System.out.print("Columna: ");
+        int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+        while(this.mapa[fila][columna] == null){
+            System.out.print("Posición invalida");
+            System.out.print("Posición del ejercito a mover:" + "\nFila: ");
+            fila = sc.nextInt() - 1;
+            System.out.print("Columna: ");
+	        columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+        }
+	    boolean posValida = true;
+        while (posValida){
+        	System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ ):");
+	     	String dir = sc.next();
+	     	posValida = this.moverEjercito(fila, columna, dir, ejercito, reino1, reino2);
+        }
+        
+        this.mapa[fila][columna]= null;
+    }
+    public boolean moverEjercito(int fila, int columna, String comando, int ejercito, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){	
+    	Ejercito eje = this.mapa[fila][columna];
+        switch (comando) {
+            case "A":
+                fila = fila - 1;
+                if(fila < 0){return true;}
+                break;
+            case "B":
+                fila = fila + 1;
+                if(fila > 9){return true;}
+                break;
+            case "I":
+                columna =  columna - 1;
+                if(columna  < 0){return true;}
+                break;
+            case "D":
+                columna = columna + 1;
+                if(columna > 9){return true;}
+                break;
+            case "DII":
+                fila = fila + 1;
+                columna =  columna - 1;
+                if(fila > 9 || columna < 0){return true;}
+		        break;
+            case "DDI":
+                fila = fila + 1;
+                columna =  columna + 1;
+                if(fila > 9 || columna > 9){return true;}
+                break;
+            case "DIS":
+                fila = fila - 1;
+                columna =  columna - 1;
+                if(fila < 0 || columna < 0){return true;}
+                break;
+            case "DDS":
+                fila = fila - 1;
+                columna =  columna + 1;
+                if(fila < 0 || columna > 9){return true;}
+                break;
+        }
+        System.out.println(fila+ " "+ columna);
+        this.cambiarPosición(eje , fila , columna, ejercito, r1, r2);
+        return false;
+    }
+
+    public void cambiarPosición(Ejercito eje, int fila, int columna, int ejercito, ArrayList <Ejercito> reino1, ArrayList <Ejercito> reino2){
+        Ejercito enemigo = this.mapa[fila][columna];
+        if (enemigo == null) {
+            this.mapa[fila][columna] = eje;
+        }
+
+        else{
+            boolean gano = VideoJuego5.definirGanador(eje.totalNivelVida(), enemigo.totalNivelVida());
+            if(gano){
+                this.mapa[fila][columna] = eje;
+                eje.avanzar(fila, columna);
+            }
+            if(enemigo.size() == 0){
+                if(ejercito == 1){
+                    reino2.remove(enemigo);
+                }
+                else{reino1.remove(enemigo);}
+            }
+        }
+        if(ejercito == 1){
+            if(eje.size() == 0){
+                reino1.remove(eje);
+            }    
+        }else{
+            if(eje.size() == 0){
+                reino2.remove(eje);
+            }    
+        }
+    } 
+            
+            
+            
 }

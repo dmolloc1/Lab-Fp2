@@ -25,7 +25,7 @@ public class VideoJuego5 {
             nR2 = reino1.get(0).getReino();
             map.rellenar(reino2);
             map.mostrar();
-//            metodoGanador(reino1, reino2);
+            startGameR(map, nR1, nR2);
             System.out.println("Desea continuar (y/n) :");
             continuar = sc.next().charAt(0) == 'y';
         }
@@ -34,7 +34,8 @@ public class VideoJuego5 {
         boolean continuar = true;
         while(continuar && reino1.size() > 0 && reino2.size() > 0){
             System.out.println("\nTurno del primer jugador(celeste) ");
-            //jugarE(mapa, 1);
+            mapa.jugar(1, reino1, reino2);
+            mapa.mostrar();
             System.out.println("Cantidad de ejercitos de" + nR1+" :" + reino1.size());
             System.out.println("Cantidad de ejercitos de" + nR2 + " :" + reino2.size());
             if(reino1.size() == 0 || reino2.size() == 0){
@@ -50,7 +51,8 @@ public class VideoJuego5 {
             continuar = sc.next().charAt(0) == 'n';
             if(!continuar) break;
             System.out.println("\nTurno del segundo jugador(amarillo) ");
-            //jugarE(mapa, 2);
+            mapa.jugar(2, reino1, reino2);
+            mapa.mostrar();
             System.out.println("Cantidad de ejercitos de" + nR1+" :" + reino1.size());
             System.out.println("Cantidad de ejercitos de" + nR2 + " :"+ reino2.size());
             System.out.print("\nDesea salir (y/n): ");
@@ -347,53 +349,6 @@ public class VideoJuego5 {
         return false;
     }
 
-    
-
-    public static boolean rellenarTablero(int fila, int columna, Object sol, Object[][] tablero) {
-        if (tablero[fila][columna] == null) {
-            tablero[fila][columna] = sol;
-            return true;
-        }
-        return false;
-    }
-    public static boolean rellenarTableroEje(int fila, int columna, Ejercito eje, Ejercito[][] tablero) {
-        if (tablero[fila][columna] == null) {
-            tablero[fila][columna] = eje;
-            return true;
-        }
-        return false;
-    }
-    public static void mostrarTableroEje(Ejercito[][] tablero){
-    	System.out.println("* | A | B | C | D | E | F | G | H | I | J |\n"+
-                           "-------------------------------------------");
-        for(int i = 0; i < tablero.length; i++){
-	    	String fila = "|";
-	    	for(int j = 0; j < tablero[i].length; j++){
-	            if(tablero[i][j] == null){ fila = fila +" - " + "|";
-		    }else fila = fila + " " + tablero[i][j].getColor() + "E"  + "\u001B[0m |";				
-	    	}
-            	if(i == 9){
-	    	    System.out.println((i + 1)  + fila);
-            	}
-            	else System.out.println((i + 1) +" " + fila);
-        }
-    }
-    public static void mostrarTablero(Soldado[][] tablero){
-    	System.out.println("* | A | B | C | D | E | F | G | H | I | J |\n"+
-                           "-------------------------------------------");
-        for(int i = 0; i < tablero.length; i++){
-	    	String fila = "|";
-	    	for(int j = 0; j < tablero[i].length; j++){
-	            if(tablero[i][j] == null){ fila = fila +" - " + "|";
-		    }else fila = fila + " " + tablero[i][j].getColor() + tablero[i][j].getNivelDeVida()  + "\u001B[0m |";				
-	    	}
-            	if(i == 9){
-	    	    System.out.println((i + 1)  + fila);
-            	}
-            	else System.out.println((i + 1) +" " + fila);
-        }
-    }
-
     public static void datosEjercito(Ejercito eje, Soldado [][] tablero){
         int comando = 0;
         do{
@@ -526,102 +481,6 @@ public class VideoJuego5 {
         }
         tablero[fila][columna]= null;
         mostrarTablero(tablero);
-    }
-//Metodos de ejercito
-   /* public static void jugarE(Ejercito [][] tablero, int ejercito){
-        System.out.print("Posición del ejercito a mover:" + "\nFila: ");
-        int fila = sc.nextInt() - 1;
-        System.out.print("Columna: ");
-        int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
-        while(tablero[fila][columna] == null){
-            System.out.print("Posición invalida");
-            System.out.print("Posición del ejercito a mover:" + "\nFila: ");
-            fila = sc.nextInt() - 1;
-            System.out.print("Columna: ");
-	    columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
-        }
-	    boolean posValida = true;
-        while (posValida){
-        	System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ ):");
-	     	String dir = sc.next();
-	     	posValida = moverEjercito(tablero, fila, columna, dir, ejercito);
-        }
-        tablero[fila][columna]= null;
-        mostrarTableroEje(tablero);
-    }
-
-    public static boolean moverEjercito(Ejercito [][] tablero, int fila, int columna, String comando, int ejercito){	
-	Ejercito eje = tablero[fila][columna];
-        switch (comando) {
-            case "A":
-                fila = fila - 1;
-                if(fila < 0){return true;}
-                break;
-            case "B":
-                fila = fila + 1;
-                if(fila > 9){return true;}
-                break;
-            case "I":
-                columna =  columna - 1;
-                if(columna  < 0){return true;}
-                break;
-            case "D":
-                columna = columna + 1;
-                if(columna > 9){return true;}
-                break;
-            case "DII":
-                fila = fila + 1;
-                columna =  columna - 1;
-                if(fila > 9 || columna < 0){return true;}
-		break;
-            case "DDI":
-                fila = fila + 1;
-                columna =  columna + 1;
-                if(fila > 9 || columna > 9){return true;}
-                break;
-            case "DIS":
-                fila = fila - 1;
-                columna =  columna - 1;
-                if(fila < 0 || columna < 0){return true;}
-                break;
-            case "DDS":
-                fila = fila - 1;
-                columna =  columna + 1;
-                if(fila < 0 || columna > 9){return true;}
-                break;
-        }
-        System.out.println(fila+ " "+ columna);
-        cambiarPosiciónE(tablero, eje , fila , columna, ejercito);
-        return false;
-    }
-    public static void cambiarPosiciónE(Ejercito [][] tablero, Ejercito eje, int fila, int columna, int ejercito){
-        Ejercito enemigo = tablero [fila][columna];
-        if (enemigo == null) {
-            tablero[fila][columna] = eje;
-        }
-
-        else{
-            boolean gano = menuPrincipal(eje, enemigo);
-            if(gano){
-                tablero[fila][columna] = eje;
-                eje.avanzar(fila, columna);
-            }
-            if(enemigo.size() == 0){
-                if(ejercito == 1){
-                    reino2.remove(enemigo);
-                }
-                else{reino1.remove(enemigo);}
-            }
-        }
-        if(ejercito == 1){
-            if(eje.size() == 0){
-                reino1.remove(eje);
-            }    
-        }else{
-            if(eje.size() == 0){
-                reino2.remove(eje);
-            }    
-        }
     }
 */
 }
