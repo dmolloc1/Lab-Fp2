@@ -16,7 +16,7 @@ public class Ejercito{
         this.misSoldados.add(sold);
         sold.setEjercito(this);
     }
-    public void setReino(int n ){
+    public void setReino(int n){
         switch(n){
             case 1:
                 this.bonificación = "1";
@@ -71,6 +71,13 @@ public class Ejercito{
     public String getColor(){
         return  color;
     }
+    public static int totalSoldados(ArrayList <Ejercito> rei){
+        int total = 0;
+        for(Ejercito ejer : rei){
+            total  += ejer.size();
+        }
+        return total;
+    }
     public String toString(){
         String mostrar = "";
         for(Soldado a : this.misSoldados){
@@ -91,8 +98,8 @@ public class Ejercito{
         }
     }
 //Metodo para rellenar a el ejercito sus soldados
-    public  void ingresarDatosAleatorio(String color, Soldado[][] tablero) {
-        int filaR = 0, columnaR = 0;
+    public  void ingresarDatosAleatorio(String color) {
+        this.misSoldados.clear();
         int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
         for (int i = 0; i < armyLength; i++) {
                 Soldado nuevo = new Soldado(("Soldado_" + (i + 1)),(int)( Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0);
@@ -102,6 +109,7 @@ public class Ejercito{
         }
     }
     public void ingresarDatosManual(Soldado [][] tablero, String color){
+        this.misSoldados.clear();
         int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
         System.out.println("Ingrese los datos de Soldados. Cantidad:" + armyLength);
         for(int i = 0; i < armyLength; i++){
