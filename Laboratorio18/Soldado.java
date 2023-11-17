@@ -131,7 +131,7 @@ public class Soldado {
 	public String mostrar(){
 		return "Nombre: " + nombre  + "\n	-Nivel de Vida: "
             + nivelVida + "\n	-Nivel de Ataque: " + nivelAtaque + "\n	-Nivel de Defensa: " + nivelDefensa +
- 	"\n	-Velocidad: "+ velocidad +"\nEstado: "+ actitud; 	
+ 	"\n	-Velocidad: "+ velocidad +"\n	-Estado: "+ actitud; 	
 	}
 
 	public void atacar(){

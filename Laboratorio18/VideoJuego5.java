@@ -14,11 +14,11 @@ public class VideoJuego5 {
         while(continuar){
             Mapa map = new Mapa("Ejercito");
             ejercito_1.ingresarDatosAleatorio(turqueza);
-            System.out.println(ejercito_1.toString());
             map.rellenar(ejercito_1);
-            
+            ejercito_1.datosEjercito();
             ejercito_2.ingresarDatosAleatorio(amarillo);
             map.rellenar(ejercito_2);
+            ejercito_2.datosEjercito();
             map.mostrarE();
             System.out.println("El tipo de terreno del mapa es " +map.getTerritorio() );
             System.out.println("Iniciar una nueva partida (y/n) :");
@@ -389,41 +389,6 @@ public class VideoJuego5 {
         return false;
     }*/
 
-   public static void datosEjercito(Ejercito eje, Soldado [][] tablero){
-        int comando = 0;
-        do{
-            System.out.println("1. Total de vida del ejercito\n2. Promedio de vida\n3. Mostrar Soldados"+
-        "\n4.Ordenamiento por Burbuja\n5. Ordenamiento por Selección\n6. Soldados con mayor nivel de vida\n7. Salir");
-            comando = sc.nextInt();
-            switch(comando){
-                case 1:
-                    System.out.printf("\nEl total de nivel de vida del ejercito %d es : %d", eje.getNombre(),  eje.totalNivelVida());  
-                    break;
-                case 2:
-                    System.out.printf("\nEl promedio de nivel de vida del ejercito %d es : %d", eje.getNombre(), eje.promedioNivelVida());
-                    break;
-                case 3:
-                    System.out.printf("\n~~~ Soldados de %d ~~~\n", eje.getNombre());
-                    System.out.println("\n" + eje.toString()); 
-                    break;
-                case 4:
-                    eje.ordenarPorNivelBurbuja();//Ordenando el ejercito con el método Burbuja
-        	        System.out.println("\n       ~MÉTODO BURBUJA~");
-                    System.out.println(eje.toString()); 
-                    break;
-                case 5:
-                    eje.ordenarPorNivelSelección();//Ordenando el ejercito con el método Burbuja
-        	        System.out.println("\n       ~MÉTODO DE SELLECIÓN~");
-                    System.out.println("\n" + eje.toString()); 
-                    break;
-                case 6:
-                    System.out.println("\nEl soldado con mayor nivel de vida del ejercito es: " );
-                    eje.ordenarPorNivelSelección();
-                    System.out.println("\n"+ eje.get(eje.size() - 1).mostrar());
-                    break;
-            }
-        }while(comando != 7);
-    }
 
     /*public static boolean moverSoldado(Soldado [][] tablero, int fila, int columna, String comando, int ejercito){	
 	Soldado sold = tablero[fila][columna];

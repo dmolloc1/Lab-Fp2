@@ -104,7 +104,6 @@ public class Ejercito{
         int tipo = 0; 
         for (int i = 0; i < armyLength; i++) {
             tipo = (int) (Math.random() * 3 + 1);   
-            System.out.println(tipo);
             switch (tipo){
                     case 1: 
                         Espadachin nuevoE = new Espadachin("Ex" + i,(int)( Math.random()* 2 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"Neutro", true, color, (int)(Math.random()*3 + 1));
@@ -128,6 +127,43 @@ public class Ejercito{
         for(int i = 0; i < armyLength; i++){
             this.crearSoldado(tablero, color);
         }
+    }
+//Menu para ver datos de soldados
+
+   public void datosEjercito(){
+        int comando = 0;
+        do{
+            System.out.print("\n1. Total de vida del ejercito\n2. Promedio de vida\n3. Mostrar Soldados"+
+        "\n4. Ordenamiento por Burbuja\n5. Ordenamiento por Selección\n6. Soldados con mayor nivel de vida\n7. Salir\n");
+            comando = sc.nextInt();
+            switch(comando){
+                case 1:
+                    System.out.printf("\n*** El total de nivel de vida del ejercito %s es : %d\n", this.getNombre(), this.totalNivelVida());  
+                    break;
+                case 2:
+                    System.out.printf("\n*** El promedio de nivel de vida del ejercito %s es : %d\n", this.getNombre(), this.promedioNivelVida());
+                    break;
+                case 3:
+                    System.out.printf("\n~ ~ ~ Soldados de %s ~ ~ ~", this.getNombre());
+                    System.out.println("\n" + this.toString()+ "\n"); 
+                    break;
+                case 4:
+                    this.ordenarPorNivelBurbuja();//Ordenando el ejercito con el método Burbuja
+        	        System.out.println("\n       ~MÉTODO BURBUJA~");
+                    System.out.println(this.toString() + "\n"); 
+                    break;
+                case 5:
+                    this.ordenarPorNivelSelección();//Ordenando el ejercito con el método Burbuja
+        	        System.out.println("\n       ~MÉTODO DE SELLECIÓN~");
+                    System.out.println( this.toString()+ "\n"); 
+                    break;
+                case 6:
+                    System.out.println("\n*** El soldado con mayor nivel de vida del ejercito es: \n" );
+                    this.ordenarPorNivelSelección();
+                    System.out.println( this.get(this.size() - 1).mostrar());
+                    break;
+            }
+        }while(comando != 7);
     }
 //Metodos para editar al soldado
     public void crearSoldado( Soldado [][] tablero, String color){
