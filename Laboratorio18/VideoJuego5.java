@@ -14,7 +14,9 @@ public class VideoJuego5 {
         while(continuar){
             Mapa map = new Mapa("Ejercito");
             ejercito_1.ingresarDatosAleatorio(turqueza);
+            System.out.println(ejercito_1.toString());
             map.rellenar(ejercito_1);
+            
             ejercito_2.ingresarDatosAleatorio(amarillo);
             map.rellenar(ejercito_2);
             map.mostrarE();

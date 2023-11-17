@@ -121,13 +121,8 @@ public class Mapa{
                 for(int j = 0; j <this.campo[i].length; j++){
                     if(this.campo[i][j] == null){ fila = fila +"  ---  " + "|";
                     }else{
-                        fila += " " + this.campo[i][j].getColor() + this.campo[i][j].getNombre().charAt(0) + "-";
-                        if(this.campo[i][j].getNivelDeVida() > 9 ){
-                            fila += this.campo[i][j].getNivelDeVida()  + "\u001B[0m |";
-                        }
-                        else {
-                            fila += " " + this.campo[i][j].getNivelDeVida()  + "\u001B[0m |";
-                        }
+                        fila += " " + this.campo[i][j].getColor() + this.campo[i][j].getNombre().charAt(0) + " - ";
+                        fila += this.campo[i][j].getNivelDeVida()  + "\u001B[0m |";
                     }
                 }
                 if(i == 9){

@@ -103,18 +103,19 @@ public class Ejercito{
         int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
         int tipo = 0; 
         for (int i = 0; i < armyLength; i++) {
-            tipo = (int) Math.random() * 3 + 1;   
-                switch (tipo){
+            tipo = (int) (Math.random() * 3 + 1);   
+            System.out.println(tipo);
+            switch (tipo){
                     case 1: 
-                        Espadachin nuevoE = new Espadachin("Ex" + i,(int)( Math.random()* 4 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"Neutro", true, color, (int)Math.random()*3 + 1);
+                        Espadachin nuevoE = new Espadachin("Ex" + i,(int)( Math.random()* 2 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"Neutro", true, color, (int)(Math.random()*3 + 1));
                         this.misSoldados.add(nuevoE);
                         break;
                     case 2:
-                        Caballero nuevoC = new Caballero("Cx" + i,(int)( Math.random()* 5 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"Neutro", true, color, true);
+                        Caballero nuevoC = new Caballero("Cx" + i,(int)( Math.random()* 3 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"Neutro", true, color, true);
                         this.misSoldados.add(nuevoC);
                         break;
                     case 3:
-                        Arquero nuevoA = new Arquero("Ax" + i,(int)( Math.random()* 4 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0, "Neutro", true, color,(int)Math.random()*5 + 1);
+                        Arquero nuevoA = new Arquero("Ax" + i,(int)( Math.random()* 3 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0, "Neutro", true, color,(int)Math.random()*5 + 1);
                         this.misSoldados.add(nuevoA);
                         break;
                 }
