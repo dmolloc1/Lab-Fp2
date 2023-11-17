@@ -131,7 +131,139 @@ public class Mapa{
                 else System.out.println((i + 1) +" " + fila);
         }
     }
-   //Metodos para mover el tablero
+    //Metodos para mover el tablero de soldados
+    
+    public  boolean startGame(Ejercito ejercito_1,Ejercito ejercito_2){ 
+        boolean continuar = true;
+        while (ejercito_1.size() > 0 && ejercito_2.size() > 0  && continuar){    
+            System.out.println("\nTurno del primer jugador(celeste) ");
+            jugar(tablero, 1);
+            System.out.println("Cantidad de soldados del Ejercito 1: " + ejercito_1.size());
+            System.out.println("Cantidad de soldados del Ejercito 2: " + ejercito_2.size());
+            if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
+                if(ejercito_1.size() == 0){
+            	    System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_2 ~~~~~~~~~~~~~~~~~");
+                    return false;
+                }else {
+                    System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
+                    return true;
+		        }
+	        }
+            System.out.print("Desea salir (y/n)");
+            continuar = sc.next().charAt(0) == 'n';
+            if(!continuar) break;
+            System.out.println("\nTurno del segundo jugador(amarillo) ");
+            jugar(tablero, 2);
+            System.out.println("Cantidad de soldados del Ejercito 1: " + ejercito_1.size());
+            System.out.println("Cantidad de soldados del Ejercito 2: " + ejercito_2.size());
+            System.out.print("\nDesea salir (y/n): ");
+            continuar = sc.next().charAt(0) == 'n';
+        } 
+        if(ejercito_2.size() == 0){
+            System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");    
+            return true;
+        }
+        return false;
+    }
+
+    public boolean moverSoldado(int fila, int columna, String comando, int ejercito, Ejercito ej1, Ejercito ej2){	
+	    Soldado sold = this.campo[fila][columna];
+        switch (comando) {
+            case "A":
+                fila = fila - 1;
+                if(fila < 0){return true;}
+                break;
+            case "B":
+                fila = fila + 1;
+                if(fila > 9){return true;}
+                break;
+            case "I":
+                columna =  columna - 1;
+                if(columna  < 0){return true;}
+                break;
+            case "D":
+                columna = columna + 1;
+                if(columna > 9){return true;}
+                break;
+            case "DII":
+                fila = fila + 1;
+                columna =  columna - 1;
+                if(fila > 9 || columna < 0){return true;}
+		        break;
+            case "DDI":
+                fila = fila + 1;
+                columna =  columna + 1;
+                if(fila > 9 || columna > 9){return true;}
+                break;
+            case "DIS":
+                fila = fila - 1;
+                columna =  columna - 1;
+                if(fila < 0 || columna < 0){return true;}
+                break;
+            case "DDS":
+                fila = fila - 1;
+                columna =  columna + 1;
+                if(fila < 0 || columna > 9){return true;}
+                break;
+        }
+        System.out.println(fila+ " "+ columna);
+        this.cambiarPosición(sold, fila , columna, ejercito, ej1, ej2);
+        return false;
+    }
+    public  void cambiarPosición(Soldado sold, int fila, int columna, int ejercito, Ejercito ejercito_1, Ejercito ejercito_2){
+        Soldado enemigo = this.campo[fila][columna];
+        if (enemigo == null) {
+            this.campo[fila][columna] = sold;
+            sold.avanzar(fila, columna);
+        }
+        else{
+            boolean gano = definirGanador(sold.getNivelDeVida(), enemigo.getNivelDeVida());
+            sold.atacar(gano);
+            enemigo.serAtacado(gano);
+            if(gano){
+                this.campo[fila][columna] = sold;
+                sold.avanzar(fila, columna);
+            }
+            if(!enemigo.getVive()){
+                if(ejercito == 1){
+                    ejercito_2.remove(enemigo);
+                }
+                else{ejercito_1.remove(enemigo);}
+            }
+        }
+        if(ejercito == 1){
+            if(!sold.getVive()){
+                ejercito_1.remove(sold);
+            }    
+        }else{
+            if(!sold.getVive()){
+                ejercito_2.remove(sold);
+            }    
+        }
+    }
+
+    public static void jugar(int ejercito, Ejercito ej1, Ejercito ej2){
+        System.out.print("Posición del soldado a mover:" + "\nFila: ");
+        int fila = sc.nextInt() - 1;
+        System.out.print("Columna: ");
+        int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+        while(this.campo[fila][columna] == null){
+            System.out.print("Posición invalida");
+            System.out.print("Posición del soldado a mover:" + "\nFila: ");
+            fila = sc.nextInt() - 1;
+            System.out.print("Columna: ");
+	        columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+        }
+	    boolean posValida = true;
+        while (posValida){
+        	System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ ):");
+	     	String dir = sc.next();
+	     	posValida = this.moverSoldado(fila, columna, dir, ejercito, ej1, ej2);
+        }
+        this.campo[fila][columna]= null;
+        this.campo.mostrar();
+    }
+   //Metodos para mover el tablero de ejercitos
     public void jugar(int ejercito, ArrayList <Ejercito> reino1, ArrayList <Ejercito> reino2){
        
 	    Scanner sc = new Scanner (System.in);
