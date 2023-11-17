@@ -3,7 +3,7 @@ public class Mapa{
     char bonificación;
     String territorio;
     Ejercito [][] mapa;
-    
+    Soldado [][] campo;
     public Mapa(){
         mapa = new Ejercito [10][10];
         int n = (int)Math.random()* 5 + 1;
@@ -50,6 +50,13 @@ public class Mapa{
         }
         return false;
     }
+    public boolean posiciónValida(int fila, int columna, Soldado sold) {
+        if (this.campo[fila][columna] == null) {
+            this.campo[fila][columna] = sold;
+            return true;
+        }
+        return false;
+    }
     public void mostrar(){
         System.out.println("* |   A   |   B   |   C   |   D   |   E   |   F   |   G   |   H   |   I   |   J   |\n"+
                            "-----------------------------------------------------------------------------------");
@@ -88,6 +95,42 @@ public class Mapa{
             }
             e.setFila(fila);
             e.setColumna(columna);
+        }
+    }
+    public void rellenar(Ejercito ejercito){ //Metodo para rellenar pero de soldados
+        int fila = 0, columna = 0;
+        for(Soldado e : ejercito.getSoldados()){
+            boolean posicionValida = false;
+            while (!posicionValida) {
+                fila = (int) (Math.random() * 9);
+                columna = (int) (Math.random() * 9);
+                posicionValida = this.posiciónValida(fila, columna, e);         
+            }
+            e.setFila(fila);
+            e.setColumna(columna);
+        }
+    }
+    public void mostrarE(){
+        System.out.println("* |   A   |   B   |   C   |   D   |   E   |   F   |   G   |   H   |   I   |   J   |\n"+
+                           "-----------------------------------------------------------------------------------");
+        for(int i = 0; i < this.mapa.length; i++){
+                String fila = "|";
+                for(int j = 0; j <this.mapa[i].length; j++){
+                    if(this.mapa[i][j] == null){ fila = fila +"  ---  " + "|";
+                    }else{
+                        fila += " " + this.campo[i][j].getColor() + this.campo[i][j].getNombre().charAt(0) + "-";
+                        if(this.campo[i][j].getNivelDeVida() > 9 ){
+                            fila += this.campo[i][j].getNivelDeVida()  + "\u001B[0m |";
+                        }
+                        else {
+                            fila += " " + this.campo[i][j].getNivelDeVida()  + "\u001B[0m |";
+                        }
+                    }
+                }
+                if(i == 9){
+                    System.out.println((i + 1)  + fila);
+                }
+                else System.out.println((i + 1) +" " + fila);
         }
     }
    //Metodos para mover el tablero

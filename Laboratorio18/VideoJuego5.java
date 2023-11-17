@@ -36,6 +36,7 @@ public class VideoJuego5 {
             continuar = sc.next().charAt(0) == 'y';
         }
       }
+    public 
     public static void startGameR(Mapa mapa, String nR1, String nR2){
         boolean continuar = true;
         while(continuar && reino1.size() > 0 && reino2.size() > 0){
@@ -369,9 +370,9 @@ public class VideoJuego5 {
             return true;
         }
         return false;
-    }
+    }*/
 
-    public static void datosEjercito(Ejercito eje, Soldado [][] tablero){
+   public static void datosEjercito(Ejercito eje, Soldado [][] tablero){
         int comando = 0;
         do{
             System.out.println("1. Total de vida del ejercito\n2. Promedio de vida\n3. Mostrar Soldados"+
@@ -407,7 +408,7 @@ public class VideoJuego5 {
         }while(comando != 7);
     }
 
-    public static boolean moverSoldado(Soldado [][] tablero, int fila, int columna, String comando, int ejercito){	
+    /*public static boolean moverSoldado(Soldado [][] tablero, int fila, int columna, String comando, int ejercito){	
 	Soldado sold = tablero[fila][columna];
         switch (comando) {
             case "A":
