@@ -3,7 +3,8 @@ import java.util.*;
 //Autor: Mollo Chuquicaña Dolly Yadhira
 public class VideoJuego5 {
     //static ArrayList <Ejercito> reino1, reino2;
-    static Ejercito ejercito_1, ejercito_2;
+    static Ejercito ejercito_1 = new Ejercito("Ejercito_1");
+    static Ejercito ejercito_2 = new Ejercito("Ejercito_2");
     static Scanner sc = new  Scanner(System.in);
     static final String turqueza = "\u001B[30m";
     static final String amarillo = "\u001B[31m";

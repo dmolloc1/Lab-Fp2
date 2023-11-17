@@ -116,10 +116,10 @@ public class Mapa{
     public void mostrarE(){
         System.out.println("* |   A   |   B   |   C   |   D   |   E   |   F   |   G   |   H   |   I   |   J   |\n"+
                            "-----------------------------------------------------------------------------------");
-        for(int i = 0; i < this.mapa.length; i++){
+        for(int i = 0; i < this.campo.length; i++){
                 String fila = "|";
-                for(int j = 0; j <this.mapa[i].length; j++){
-                    if(this.mapa[i][j] == null){ fila = fila +"  ---  " + "|";
+                for(int j = 0; j <this.campo[i].length; j++){
+                    if(this.campo[i][j] == null){ fila = fila +"  ---  " + "|";
                     }else{
                         fila += " " + this.campo[i][j].getColor() + this.campo[i][j].getNombre().charAt(0) + "-";
                         if(this.campo[i][j].getNivelDeVida() > 9 ){
