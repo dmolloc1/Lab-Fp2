@@ -9,6 +9,9 @@ public class Mapa{
         int n = (int)Math.random()* 5 + 1;
         this.setTerritorio(n);
     }
+    public Mapa(String a){
+        campo = new Soldado [10][10];
+    }
     public String getTerritorio(){
         return this.territorio;
     }
@@ -208,13 +211,13 @@ public class Mapa{
             this.mapa[fila][columna] = eje;
         }
 
-        else{
+      /* else{
             if(VideoJuego5.ganador(eje, enemigo, fila, columna, ejercito)){
                 mapa[fila][columna] = eje;
                 eje.avanzar(fila, columna);
             }
             
-        }
+        }*/
     } 
             
             

@@ -2,12 +2,27 @@ import java.util.*;
 //Laboratorio A Fundamentos 2
 //Autor: Mollo Chuquicaña Dolly Yadhira
 public class VideoJuego5 {
-    static ArrayList <Ejercito> reino1, reino2;
+    //static ArrayList <Ejercito> reino1, reino2;
     static Ejercito ejercito_1, ejercito_2;
     static Scanner sc = new  Scanner(System.in);
     static final String turqueza = "\u001B[30m";
     static final String amarillo = "\u001B[31m";
     public static void main(String[] args) {
+        String nR1, nR2;
+        boolean continuar = true;
+        while(continuar){
+            Mapa map = new Mapa("Ejercito");
+            ejercito_1.ingresarDatosAleatorio(turqueza);
+            map.rellenar(ejercito_1);
+            ejercito_2.ingresarDatosAleatorio(amarillo);
+            map.rellenar(ejercito_2);
+            map.mostrarE();
+            System.out.println("El tipo de terreno del mapa es " +map.getTerritorio() );
+            System.out.println("Iniciar una nueva partida (y/n) :");
+            continuar = sc.next().charAt(0) == 'y';
+        }
+      }
+   /* public static void iterativeGameReino(){
         String nR1, nR2;
         boolean continuar = true;
         while(continuar){
@@ -35,8 +50,7 @@ public class VideoJuego5 {
             System.out.println("Iniciar una nueva partida (y/n) :");
             continuar = sc.next().charAt(0) == 'y';
         }
-      }
-    public 
+    } 
     public static void startGameR(Mapa mapa, String nR1, String nR2){
         boolean continuar = true;
         while(continuar && reino1.size() > 0 && reino2.size() > 0){
@@ -86,7 +100,7 @@ public class VideoJuego5 {
             else nuevo.setColor(amarillo);
             reino.add(nuevo);
         }
-    }*/
+    }
     public static ArrayList <Ejercito> crearReino(int num, String color){
         ArrayList <Ejercito> reino = new ArrayList<>();
         int armyLength = (int)(Math.random() * Ejercito.MAX_SIZE + 1);
@@ -115,7 +129,7 @@ public class VideoJuego5 {
             }
         }
         return gano;
-    }
+    }*/
     public static boolean definirGanador(int vida1 , int vida2){
     	double prob1 = (vida1 * 100.0) / (vida1 + vida2);
         double prob2 = (vida2 * 100.0) / (vida1 + vida2);
