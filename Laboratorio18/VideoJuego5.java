@@ -15,13 +15,15 @@ public class VideoJuego5 {
             Mapa map = new Mapa("Ejercito");
             ejercito_1.ingresarDatosAleatorio(turqueza);
             map.rellenar(ejercito_1);
+            System.out.printf("*** Datos del ejercio %s ***", ejercito_1.getNombre());
             ejercito_1.datosEjercito();
             ejercito_2.ingresarDatosAleatorio(amarillo);
             map.rellenar(ejercito_2);
+            System.out.printf("\nDatos del ejercio %s", ejercito_2.getNombre());
             ejercito_2.datosEjercito();
             map.mostrarE();
-            System.out.println("*** En batalla ***");
-            System.out.println("Se decidira aleatoriamente quien ganara de acuerdo a la suma total de nivel de vida del ejercito");
+            System.out.println("\n*** En batalla ***");
+            System.out.println("\nNOTA: Se decidira aleatoriamente quien ganara de acuerdo a la suma total de nivel de vida del ejercito\n");
             ganador(ejercito_1, ejercito_2);
             System.out.println("Iniciar una nueva partida (y/n) :");
             continuar = sc.next().charAt(0) == 'y';
