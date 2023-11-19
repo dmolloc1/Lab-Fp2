@@ -333,7 +333,7 @@ public class VideoJuego5 {
     		if (word1.compareTo(word2) <= 0) return false;
     		return true;
     }
-    public static int sumarNiveles(ArrayList<Ejercito> reino){
+    /*public static int sumarNiveles(ArrayList<Ejercito> reino){
         int total =  0;
         Ejercito e = reino.get(0);
         for( Ejercito eje : reino){
