@@ -144,6 +144,15 @@ public class Soldado {
         	}
     	}
 
+	public void atacar(boolean gano){
+        	this.velocidad += 1;
+        	this.actitud = "Atacar";
+        	this.nivelVida += 1;
+        	if(gano){
+        	    morir();
+        	    this.vive = false;
+        	}
+    	}
     	public void defender(){
         	this.velocidad = 0;
         	this.actitud = "Defender";

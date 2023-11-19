@@ -9,22 +9,63 @@ public class VideoJuego5 {
     static final String turqueza = "\u001B[30m";
     static final String amarillo = "\u001B[31m";
     public static void main(String[] args) {
-        String nR1, nR2;
+    	String nR1, nR2;
         boolean continuar = true;
         while(continuar){
             Mapa map = new Mapa("Ejercito");
             ejercito_1.ingresarDatosAleatorio(turqueza);
             map.rellenar(ejercito_1);
+            System.out.printf("*** Datos del ejercio %s ***", ejercito_1.getNombre());
             ejercito_1.datosEjercito();
             ejercito_2.ingresarDatosAleatorio(amarillo);
             map.rellenar(ejercito_2);
+            System.out.printf("\nDatos del ejercio %s", ejercito_2.getNombre());
             ejercito_2.datosEjercito();
             map.mostrarE();
-            System.out.println("El tipo de terreno del mapa es " +map.getTerritorio() );
+            startGame(map, ejercito_1, ejercito_2);
             System.out.println("Iniciar una nueva partida (y/n) :");
             continuar = sc.next().charAt(0) == 'y';
+        }  
+    }
+    
+    public static void ganador(Ejercito my, Ejercito enemigo){
+        boolean gano = definirGanador(my.totalNivelVida(), enemigo.totalNivelVida());
+        if(gano) System.out.println("--------- GANO EL EJERCITO 1 --------");
+        else  System.out.println("--------- GANO EL EJERCITO 2 --------");
+
+    }
+    public static  boolean startGame(Mapa map, Ejercito ejercito_1,Ejercito ejercito_2){ 
+        boolean continuar = true;
+        while (ejercito_1.size() > 0 && ejercito_2.size() > 0  && continuar){    
+            System.out.println("\nTurno del primer jugador(celeste) ");
+            map.jugar(1, ejercito_1, ejercito_2);
+            System.out.println("Cantidad de soldados del Ejercito 1: " + ejercito_1.size());
+            System.out.println("Cantidad de soldados del Ejercito 2: " + ejercito_2.size());
+            if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
+                if(ejercito_1.size() == 0){
+            	    System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_2 ~~~~~~~~~~~~~~~~~");
+                    return false;
+                }else {
+                    System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");
+                    return true;
+		        }
+	        }
+            System.out.print("Desea salir (y/n)");
+            continuar = sc.next().charAt(0) == 'n';
+            if(!continuar) break;
+            System.out.println("\nTurno del segundo jugador(amarillo) ");
+            map.jugar(2, ejercito_1, ejercito_2);
+            System.out.println("Cantidad de soldados del Ejercito 1: " + ejercito_1.size());
+            System.out.println("Cantidad de soldados del Ejercito 2: " + ejercito_2.size());
+            System.out.print("\nDesea salir (y/n): ");
+            continuar = sc.next().charAt(0) == 'n';
+        } 
+        if(ejercito_2.size() == 0){
+            System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");    
+            return true;
         }
-      }
+        return false;
+    }
    /* public static void iterativeGameReino(){
         String nR1, nR2;
         boolean continuar = true;
