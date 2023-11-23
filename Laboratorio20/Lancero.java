@@ -1,9 +1,9 @@
 public class Lancero extends Soldado{
     private int longLanza;
     
-    public Lancero(String nombre, int nVida, int nAtaque, int nDefensa, int v, String act, boolean vive, String color, int longLanza){
-    	super(nombre, nVida, nAtaque, nDefensa, v, act, vive, color);
-        this.longLanza = longLanza;
+    public Lancero(String n, int nV, int nA, int nD, int v, String act, boolean vive, String c, int lanza){
+    	super(n, nV, nA, nD, v, act, vive, c);
+        this.longLanza = lanza;
     }
     public void schiltrom(){
         this.setNivelDefensa(this.getNivelDefensa() + 1);

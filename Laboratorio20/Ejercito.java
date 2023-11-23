@@ -94,7 +94,7 @@ public class Ejercito{
         for(Ejercito e : ejercitos){
             for(Soldado s : e.getSoldados()){
                 s.aumentarVida(1);
-            }
+
         }
     }
 //Metodo para rellenar a el ejercito sus soldados
@@ -103,21 +103,25 @@ public class Ejercito{
         int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
         int tipo = 0; 
         for (int i = 0; i < armyLength; i++) {
-            tipo = (int) (Math.random() * 3 + 1);   
+            tipo = (int) (Math.random() * 4 + 1);   
             switch (tipo){
                     case 1: 
-                        Espadachin nuevoE = new Espadachin("Ex" + i,(int)( Math.random()* 2 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"Neutro", true, color, (int)(Math.random()*3 + 1));
-                        this.misSoldados.add(nuevoE);
+                        Espadachin nE = new Espadachin("Ex" + i,(int)( Math.random()* 2 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, (int)(Math.random()*3 + 1));
+                        this.misSoldados.add(nE);
                         break;
                     case 2:
-                        Caballero nuevoC = new Caballero("Cx" + i,(int)( Math.random()* 3 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"Neutro", true, color, true);
-                        this.misSoldados.add(nuevoC);
+                        Caballero nC = new Caballero("Cx" + i,(int)( Math.random()* 3 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, true);
+                        this.misSoldados.add(nC);
                         break;
                     case 3:
-                        Arquero nuevoA = new Arquero("Ax" + i,(int)( Math.random()* 3 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0, "Neutro", true, color,(int)Math.random()*5 + 1);
-                        this.misSoldados.add(nuevoA);
+                        Arquero nA = new Arquero("Ax" + i,(int)( Math.random()* 3 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0, "neutro", true, color,(int)(Math.random()*5 + 1));
+                        this.misSoldados.add(nA);
                         break;
-                }
+                    case 4: 
+                        Lancero nL = new Lancero("Lx" + i,(int)( Math.random()* 2 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, (int)(Math.random()*5 + 1));
+                        this.misSoldados.add(nL);
+                        break;
+            }
         }
     }
     public void ingresarDatosManual(Soldado [][] tablero, String color){

@@ -21,15 +21,15 @@ public class Soldado {
 		return totalSoldados;
 	}
 //Constructores
-    	public Soldado(String nombre, int nivelVida, int nivelAtaque, int nivelDefensa, int velocidad, String actitud, boolean vive, String color){//Atributos de batalla
-        	this.nombre = nombre;
-        	this.nivelVida = nivelVida;
-        	this.nivelAtaque = nivelAtaque;
-        	this.nivelDefensa = nivelDefensa;
-        	this.velocidad = velocidad;
-           	this.actitud = actitud;
+    	public Soldado(String nom, int nV, int nA, int nD, int vel, String act, boolean vive, String c){//Atributos de batalla
+        	this.nombre = nom;
+        	this.nivelVida = nV;
+        	this.nivelAtaque = nA;
+        	this.nivelDefensa = nD;
+        	this.velocidad = vel;
+           	this.actitud = act;
         	this.vive = vive;
-            this.color = color;
+            this.color = c;
 		totalSoldados += 1;
     	}
 
