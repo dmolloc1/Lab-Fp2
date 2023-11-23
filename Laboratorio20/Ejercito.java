@@ -94,7 +94,7 @@ public class Ejercito{
         for(Ejercito e : ejercitos){
             for(Soldado s : e.getSoldados()){
                 s.aumentarVida(1);
-
+            }
         }
     }
 //Metodo para rellenar a el ejercito sus soldados

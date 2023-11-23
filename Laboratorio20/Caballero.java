@@ -2,7 +2,7 @@ public class Caballero extends Soldado{
     private boolean montar;
     private String arma;
     public Caballero(String n, int nV, int nA, int nD, int v, String act, boolean vive, String c, boolean montar){
-    	super(nombre, nV, nA, nD, v, act, vive, c);
+    	super(n, nV, nA, nD, v, act, vive, c);
         this.montar =  montar;
     }
     public void montar(){

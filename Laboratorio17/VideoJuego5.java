@@ -17,7 +17,6 @@ public class VideoJuego5 {
             while (num1 == num2){
                 num2 = (int)Math.random()*5 + 1;
             }
-            System.out.println(num1 + " " + num2 );
             reino1 = crearReino(num1, turqueza);
             nR1 = reino1.get(0).getReino();
             map.rellenar(reino1);
@@ -108,11 +107,9 @@ public class VideoJuego5 {
                 Ejercito.bono(reino1);
             
                 reino2.remove(enemigo);
-                System.out.println("----------------r1" +reino1.size());
             }else {
                 Ejercito.bono(reino2);
                 reino1.remove(my);
-                System.out.println("_-------------------------r2"+reino2.size());
             }
         }
         return gano;
