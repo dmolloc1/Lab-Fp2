@@ -23,7 +23,7 @@ public class VideoJuego5 {
             map.mostrarE();
             System.out.println("\n*** En batalla ***");
             System.out.println("\nNOTA: Se decidira aleatoriamente quien ganara de acuerdo a la suma total de nivel de vida del ejercito\n");
-            ganador(ejercito_2, ejercito_1);
+            ganador(ejercito_1, ejercito_2);
             //startGame(map, ejercito_1, ejercito_2);
             System.out.println("Iniciar una nueva partida (y/n) :");
             continuar = sc.next().equalsIgnoreCase("y");
