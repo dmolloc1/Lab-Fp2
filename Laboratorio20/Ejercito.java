@@ -106,19 +106,19 @@ public class Ejercito{
             tipo = (int) (Math.random() * 4 + 1);   
             switch (tipo){
                     case 1: 
-                        Espadachin nE = new Espadachin("Ex" + i,(int)( Math.random()* 2 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, (int)(Math.random()*3 + 1));
+                        Espadachin nE = new Espadachin("Espadachin X " + i,(int)( Math.random()* 2 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, (int)(Math.random()*3 + 1));
                         this.misSoldados.add(nE);
                         break;
                     case 2:
-                        Caballero nC = new Caballero("Cx" + i,(int)( Math.random()* 3 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, true);
+                        Caballero nC = new Caballero("Caballero X " + i,(int)( Math.random()* 3 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, true);
                         this.misSoldados.add(nC);
                         break;
                     case 3:
-                        Arquero nA = new Arquero("Ax" + i,(int)( Math.random()* 3 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0, "neutro", true, color,(int)(Math.random()*5 + 1));
+                        Arquero nA = new Arquero("Arquero X " + i,(int)( Math.random()* 3 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0, "neutro", true, color,(int)(Math.random()*5 + 1));
                         this.misSoldados.add(nA);
                         break;
                     case 4: 
-                        Lancero nL = new Lancero("Lx" + i,(int)( Math.random()* 2 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, (int)(Math.random()*5 + 1));
+                        Lancero nL = new Lancero("Lancero X " + i,(int)( Math.random()* 2 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, (int)(Math.random()*5 + 1));
                         this.misSoldados.add(nL);
                         break;
             }
@@ -139,6 +139,7 @@ public class Ejercito{
         do{
             System.out.print("\n1. Total de vida del ejercito\n2. Promedio de vida\n3. Mostrar Soldados"+
         "\n4. Ordenamiento por Burbuja\n5. Ordenamiento por Selección\n6. Soldados con mayor nivel de vida\n7. Salir\n");
+            System.out.print("Elección: ");
             comando = sc.nextInt();
             switch(comando){
                 case 1:

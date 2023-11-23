@@ -9,7 +9,6 @@ public class VideoJuego5 {
     static final String turqueza = "\u001B[30m";
     static final String amarillo = "\u001B[31m";
     public static void main(String[] args) {
-    	String nR1, nR2;
         boolean continuar = true;
         while(continuar){
             Mapa map = new Mapa("Ejercito");
@@ -22,9 +21,12 @@ public class VideoJuego5 {
             System.out.printf("\nDatos del ejercio %s", ejercito_2.getNombre());
             ejercito_2.datosEjercito();
             map.mostrarE();
-            startGame(map, ejercito_1, ejercito_2);
+            System.out.println("\n*** En batalla ***");
+            System.out.println("\nNOTA: Se decidira aleatoriamente quien ganara de acuerdo a la suma total de nivel de vida del ejercito\n");
+            ganador(ejercito_2, ejercito_1);
+            //startGame(map, ejercito_1, ejercito_2);
             System.out.println("Iniciar una nueva partida (y/n) :");
-            continuar = sc.next().charAt(0) == 'y';
+            continuar = sc.next().equalsIgnoreCase("y");
         }  
     }
     
@@ -58,13 +60,37 @@ public class VideoJuego5 {
             System.out.println("Cantidad de soldados del Ejercito 1: " + ejercito_1.size());
             System.out.println("Cantidad de soldados del Ejercito 2: " + ejercito_2.size());
             System.out.print("\nDesea salir (y/n): ");
-            continuar = sc.next().charAt(0) == 'n';
+            continuar = sc.next().equalsIgnoreCase("n");
         } 
         if(ejercito_2.size() == 0){
             System.out.println("~~~~~~~~~~~~~~~~~~~ GANO EL EJERCITO_1 ~~~~~~~~~~~~~~~~~~~~~~~~");    
             return true;
         }
         return false;
+    }
+    public static boolean definirGanador(int vida1 , int vida2){
+    	double prob1 = (vida1 * 100.0) / (vida1 + vida2);
+        double prob2 = (vida2 * 100.0) / (vida1 + vida2);
+
+        System.out.println("Probabilidad de vencer para el primero 1: " + prob1 + "%");
+        System.out.println("Probabilidad de vencer para el segundo 2: " + prob2 + "%");
+	    Random ran = new Random();
+        double randomValue = ran.nextDouble() * 100 + 1 ;
+        System.out.printf("\nEl número  es %.2f", randomValue);
+        if (randomValue <= prob1) {
+            System.out.printf("\nEl primero  gana porque es mayor o igual a %.2f\n", randomValue);
+            return true;
+        } else {
+            System.out.printf("\nEl segundo  gana porque es menor a %.2f\n", randomValue);
+            return false;
+        }
+        
+    }
+    public static boolean compareString(String word1, String word2){
+    		word1 = word1.toUpperCase();
+    		word2 = word2.toUpperCase();
+    		if (word1.compareTo(word2) <= 0) return false;
+    		return true;
     }
    /* public static void iterativeGameReino(){
         String nR1, nR2;
@@ -174,24 +200,7 @@ public class VideoJuego5 {
         }
         return gano;
     }*/
-    public static boolean definirGanador(int vida1 , int vida2){
-    	double prob1 = (vida1 * 100.0) / (vida1 + vida2);
-        double prob2 = (vida2 * 100.0) / (vida1 + vida2);
-
-        System.out.println("Probabilidad de vencer para el primero 1: " + prob1 + "%");
-        System.out.println("Probabilidad de vencer para el segundo 2: " + prob2 + "%");
-	    Random ran = new Random();
-        double randomValue = ran.nextDouble() * 100 + 1 ;
-        System.out.printf("\nEl número  es %.2f", randomValue);
-        if (randomValue <= prob1) {
-            System.out.printf("\nEl primero  gana porque es mayor o igual a %.2f\n", randomValue);
-            return true;
-        } else {
-            System.out.printf("\nEl segundo  gana porque es menor a %.2f\n", randomValue);
-            return false;
-        }
-        
-    }
+    
  /*   public static boolean menuPrincipal(Ejercito eje1, Ejercito eje2){
         //Se rellenan los ejercitos
         Soldado[][]tablero = new Soldado[10][10];
@@ -327,12 +336,7 @@ public class VideoJuego5 {
         if(izq > der) System.out.println("Soldado no encontrado");
     }
 */
-    public static boolean compareString(String word1, String word2){
-    		word1 = word1.toUpperCase();
-    		word2 = word2.toUpperCase();
-    		if (word1.compareTo(word2) <= 0) return false;
-    		return true;
-    }
+   
     /*public static int sumarNiveles(ArrayList<Ejercito> reino){
         int total =  0;
         Ejercito e = reino.get(0);
