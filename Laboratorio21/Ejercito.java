@@ -109,19 +109,19 @@ public class Ejercito{
             tipo = (int) (Math.random() * 4 + 1);   
             switch (tipo){
                     case 1: 
-                        Espadachin nE = new Espadachin("Espadachin X " + i,(int)( Math.random()* 2 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, (int)(Math.random()*3 + 1));
+                        Espadachin nE = new Espadachin("Espadachin X " + i,(int)( Math.random()* 3 + 8), 10, 8, 0,"neutro", true, color, (int)(Math.random()*3 + 1));
                         this.misSoldados.add(nE);
                         break;
                     case 2:
-                        Caballero nC = new Caballero("Caballero X " + i,(int)( Math.random()* 3 + 3), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, true);
+                        Caballero nC = new Caballero("Caballero X " + i,(int)( Math.random()* 3  + 10), 13 , 7, 0,"neutro", true, color, true);
                         this.misSoldados.add(nC);
                         break;
                     case 3:
-                        Arquero nA = new Arquero("Arquero X " + i,(int)( Math.random()* 3 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0, "neutro", true, color,(int)(Math.random()*5 + 1));
+                        Arquero nA = new Arquero("Arquero X " + i,(int)( Math.random()* 3 + 3), 7, 3, 0, "neutro", true, color,(int)(Math.random()*5 + 1));
                         this.misSoldados.add(nA);
                         break;
                     case 4: 
-                        Lancero nL = new Lancero("Lancero X " + i,(int)( Math.random()* 2 + 1), (int) (Math.random()* 5 + 1), (int) (Math.random()* 5 + 1), 0,"neutro", true, color, (int)(Math.random()*5 + 1));
+                        Lancero nL = new Lancero("Lancero X " + i,(int)( Math.random()* 4 + 5), 5, 10, 0,"neutro", true, color, (int)(Math.random()*5 + 1));
                         this.misSoldados.add(nL);
                         break;
             }
