@@ -7,9 +7,17 @@ public class Ejercito{
     private char columna;
     private String reino, bonificación;
     private ArrayList <Soldado> misSoldados ;
-
+    private Soldado [] miEjercito2;
+    private int tInicial;
     public Ejercito(String nom){
-        this.misSoldados = new ArrayList <>(1);
+        this.tInicial = (int)(Math.random() * Soldado.MAX_SIZE + 1);
+        this.misSoldados = new ArrayList <>();
+        this.misSoldados.clear();
+        this.nombre = nom;
+    }
+    public Ejercito(int a , String nom){
+        this.tInicial = (int)(Math.random() * Soldado.MAX_SIZE + 1);
+        this.miEjercito2 = new Soldado[this.tInicial];
         this.nombre = nom;
     }
     public void add(Soldado sold){
@@ -50,6 +58,9 @@ public class Ejercito{
     public String getReino(){
         return this.reino;
     } 
+    public Soldado [] getSoldados2(){
+        return this.miEjercito2;
+    }
     public ArrayList <Soldado> getSoldados(){
         return this.misSoldados;
     }
@@ -101,28 +112,31 @@ public class Ejercito{
         }
     }
 //Metodo para rellenar a el ejercito sus soldados
-    public  void ingresarDatosAleatorio(String color) {
-        this.misSoldados.clear();
-        int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
-        int tipo = 0; 
-        for (int i = 0; i < armyLength; i++) {
+    public  void ingresarDatosAleatorio(int num, String color) {
+        int tipo = 0 ;
+        boolean elección = num == 1;
+        for (int i = 0; i < this.tInicial; i++) {
             tipo = (int) (Math.random() * 4 + 1);   
             switch (tipo){
                     case 1: 
                         Espadachin nE = new Espadachin("Espadachin X " + i,(int)( Math.random()* 3 + 8), 10, 8, 0,"neutro", true, color, (int)(Math.random()*3 + 1));
-                        this.misSoldados.add(nE);
+                        if (elección) this.misSoldados.add(nE);
+                        else this.miEjercito2[i] = nE;
                         break;
                     case 2:
                         Caballero nC = new Caballero("Caballero X " + i,(int)( Math.random()* 3  + 10), 13 , 7, 0,"neutro", true, color, true);
-                        this.misSoldados.add(nC);
+                        if (elección) this.misSoldados.add(nC);
+                        else this.miEjercito2[i] = nC;
                         break;
                     case 3:
                         Arquero nA = new Arquero("Arquero X " + i,(int)( Math.random()* 3 + 3), 7, 3, 0, "neutro", true, color,(int)(Math.random()*5 + 1));
-                        this.misSoldados.add(nA);
+                        if (elección) this.misSoldados.add(nA);
+                        else this.miEjercito2[i] = nA;
                         break;
                     case 4: 
                         Lancero nL = new Lancero("Lancero X " + i,(int)( Math.random()* 4 + 5), 5, 10, 0,"neutro", true, color, (int)(Math.random()*5 + 1));
-                        this.misSoldados.add(nL);
+                        if (elección) this.misSoldados.add(nL);
+                        else this.miEjercito2[i] = nL;
                         break;
             }
         }
@@ -137,7 +151,7 @@ public class Ejercito{
     }
 //Menu para ver datos de soldados
 
-   public void datosEjercito(){
+   public void datosEjercito(int num){
         int comando = 0;
         do{
             System.out.print("\n1. Total de vida del ejercito\n2. Promedio de vida\n3. Mostrar Soldados"+
@@ -146,29 +160,30 @@ public class Ejercito{
             comando = sc.nextInt();
             switch(comando){
                 case 1:
-                    System.out.printf("\n*** El total de nivel de vida del ejercito %s es : %d\n", this.getNombre(), this.totalNivelVida());  
+                    System.out.printf("\n*** El total de nivel de vida del ejercito %s es : %d\n", this.getNombre(), this.totalNivelVida(num));  
                     break;
                 case 2:
-                    System.out.printf("\n*** El promedio de nivel de vida del ejercito %s es : %d\n", this.getNombre(), this.promedioNivelVida());
+                    System.out.printf("\n*** El promedio de nivel de vida del ejercito %s es : %d\n", this.getNombre(), this.promedioNivelVida(num));
                     break;
                 case 3:
                     System.out.printf("\n~ ~ ~ Soldados de %s ~ ~ ~", this.getNombre());
                     System.out.println("\n" + this.toString()+ "\n"); 
                     break;
                 case 4:
-                    this.ordenarPorNivelBurbuja();//Ordenando el ejercito con el método Burbuja
+                    this.ordenarPorNivelBurbuja(num);//Ordenando el ejercito con el método Burbuja
         	        System.out.println("\n       ~MÉTODO BURBUJA~");
                     System.out.println(this.toString() + "\n"); 
                     break;
                 case 5:
-                    this.ordenarPorNivelSelección();//Ordenando el ejercito con el método Burbuja
+                    this.ordenarPorNivelSelección(num);//Ordenando el ejercito con el método Burbuja
         	        System.out.println("\n       ~MÉTODO DE SELLECIÓN~");
                     System.out.println( this.toString()+ "\n"); 
                     break;
                 case 6:
                     System.out.println("\n*** El soldado con mayor nivel de vida del ejercito es: \n" );
-                    this.ordenarPorNivelSelección();
-                    System.out.println( this.get(this.size() - 1).mostrar());
+                    this.ordenarPorNivelSelección(num);
+                    if(num == 1) System.out.println( this.misSoldados.get(this.size() - 1).mostrar());
+                    else System.out.println( this.miEjercito2[this.miEjercito2.length - 1].mostrar());
                     break;
             }
         }while(comando != 7);
@@ -241,32 +256,46 @@ public class Ejercito{
         this.misSoldados.remove(sold);
     }
 //Metodos para saber caracteristicas del ejercito
-    public int totalNivelVida() {
+    public int totalNivelVida(int num) {
         int total = 0;
-        for (Soldado soldado : this.misSoldados) {
-            total += soldado.getNivelDeVida();
+        if(num == 1){
+            for (Soldado soldado : this.misSoldados) {
+                total += soldado.getNivelDeVida();
+            }
+        }else{
+            for (Soldado soldado : this.miEjercito2) {
+                total += soldado.getNivelDeVida();
+            }
         }
         this.totalNivelVida = total;
         return total;
     }
 
-    public int promedioNivelVida(){
-        return this.totalNivelVida()/ this.size();
+    public int promedioNivelVida(int num){
+        return this.totalNivelVida(num)/ this.tInicial;
     }
     public Soldado get(int n){
-        return this.misSoldados.get(n);
+        if(n == 1){
+            return this.misSoldados.get(n);
+        }
+        return this.miEjercito2[n];
     }
 // Metodos de ordenamiento
-    public void ordenarPorNivelBurbuja(){
-        for(int i = 1; i< this.size(); i++){
-            for(int j = 0; j < this.size() - i; j++){
+    public void ordenarPorNivelBurbuja(int num){
+        int len = 0;
+        if(num == 1){
+            len = this.size();
+        }else len = this.miEjercito2.length;
+        for(int i = 1; i< len; i++){
+            for(int j = 0; j < len - i; j++){
                 if(this.misSoldados.get(j).getNivelDeVida() > this.misSoldados.get(j + 1).getNivelDeVida()){
-                    Ejercito.intercambiar(this, j , j + 1);
+                    if(num == 1) Ejercito.intercambiarList( this, j, j + 1);
+                    else Ejercito.intercambiarArray( this, j, j + 1);
                 }
             }
         }
     }
-    public  void ordenarPorNivelSelección(){
+    public  void ordenarPorNivelSelección(int num){
         for(int i = 0; i < this.size() - 1; i++){
             int min = i;
             for(int j = i + 1; j < this.size(); j++){
@@ -274,14 +303,21 @@ public class Ejercito{
                     min = j;
                 }
             }
-            Ejercito.intercambiar( this, min, i);
+            if(num == 1) Ejercito.intercambiarList( this, min, i);
+            else Ejercito.intercambiarArray( this, min, i);
+
         }
     }
 
-    public static void intercambiar( Ejercito lista, int i, int j){
+    public static void intercambiarList( Ejercito lista, int i, int j){
         Soldado vControl = lista.misSoldados.get(i);
         lista.misSoldados.set(i,lista.misSoldados.get(j));
         lista.misSoldados.set(j, vControl);
+    }
+    public static void intercambiarArray( Ejercito lista, int i, int j){
+        Soldado vControl = lista.miEjercito2[i];
+        lista.miEjercito2[i] = lista.miEjercito2[j];
+        lista.miEjercito2[j] = vControl;
     }
 //Metodo de ordenamiento por nombre
     public void insertionSortName (){

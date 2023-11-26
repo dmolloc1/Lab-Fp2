@@ -4,7 +4,7 @@ import java.util.*;
 public class VideoJuego5 {
     //static ArrayList <Ejercito> reino1, reino2;
     static Ejercito ejercito_1 = new Ejercito("Ejercito_1");
-    static Ejercito ejercito_2 = new Ejercito("Ejercito_2");
+    static Ejercito ejercito_2 = new Ejercito(2,"Ejercito_2");
     static Scanner sc = new  Scanner(System.in);
     static final String turqueza = "\u001B[30m";
     static final String amarillo = "\u001B[31m";
@@ -12,14 +12,14 @@ public class VideoJuego5 {
         boolean continuar = true;
         while(continuar){
             Mapa map = new Mapa("Ejercito");
-            ejercito_1.ingresarDatosAleatorio(turqueza);
-            map.rellenar(ejercito_1);
+            ejercito_1.ingresarDatosAleatorio(1, turqueza);
+            map.rellenar(ejercito_1, 1);
             System.out.printf("*** Datos del ejercio %s ***", ejercito_1.getNombre());
-            ejercito_1.datosEjercito();
-            ejercito_2.ingresarDatosAleatorio(amarillo);
-            map.rellenar(ejercito_2);
+            ejercito_1.datosEjercito(1);
+            ejercito_2.ingresarDatosAleatorio(2, amarillo);
+            map.rellenar(ejercito_2, 2);
             System.out.printf("\nDatos del ejercio %s", ejercito_2.getNombre());
-            ejercito_2.datosEjercito();
+            ejercito_2.datosEjercito(2);
             map.mostrarE();
             System.out.println("\n*** En batalla ***");
             System.out.println("\nNOTA: Se decidira aleatoriamente quien ganara de acuerdo a la suma total de nivel de vida del ejercito\n");
@@ -31,7 +31,7 @@ public class VideoJuego5 {
     }
     
     public static void ganador(Ejercito my, Ejercito enemigo){
-        boolean gano = definirGanador(my.totalNivelVida(), enemigo.totalNivelVida());
+        boolean gano = definirGanador(my.totalNivelVida(1), enemigo.totalNivelVida(2));
         if(gano) System.out.println("--------- GANO EL EJERCITO 1 --------");
         else  System.out.println("--------- GANO EL EJERCITO 2 --------");
 

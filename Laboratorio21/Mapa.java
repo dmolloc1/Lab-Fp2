@@ -66,7 +66,7 @@ public class Mapa{
         }
         return false;
     }
-    public void mostrar(){
+   /* public void mostrar(){
         System.out.println("* |   A   |   B   |   C   |   D   |   E   |   F   |   G   |   H   |   I   |   J   |\n"+
                            "-----------------------------------------------------------------------------------");
         for(int i = 0; i < this.mapaR.length; i++){
@@ -92,9 +92,9 @@ public class Mapa{
                 }
                 else System.out.println((i + 1) +" " + fila);
         }
-    }
+    }*/
     public void rellenar(ArrayList <Ejercito> ejercito){
-        int fila = 0, columna = 0;
+        int fila = 0, columna = 0; 
         for(Ejercito e : ejercito){
             boolean posicionValida = false;
             while (!posicionValida) {
@@ -106,9 +106,14 @@ public class Mapa{
             e.setColumna(columna);
         }
     }
-    public void rellenar(Ejercito ejercito){ //Metodo para rellenar pero de soldados
+
+    public void rellenar(Ejercito eje, int num){ //Metodo para rellenar pero de soldados
         int fila = 0, columna = 0;
-        for(Soldado e : ejercito.getSoldados()){
+        Soldado [] ejercito ;
+        if(num == 1){
+            ejercito = eje.getSoldados().toArray( new Soldado [eje.getSoldados().size()]);
+        }else ejercito = eje.getSoldados2();
+        for (Soldado e : ejercito){
             boolean posicionValida = false;
             while (!posicionValida) {
                 fila = (int) (Math.random() * 9);
