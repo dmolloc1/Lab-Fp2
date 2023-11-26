@@ -89,10 +89,16 @@ public class Ejercito{
         }
         return total;
     }
-    public String toString(){
+    public String toString(int num){
         String mostrar = "";
-        for(Soldado a : this.misSoldados){
-            mostrar += "\n"+ a.mostrar() ;
+        if (num == 1){
+            for(Soldado a : this.misSoldados){
+                mostrar += "\n"+ a.mostrar() ;
+            }
+        }else{
+            for(Soldado a : this.miEjercito2){
+                mostrar += "\n"+ a.mostrar() ;
+            }
         }
         return mostrar;
     }
@@ -167,7 +173,7 @@ public class Ejercito{
                     break;
                 case 3:
                     System.out.printf("\n~ ~ ~ Soldados de %s ~ ~ ~", this.getNombre());
-                    System.out.println("\n" + this.toString()+ "\n"); 
+                    System.out.println("\n" + this.toString(num)+ "\n"); 
                     break;
                 case 4:
                     this.ordenarPorNivelBurbuja(num);//Ordenando el ejercito con el método Burbuja

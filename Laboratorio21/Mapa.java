@@ -125,15 +125,17 @@ public class Mapa{
         }
     }
     public void mostrarE(){
-        System.out.println("* |   A   |   B   |   C   |   D   |   E   |   F   |   G   |   H   |   I   |   J   |\n"+
-                           "-----------------------------------------------------------------------------------");
+        System.out.println("* |   A    |   B    |    C   |    D   |   E    |    F   |    G   |    H   |    I   |    J   |\n"+
+                           "---------------------------------------------------------------------------------------------");
         for(int i = 0; i < this.mapa.length; i++){
                 String fila = "|";
                 for(int j = 0; j <this.mapa[i].length; j++){
-                    if(this.mapa[i][j] == null){ fila = fila +"  ---  " + "|";
+                    if(this.mapa[i][j] == null){ fila = fila +"  ---   " + "|";
                     }else{
                         fila += " " + this.mapa[i][j].getColor() + this.mapa[i][j].getNombre().charAt(0) + " - ";
-                        fila += this.mapa[i][j].getNivelDeVida()  + "\u001B[0m |";
+                        if( this.mapa[i][j].getNivelDeVida() > 9) fila += this.mapa[i][j].getNivelDeVida()  + "\u001B[0m |";
+                        else fila += this.mapa[i][j].getNivelDeVida()  + " \u001B[0m |";
+
                     }
                 }
                 if(i == 9){
