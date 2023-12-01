@@ -108,7 +108,7 @@ public class Ejercito{
      int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
      int tipo = 0 ;
         for (int i = 0; i < armyLength; i++) {
-            tipo = (int) (Math.random() * 4 + 1);   
+            tipo = (int) (Math.random() * 5 + 1);   
             switch (tipo){
                     case 1: 
                         Espadachin nE = new Espadachin("Espadachin X " + i,(int)(Math.random()*3 + 8), 10, 8, 0,"neutro", true, color, (int)(Math.random()*3 + 1));
@@ -126,9 +126,29 @@ public class Ejercito{
                         Lancero nL = new Lancero("Lancero X " + i,(int)( Math.random()* 4 + 5), 5, 10, 0,"neutro", true, color, (int)(Math.random()*5 + 1));
                         this.misSoldados.add(nL);
                         break;
+                    case 5:
+                        this.ejercitoEspecial(i,color);
+
             }
         }
+ }
+ public void ejercitoEspecial(int i, String color){
+    char tipo = this.reino.charAt(0);
+    switch (tipo){
+        case 'I':
+            EspadachinReal nER = new EspadachinReal("EReal X " + i, 12, 10, 8, 0, "neutro", true, color,1);
+            this.misSoldados.add(nER);
+            break;
+        case 'F':
+            break;
+        case 'C':
+            break;
+        case 'M':
+            break;
+        case 'S':
+            break;
     }
+ }
 //Menu para ver datos de soldados
 
    public void datosEjercito(){
