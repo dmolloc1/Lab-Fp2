@@ -105,16 +105,18 @@ public class Ejercito{
     }
 //Metodo para rellenar a el ejercito sus soldados
  public  void ingresarDatosAleatorio(String color) {
-        int tipo = 0 ;
-        for (int i = 0; i < this.size(); i++) {
+     this.misSoldados.clear();
+     int armyLength = (int)(Math.random() * Soldado.MAX_SIZE + 1);
+     int tipo = 0 ;
+        for (int i = 0; i < armyLength; i++) {
             tipo = (int) (Math.random() * 4 + 1);   
             switch (tipo){
                     case 1: 
-                        Espadachin nE = new Espadachin("Espadachin X " + i,(int)( Math.random()* 3 + 8), 10, 8, 0,"neutro", true, color, (int)(Math.random()*3 + 1));
+                        Espadachin nE = new Espadachin("Espadachin X " + i,(int)(Math.random()*3 + 8), 10, 8, 0,"neutro", true, color, (int)(Math.random()*3 + 1));
                         this.misSoldados.add(nE);
                         break;
                     case 2:
-                        Caballero nC = new Caballero("Caballero X " + i,(int)( Math.random()* 3  + 10), 13 , 7, 0,"neutro", true, color, true);
+                        Caballero nC = new Caballero("Caballero X " + i,(int)(Math.random()*3 + 10), 13 , 7, 0,"neutro", true, color,true);
                         this.misSoldados.add(nC);
                         break;
                     case 3:

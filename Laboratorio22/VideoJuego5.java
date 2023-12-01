@@ -31,8 +31,9 @@ public class VideoJuego5 {
             System.out.println("\nNOTA: Se aplica la bonificación\n");
             map.bonificación(ejercito_1);
             map.bonificación(ejercito_2);
-            ganador(ejercito_1, ejercito_2);
-            //startGame(map, ejercito_1, ejercito_2);
+            map.mostrarE();
+            //ganador(ejercito_1, ejercito_2);
+            startGame(map, ejercito_1, ejercito_2);
             System.out.println("Iniciar una nueva partida (y/n) :");
             continuar = sc.next().equalsIgnoreCase("y");
         }  
