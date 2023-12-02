@@ -1,9 +1,10 @@
-public class EspadachinTectonico extends Espadachin implements AtaqueEspecial{
+public class EspadachinTeutonico extends Espadachin implements AtaqueEspecial{
     private int numEspadas, numDefensa;
-    public EspadachinTectonico(String n, int nV, int nA, int nD, int v, String act, boolean vive, String c, int espada){
+    public EspadachinTeutonico(String n, int nV, int nA, int nD, int v, String act, boolean vive, String c, int espada){
     	super(n, nV, nA, nD, v, act, vive, c, espada);
         this.numEspadas = 1;
         this.numDefensa = 1;
+        this.arma = "Jabalina";
     }
     public void lanzar(){
         for (int i = 0; i < numEspadas && numEspadas <= AtaqueEspecial.MAX_CANTIDAD; i++){
