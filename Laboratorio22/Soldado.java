@@ -2,49 +2,44 @@
 import java.util.*;
 //Laboratorio A Fundamentos 2
 //Autor: Mollo Chuquicaña Dolly Yadhira
-public class Soldado {
+public abstract class Soldado {
 	//Variables de clase
 	public static final int MAX_SIZE = 10;
-       	private static int cantidad;	
-	private static int totalSoldados;
+ 	private static int totalSoldados;
 	//Atributos de objeto
-	private Ejercito ejercito;
 	private String nombre;
 	private int nivelVida, fila;
 	private char columna;
 	private String color;
-      	private int nivelAtaque, nivelDefensa, vidaActual, velocidad;
-    	private String actitud;
-    	private boolean vive;
+    private int nivelAtaque, nivelDefensa, vidaActual, velocidad;
+    private String actitud;
+    private boolean vive;
 //Metodos de clase
 	public static int creados(){
 		return totalSoldados;
 	}
 //Constructores
-    	public Soldado(String nom, int nV, int nA, int nD, int vel, String act, boolean vive, String c){//Atributos de batalla
-        	this.nombre = nom;
-        	this.nivelVida = nV;
-        	this.nivelAtaque = nA;
-        	this.nivelDefensa = nD;
-        	this.velocidad = vel;
-           	this.actitud = act;
-        	this.vive = vive;
-            this.color = c;
+	public Soldado(String nom, int nV, int nA, int nD, int vel, String act, boolean vive, String c){//Atributos de batalla
+      	this.nombre = nom;
+       	this.nivelVida = nV;
+       	this.nivelAtaque = nA;
+       	this.nivelDefensa = nD;
+       	this.velocidad = vel;
+       	this.actitud = act;
+       	this.vive = vive;
+		this.color = c;
 		totalSoldados += 1;
-    	}
-
-    	public Soldado(int fila, char columna ){//Atributos de ubicacion y nombre
-        	this.fila = fila;
-        	this.columna = columna;
-		totalSoldados += 1;
-    	}
-
-    	public Soldado(String actitud, boolean vive){// Atributos de estado
-           	this.actitud = actitud;
-        	this.vive = vive;
-		totalSoldados += 1;
-    	}
+    }
+	public Soldado(String act, boolean vive){
+		this.actitud = act;
+		this.vive = vive;
+	}
+// Metodos abstractos
+	public abstract void ataque();
  //Getters and Setters
+	public void setNombre(String nom){
+		this.nombre = nom;
+	}
 	public void setNivelDeVida(int num){
 		this.nivelVida = num;
 	}
@@ -57,12 +52,6 @@ public class Soldado {
 	
 	public void setNivelDefensa(int num){
 		this.nivelDefensa = num;
-	}
-	public void setEjercito(Ejercito eje){
-		this.ejercito = eje;
-	}
-	public void setNombre(String nom){
-		this.nombre = nom;
 	}
 
 	public void setFila(int num){
@@ -135,14 +124,14 @@ public class Soldado {
 	}
 
 	public void atacar(){
-        	this.velocidad += 1;
-        	this.actitud = "Atacar";
-        	this.nivelVida += 1;
-        	if(this.nivelVida == 0){
-        	    morir();
-        	    this.vive = false;
-        	}
-    	}
+        this.velocidad += 1;
+        this.actitud = "Atacar";
+        this.nivelVida += 1;
+        if(this.nivelVida == 0){
+            morir();
+            this.vive = false;
+        }
+    }
 
 	public void atacar(boolean gano){
         	this.velocidad += 1;
@@ -152,43 +141,39 @@ public class Soldado {
         	    morir();
         	    this.vive = false;
         	}
-    	}
-    	public void defender(){
-        	this.velocidad = 0;
-        	this.actitud = "Defender";
-    	}
+   	}
+    public void defender(){
+       	this.velocidad = 0;
+       	this.actitud = "Defender";
+    }
 
-    	public void huir (){
-        	this.velocidad += 2;
-        	this.actitud = "Huir";
-    	}
+    public void huir (){
+       	this.velocidad += 2;
+       	this.actitud = "Huir";
+    }
 
-    	public void retroceder(){
-        	if(this.velocidad > 0){
-        	    this.velocidad = 0;
-        	    this.actitud = "Defender";
-        	    this.defender();
-        	}
-        	else this.velocidad = this.velocidad - 1;
-        	
-    	}
+    public void retroceder(){
+       	if(this.velocidad > 0){
+       	    this.velocidad = 0;
+       	    this.actitud = "Defender";
+       	    this.defender();
+       	}
+       	else this.velocidad = this.velocidad - 1;  	
+    }
 
-    	public void avanzar(int fila, int columna){
-        	this.velocidad += 1;
-        	setFila(fila);
-        	setColumna(columna);
-    	}
+    public void avanzar(int fila, int columna){
+       	this.velocidad += 1;
+       	setFila(fila);
+       	setColumna(columna);
+    }
 
-    	public void serAtacado(boolean perdio){
-        	if(!perdio){
-            	this.nivelVida += 1;
-        	}
-        	else morir();
-    	}
-
-    	public void morir(){
-        	this.vive = false;
-    	}
+    public void serAtacado(boolean perdio){
+       	if(!perdio)	this.nivelVida += 1;
+       	else morir();
+	}
+    public void morir(){
+       	this.vive = false;
+    }
 
 	public void clonar(Soldado clon){
 		this.nombre = clon.nombre;

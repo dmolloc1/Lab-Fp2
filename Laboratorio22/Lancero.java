@@ -5,7 +5,7 @@ public class Lancero extends Soldado{
     	super(n, nV, nA, nD, v, act, vive, c);
         this.longLanza = lanza;
     }
-    public void schiltrom(){
+    public void ataque(){
         this.setNivelDefensa(this.getNivelDefensa() + 1);
     }
 }

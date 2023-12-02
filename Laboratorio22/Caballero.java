@@ -8,7 +8,7 @@ public class Caballero extends Soldado{
     public void montar(){
         if(!this.montar){
             this.arma = "Lanza";
-            this.embestir();
+            this.ataque();
         }
     }
     
@@ -18,7 +18,7 @@ public class Caballero extends Soldado{
         }
     }
 
-    public void embestir(){
+    public void ataque(){
         if(!montar){
             this.atacar();
             this.atacar();

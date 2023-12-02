@@ -15,7 +15,6 @@ public class Ejercito{
     }
     public void add(Soldado sold){
         this.misSoldados.add(sold);
-        sold.setEjercito(this);
     }
     public void setReino(int n){
         switch(n){
@@ -169,7 +168,7 @@ public class Ejercito{
         }while(comando != 7);
     }
 //Metodos para editar al soldado
-    public void crearSoldado( Soldado [][] tablero, String color){
+   /* public void crearSoldado( Soldado [][] tablero, String color){
         if(this.size() + 1 <= Soldado.MAX_SIZE){
             Soldado nuevo = new Soldado("Neutro", true);
             System.out.print("Nombre del Soldado:");
@@ -191,7 +190,7 @@ public class Ejercito{
             this.add(nuevo);        
         }
     }
-
+*/
     public void modificarSoldado(Soldado soldado){
         int opcion;
         do {
