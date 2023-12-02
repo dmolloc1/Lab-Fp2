@@ -145,6 +145,7 @@ public abstract class Soldado {
     public void defender(){
        	this.velocidad = 0;
        	this.actitud = "Defender";
+        this.nivelDefensa += 1;
     }
 
     public void huir (){

@@ -20,11 +20,11 @@ public class VideoJuego5 {
             ejercito_2 = new Ejercito("Ejercito_2", num2);
             ejercito_1.ingresarDatosAleatorio(turqueza);
             map.rellenar(ejercito_1);
-            System.out.printf("*** Datos del ejercio %s ***", ejercito_1.getNombre());
+            System.out.printf("*** Datos del ejercito 1 %s ***", ejercito_1.getReino());
             ejercito_1.datosEjercito();
             ejercito_2.ingresarDatosAleatorio(amarillo);
             map.rellenar(ejercito_2);
-            System.out.printf("\nDatos del ejercio %s", ejercito_2.getNombre());
+            System.out.printf("\nDatos del ejercito 2 %s", ejercito_2.getReino());
             ejercito_2.datosEjercito();
             map.mostrarE();
             System.out.println("\n*** En batalla ***");

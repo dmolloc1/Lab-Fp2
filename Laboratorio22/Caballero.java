@@ -1,9 +1,11 @@
 public class Caballero extends Soldado{
     private boolean montar;
-    private String arma;
+    protected String arma;
+    protected int longArma;
     public Caballero(String n, int nV, int nA, int nD, int v, String act, boolean vive, String c, boolean montar){
     	super(n, nV, nA, nD, v, act, vive, c);
         this.montar =  montar;
+        this.longArma = 1;
     }
     public void montar(){
         if(!this.montar){
