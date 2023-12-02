@@ -2,6 +2,7 @@ public class EspadachinConquistador extends Espadachin implements AtaqueEspecial
     private int numEspadas;
     public EspadachinConquistador(String n, int nV, int nA, int nD, int v, String act, boolean vi, String c, int es){
     	super(n, nV, nA, nD, v, act, vi, c, es);
+        this.setNombreM("EC");
         this.numEspadas = 1;
         this.arma = "Hacha";
     }

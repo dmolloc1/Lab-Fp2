@@ -7,7 +7,7 @@ public abstract class Soldado {
 	public static final int MAX_SIZE = 10;
  	private static int totalSoldados;
 	//Atributos de objeto
-	private String nombre;
+	private String nombre, nMapa;
 	private int nivelVida, fila;
 	private char columna;
 	private String color;
@@ -37,6 +37,10 @@ public abstract class Soldado {
 // Metodos abstractos
 	public abstract void ataque();
  //Getters and Setters
+	public void setNombreM(String n){
+		this.nMapa = n;
+	}	
+		
 	public void setNombre(String nom){
 		this.nombre = nom;
 	}
@@ -80,7 +84,9 @@ public abstract class Soldado {
 	public String getNombre(){
 		return nombre;
 	}	
-
+	public String getNombreM(){
+		return nMapa;
+	}
 	public int getNivelDeVida(){
 		return nivelVida;
 	}

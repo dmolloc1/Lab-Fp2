@@ -3,6 +3,7 @@ public class CaballeroMoro extends Caballero implements AtaqueEspecial{
     private String armaE;
     public CaballeroMoro(String n, int nV, int nA, int nD, int v, String act, boolean vi, String c, boolean m){
     	super(n, nV, nA, nD, v, act, vi, c, m);
+        this.setNombreM("CM ");
         this.numArma = 1;
         this.armaE = "Flechas";
     }

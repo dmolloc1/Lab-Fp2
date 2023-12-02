@@ -5,6 +5,7 @@ public class Espadachin extends Soldado{
     	super(n, nV, nA, nD, v, act, vive, c);
         this.longEspada =  espada;
         this.arma = "Espada";
+        this.setNombreM("E ");
     }
     public void ataque(){}
 }

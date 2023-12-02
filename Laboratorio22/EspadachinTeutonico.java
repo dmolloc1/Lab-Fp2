@@ -2,6 +2,7 @@ public class EspadachinTeutonico extends Espadachin implements AtaqueEspecial{
     private int numEspadas, numDefensa;
     public EspadachinTeutonico(String n, int nV, int nA, int nD, int v, String act, boolean vive, String c, int espada){
     	super(n, nV, nA, nD, v, act, vive, c, espada);
+        this.setNombreM("ET");
         this.numEspadas = 1;
         this.numDefensa = 1;
         this.arma = "Jabalina";

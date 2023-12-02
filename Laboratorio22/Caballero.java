@@ -4,6 +4,7 @@ public class Caballero extends Soldado{
     protected int longArma;
     public Caballero(String n, int nV, int nA, int nD, int v, String act, boolean vive, String c, boolean montar){
     	super(n, nV, nA, nD, v, act, vive, c);
+        this.setNombreM("C ");
         this.montar =  montar;
         this.longArma = 1;
     }

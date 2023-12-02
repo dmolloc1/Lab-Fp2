@@ -3,6 +3,7 @@ public class Lancero extends Soldado{
     
     public Lancero(String n, int nV, int nA, int nD, int v, String act, boolean vive, String c, int lanza){
     	super(n, nV, nA, nD, v, act, vive, c);
+        this.setNombreM("L ");
         this.longLanza = lanza;
     }
     public void ataque(){
