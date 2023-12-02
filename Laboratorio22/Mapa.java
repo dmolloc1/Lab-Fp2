@@ -130,8 +130,8 @@ public class Mapa{
                     if(this.mapa[i][j] == null){ fila = fila +"  ---   " + "|";
                     }else{
                         fila += " " + this.mapa[i][j].getColor() + this.mapa[i][j].getNombre().substring(0, 2) + " - ";
-                        if( this.mapa[i][j].getNivelDeVida() > 9) fila += this.mapa[i][j].getNivelDeVida()  + "\u001B[0m |";
-                        else fila += this.mapa[i][j].getNivelDeVida()  + " \u001B[0m |";
+                        if( this.mapa[i][j].getNivelDeVida() > 9) fila += this.mapa[i][j].getNivelDeVida()  + "\u001B[0m|";
+                        else fila += this.mapa[i][j].getNivelDeVida()  + " \u001B[0m|";
 
                     }
                 }
