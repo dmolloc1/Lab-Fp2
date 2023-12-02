@@ -193,8 +193,8 @@ public class Mapa{
             this.mapa[fila][columna] = sold;
             sold.avanzar(fila, columna);
         }
-        else{
-            boolean gano = VideoJuego5.definirGanador(sold.getNivelDeVida(), enemigo.getNivelDeVida());
+        else{ //Se agrega las ecepciones de batalla
+            boolean gano = aplicarReglas(sold, enemigo);
             sold.atacar(gano);
             enemigo.serAtacado(gano);
             if(gano){
@@ -217,6 +217,56 @@ public class Mapa{
                 ejercito_2.remove(sold);
             }    
         }
+    }
+    public boolean aplicarReglas(Soldado sold, Soldado enemigo){
+        char s1 = sold.getNombreM().charAt(0);
+        char s2 = enemigo.getNombreM().charAt(0);
+        if((s1 == 'C' || s2 == 'C') && (s1 == 'L' || s2 == 'L')){
+            if(s1 == 'C' && sold.getNombreM().compareTo("C ") == 0 ){ return reglas(1, enemigo, sold);}
+            else {
+                if(s2 == 'C' && enemigo.getNombreM().compareTo("C ") == 0 ){ return reglas(1, sold, enemigo);}
+            } 
+        }
+        
+        if((s1 == 'A' || s2 == 'A') && (s1 == 'L' || s2 == 'L')){
+            if(s1 == 'A'){ return reglas(1, sold, enemigo);}
+            else {return reglas(1, enemigo, sold);} 
+        }
+
+        if((s1 == 'C' || s2 == 'C') && (s1 == 'E' || s2 == 'E')){
+            if(s1 == 'C') return reglas(1, sold, enemigo);
+            else return reglas(1, enemigo, sold); 
+        }
+
+        if((s1 == 'C' || s2 == 'C') && (s1 == 'A' || s2 == 'A')){
+            if(s1 == 'C') {
+                if (sold.getNombreM().compareTo("C ") > 0) return  reglas(2, sold, enemigo);
+                else  return reglas(1, sold, enemigo);
+            }else{if (enemigo.getNombreM().compareTo("C ") > 0) return  reglas(2, enemigo, sold);
+                else  return reglas(1, enemigo, sold);
+            } 
+        }
+        
+        if((s1 == 'E' || s2 == 'E') && (s1 == 'L' || s2 == 'L')){
+            if(s1 == 'E') {
+                if (sold.getNombreM().compareTo("E ") > 0) return  reglas(1, sold, enemigo);
+                else  return reglas(1, sold, enemigo);
+            }else{if (enemigo.getNombreM().compareTo("E ") > 0) return  reglas(2, enemigo, sold);
+                else  return reglas(1, enemigo, sold);
+        }
+
+        if((s1 == s2 ) && (s1 == 'E' || s1 == 'C')){
+            if(sold.getNombreM().compareTo(enemigo.getNombreM()) > 0) return reglas(1, sold, enemigo);
+            else if(sold.getNombre().compareTo(enemigo.getNombreM() != 0)) return reglas(1, enemigo, sold); 
+        }
+        return VideoJuego5.definirGanador(sold.getNivelDeVida(), enemigo.getNivelDeVida());
+    }
+
+    public boolean reglas(int n, Soldado sold, Soldado enemigo){
+        if(n == 1){
+            return VideoJuego5.definirGanador(sold.getNivelDeVida() + 1, enemigo.getNivelDeVida());
+        }
+        return VideoJuego5.definirGanador(sold.getNivelDeVida() + 2, enemigo.getNivelDeVida());
     }
 
     public  void jugar(int ejercito, Ejercito ej1, Ejercito ej2){
