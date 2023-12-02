@@ -129,7 +129,7 @@ public class Mapa{
                 for(int j = 0; j <this.mapa[i].length; j++){
                     if(this.mapa[i][j] == null){ fila = fila +"  ---   " + "|";
                     }else{
-                        fila += " " + this.mapa[i][j].getColor() + this.mapa[i][j].getNombre().charAt(0) + " - ";
+                        fila += " " + this.mapa[i][j].getColor() + this.mapa[i][j].getNombre().substring(0, 2) + " - ";
                         if( this.mapa[i][j].getNivelDeVida() > 9) fila += this.mapa[i][j].getNivelDeVida()  + "\u001B[0m |";
                         else fila += this.mapa[i][j].getNivelDeVida()  + " \u001B[0m |";
 

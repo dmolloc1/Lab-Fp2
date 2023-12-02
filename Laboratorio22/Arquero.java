@@ -5,7 +5,7 @@ public class Arquero extends Soldado{
     	super(n, nV, nA, nD, v, act, vive, c);
         this.flechas =  flechas;
     }
-    public void disparar(){
+    public void ataque(){
         this.flechas = this.flechas - 1;
         this.atacar();
     }

@@ -1,9 +1,8 @@
-public class EspadachinTeutonico extends Espadachin implements AtaqueEspecial{
-    private int numEspadas, numDefensa;
+public class EspadachinConquistador extends Espadachin implements AtaqueEspecial{
+    private int numEspadas;
     public EspadachinConquistador(String n, int nV, int nA, int nD, int v, String act, boolean vi, String c, int es){
-    	super(n, nV, nA, nD, v, act, vive, c, es);
+    	super(n, nV, nA, nD, v, act, vi, c, es);
         this.numEspadas = 1;
-        this.numDefensa = 1;
         this.arma = "Hacha";
     }
     public void lanzar(){

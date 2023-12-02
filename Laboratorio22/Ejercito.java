@@ -140,20 +140,20 @@ public class Ejercito{
             this.misSoldados.add(nER);
             break;
         case 'F':
-            CaballeroFranco nCF = new EspadachinReal("CFranco X " + i, 12, 10, 8, 0, "neutro", true, color,1);
-            this.misSoldados.add(nER);
+            CaballeroFranco nCF = new CaballeroFranco("CFranco X " + i, 15, 13, 7, 0, "neutro", true, color,true);
+            this.misSoldados.add(nCF);
             break;
         case 'C':
-            EspadachinReal nER = new EspadachinReal("EReal X " + i, 12, 10, 8, 0, "neutro", true, color,1);
-            this.misSoldados.add(nER);
+            EspadachinTeutonico nET = new EspadachinTeutonico("ETeutonico X " + i, 13, 10, 8, 0, "neutro", true, color,1);
+            this.misSoldados.add(nET);
             break;
         case 'M':
-            EspadachinReal nER = new EspadachinReal("EReal X " + i, 12, 10, 8, 0, "neutro", true, color,1);
-            this.misSoldados.add(nER);
+            EspadachinConquistador nEC = new EspadachinConquistador("EConquistador X " + i, 14, 10, 8, 0, "neutro", true, color,1);
+            this.misSoldados.add(nEC);
             break;
         case 'S':
-            EspadachinReal nER = new EspadachinReal("EReal X " + i, 12, 10, 8, 0, "neutro", true, color,1);
-            this.misSoldados.add(nER);
+            CaballeroMoro nCM = new CaballeroMoro("CMoro X " + i, 13, 13, 7, 0, "neutro", true, color, true);
+            this.misSoldados.add(nCM);
             break;
     }
  }
