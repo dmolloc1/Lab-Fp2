@@ -67,34 +67,37 @@ public class Mapa{
         }
         return false;
     }
-   public void mostrar(){
-        System.out.println("* |   A    |    B   |    C   |    D   |    E   |    F   |    G   |    H   |    I   |    J   |\n"+
-                           "---------------------------------------------------------------------------------------------");
-        for(int i = 0; i < this.mapaR.length; i++){
-                String fila = "|";
-                for(int j = 0; j <this.mapaR[i].length; j++){
-                    if(this.mapaR[i][j] == null){ fila = fila +"  ---  " + "|";
-                    }else{
-                        if(this.mapaR[i][j].size() > 9){
-                            fila += " " + this.mapaR[i][j].getColor() + this.mapaR[i][j].size() + "-";
-                        }
-                        else{fila += "  " + this.mapaR[i][j].getColor() + this.mapaR[i][j].size() + "-";}
-                        
-                        if(this.mapaR[i][j].totalNivelVida() > 9 ){
-                            fila += " " + this.mapaR[i][j].totalNivelVida()  + "\u001B[0m |";
-                        }
-                        if(this.mapaR[i][j].totalNivelVida() > 99 ){
-                            fila += this.mapaR[i][j].totalNivelVida()  + "\u001B[0m |";
-                        }
-                        else {
-                            fila += "  " + this.mapaR[i][j].totalNivelVida()  + "\u001B[0m |";
-                        }
-                    }
+   public void mostrar() {
+    System.out.println("* |   A   |   B   |   C   |   D   |   E   |   F   |   G   |   H   |   I   |   J   |\n" +
+            "-----------------------------------------------------------------------------------");
+    for (int i = 0; i < this.mapaR.length; i++) {
+        String fila = "|";
+        for (int j = 0; j < this.mapaR[i].length; j++) {
+            if (this.mapaR[i][j] == null) {
+                fila = fila + "  ---  |";
+            } else {
+                if (this.mapaR[i][j].size() > 9) {
+                    fila += " " + this.mapaR[i][j].getColor() + this.mapaR[i][j].size() + "-";
+                } else {
+                    fila += "  " + this.mapaR[i][j].getColor() + this.mapaR[i][j].size() + "-";
                 }
-                if(i == 9){
-                    System.out.println((i + 1)  + fila);
+
+                // Modificación para permitir que el nivel de vida llegue a 100
+                if (this.mapaR[i][j].totalNivelVida() > 99) {
+                    fila += this.mapaR[i][j].totalNivelVida() + "\u001B[0m|";
+                } else if (this.mapaR[i][j].totalNivelVida() > 9) {
+                    fila += " " + this.mapaR[i][j].totalNivelVida() + "\u001B[0m|";
+                } else {
+                    fila += "  " + this.mapaR[i][j].totalNivelVida() + "\u001B[0m|";
                 }
-                else System.out.println((i + 1) +" " + fila);
+            }
+        }
+        
+        if (i == 9) {
+            System.out.println((i + 1) + fila);
+        } else {
+                System.out.println((i + 1) + " " + fila);
+            }
         }
     }
     public void rellenar(ArrayList <Ejercito> ejercito){
