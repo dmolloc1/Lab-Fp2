@@ -53,23 +53,23 @@ public class Mapa{
         if(eje.getBono().charAt(0) == this.bonificación) eje.bonificación();    
     }
 
-   /* public boolean posiciónValida(int fila, int columna, Ejercito eje) {
+    public boolean posiciónValida(int fila, int columna, Ejercito eje) {
         if (this.mapaR[fila][columna] == null) {
             this.mapaR[fila][columna] = eje;
             return true;
         }
         return false;
-    }*/
-    public boolean posiciónValida(int fila, int columna, Soldado sold) {
+    }
+    public boolean posiciónValida(int fila, int columna, Soldado s) {
         if (this.mapa[fila][columna] == null) {
-            this.mapa[fila][columna] = sold;
+            this.mapa[fila][columna] = s;
             return true;
         }
         return false;
     }
-   /* public void mostrar(){
-        System.out.println("* |   A   |   B   |   C   |   D   |   E   |   F   |   G   |   H   |   I   |   J   |\n"+
-                           "-----------------------------------------------------------------------------------");
+   public void mostrar(){
+        System.out.println("* |   A    |    B   |    C   |    D   |    E   |    F   |    G   |    H   |    I   |    J   |\n"+
+                           "---------------------------------------------------------------------------------------------");
         for(int i = 0; i < this.mapaR.length; i++){
                 String fila = "|";
                 for(int j = 0; j <this.mapaR[i].length; j++){
@@ -81,10 +81,13 @@ public class Mapa{
                         else{fila += "  " + this.mapaR[i][j].getColor() + this.mapaR[i][j].size() + "-";}
                         
                         if(this.mapaR[i][j].totalNivelVida() > 9 ){
+                            fila += " " + this.mapaR[i][j].totalNivelVida()  + "\u001B[0m |";
+                        }
+                        if(this.mapaR[i][j].totalNivelVida() > 99 ){
                             fila += this.mapaR[i][j].totalNivelVida()  + "\u001B[0m |";
                         }
                         else {
-                            fila += " " + this.mapaR[i][j].totalNivelVida()  + "\u001B[0m |";
+                            fila += "  " + this.mapaR[i][j].totalNivelVida()  + "\u001B[0m |";
                         }
                     }
                 }
@@ -106,7 +109,7 @@ public class Mapa{
             e.setFila(fila);
             e.setColumna(columna);
         }
-    }*/
+    }
 
     public void rellenar(Ejercito ejercito){ //Metodo para rellenar pero de soldados
         int fila = 0, columna = 0;
@@ -143,7 +146,7 @@ public class Mapa{
     }
     //Metodos para mover el tablero de soldados
 
-    public boolean moverSoldado(int fila, int columna, String comando, int ejercito, Ejercito ej1, Ejercito ej2){	
+    public boolean moverSoldado(int fila, int columna, String comando, int num, Ejercito ej1, Ejercito ej2){	
 	    Soldado sold = this.mapa[fila][columna];
         switch (comando) {
             case "A":
@@ -184,10 +187,10 @@ public class Mapa{
                 break;
         }
         System.out.println(fila+ " "+ columna);
-        this.cambiarPosición(sold, fila , columna, ejercito, ej1, ej2);
+        this.cambiarPosición(sold, fila , columna, num, ej1, ej2);
         return false;
     }
-    public  void cambiarPosición(Soldado sold, int fila, int columna, int ejercito, Ejercito ejercito_1, Ejercito ejercito_2){
+    public  void cambiarPosición(Soldado sold, int fila, int columna, int ejercito, Ejercito e1, Ejercito e2){
         Soldado enemigo = this.mapa[fila][columna];
         if (enemigo == null) {
             this.mapa[fila][columna] = sold;
@@ -203,75 +206,32 @@ public class Mapa{
             }
             if(!enemigo.getVive()){
                 if(ejercito == 1){
-                    ejercito_2.remove(enemigo);
+                    e2.remove(enemigo);
                 }
-                else{ejercito_1.remove(enemigo);}
+                else{e1.remove(enemigo);}
             }
         }
         if(ejercito == 1){
             if(!sold.getVive()){
-                ejercito_1.remove(sold);
+                e1.remove(sold);
             }    
         }else{
             if(!sold.getVive()){
-                ejercito_2.remove(sold);
+                e2.remove(sold);
             }    
         }
     }
-   /* public boolean aplicarReglas(Soldado sold, Soldado enemigo){
+    public boolean aplicarReglas(Soldado sold, Soldado enemigo) {
         char s1 = sold.getNombreM().charAt(0);
         char s2 = enemigo.getNombreM().charAt(0);
-        if((s1 == 'C' || s2 == 'C') && (s1 == 'L' || s2 == 'L')){
-            if(s1 == 'C' && sold.getNombreM().compareTo("C ") == 0 ){ return reglas(1, enemigo, sold);}
-            else {
-                if(s2 == 'C' && enemigo.getNombreM().compareTo("C ") == 0 ){ return reglas(1, sold, enemigo);}
-            } 
-        }
-        
-        if((s1 == 'A' || s2 == 'A') && (s1 == 'L' || s2 == 'L')){
-            if(s1 == 'A'){ return reglas(1, sold, enemigo);}
-            else {return reglas(1, enemigo, sold);} 
-        }
 
-        if((s1 == 'C' || s2 == 'C') && (s1 == 'E' || s2 == 'E')){
-            if(s1 == 'C'){ return reglas(1, sold, enemigo);}
-            else {return reglas(1, enemigo, sold);} 
+        if ((s1 == 'C' || s2 == 'C') && (s1 == 'L' || s2 == 'L')) {
+            if (s1 == 'C' && sold.getNombreM().equals("C ")) {
+                return reglas(1, enemigo, sold);
+            } else if (s2 == 'C' && enemigo.getNombreM().equals("C ")) {
+                return reglas(1, sold, enemigo);
+            }
         }
-
-        if((s1 == 'C' || s2 == 'C') && (s1 == 'A' || s2 == 'A')){
-            if(s1 == 'C') {
-                if (sold.getNombreM().compareTo("C ") > 0){ return  reglas(2, sold, enemigo);}
-                else {return reglas(1, sold, enemigo);}
-            }else{if (enemigo.getNombreM().compareTo("C ") > 0){ return  reglas(2, enemigo, sold);}
-                else{  return reglas(1, enemigo, sold);}
-            } 
-        }
-        
-        if((s1 == 'E' || s2 == 'E') && (s1 == 'L' || s2 == 'L')){
-            if(s1 == 'E') {
-                if (sold.getNombreM().compareTo("E ") > 0) {return  reglas(1, sold, enemigo);}
-                else { return reglas(1, sold, enemigo);}
-            }else{if (enemigo.getNombreM().compareTo("E ") > 0){ return  reglas(2, enemigo, sold);}
-                else  {return reglas(1, enemigo, sold);}
-        }
-
-        if((s1 == s2 ) && (s1 == 'E' || s1 == 'C')){
-            if(sold.getNombreM().compareTo(enemigo.getNombreM()) > 0){ return reglas(1, sold, enemigo);}
-            if(sold.getNombre().compareTo(enemigo.getNombreM() != 0)) {return reglas(1, enemigo, sold);} 
-        }
-        return VideoJuego5.definirGanador(sold.getNivelDeVida(), enemigo.getNivelDeVida());
-    }*/
-public boolean aplicarReglas(Soldado sold, Soldado enemigo) {
-    char s1 = sold.getNombreM().charAt(0);
-    char s2 = enemigo.getNombreM().charAt(0);
-
-    if ((s1 == 'C' || s2 == 'C') && (s1 == 'L' || s2 == 'L')) {
-        if (s1 == 'C' && sold.getNombreM().equals("C ")) {
-            return reglas(1, enemigo, sold);
-        } else if (s2 == 'C' && enemigo.getNombreM().equals("C ")) {
-            return reglas(1, sold, enemigo);
-        }
-    }
 
     if ((s1 == 'A' || s2 == 'A') && (s1 == 'L' || s2 == 'L')) {
         if (s1 == 'A') {
@@ -362,7 +322,7 @@ public boolean aplicarReglas(Soldado sold, Soldado enemigo) {
         this.mostrarE();
     }
    //Metodos para mover el tablero de ejercitos
-    public void jugar(int ejercito, ArrayList <Ejercito> reino1, ArrayList <Ejercito> reino2){
+    public void jugar(int num, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){
        
 	    Scanner sc = new Scanner (System.in);
         System.out.print("Posición del ejercito a mover:" + "\nFila: ");
@@ -380,14 +340,14 @@ public boolean aplicarReglas(Soldado sold, Soldado enemigo) {
         while (posValida){
         	System.out.print("\nDirección (I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ ):");
 	     	String dir = sc.next();
-	     	posValida = this.moverEjercito(fila, columna, dir, ejercito, reino1, reino2);
+	     	posValida = this.moverEjercito(fila, columna, dir, num, r1, r2);
         }
         
         this.mapaR[fila][columna]= null;
     }
-    public boolean moverEjercito(int fila, int columna, String comando, int ejercito, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){	
+    public boolean moverEjercito(int fila, int columna, String c, int ejercito, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){	
     	Ejercito eje = this.mapaR[fila][columna];
-        switch (comando) {
+        switch (c) {
             case "A":
                 fila = fila - 1;
                 if(fila < 0){return true;}
@@ -430,19 +390,25 @@ public boolean aplicarReglas(Soldado sold, Soldado enemigo) {
         return false;
     }
 
-    public void cambiarPosición(Ejercito eje, int fila, int columna, int ejercito, ArrayList <Ejercito> reino1, ArrayList <Ejercito> reino2){
+    public void cambiarPosición(Ejercito eje, int fila, int columna, int num, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){
+        Boolean es1 = num == 1 ;
         Ejercito enemigo = this.mapaR[fila][columna];
         if (enemigo == null) {
             this.mapaR[fila][columna] = eje;
         }
 
-       /*else{
-            if(VideoJuego5.ganador(eje, enemigo, fila, columna, ejercito)){
+       else{
+            if(VideoJuego5.batallaEjercitos(eje, enemigo)){
                 mapaR[fila][columna] = eje;
                 eje.avanzar(fila, columna);
-            }
+                if(es1){
+                    r2.remove(enemigo);
+                }else { r1.remove(enemigo); }
+            }else if(es1){
+                r1.remove(eje);
+            }else{r2.remove(enemigo);}
             
-        }*/
+       }
     } 
             
             

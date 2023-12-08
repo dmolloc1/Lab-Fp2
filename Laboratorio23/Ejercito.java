@@ -8,10 +8,11 @@ public class Ejercito{
     private String reino, bonificación;
     private ArrayList <Soldado> misSoldados ;
 
-    public Ejercito(String nom, int n){
+    public Ejercito(String nom, int n, String color){
         this.misSoldados = new ArrayList <>(1);
         this.nombre = nom;
         this.setReino(n);
+        this.color = color;
     }
     public void add(Soldado sold){
         this.misSoldados.add(sold);
@@ -92,9 +93,7 @@ public class Ejercito{
 
     public static void bono(ArrayList <Ejercito> ejercitos){
         for(Ejercito e : ejercitos){
-            for(Soldado s : e.getSoldados()){
-                s.aumentarVida(1);
-            }
+            e.bonificación();
         }
     }
     public void bonificación(){
