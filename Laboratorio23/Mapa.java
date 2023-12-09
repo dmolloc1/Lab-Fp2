@@ -1,8 +1,18 @@
 import java.util.*;
-public class Mapa{
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Mapa extends JFrame{
+    //variables para la interfaz grafica
+    private JTextField filaF;
+    private JTextField columnaF;
+    private JTextField direccionF;
+     
     char bonificación;
     private String territorio;
-    private Ejercito [][] mapaR;
+    protected Ejercito [][] mapaR;
     private Soldado [][] mapa;
     private Scanner sc = new Scanner (System.in);
     public Mapa(){
@@ -68,37 +78,8 @@ public class Mapa{
         return false;
     }
    public void mostrar() {
-    System.out.println("* |   A   |   B   |   C   |   D   |   E   |   F   |   G   |   H   |   I   |   J   |\n" +
-            "-----------------------------------------------------------------------------------");
-    for (int i = 0; i < this.mapaR.length; i++) {
-        String fila = "|";
-        for (int j = 0; j < this.mapaR[i].length; j++) {
-            if (this.mapaR[i][j] == null) {
-                fila = fila + "  ---  |";
-            } else {
-                if (this.mapaR[i][j].size() > 9) {
-                    fila += " " + this.mapaR[i][j].getColor() + this.mapaR[i][j].size() + "-";
-                } else {
-                    fila += "  " + this.mapaR[i][j].getColor() + this.mapaR[i][j].size() + "-";
-                }
-
-                // Modificación para permitir que el nivel de vida llegue a 100
-                if (this.mapaR[i][j].totalNivelVida() > 99) {
-                    fila += this.mapaR[i][j].totalNivelVida() + "\u001B[0m|";
-                } else if (this.mapaR[i][j].totalNivelVida() > 9) {
-                    fila += " " + this.mapaR[i][j].totalNivelVida() + "\u001B[0m|";
-                } else {
-                    fila += "  " + this.mapaR[i][j].totalNivelVida() + "\u001B[0m|";
-                }
-            }
-        }
-        
-        if (i == 9) {
-            System.out.println((i + 1) + fila);
-        } else {
-                System.out.println((i + 1) + " " + fila);
-            }
-        }
+    new Tablero(this);
+  
     }
     public void rellenar(ArrayList <Ejercito> ejercito){
         int fila = 0, columna = 0; 
@@ -302,8 +283,47 @@ public class Mapa{
         }
         return VideoJuego5.definirGanador(sold.getNivelDeVida() + 2, enemigo.getNivelDeVida());
     }
+    public void jugarE(int ejercito, Ejercito ej1, Ejercito ej2) {
+        setTitle("Juego - Mover Soldado");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    public  void jugar(int ejercito, Ejercito ej1, Ejercito ej2){
+        JPanel panel = new JPanel(new GridLayout(4, 2, 5, 5));
+
+        panel.add(new JLabel("Fila:"));
+        filaF = new JTextField();
+        panel.add(filaF);
+
+        panel.add(new JLabel("Columna:"));
+        columnaF = new JTextField();
+        panel.add(columnaF);
+
+        panel.add(new JLabel("Dirección:(I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ )"));
+        direccionF = new JTextField();
+        panel.add(direccionF);
+
+        //convertir valores
+        int fila = Integer.parseInt(filaF.getText()) - 1;
+        int columna = Character.toUpperCase(columnaF.getText().charAt(0)) - 'A';
+        String dir = direccionF.getText();
+
+        JButton moverBtn = new JButton("Mover Soldado");
+        moverBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                moverSoldado(fila, columna, dir, ejercito, ej1, ej2);
+            }
+        });
+        panel.add(moverBtn);
+
+        add(panel, BorderLayout.CENTER);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        this.mapa[fila][columna]= null;
+        this.mostrarE();
+    }
+    /*public  void jugar(int ejercito, Ejercito ej1, Ejercito ej2){
+        
         System.out.print("Posición del soldado a mover:" + "\nFila: ");
         int fila = sc.nextInt() - 1;
         System.out.print("Columna: ");
@@ -323,9 +343,47 @@ public class Mapa{
         }
         this.mapa[fila][columna]= null;
         this.mostrarE();
-    }
+    }*/
    //Metodos para mover el tablero de ejercitos
-    public void jugar(int num, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){
+   public void jugar(int num, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2) {
+        setTitle("Juego - Mover Ejercito");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel(new GridLayout(4, 2, 5, 5));
+
+        panel.add(new JLabel("Fila:"));
+        filaF = new JTextField();
+        panel.add(filaF);
+
+        panel.add(new JLabel("Columna:"));
+        columnaF = new JTextField();
+        panel.add(columnaF);
+
+        panel.add(new JLabel("Dirección:(I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ )"));
+        direccionF = new JTextField();
+        panel.add(direccionF);
+
+        //convertir valores
+        int fila = Integer.parseInt(filaF.getText()) - 1;
+        int columna = Character.toUpperCase(columnaF.getText().charAt(0)) - 'A';
+        String dir = direccionF.getText();
+
+        JButton moverBtn = new JButton("Mover Soldado");
+        moverBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                moverEjercito(fila, columna, dir, num, r1, r2);
+            }
+        });
+        panel.add(moverBtn);
+
+        add(panel, BorderLayout.CENTER);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        this.mapaR[fila][columna]= null;
+    }
+    /*public void jugar(int num, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){
        
 	    Scanner sc = new Scanner (System.in);
         System.out.print("Posición del ejercito a mover:" + "\nFila: ");
@@ -347,7 +405,7 @@ public class Mapa{
         }
         
         this.mapaR[fila][columna]= null;
-    }
+    }*/
     public boolean moverEjercito(int fila, int columna, String c, int ejercito, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){	
     	Ejercito eje = this.mapaR[fila][columna];
         switch (c) {

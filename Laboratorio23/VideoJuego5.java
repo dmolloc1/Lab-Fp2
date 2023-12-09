@@ -1,14 +1,79 @@
 import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 //Laboratorio A Fundamentos 2
 //Autor: Mollo Chuquicaña Dolly Yadhira
-public class VideoJuego5 {
+public class VideoJuego5 extends JFrame{
+    private JTextArea outputArea;
     static ArrayList <Ejercito> reino1, reino2;
     //static Ejercito ejercito_1, ejercito_2 ;
     static Scanner sc = new  Scanner(System.in);
-    static final String turqueza = "\u001B[30m";
-    static final String amarillo = "\u001B[31m";
+    static final String turqueza = "1";
+    static final String amarillo = "2";
+    
+    public VideoJuego5(){
+        super("Juego");
+        
+    }
     public static void main(String[] args) {
         iterativeGameReino();
+    }
+    public static void iterativeGameReino(){
+        VideoJuego5 pantalla = new VideoJuego5();
+        String nR1, nR2;
+        
+        Mapa map = new Mapa();
+        int num1 = (int) (Math.random()*5) + 1;
+        int num2 = (int) (Math.random()*5) + 1;
+        while (num1 == num2){
+            num2 = (int)Math.random()*5 + 1;
+        }
+        reino1 = crearReino(num1, turqueza);
+        nR1 = reino1.get(0).getReino();
+        map.rellenar(reino1);
+            
+        reino2 = crearReino(num2, amarillo);
+        nR2 = reino2.get(0).getReino();
+        map.rellenar(reino2);
+       //Interfaz grafica
+        map.mostrar();
+        pantalla.mostrarMensajes(map);
+        map.bonificación(reino1);
+        map.bonificación(reino2);
+        map.mostrar();
+        pantalla.iniciarJuego(map, nR1, nR2);    
+    } 
+    private void mostrarMensajes(Mapa map) {
+        setTitle("Mensajes del Juego");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JTextArea mensajeTextArea = new JTextArea();
+        mensajeTextArea.setEditable(false);
+        mensajeTextArea.setLineWrap(true);
+        mensajeTextArea.setWrapStyleWord(true);
+
+        // Mostrar los mensajes en diferentes líneas
+        String mensaje1 = "*** EMPEZANDO EL JUEGO ***";
+        String mensaje2 = "\n- El tipo de terreno del mapa es " + map.getTerritorio() +
+                "\n-------------- Se procederá a efectuar la bonificación --------";
+        String mensaje3 = "\nEl reino 1 es: " + reino1.get(0).getReino() +
+                "\nEl reino 2 es: " + reino2.get(0).getReino();
+
+
+        JScrollPane scrollPane = new JScrollPane(mensajeTextArea);
+        scrollPane.setPreferredSize(new Dimension(400, 300));
+
+        add(scrollPane);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+      
+        mensajeTextArea.setText(mensaje1 + mensaje2 + mensaje3);
+    }
+    public static void juegoGrafico(){
+        
     }
     public static boolean batallaEjercitos(Ejercito ejercito_1, Ejercito ejercito_2){
             Mapa map = new Mapa("Ejercito");
@@ -26,13 +91,67 @@ public class VideoJuego5 {
         boolean gano = definirGanador(my.totalNivelVida(), enemigo.totalNivelVida());
         if(gano) System.out.println("--------- GANO EL EJERCITO 1 --------");
         else  System.out.println("--------- GANO EL EJERCITO 2 --------");
-
     }
+    public void iniciarJuego(Mapa mapa, String nR1, String nR2) {
+        this.outputArea.append("El juego está comenzando..." + "\n");
+        
+        boolean continuar = true;
+
+        while (continuar && reino1.size() > 0 && reino2.size() > 0) {
+            mapa.jugar(1, reino1, reino2);
+            if (reino1.size() == 0) {
+                this.outputArea.append("~~~~~~~~~~~~~~~~~~~~~ GANO Jugador 2 ~~~~~~~~~~~~~~~~~\n");
+                break;
+            } else {
+                this.outputArea.append("Desea salir (y/n)\n");
+            }
+
+            continuar = reino1.size() > 0 && reino2.size() > 0;
+            if (!continuar) break;
+
+            mapa.jugar(2, reino1, reino2);
+            if (reino2.size() == 0) {
+                this.outputArea.append("~~~~~~~~~~~~~~~~~~~~~ GANO Jugador 1 ~~~~~~~~~~~~~~~~~\n");
+                break;
+            } else {
+                this.outputArea.append("Desea salir (y/n)\n");
+            }
+        }
+    }
+
+    /*public static void startGame(Mapa mapa, String nR1, String nR2){
+        boolean continuar = true;
+        while(continuar && reino1.size() > 0 && reino2.size() > 0){
+            System.out.println("\nTurno del primer jugador(celeste) ");
+            mapa.jugar(1, reino1, reino2);
+            mapa.mostrar();
+            if(reino1.size() == 0 || reino2.size() == 0){
+                if(reino1.size() == 0){
+            	    System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO "+ nR2 + " ~~~~~~~~~~~~~~~~~");
+                    break;
+                }else {
+                    System.out.println("~~~~~~~~~~~~~~~~~~~ GANO "+ nR1+" ~~~~~~~~~~~~~~~~~~~~~~~~");
+                    break;
+		        }
+	        }
+            System.out.print("Desea salir (y/n)");
+            continuar = sc.next().charAt(0) == 'n';
+            if(!continuar) break;
+            System.out.println("\nTurno del segundo jugador(amarillo) ");
+            mapa.jugar(2, reino1, reino2);
+            mapa.mostrar();
+            System.out.print("\nDesea salir (y/n): ");
+            continuar = sc.next().charAt(0) == 'n';
+        } 
+        if(reino2.size() == 0){
+            System.out.println("~~~~~~~~~~~~~~~~~~~ GANO "+ nR1+" ~~~~~~~~~~~~~~~~~~~~~~~~");
+        }
+    }*/
     public static  boolean startGame(Mapa map, Ejercito ejercito_1,Ejercito ejercito_2){ 
         boolean continuar = true;
         while (ejercito_1.size() > 0 && ejercito_2.size() > 0  && continuar){    
             System.out.println("\nTurno del primer jugador(celeste) ");
-            map.jugar(1, ejercito_1, ejercito_2);
+            //map.jugar(1, ejercito_1, ejercito_2);
             System.out.println("Cantidad de soldados del Ejercito 1: " + ejercito_1.size());
             System.out.println("Cantidad de soldados del Ejercito 2: " + ejercito_2.size());
             if(ejercito_1.size() == 0 || ejercito_2.size() == 0){
@@ -48,7 +167,7 @@ public class VideoJuego5 {
             continuar = sc.next().charAt(0) == 'n';
             if(!continuar) break;
             System.out.println("\nTurno del segundo jugador(amarillo) ");
-            map.jugar(2, ejercito_1, ejercito_2);
+            //map.jugar(2, ejercito_1, ejercito_2);
             System.out.println("Cantidad de soldados del Ejercito 1: " + ejercito_1.size());
             System.out.println("Cantidad de soldados del Ejercito 2: " + ejercito_2.size());
             System.out.print("\nDesea salir (y/n): ");
@@ -84,67 +203,8 @@ public class VideoJuego5 {
     		if (word1.compareTo(word2) <= 0) return false;
     		return true;
     }
-    public static void iterativeGameReino(){
-        String nR1, nR2;
-        boolean continuar = true;
-        while(continuar){
-            Mapa map = new Mapa();
-            int num1 = (int) (Math.random()*5) + 1;
-            int num2 = (int) (Math.random()*5) + 1;
-            while (num1 == num2){
-                num2 = (int)Math.random()*5 + 1;
-            }
-            System.out.println(num1 + " " + num2 );
-            reino1 = crearReino(num1, turqueza);
-            nR1 = reino1.get(0).getReino();
-            map.rellenar(reino1);
-            
-            reino2 = crearReino(num2, amarillo);
-            nR2 = reino2.get(0).getReino();
-            map.rellenar(reino2);
-            map.mostrar();
-            System.out.println("El tipo de terreno del mapa es " +map.getTerritorio() + "\nSe procedera a efectuar la bonificación");
-            System.out.println("El reino 1 es :"+ reino1.get(0).getReino()+ "\nEl reino 2 es :" + reino2.get(0).getReino());
-            map.bonificación(reino1);
-            map.bonificación(reino2);
-            map.mostrar();
-            startGame(map, nR1, nR2);
-            System.out.println("Iniciar una nueva partida (y/n) :");
-            continuar = sc.next().charAt(0) == 'y';
-        }
-    } 
-    public static void startGame(Mapa mapa, String nR1, String nR2){
-        boolean continuar = true;
-        while(continuar && reino1.size() > 0 && reino2.size() > 0){
-            System.out.println("\nTurno del primer jugador(celeste) ");
-            mapa.jugar(1, reino1, reino2);
-            mapa.mostrar();
-            System.out.println("Cantidad de ejercitos de " + nR1+" :" + reino1.size());
-            System.out.println("Cantidad de ejercitos de " + nR2 + " :" + reino2.size());
-            if(reino1.size() == 0 || reino2.size() == 0){
-                if(reino1.size() == 0){
-            	    System.out.println("~~~~~~~~~~~~~~~~~~~~~ GANO "+ nR2 + " ~~~~~~~~~~~~~~~~~");
-                    break;
-                }else {
-                    System.out.println("~~~~~~~~~~~~~~~~~~~ GANO "+ nR1+" ~~~~~~~~~~~~~~~~~~~~~~~~");
-                    break;
-		        }
-	        }
-            System.out.print("Desea salir (y/n)");
-            continuar = sc.next().charAt(0) == 'n';
-            if(!continuar) break;
-            System.out.println("\nTurno del segundo jugador(amarillo) ");
-            mapa.jugar(2, reino1, reino2);
-            mapa.mostrar();
-            System.out.println("Cantidad de ejercitos de " + nR1+" :" + reino1.size());
-            System.out.println("Cantidad de ejercitos de " + nR2 + " :"+ reino2.size());
-            System.out.print("\nDesea salir (y/n): ");
-            continuar = sc.next().charAt(0) == 'n';
-        } 
-        if(reino2.size() == 0){
-            System.out.println("~~~~~~~~~~~~~~~~~~~ GANO "+ nR1+" ~~~~~~~~~~~~~~~~~~~~~~~~");
-        }
-    }
+    
+    
     
     public static ArrayList <Ejercito> crearReino(int num, String color){
         ArrayList <Ejercito> reino = new ArrayList<>();
