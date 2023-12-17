@@ -1,12 +1,4 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
-
-import javax.swing.JOptionPane;
 public class Ejercito{
     Scanner sc = new Scanner(System.in);
     public static final int MAX_SIZE = 10;
@@ -168,63 +160,64 @@ public class Ejercito{
 
    public void datosEjercito(){
         int comando = 0;
-    do {
-        String input = JOptionPane.showInputDialog(
-            "Datos del Ejército " + this.getNombre() + "\n" +
-            "1. Total de vida del ejército\n" +
-            "2. Promedio de vida\n" +
-            "3. Mostrar Soldados\n" +
-            "4. Ordenamiento por Burbuja\n" +
-            "5. Ordenamiento por Selección\n" +
-            "6. Soldados con mayor nivel de vida\n" +
-            "7. Salir\n" +
-            "Elección:", this.getNombre()
-        );
-
-        try {
-            comando = Integer.parseInt(input);
-            switch (comando) {
+        do{
+            System.out.print("\n1. Total de vida del ejercito\n2. Promedio de vida\n3. Mostrar Soldados"+
+        "\n4. Ordenamiento por Burbuja\n5. Ordenamiento por Selección\n6. Soldados con mayor nivel de vida\n7. Salir\n");
+            System.out.print("Elección: ");
+            comando = sc.nextInt();
+            switch(comando){
                 case 1:
-                    JOptionPane.showMessageDialog(null, String.format(
-                        "*** El total de nivel de vida del ejército %s es : %d",
-                        this.getNombre(),
-                        this.totalNivelVida()
-                    ));
+                    System.out.printf("\n*** El total de nivel de vida del ejercito %s es : %d\n", this.getNombre(), this.totalNivelVida());  
                     break;
                 case 2:
-                    JOptionPane.showMessageDialog(null, String.format(
-                        "*** El promedio de nivel de vida del ejército %s es : %d",
-                        this.getNombre(),
-                        this.promedioNivelVida()
-                    ));
+                    System.out.printf("\n*** El promedio de nivel de vida del ejercito %s es : %d\n", this.getNombre(), this.promedioNivelVida());
                     break;
                 case 3:
-                    JOptionPane.showMessageDialog(null, String.format(
-                        "~ ~ ~ Soldados de %s ~ ~ ~\n%s",
-                        this.getNombre(),
-                        this.toString()
-                    ));
+                    System.out.printf("\n~ ~ ~ Soldados de %s ~ ~ ~", this.getNombre());
+                    System.out.println("\n" + this.toString()+ "\n"); 
                     break;
                 case 4:
-                    this.ordenarPorNivelBurbuja();
-                    JOptionPane.showMessageDialog(null, "       ~MÉTODO BURBUJA~\n" + this.toString());
+                    this.ordenarPorNivelBurbuja();//Ordenando el ejercito con el método Burbuja
+        	        System.out.println("\n       ~MÉTODO BURBUJA~");
+                    System.out.println(this.toString() + "\n"); 
                     break;
                 case 5:
-                    this.ordenarPorNivelSelección();
-                    JOptionPane.showMessageDialog(null, "       ~MÉTODO DE SELECCIÓN~\n" + this.toString());
+                    this.ordenarPorNivelSelección();//Ordenando el ejercito con el método Burbuja
+        	        System.out.println("\n       ~MÉTODO DE SELLECIÓN~");
+                    System.out.println( this.toString()+ "\n"); 
                     break;
                 case 6:
+                    System.out.println("\n*** El soldado con mayor nivel de vida del ejercito es: \n" );
                     this.ordenarPorNivelSelección();
-                    JOptionPane.showMessageDialog(null, "*** El soldado con mayor nivel de vida del ejército es:\n\n" + this.get(this.size() - 1).mostrar());
+                    System.out.println( this.get(this.size() - 1).mostrar());
                     break;
             }
-        } catch (NumberFormatException e) {
-            // Manejo de entrada inválida
-            JOptionPane.showMessageDialog(null, "Por favor, ingresa un número válido.");
+        }while(comando != 7);
+    }
+//Metodos para editar al soldado
+   /* public void crearSoldado( Soldado [][] tablero, String color){
+        if(this.size() + 1 <= Soldado.MAX_SIZE){
+            Soldado nuevo = new Soldado("Neutro", true);
+            System.out.print("Nombre del Soldado:");
+            nuevo.setNombre(sc.next());
+            System.out.print("\nNivel de vida (1 - 5):");
+            nuevo.setNivelDeVida(sc.nextInt());
+            System.out.print("\nNivel de ataque(1 - 5):");
+            nuevo.setNivelAtaque(sc.nextInt());
+            System.out.print("\nNivel de defensa(1 - 5):");
+            nuevo.setNivelDefensa(sc.nextInt());
+            System.out.print("\nFila");
+            int fila = sc.nextInt() - 1;
+            System.out.print("\nColumna:");
+            int columna = Integer.valueOf(sc.next().toUpperCase().charAt(0)) - 65;
+            tablero[fila][columna] = nuevo;
+            nuevo.setFila(fila);
+            nuevo.setColumna(columna);
+            nuevo.setColor(color);
+            this.add(nuevo);        
         }
-    } while (comando != 7);
-}
-
+    }
+*/
     public void modificarSoldado(Soldado soldado){
         int opcion;
         do {
@@ -269,17 +262,17 @@ public class Ejercito{
         this.misSoldados.remove(sold);
     }
 //Metodos para saber caracteristicas del ejercito
-    public File totalNivelVida() {
-    int total = 0;
-    for (Soldado soldado : this.misSoldados) {
-        total += soldado.getNivelDeVida();
+    public int totalNivelVida() {
+        int total = 0;
+        for (Soldado soldado : this.misSoldados) {
+            total += soldado.getNivelDeVida();
+        }
+        this.totalNivelVida = total;
+        return total;
     }
-    this.totalNivelVida = total;
-    return escribirATexto(1, "El total es: " + total);
-}
 
     public int promedioNivelVida(){
-        return this.totalNivelVida/ this.size();
+        return this.totalNivelVida()/ this.size();
     }
     public Soldado get(int n){
         return this.misSoldados.get(n);
@@ -324,29 +317,5 @@ public class Ejercito{
       		}
       	    this.misSoldados.set((j + 1), pivot);
 	    }
-    }
-//Metodos para escribir archivos
-    public File escribirATexto(int opcion, String contenido) {
-        String nombre = "Datos_" + opcion + ".txt";
-        File archivo = new File(nombre);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(archivo))) {
-            writer.write(contenido);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return archivo;
-    }
-//LEer
-    public String leerATexto(String nombreArchivo) {
-        StringBuilder contenido = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                contenido.append(linea).append("\n");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return contenido.toString();
     }
 }

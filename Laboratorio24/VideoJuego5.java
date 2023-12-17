@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 //Autor: Mollo Chuquicaña Dolly Yadhira
 public class VideoJuego5 extends JFrame{
     private JTextArea outputArea;
-    private JLabel mensajeLabel;
     static ArrayList <Ejercito> reino1, reino2;
     //static Ejercito ejercito_1, ejercito_2 ;
     static Scanner sc = new  Scanner(System.in);
@@ -16,14 +15,13 @@ public class VideoJuego5 extends JFrame{
     
     public VideoJuego5(){
         super("Juego");
-        setSize(300, 200);
         
     }
     public static void main(String[] args) {
         iterativeGameReino();
     }
     public static void iterativeGameReino(){
-        VideoJuego5 juego = new VideoJuego5();
+        VideoJuego5 pantalla = new VideoJuego5();
         String nR1, nR2;
         
         Mapa map = new Mapa();
@@ -32,40 +30,24 @@ public class VideoJuego5 extends JFrame{
         while (num1 == num2){
             num2 = (int)Math.random()*5 + 1;
         }
-        reino1 = crearReino(1, num1, turqueza);
+        reino1 = crearReino(num1, turqueza);
         nR1 = reino1.get(0).getReino();
         map.rellenar(reino1);
             
-        reino2 = crearReino(2, num2, amarillo);
+        reino2 = crearReino(num2, amarillo);
         nR2 = reino2.get(0).getReino();
         map.rellenar(reino2);
        //Interfaz grafica
-        juego.mensajesJuego(map, reino1,reino2, nR1, nR2);
-        
-        //map.mostrar();
-        //map.jugar(1, reino1, reino2);
-        //pantalla.iniciarJuego(map, nR1, nR2);    
-    } 
-    public void empezarPartida(Mapa map, String nR1, String nR2){
-        VideoJuego5 juego = new VideoJuego5();
-        JButton bEmpezar = new JButton("Empezar Partida");
-        bEmpezar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                iniciarJuego(map, nR1, nR2);
-            }
-        });
-        juego.add(bEmpezar);
-        juego.setLocationRelativeTo(null);
-        juego.setVisible(true);
-    }
-    public void mensajesJuego(Mapa map, ArrayList <Ejercito> r1, ArrayList<Ejercito> r2,String nR1, String nR2) {
-        setTitle("Mensajes del Juego");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        Tablero tab = map.mostrar();
-
+        map.mostrar();
+        pantalla.mostrarMensajes(map);
         map.bonificación(reino1);
         map.bonificación(reino2);
+        map.mostrar();
+        pantalla.iniciarJuego(map, nR1, nR2);    
+    } 
+    private void mostrarMensajes(Mapa map) {
+        setTitle("Mensajes del Juego");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JTextArea mensajeTextArea = new JTextArea();
         mensajeTextArea.setEditable(false);
@@ -79,64 +61,20 @@ public class VideoJuego5 extends JFrame{
         String mensaje3 = "\nEl reino 1 es: " + reino1.get(0).getReino() +
                 "\nEl reino 2 es: " + reino2.get(0).getReino();
 
-        mensajeTextArea.setText(mensaje1 + mensaje2 + mensaje3);
 
         JScrollPane scrollPane = new JScrollPane(mensajeTextArea);
-        scrollPane.setPreferredSize(new Dimension(400, 120));
+        scrollPane.setPreferredSize(new Dimension(400, 300));
 
-        // Agregar botón
-        JButton bBonificacion = new JButton("Aplicar bonificación");
-        bBonificacion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                tab.dispose();
-                map.mostrar();
-                dispose();
-                empezarPartida(map, nR1, nR2);
-            }
-        });
-        
-        JPanel panelCentral = new JPanel();
-        panelCentral.setLayout(new BorderLayout());
-        panelCentral.add(scrollPane, BorderLayout.CENTER);
-        panelCentral.add(bBonificacion, BorderLayout.SOUTH);
-
-        add(panelCentral);
-
-        pack(); // Ajusta el tamaño del frame según los componentes agregados
+        add(scrollPane);
+        pack();
         setLocationRelativeTo(null);
         setVisible(true);
+      
+        mensajeTextArea.setText(mensaje1 + mensaje2 + mensaje3);
+    }
+    public static void juegoGrafico(){
         
     }
-    /*public void menu(){
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 200);
-        setLayout(new GridLayout(2, 1));
-
-        JButton botonEmpezarJuego = new JButton("Empezar Juego");
-        botonEmpezarJuego.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Lógica para empezar el juego
-                System.out.println("El juego ha empezado.");
-            }
-        });
-
-        JButton botonDatosEjercito = new JButton("Datos de Ejército");
-        botonDatosEjercito.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String input = JOptionPane.showInputDialog("Ingrese el ejercito (1 o 2):");
-
-                if (input != null && (input.equals("1") || input.equals("2"))) {
-                    int num = Integer.parseInt(input);
-                    if(num == 1) reino1.datosEjercito(); // Llama al método ejercito(num) con el número ingresado
-                } else {
-                    JOptionPane.showMessageDialog(null, "Ingrese un número válido (1 o 2).");
-                }
-            }
-        });
-
-        add(botonEmpezarJuego);
-        add(botonDatosEjercito);
-    }*/
     public static boolean batallaEjercitos(Ejercito ejercito_1, Ejercito ejercito_2){
             Mapa map = new Mapa("Ejercito");
             map.rellenar(ejercito_1);
@@ -155,31 +93,29 @@ public class VideoJuego5 extends JFrame{
         else  System.out.println("--------- GANO EL EJERCITO 2 --------");
     }
     public void iniciarJuego(Mapa mapa, String nR1, String nR2) {
+        this.outputArea.append("El juego está comenzando..." + "\n");
+        
         boolean continuar = true;
 
         while (continuar && reino1.size() > 0 && reino2.size() > 0) {
-            //mensajeLabel.setText("Turno del primer jugador(celeste)");
-            continuar = mapa.jugar(1, reino1, reino2);
-            mapa.mostrar();
-
-            if (reino1.size() == 0 || reino2.size() == 0) {
-                if (reino1.size() == 0) {
-                    mensajeLabel.setText("~~~~~~~~~~~~~~~~~~~~~ GANO " + nR2 + " ~~~~~~~~~~~~~~~~~");
-                    break;
-                } else {
-                    mensajeLabel.setText("~~~~~~~~~~~~~~~~~~~ GANO " + nR1 + " ~~~~~~~~~~~~~~~~~~~~~~~~");
-                    break;
-                }
+            mapa.jugar(1, reino1, reino2);
+            if (reino1.size() == 0) {
+                this.outputArea.append("~~~~~~~~~~~~~~~~~~~~~ GANO Jugador 2 ~~~~~~~~~~~~~~~~~\n");
+                break;
+            } else {
+                this.outputArea.append("Desea salir (y/n)\n");
             }
 
+            continuar = reino1.size() > 0 && reino2.size() > 0;
             if (!continuar) break;
-            //mensajeLabel.setText("Turno del segundo jugador(amarillo)");
-            continuar = mapa.jugar(2, reino1, reino2);
-            mapa.mostrar();
-            pack(); // Ajusta el tamaño del frame según los componentes agregados
-            setLocationRelativeTo(null);
-            setVisible(true);
-            
+
+            mapa.jugar(2, reino1, reino2);
+            if (reino2.size() == 0) {
+                this.outputArea.append("~~~~~~~~~~~~~~~~~~~~~ GANO Jugador 1 ~~~~~~~~~~~~~~~~~\n");
+                break;
+            } else {
+                this.outputArea.append("Desea salir (y/n)\n");
+            }
         }
     }
 
@@ -270,12 +206,12 @@ public class VideoJuego5 extends JFrame{
     
     
     
-    public static ArrayList <Ejercito> crearReino(int nombre, int n, String color){
+    public static ArrayList <Ejercito> crearReino(int num, String color){
         ArrayList <Ejercito> reino = new ArrayList<>();
         int armyLength = (int)(Math.random() * Ejercito.MAX_SIZE + 1);
 	    
         for (int i = 0; i < armyLength; i++) {
-           	Ejercito nuevo = new Ejercito("Ejercito_"+ nombre + "X"+ (i + 1), n, color);
+           	Ejercito nuevo = new Ejercito("Ejercito_"+ num + "X"+ (i + 1), num, color);
             nuevo.ingresarDatosAleatorio(color);
             reino.add(nuevo);
 	    }
