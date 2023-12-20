@@ -9,7 +9,9 @@ class BattleGame{
         this.c2 = new Castle("");
         this.map = new Map();
     }
+    public void startGame(){
 
+    }
     //main
     public static void main(String[] args){
 
