@@ -1,13 +1,24 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 class Grafic extends JFrame{
     
     public static void menu(){
         JFrame menu = new JFrame("Menu de instrucciónes:");
-        menu.setSize(300,200);
+        menu.setSize(500,200);
         menu.setLayout (new BorderLayout());
         menu.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+       
+        menu.setLocationRelativeTo(null);
+        menu.add(contenido(), BorderLayout.CENTER);
+        menu.add(empezar(), BorderLayout.SOUTH );
+        menu.setVisible(true);
+
+    }
+    public static JTextArea contenido(){
         String mensaje= "El juego esta por comenzar...\n"+
         "Cada jugador se el asignara un castillo con un general a elección del jugador\n"+
         "OBJETIVO: Conquistar el castillo del enemigo\n"+
@@ -18,10 +29,20 @@ class Grafic extends JFrame{
         JTextArea texto = new JTextArea();
         texto.setText(mensaje);
         texto.setEditable(false);
-        menu.setLocationRelativeTo(null);
-        menu.add(texto, BorderLayout.NORTH);
-        menu.setVisible(true);
+        return texto;
+    }
 
+    public static JButton empezar(){
+        JButton empezar = new JButton("Empezar");
+        empezar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Hola");
+            }
+            
+        });
+        return empezar;
     }
     public static void main(String[] args){
         menu();
