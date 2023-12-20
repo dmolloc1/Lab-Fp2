@@ -23,32 +23,40 @@ public class Tablero extends JFrame {
         scrollPane.setPreferredSize(new Dimension(500, 80));
         add(scrollPane, BorderLayout.NORTH);
 
-        // Panel para etiquetas de filas (A-J)
-        JPanel letrasPanel = new JPanel(new GridLayout(10, 1));
-        letrasPanel.setPreferredSize(new Dimension(50, 500));
-        for (char c = 'A'; c <= 'J'; c++) {
-            JLabel label = new JLabel(Character.toString(c));
-            label.setHorizontalAlignment(SwingConstants.CENTER);
-            letrasPanel.add(label);
-        }
-        add(letrasPanel, BorderLayout.WEST);
-
-        // Panel para etiquetas de columnas (1-10)
-        JPanel numerosPanel = new JPanel(new GridLayout(1, 10));
+        JPanel numerosPanel = new JPanel(new GridLayout(10, 1));
         for (int i = 1; i <= 10; i++) {
             JLabel label = new JLabel(Integer.toString(i));
             label.setHorizontalAlignment(SwingConstants.CENTER);
             numerosPanel.add(label);
         }
-        add(numerosPanel, BorderLayout.NORTH);
+        add(numerosPanel, BorderLayout.WEST);
+
+        // Panel para etiquetas de columnas (A-J)
+        JPanel letrasPanel = new JPanel(new GridLayout(1, 10));
+        for (char c = 'A'; c <= 'J'; c++) {
+            JLabel label = new JLabel(Character.toString(c));
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            letrasPanel.add(label);
+        }
+        add(letrasPanel, BorderLayout.NORTH);
 
         // Panel para el tablero
         panel = new JPanel(new GridLayout(10, 10));
         crearTablero(map);
         add(panel, BorderLayout.CENTER);
+        
 
         setVisible(true);
     }
+    
+   /*  private void tableroMover(Mapa map){
+
+        Tablero tablero = new Tablero(map);
+        JButton bMover = new JButton("Mover");
+        bMover.addActionListener(new ActionListener() {
+            
+        })*/
+   // }
 
     private void crearTablero(Mapa map) {
         Color color1 = Color.YELLOW;
@@ -94,8 +102,8 @@ public class Tablero extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
+   /*  public static void main(String[] args) {
         Mapa mapa = new Mapa();
         new Tablero(mapa);
-    }
+    }*/
 }

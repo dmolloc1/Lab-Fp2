@@ -269,13 +269,13 @@ public class Ejercito{
         this.misSoldados.remove(sold);
     }
 //Metodos para saber caracteristicas del ejercito
-    public File totalNivelVida() {
+    public int totalNivelVida() {
     int total = 0;
     for (Soldado soldado : this.misSoldados) {
         total += soldado.getNivelDeVida();
     }
     this.totalNivelVida = total;
-    return escribirATexto(1, "El total es: " + total);
+    return total;
 }
 
     public int promedioNivelVida(){
