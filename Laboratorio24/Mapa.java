@@ -77,8 +77,8 @@ public class Mapa extends JFrame{
         }
         return false;
     }
-   public void mostrar() {
-    new Tablero(this);
+   public Tablero mostrar() {
+    return new Tablero(this);
   
     }
     public void rellenar(ArrayList <Ejercito> ejercito){
@@ -284,8 +284,9 @@ public class Mapa extends JFrame{
         return VideoJuego5.definirGanador(sold.getNivelDeVida() + 2, enemigo.getNivelDeVida());
     }
     public void jugarE(int ejercito, Ejercito ej1, Ejercito ej2) {
-        setTitle("Juego - Mover Soldado");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Mapa mJuego = new Mapa();
+        mJuego.setTitle("Juego - Mover Soldado");
+        mJuego.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel(new GridLayout(4, 2, 5, 5));
 
@@ -314,11 +315,11 @@ public class Mapa extends JFrame{
         });
         panel.add(moverBtn);
 
-        add(panel, BorderLayout.CENTER);
+        mJuego.add(panel, BorderLayout.CENTER);
 
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
+        mJuego.pack();
+        mJuego.setLocationRelativeTo(null);
+        mJuego.setVisible(true);
         this.mapa[fila][columna]= null;
         this.mostrarE();
     }
@@ -345,43 +346,23 @@ public class Mapa extends JFrame{
         this.mostrarE();
     }*/
    //Metodos para mover el tablero de ejercitos
-   public void jugar(int num, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2) {
-        setTitle("Juego - Mover Ejercito");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel panel = new JPanel(new GridLayout(4, 2, 5, 5));
-
-        panel.add(new JLabel("Fila:"));
-        filaF = new JTextField();
-        panel.add(filaF);
-
-        panel.add(new JLabel("Columna:"));
-        columnaF = new JTextField();
-        panel.add(columnaF);
-
-        panel.add(new JLabel("Dirección:(I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ )"));
-        direccionF = new JTextField();
-        panel.add(direccionF);
-
-        //convertir valores
-        int fila = Integer.parseInt(filaF.getText()) - 1;
-        int columna = Character.toUpperCase(columnaF.getText().charAt(0)) - 'A';
-        String dir = direccionF.getText();
-
-        JButton moverBtn = new JButton("Mover Soldado");
-        moverBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                moverEjercito(fila, columna, dir, num, r1, r2);
-            }
-        });
-        panel.add(moverBtn);
-
-        add(panel, BorderLayout.CENTER);
-
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        this.mapaR[fila][columna]= null;
+   public boolean jugar(int num, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2) {
+        String filaInput = JOptionPane.showInputDialog("Fila:");
+        String columnaInput = JOptionPane.showInputDialog("Columna:");
+        String direccionInput = JOptionPane.showInputDialog("Dirección:(I = ⬅ , D = ➡ , A = ⬆ , B = ⬇ , DIS = ⬉ , DII = ⬋, DDS = ⬈, DDI = ⬊ )");
+        String continuar ;
+        if (filaInput != null && columnaInput != null && direccionInput != null) {
+            int fila = Integer.parseInt(filaInput) - 1;
+            int columna = Character.toUpperCase(columnaInput.charAt(0)) - 'A';
+            String dir = direccionInput;
+            moverEjercito(fila, columna, dir, num, r1, r2);
+            this.mapaR[fila][columna] = null;
+        } 
+        continuar = JOptionPane.showInputDialog("¿Desea continuar?(y/n)");
+        if (continuar.equalsIgnoreCase("n")) {
+            return false;
+        }    
+        return true;
     }
     /*public void jugar(int num, ArrayList <Ejercito> r1, ArrayList <Ejercito> r2){
        
