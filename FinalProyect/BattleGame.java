@@ -10,12 +10,15 @@ class BattleGame{
         this.map = new Map();
     }
     public void startGame(){
-        this.map.print();
+ 
+        map.builtMap();
+        map.print();
 
     }
     //main
     public static void main(String[] args){
-
+        BattleGame bg = new BattleGame();
+        bg.startGame();
     }
 
 }

@@ -1,6 +1,7 @@
 class Castle{
     private int points;
-    private String warrior;//Nombre del conquistador otro nombre alternativo
+    private String warrior;
+    //Nombre del conquistador otro nombre alternativo
 
     public Castle(String w){
         this.warrior = w;
@@ -13,9 +14,9 @@ class Castle{
     public int getPoints(int p){
         return this.points;
     }
-    /*
-    public void buyItems(Item i){
-        if(i > this.points)
-    }*/
+    
+    public void buyItems(){
+        //if(i > this.points)
+    }
 
 }
