@@ -10,6 +10,7 @@ class BattleGame{
         this.map = new Map();
     }
     public void startGame(){
+        this.map.print();
 
     }
     //main

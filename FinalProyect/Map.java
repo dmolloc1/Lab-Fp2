@@ -1,14 +1,20 @@
 import java.util.*;
 class Map{
     private Land land;//es un picture
-    private ArrayList<Land> field;
+    private Land [] field;
     public Map(){ 
+        this.field = Land.createLands();
     }
-
-    private void builtMap(){
+    public void print(){
+        //Para que sea variable
+        //tambien puede 
+    }
+    public void builtMap(){
         //Logica para unir el arrat de Picture
+        
+        
     }
-    private void levelUp(Castle c, Land l){
+    public void levelUp(Castle c, Land l){
         //Logicca para agregar un item
     }
 }
