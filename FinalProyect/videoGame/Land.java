@@ -1,14 +1,15 @@
+package videoGame;
 import java.util.*;
+
 import graphic.*;
 class Land {
     public static int SIZE_MAP = 16;
-    private static Land[] map;
+    private static ArrayList<Land> map;
     private Image land;
     private int points;
     private Castle castle;
-    public Land(int n, Castle c){
+    public Land(int n){
         super();
-        this.castle = c;
         this.points = 10;
         switch (n) {
             case 1:
@@ -64,14 +65,24 @@ class Land {
                 break;
         }
     }
+    public void setImage(Image i){
+        this.land = i;
+    }
+    public void setCastle(Castle c){
+        this.castle = c;
+    }
+    public Castle getCastle(){
+        return this.castle;
+    }
     // Instancia el arreglo de Lands
-    public static Land [] createLands(){
-        map = new Land [SIZE_MAP];
-        for(int i = 0; i < SIZE_MAP; i++){
-            map[i] = new Land(i, null);
+   public static ArrayList<Land> createLands(){
+        map = new ArrayList<>();
+        for(int i = 1; i <= SIZE_MAP; i++){
+            map.add(new Land(i));
         }
         return map;
-    }
+
+    } 
     public Image getImage(){
         return land;
     }

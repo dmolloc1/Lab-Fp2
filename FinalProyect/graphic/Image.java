@@ -1,11 +1,18 @@
 package graphic;
+import java.awt.Color;
 import java.util.Iterator;
+
 
 public class Image implements Iterable<String>{
 	private String[] img;
 	private int width = 0;
 	public final int length;
 	
+	public static void main(String[] args) {
+		Image a = Image.part10().colorImage(1);
+		Graphics g = new Graphics(a);
+		g.print();
+	}
 	private Image(String[] img){
 		this.img = img;
 		length = this.img.length;
@@ -16,13 +23,12 @@ public class Image implements Iterable<String>{
  
 	//Colores, 
 	
-	private byte invColor(byte c){
-		byte ic;
+	private byte changeColor(byte c, int e){
+		byte ic = c;
 		switch (c) {
-		  case '_': ic = '='; break;
-		  case '=': ic = '_'; break;
-		  case '.': ic = '@'; break;
-		  case '@': ic = '.'; break;
+		  case '*': if(e == 1) {ic = '#';}else if(e == 2) {ic = '&';} break;
+		  case '#': if(e == 1) {ic = '#';}else if(e == 2) {ic = '&';} break;
+		  case '&': if(e == 1) {ic = '#';}else if(e == 2) {ic = '&';} break;
 		  default: ic = c; break;
 		}
 		return ic;
@@ -40,20 +46,20 @@ public class Image implements Iterable<String>{
 	}
 
 	
-	/*public Image invertir(){
+	public Image colorImage(int num){
 		String[] img = new String[this.img.length];
 		for (int i = 0; i < this.img.length; i++) {
 			char [] line = new char[width];
 			for (int j = 0; j < width; j++) {
-				line[j] = (char)invColor((byte)this.img[i].charAt(j));
+				line[j] = (char)changeColor((byte)this.img[i].charAt(j), num);
 			}
 			img[i] = new String(line);
 
 		}
 		return new Image(img);
 	}
+	//0 = neutro, 1 = rojo, 2 = azul
 	
-	*/
 	//Concatenacion de strings
 	public Image alLado(Image p){
 

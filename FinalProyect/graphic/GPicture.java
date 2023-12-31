@@ -58,6 +58,8 @@ public class GPicture extends Component {
 		case '.': col = Color.WHITE; break;
 		case ':': col = Color.CYAN; break;
 		case '*': col = Color.GREEN; break;
+		case '#': col = Color.RED; break;
+		case '&': col = Color.BLUE; break;
 		default: col = Color.BLACK; break;
 		}
 		return col;

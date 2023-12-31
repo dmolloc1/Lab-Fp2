@@ -1,10 +1,12 @@
+package videoGame;
 import java.util.*;
+
 import graphic.*;
 class Map{
     private Image land;//es un Image
-    private Land [] field;
+    private ArrayList<Land> field;
     public Map(){ 
-        this.field = new Land[Land.SIZE_MAP];
+        this.field = new ArrayList<>(0);
         this.field = Land.createLands();
     }
     public void print(){
@@ -16,10 +18,18 @@ class Map{
         return land;
     }
     public Image row(int i){
-        Image row = land.alLado(this.field[i + 1].getImage().alLado(this.field[i + 2].getImage())).alLado(this.field[i+3].getImage());
+        Image row = this.field.get(i).getImage();
+        row = row.alLado(this.field.get(i+1).getImage().alLado(this.field.get(i+2).getImage())).alLado(this.field.get(i+3).getImage());
         return row;
     }
     public void levelUp(Castle c, Land l){
         //Logicca para agregar un item
     }
+    public void setCastle(int i, int col, Castle c){
+        this.land = this.field.get(i).getImage().colorImage(col);
+        this.field.get(i).setImage(land);
+        this.field.get(i).setCastle(c);
+    }
+
+
 }
