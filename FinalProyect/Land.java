@@ -1,8 +1,5 @@
-package vgame;
 import java.util.*;
 
-import graphic.*;
-import vgame.Castle;
 class Land {
     public static int SIZE_MAP = 16;
     private static ArrayList<Land> map;

@@ -1,9 +1,7 @@
-package graphic;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import vgame.*;
 //Permite ver un arreglo de String como una imagen
 public class Graphics{
   private JFrame frame;

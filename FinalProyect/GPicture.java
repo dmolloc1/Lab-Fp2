@@ -1,8 +1,6 @@
-package graphic;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
-import vgame.*;
 
 public class GPicture extends Component {
 	private Image pic;

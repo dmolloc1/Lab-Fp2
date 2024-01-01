@@ -1,4 +1,3 @@
-package vgame;
 class Castle{
     private int points, posicion, p;
     private String warrior;
