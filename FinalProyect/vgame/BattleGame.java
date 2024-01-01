@@ -1,10 +1,10 @@
-package videoGame;
+package vgame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-class BattleGame extends JFrame{
+public class BattleGame extends JFrame{
 
     //archivo para guardar los records
     private Map map;
@@ -34,7 +34,7 @@ class BattleGame extends JFrame{
     public static void main(String[] args){
         BattleGame bg = new BattleGame();
         currentG = bg;
-        bg.menu();
+        //bg.menu();
         
     }
     //Parte de mensajes
@@ -86,7 +86,7 @@ class BattleGame extends JFrame{
        
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                System.out.println(getName());
             }
         });
         return empezar;

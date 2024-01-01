@@ -1,7 +1,7 @@
 package graphic;
 import java.awt.Color;
 import java.util.Iterator;
-
+import vgame.*;
 
 public class Image implements Iterable<String>{
 	private String[] img;

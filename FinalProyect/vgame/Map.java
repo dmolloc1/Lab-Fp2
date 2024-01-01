@@ -1,7 +1,9 @@
-package videoGame;
+package vgame;
 import java.util.*;
 
 import graphic.*;
+import vgame.Land;
+import vgame.Castle;
 class Map{
     private Image land;//es un Image
     private ArrayList<Land> field;
