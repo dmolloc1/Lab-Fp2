@@ -8,13 +8,12 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class MiniGame extends JFrame {
-    private int points;
     private JFrame game;
     private JPanel panel;
     private String[][] indQuestion;
     private Boolean win ;
     public MiniGame(){
-        int i = (int)(Math.random()*3 + 1);
+       /* int i = (int)(Math.random()*3 + 1);
         switch (i) {
             case 1:
                 
@@ -22,13 +21,18 @@ public class MiniGame extends JFrame {
         
             default:
                 break;
-        }
+        }*/
+        this.culturalQuestion();
+    }
+    public boolean getWin(){
+        return this.win;
     }
     public boolean culturalQuestion(){
-        game = new JFrame("Mini Game");
-        panel = new JPanel(new GridLayout(4,1));
-
-        return true;
+        Reader r = new Reader();
+        String f =  "./File/cultural.csv.csv";
+        indQuestion = r.getData(f);
+        this.playIndividual();
+        return this.win;
     }
     public String[][] readFile(/*Que suba el archivo */){
         //Ingresar código para lectura
@@ -49,7 +53,7 @@ public class MiniGame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     mgame.win =true;
-                    b.setBackground(Color.GREEN);
+                    b.setBackground(Color.green);
                 }
             });
             }else{
@@ -57,6 +61,7 @@ public class MiniGame extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     b.setBackground(Color.RED);
+                    b.setForeground(Color.white);
                 }
             });
             }
@@ -77,4 +82,8 @@ public class MiniGame extends JFrame {
     public Boolean getWin(Boolean w){
         return this.win = w;
     }
+    public static void main(String [] args){
+        MiniGame a = new MiniGame();
+    }
+
 }

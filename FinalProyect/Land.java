@@ -10,7 +10,6 @@ class Land {
     public static int SIZE_MAP = 16;
     private static ArrayList<Land> map;
     private Image land;
-    private JButton button;
     private int points;
     private Castle castle;
     public Land(int n){

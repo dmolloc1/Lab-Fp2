@@ -1,24 +1,24 @@
 import java.io.*;
 import java.util.*;
-public class FileReader{
+public class Reader{
   private String[][] basedata;
   private String [] parts;
   private ArrayList<String[]> questions = new ArrayList<>();
 
-  public String[][] getData(){
-    readDataFile();
+  public String[][] getData(String f){
+    readDataFile(f);
     basedata = questions.toArray(new String[questions.size()][parts.length]);
     return basedata;
   }
 
-  private void readDataFile(){
+  private void readDataFile(String f){
     BufferedReader reader = null;
     String line = "";
     try {
-      FileReader fileReader = new FileReader("h.cvs");
+      FileReader fileReader = new FileReader(f);
       reader = new BufferedReader(fileReader);
       while ((line = reader.readLine()) != null) {
-        parts = line.split(",");
+        parts = line.split(";");
         questions.add(parts);
       }
     }catch (Exception exception){
@@ -29,8 +29,6 @@ public class FileReader{
   }
 
   public static void main(String[] args){
-      ReaderP r = new ReaderP();
-      String [][] a = r.getData();
-      System.out.println(a[0][0] + "Hola");
+      
   }
 }

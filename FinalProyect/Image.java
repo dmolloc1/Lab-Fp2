@@ -8,8 +8,7 @@ public class Image implements Iterable<String>{
 	
 	public static void main(String[] args) {
 		Image a = Image.part10().colorImage(1);
-		Graphics g = new Graphics(a);
-		g.print();
+	
 	}
 	private Image(String[] img){
 		this.img = img;
