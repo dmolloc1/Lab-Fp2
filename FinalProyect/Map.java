@@ -1,5 +1,5 @@
 import java.util.*;
-class Map{
+public class Map{
     private Image land;//es un Image
     private ArrayList<Land> field;
     public Map(){ 
@@ -7,7 +7,7 @@ class Map{
         this.field = Land.createLands();
     }
     public void print(){
-        Graphics g = new Graphics(this.builtMap());
+        Graphics g = new Graphics(this.builtMap(), this);
 		g.print();
     }
     public Image builtMap(){
@@ -27,6 +27,6 @@ class Map{
         this.field.get(i).setImage(land);
         this.field.get(i).setCastle(c);
     }
-
+    public void play(int l, int c){}
 
 }

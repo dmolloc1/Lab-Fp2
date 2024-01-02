@@ -32,7 +32,7 @@ public class BattleGame extends JFrame{
     public static void main(String[] args){
         BattleGame bg = new BattleGame();
         currentG = bg;
-        //bg.menu();
+        bg.menu();
         
     }
     //Parte de mensajes

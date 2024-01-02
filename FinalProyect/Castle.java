@@ -13,9 +13,13 @@ class Castle{
     public void setPosicion(int i){
         this.posicion =i;
     }
+    public String name(){
+        return this.warrior;
+    }
     public int getPoints(int p){
         return this.points;
     }
+
     
     public void buyItems(){
         //if(i > this.points)

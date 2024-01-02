@@ -1,9 +1,16 @@
 import java.util.*;
 
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import java.awt.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 class Land {
     public static int SIZE_MAP = 16;
     private static ArrayList<Land> map;
     private Image land;
+    private JButton button;
     private int points;
     private Castle castle;
     public Land(int n){
@@ -84,7 +91,39 @@ class Land {
     public Image getImage(){
         return land;
     }
+    //Botones transparentes
+    public static JPanel createButtons() {
+        JPanel panel = new JPanel(new GridLayout(4, 4, 5, 5));
+        panel.setOpaque(false); // Establecer el panel como transparente
 
+        for (int i = 1; i <= 16; i++) {
+            JButton button = createTransparentButton(String.valueOf(i));
+            panel.add(button);
+        }
 
+        return panel;
+    }
+
+    private static JButton createTransparentButton(String text) {
+        Land a = Land.map.get(Integer.parseInt(text) - 1);
+        JButton button = new JButton(text+ "X");
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setFocusPainted(false);
+        button.setForeground(Color.black); // Cambia el color del texto si lo deseas
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Acciones al hacer clic en el botón
+                System.out.println(a.nombre()+ " clickeado");
+            }
+        });
+        return button;
+    }
+    
+    private String nombre(){
+        return this.castle.name();
+    }
 
 }
