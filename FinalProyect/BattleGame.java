@@ -26,7 +26,10 @@ public class BattleGame extends JFrame{
         
     }
     public static void continueGame(Boolean b){
-        go = b;
+        if(b){
+            currentG.map.builtMap();
+            currentG.map.print();
+        }
     }
     public static void endGame(){
         currentG.map.dispose();

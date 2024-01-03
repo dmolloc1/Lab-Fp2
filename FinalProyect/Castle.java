@@ -20,7 +20,7 @@ class Castle{
     public int getColor(){
         return this.color;
     }
-    public int getPoints(int p){
+    public int getPoints(){
         return this.points;
     }
 

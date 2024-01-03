@@ -39,9 +39,9 @@ public class Map{
     }
     //l es el indice del Land y c es el jugador al que le pertenece
     public void play(int l, int c, Boolean win){
-        
         if(win){
                 this.changeLand(l, c);
+                this.field.get(l).setPoints(this.getCastle(c));
         }
     }
     public Boolean typeMiniGame(int l, int c){
@@ -50,6 +50,9 @@ public class Map{
     public void changeLand(int l, int c){
         this.image = this.field.get(l).getImage().colorImage(c);
         this.field.get(l).setImage(image);
+    }
+    public Castle getCastle(int i){
+        return castles.get(i);
     }
     /*public static void main(String[] args) {
         Castle ca1 = new Castle("1", 1);

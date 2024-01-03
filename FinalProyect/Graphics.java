@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,14 +15,14 @@ public class Graphics {
         frame = new JFrame("BATTLE FIELD");
         window = new GPicture(pic);
 
-        frame.setSize(900, 500);
+        frame.setSize(870, 400);
         frame.setLayout(new BorderLayout());
         frame.setLocationRelativeTo(null);
         frame.add(window, BorderLayout.CENTER);
 
         // Crear un JLayeredPane para superponer botones sobre la imagen
         layeredPane = new JLayeredPane();
-        layeredPane.setPreferredSize(new Dimension(750, 300));
+        layeredPane.setPreferredSize(new Dimension(750, 283));
         frame.add(layeredPane, BorderLayout.CENTER);
 
         // Agregar la imagen al fondo del JLayeredPane
@@ -46,41 +48,9 @@ public class Graphics {
             }
         }
             //BOTONES DE JUGADORES
-        JPanel section1 = new JPanel(new FlowLayout());
-        player1 = new JButton("Jugador 1");
-        player1.addActionListener(new ActionListener() {
-          @Override
-                  public void actionPerformed(ActionEvent e) {
-                    player = 1;
-                    player2.setBackground(null);
-                    player1.setBackground(Color.ORANGE);
-                  }
-        });
-        player2 = new JButton("Jugador 2");
-        player2.addActionListener(new ActionListener() {
-          @Override
-                  public void actionPerformed(ActionEvent e) {
-                    player = 2;
-                    player1.setBackground(null);
-                    player2.setBackground(Color.ORANGE);
-                  }
-        });
-        //BOTON DE COMPRA
-        JButton squareButton = new JButton();
-        squareButton.setPreferredSize(new Dimension(50, 50)); 
-        squareButton.setIcon(new ImageIcon("./img/logo_comprar.png")); // Ruta a la imagen
-        squareButton.setContentAreaFilled(false); // Hace que el área de contenido no esté pintada
-        squareButton.setBorderPainted(false);
-        squareButton.addActionListener(new ActionListener() {
-           @Override
-            public void actionPerformed(ActionEvent e) {
-              System.out.println("Comprar"+ player);
-            }
-        });
-        section1.add(player1);
-        section1.add(player2);
-        section1.add(squareButton);
-        frame.add(section1, BorderLayout.NORTH);
+        
+        frame.add(this.partNorth(), BorderLayout.NORTH);
+        frame.add(this.partEast(map), BorderLayout.EAST);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -106,7 +76,72 @@ public class Graphics {
           mg.individual();
         }
         //this.map.play(Integer.parseInt(this.button.getText()) - 1, player);
+      }      
+    }
+
+    //Componentes
+          //Componentes
+    public JPanel partNorth(){
+      JPanel section1 = new JPanel(new FlowLayout());
+        player1 = new JButton("Jugador 1");
+        player1.addActionListener(new ActionListener() {
+          @Override
+            public void actionPerformed(ActionEvent e) {
+              player = 1;
+              player2.setBackground(null);
+              player1.setBackground(Color.ORANGE);
+            }
+        });
+        player2 = new JButton("Jugador 2");
+        player2.addActionListener(new ActionListener() {
+          @Override
+            public void actionPerformed(ActionEvent e) {
+              player = 2;
+              player1.setBackground(null);
+              player2.setBackground(Color.ORANGE);
+            }
+        });
+        //BOTON DE COMPRA
+        JButton squareButton = new JButton();
+        squareButton.setPreferredSize(new Dimension(50, 50)); 
+        squareButton.setIcon(new ImageIcon("./img/logo_comprar.png")); // Ruta a la imagen
+        squareButton.setContentAreaFilled(false); // Hace que el área de contenido no esté pintada
+        squareButton.setBorderPainted(false);
+        squareButton.addActionListener(new ActionListener() {
+           @Override
+            public void actionPerformed(ActionEvent e) {
+              System.out.println("Comprar"+ player);
+            }
+        });
+        section1.add(player1);
+        section1.add(player2);
+        section1.add(squareButton);
+        return section1;
       }
+     
+      public JPanel partEast(Map m) {
+        JPanel panel = new JPanel(new GridLayout(3, 1,5,5)); // 3 filas
+        panel.setPreferredSize(new Dimension(90, 10)); // Tamaño: 100x80
+
+        JLabel label1 = new JLabel("Points");
+        panel.add(createRow(label1));
+
+        JLabel label2 = new JLabel("Jugador 1: "+ m.getCastle(1).getPoints()); 
+        panel.add(createRow(label2));
+
+        JLabel label3 = new JLabel("Jugador 2: "+ m.getCastle(2).getPoints());
+        panel.add(createRow(label3));
+
+        return panel;
+    }
+
+    private static JPanel createRow(JLabel label) {
+        JPanel rowPanel = new JPanel();
+        rowPanel.setLayout(new BorderLayout());
+        rowPanel.add(label, BorderLayout.WEST);
+        rowPanel.setBorder(new EmptyBorder(1, 1, 1, 1)); 
+
+        return rowPanel;
     }
 }
 
