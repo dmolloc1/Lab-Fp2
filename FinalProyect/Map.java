@@ -4,6 +4,7 @@ public class Map{
     private ArrayList<Land> field;
     private HashMap<Integer,Castle> castles;
     private Graphics currentG ;
+    private Image image;
     public Map(Castle cas1, Castle cas2){ 
         this.field = new ArrayList<>(0);
         this.field = Land.createLands();
@@ -12,15 +13,16 @@ public class Map{
         castles.put(2, cas2);
     }
     public void print(){
-        currentG = new Graphics(this.builtMap(), this);
-		currentG.print();
+        Graphics g = new Graphics(this.land, this);
+        this.currentG = g;
+		g.print();
     }
     public void dispose(){
         this.currentG.again();
     }
-    public Image builtMap(){
-        land = this.row(0).encima(row(4)).encima(row(8)).encima(row(12));
-        return land;
+    public void builtMap(){
+        this.land = this.row(0).encima(row(4)).encima(row(8)).encima(row(12));
+        
     }
     public Image row(int i){
         Image row = this.field.get(i).getImage();
@@ -31,20 +33,38 @@ public class Map{
         //Logicca para agregar un item
     }
     public void setCastle(int i, Castle c){
-        this.land = this.field.get(i).getImage().colorImage(c.getColor());
-        this.field.get(i).setImage(land);
+        this.image = this.field.get(i).getImage().colorImage(c.getColor());
+        this.field.get(i).setImage(image);
         this.field.get(i).setCastle(c);
     }
     //l es el indice del Land y c es el jugador al que le pertenece
-    public void play(int l, int c){
-        MiniGame mg = new MiniGame();
-        if(this.field.get(l).getCastle() == null){
-            if(mg.individual()){
-                this.field.get(l).setPoints(this.castles.get(l));
-            }
+    public void play(int l, int c, Boolean win){
+        
+        if(win){
+                this.changeLand(l, c);
         }
-        this.print();
     }
-
+    public Boolean typeMiniGame(int l, int c){
+        return this.field.get(l).getCastle() == null;
+    }
+    public void changeLand(int l, int c){
+        this.image = this.field.get(l).getImage().colorImage(c);
+        this.field.get(l).setImage(image);
+    }
+    /*public static void main(String[] args) {
+        Castle ca1 = new Castle("1", 1);
+        Castle ca2 = new Castle("2", 2);
+        Map m = new Map(ca1,ca2);
+        m.builtMap();
+        m.print();
+        m.dispose();
+        m.changeLand(4, 1);
+        m.builtMap();
+        m.print();
+        m.dispose();
+        m.changeLand(8, 2);
+        m.builtMap();
+        m.print();
+    }*/
 
 }

@@ -13,34 +13,37 @@ public class MiniGame extends JFrame {
     private String[][] indQuestion;
     private Boolean win ;
     private Reader r;
-    
+    private Map map;
+    private int indice, player;
+
+    public MiniGame(Map m, int ind, int p){
+        this.map = m;
+        this.indice = ind;
+        this.player = p;
+    }
     public boolean getWin(){
         return this.win;
     }
     public Boolean individual(){
-        this.win = false;
-        int i = (int)(Math.random()*3 + 1);
+        int i = (int)(Math.random()*2 + 1);
         switch (i) {
             case 1:
-                this.win = culturalQuestion();
-                break;
+                return  culturalQuestion();
+                
             case 2://Adivinanza
-                this.win = culturalQuestion();
-                break;
+                return  culturalQuestion();
             default:
-            
                 break;
         }
-        return this.win;
+        return false;
     }
     public Boolean culturalQuestion(){
         r = new Reader();
         String f =  "./File/cultural.csv.csv";
         indQuestion = r.getData(f);
         System.out.println(indQuestion[1].length);
-        this.win = multipleChoice();
-        return this.win;
-    
+        
+        return this.multipleChoice();
     }
  /*   public String[][] readFile(/*Que suba el archivo ){
         //Ingresar código para lectura
@@ -49,6 +52,7 @@ public class MiniGame extends JFrame {
     }*/
     public Boolean multipleChoice(){
         MiniGame mgame = this;
+
         int len = indQuestion.length;
         int i = (int)(Math.random()*len);
         panel = new JPanel(new GridLayout(len ,1, 5,5));
@@ -63,9 +67,20 @@ public class MiniGame extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         mgame.win = true;
-                        b.setBackground(Color.green);
-                        game.dispose();
-                        //mgame.continueGame();
+                        mgame.dispose();
+                        JOptionPane.showMessageDialog(null, "¡Ganaste!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                        int result = JOptionPane.showConfirmDialog(null, "¿Quieres continuar?", "Continuar",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (result == JOptionPane.YES_OPTION) {
+                            mgame.map.play(mgame.indice, mgame.player, true);
+                            BattleGame.endGame();
+                            BattleGame.continueGame(true);
+                            game.dispose();
+                        } else {
+                            BattleGame.continueGame(false);
+                            BattleGame.endGame();
+                            game.dispose();
+                        }
+                        
                     }
                 });
             } else {
@@ -75,7 +90,20 @@ public class MiniGame extends JFrame {
                         b.setBackground(Color.RED);
                         b.setForeground(Color.white);
                         mgame.win = false;
-                        game.dispose();
+                        JOptionPane.showMessageDialog(null, "¡Oh, suerte a la próxima!", "Mensaje",
+                        JOptionPane.WARNING_MESSAGE);
+                        int result2 = JOptionPane.showConfirmDialog(null, "¿Quieres continuar?", "Continuar",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (result2 == JOptionPane.YES_OPTION) {
+                            mgame.map.play(mgame.indice, mgame.player,false);
+                            BattleGame.endGame();
+                            BattleGame.continueGame(true);
+                            game.dispose();
+                        } else {
+                            BattleGame.continueGame(false);
+                            BattleGame.endGame();
+                            game.dispose();
+                        }
+                        
                         //mgame.continueGame();
                     }
                 });
@@ -96,13 +124,5 @@ public class MiniGame extends JFrame {
         return mgame.win;
     }
 
-    public Boolean getWin(Boolean w){
-        return this.win = w;
-    }
-    public void continueGame(){
-        
-            this.game.dispose();
-        
-    }
-
+   
 }

@@ -8,28 +8,41 @@ public class BattleGame extends JFrame{
     private Map map;
     private Castle c1 ,c2;//posicion actual
     private static BattleGame currentG;
+    public static boolean go;
     //constructor
     public BattleGame(){
         this.c1 = new Castle("",1);
         this.c2 = new Castle("",2);
         this.map = new Map(c1,c2);
-    }
-    public void startGame(){
         this.map.setCastle(12, c1);
         this.c1.setPosicion(12);
         this.map.setCastle(7, c2);
         this.c2.setPosicion(7);
+    }
+    public void startGame(){
+        
         this.map.builtMap();
         this.map.print();
         
     }
-   
+    public static void continueGame(Boolean b){
+        go = b;
+    }
+    public static void endGame(){
+        currentG.map.dispose();
+    }
+    public void newRound(){
+        if(go){
+            startGame();
+        }
+    }
+    
     //main
     public static void main(String[] args){
         BattleGame bg = new BattleGame();
         currentG = bg;
         bg.menu();
-
+        System.out.println("Fin primera ronda");
         
     }
     //Parte de mensajes
@@ -43,7 +56,7 @@ public class BattleGame extends JFrame{
        
         menu.setLocationRelativeTo(null);
         menu.add(BattleGame.contenido(), BorderLayout.CENTER);
-        menu.add(this.empezar(), BorderLayout.SOUTH );
+        menu.add(this.empezar(menu), BorderLayout.SOUTH );
         menu.setVisible(true);
 
     }
@@ -61,7 +74,7 @@ public class BattleGame extends JFrame{
         return texto;
     }
 //Botones
-    public  JButton empezar(){
+    public  JButton empezar(JFrame m){
         //boton
         JButton empezar = new JButton("Empezar");
         empezar.setBounds(150, 100, 100, 30);
@@ -69,6 +82,7 @@ public class BattleGame extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
           startGame();
+          m.dispose();
         }
       });
         return empezar;

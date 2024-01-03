@@ -99,7 +99,6 @@ class Land {
     }
     public void setPoints(Castle c){
         c.setPoints(this.points);
-        this.getImage().colorImage(c.getColor());
     }
 
 }

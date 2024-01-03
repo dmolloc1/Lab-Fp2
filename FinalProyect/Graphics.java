@@ -101,7 +101,11 @@ public class Graphics {
       }
       public void actionPerformed(ActionEvent e) {
         System.out.println(this.button.getText()+ "fddddd" + player);
-        this.map.play(Integer.parseInt(this.button.getText()) - 1, player);
+        MiniGame mg = new MiniGame(map,Integer.parseInt(this.button.getText()) - 1, player);
+        if(this.map.typeMiniGame(Integer.parseInt(this.button.getText()) - 1, player)){
+          mg.individual();
+        }
+        //this.map.play(Integer.parseInt(this.button.getText()) - 1, player);
       }
     }
 }
