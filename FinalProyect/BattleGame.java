@@ -10,29 +10,26 @@ public class BattleGame extends JFrame{
     private static BattleGame currentG;
     //constructor
     public BattleGame(){
-        this.c1 = new Castle("");
-        this.c2 = new Castle("");
-        this.map = new Map();
+        this.c1 = new Castle("",1);
+        this.c2 = new Castle("",2);
+        this.map = new Map(c1,c2);
     }
     public void startGame(){
-        this.map.setCastle(12,1, c1);
+        this.map.setCastle(12, c1);
         this.c1.setPosicion(12);
-        this.map.setCastle(7,2, c2);
+        this.map.setCastle(7, c2);
         this.c2.setPosicion(7);
         this.map.builtMap();
         this.map.print();
-
+        
     }
-
-    public static void jugar(String r){
-
-    }
-    
+   
     //main
     public static void main(String[] args){
         BattleGame bg = new BattleGame();
         currentG = bg;
         bg.menu();
+
         
     }
     //Parte de mensajes
@@ -66,7 +63,7 @@ public class BattleGame extends JFrame{
 //Botones
     public  JButton empezar(){
         //boton
-        JButton empezar = new JButton("Enviar");
+        JButton empezar = new JButton("Empezar");
         empezar.setBounds(150, 100, 100, 30);
         empezar.addActionListener(new ActionListener() { 
         @Override
@@ -89,5 +86,4 @@ public class BattleGame extends JFrame{
         });
         return empezar;
     }
-
 }

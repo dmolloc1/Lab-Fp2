@@ -40,22 +40,13 @@ public class Graphics {
                 button.setContentAreaFilled(false);
                 button.setBorderPainted(true);
                 button.setForeground(Color.black); // Cambiar el color del texto si es necesario
-                button.addActionListener(new ActionListener() {
-                  @Override
-                  public void actionPerformed(ActionEvent e) {
-                    map.play(Integer.parseInt(button.getText()) - 1, player);
-                    System.out.println(button.getText()+ "fddddd" + player);
-
-                  }
-                  
-                });
+                button.addActionListener(new Listener(map, button) );
                 layeredPane.add(button, JLayeredPane.PALETTE_LAYER);
                 buttonCount++;
             }
         }
-            //TITULO
+            //BOTONES DE JUGADORES
         JPanel section1 = new JPanel(new FlowLayout());
-        JLabel titulo = new JLabel("La batalla  ha comenzado");
         player1 = new JButton("Jugador 1");
         player1.addActionListener(new ActionListener() {
           @Override
@@ -74,8 +65,21 @@ public class Graphics {
                     player2.setBackground(Color.ORANGE);
                   }
         });
+        //BOTON DE COMPRA
+        JButton squareButton = new JButton();
+        squareButton.setPreferredSize(new Dimension(50, 50)); 
+        squareButton.setIcon(new ImageIcon("./img/logo_comprar.png")); // Ruta a la imagen
+        squareButton.setContentAreaFilled(false); // Hace que el área de contenido no esté pintada
+        squareButton.setBorderPainted(false);
+        squareButton.addActionListener(new ActionListener() {
+           @Override
+            public void actionPerformed(ActionEvent e) {
+              System.out.println("Comprar"+ player);
+            }
+        });
         section1.add(player1);
         section1.add(player2);
+        section1.add(squareButton);
         frame.add(section1, BorderLayout.NORTH);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,6 +88,21 @@ public class Graphics {
     public void print() {
         frame.repaint();
         frame.setVisible(true);
+    }
+    public void again(){
+      this.frame.dispose();
+    }
+    private class Listener implements ActionListener{
+      private Map map;
+      private JButton button;
+      public Listener(Map map, JButton b){
+        this.map = map;
+        this.button = b;
+      }
+      public void actionPerformed(ActionEvent e) {
+        System.out.println(this.button.getText()+ "fddddd" + player);
+        this.map.play(Integer.parseInt(this.button.getText()) - 1, player);
+      }
     }
 }
 

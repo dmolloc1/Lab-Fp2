@@ -12,59 +12,75 @@ public class MiniGame extends JFrame {
     private JPanel panel;
     private String[][] indQuestion;
     private Boolean win ;
-    public MiniGame(){
-       /* int i = (int)(Math.random()*3 + 1);
-        switch (i) {
-            case 1:
-                
-                break;
-        
-            default:
-                break;
-        }*/
-        this.culturalQuestion();
-    }
+    private Reader r;
+    
     public boolean getWin(){
         return this.win;
     }
-    public boolean culturalQuestion(){
-        Reader r = new Reader();
-        String f =  "./File/cultural.csv.csv";
-        indQuestion = r.getData(f);
-        this.playIndividual();
+    public Boolean individual(){
+        this.win = false;
+        int i = (int)(Math.random()*3 + 1);
+        switch (i) {
+            case 1:
+                this.win = culturalQuestion();
+                break;
+            case 2://Adivinanza
+                this.win = culturalQuestion();
+                break;
+            default:
+            
+                break;
+        }
         return this.win;
     }
-    public String[][] readFile(/*Que suba el archivo */){
+    public Boolean culturalQuestion(){
+        r = new Reader();
+        String f =  "./File/cultural.csv.csv";
+        indQuestion = r.getData(f);
+        System.out.println(indQuestion[1].length);
+        this.win = multipleChoice();
+        return this.win;
+    
+    }
+ /*   public String[][] readFile(/*Que suba el archivo ){
         //Ingresar código para lectura
         indQuestion = new String[9][4];
         return indQuestion;
-    }
-    public void playIndividual(){
+    }*/
+    public Boolean multipleChoice(){
         MiniGame mgame = this;
-        int i = (int)(Math.random()*this.indQuestion.length);
-        panel = new JPanel(new GridLayout(indQuestion[i].length, 1));
+        int len = indQuestion.length;
+        int i = (int)(Math.random()*len);
+        panel = new JPanel(new GridLayout(len ,1, 5,5));
         //Post: agregar una columna despues de la pregunta que diga cual es la respuesta 
         int resp = Integer.parseInt(indQuestion[i][1]) ;
+        System.out.println(indQuestion[i][5]);
         int j = 2;
-        for (j = 2; j < indQuestion[i].length ; j ++){
-            JButton b = new JButton(indQuestion[i][j]); 
-            if(j == resp){
+        for (j = 2; j < indQuestion[i].length; j++) {
+            JButton b = new JButton(indQuestion[i][j]);
+            if (j == resp) {
                 b.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    mgame.win =true;
-                    b.setBackground(Color.green);
-                }
-            });
-            }else{
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        mgame.win = true;
+                        b.setBackground(Color.green);
+                        game.dispose();
+                        //mgame.continueGame();
+                    }
+                });
+            } else {
                 b.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    b.setBackground(Color.RED);
-                    b.setForeground(Color.white);
-                }
-            });
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        b.setBackground(Color.RED);
+                        b.setForeground(Color.white);
+                        mgame.win = false;
+                        game.dispose();
+                        //mgame.continueGame();
+                    }
+                });
             }
+            
             panel.add(b);
         }
         //Pregunta
@@ -77,13 +93,16 @@ public class MiniGame extends JFrame {
         game.add(question, BorderLayout.NORTH);
         game.add(panel, BorderLayout.CENTER);
         game.setVisible(true);   
+        return mgame.win;
     }
 
     public Boolean getWin(Boolean w){
         return this.win = w;
     }
-    public static void main(String [] args){
-        MiniGame a = new MiniGame();
+    public void continueGame(){
+        
+            this.game.dispose();
+        
     }
 
 }

@@ -29,6 +29,9 @@ public class Reader{
   }
 
   public static void main(String[] args){
-      
+    Reader r = new Reader();
+    String f =  "./File/cultural.csv.csv";
+    String[][] indQuestion = r.getData(f);
+    System.out.println(indQuestion[1][5] + " " + indQuestion[1].length);
   }
 }

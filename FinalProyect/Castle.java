@@ -1,10 +1,11 @@
 class Castle{
-    private int points, posicion, p;
+    private int points, posicion, p, color;
     private String warrior;
     //Nombre del conquistador otro nombre alternativo
 
-    public Castle(String w){
+    public Castle(String w, int c){
         this.warrior = w;
+        this.color = c;
     }
 
     public void setPoints(int p){
@@ -15,6 +16,9 @@ class Castle{
     }
     public String name(){
         return this.warrior;
+    }
+    public int getColor(){
+        return this.color;
     }
     public int getPoints(int p){
         return this.points;
