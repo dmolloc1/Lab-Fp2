@@ -7,53 +7,25 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class MiniGame extends JFrame {
-    protected JFrame game;
-    protected JPanel panel;
-    protected String[][] indQuestion;
-    protected Boolean win ;
-    protected Reader r;
-    protected Map map;
-    protected int indice, player;
+public class AlternativeGame extends MiniGame {
 
-    public MiniGame(Map m, int ind, int p){
-        this.map = m;
-        this.indice = ind;
-        this.player = p;
-    }
-    public boolean getWin(){
-        return this.win;
-    }
-    public Boolean individual(){
-        int i = (int)(Math.random()*2 + 1);
-        switch (i) {
-            case 1:
-                AlternativeGame ag = new AlternativeGame(map, indice, player);
-                return  ag.getResult();
-                
-            case 2://Adivinanza
-                System.out.println("Funcion prueba");
-                return  culturalQuestion();
-            default:
-                break;
-        }
-        return false;
-    }
-    public Boolean culturalQuestion(){
+    public AlternativeGame(Map m, int ind, int p) {
+        super(m, ind, p);
         r = new Reader();
         String f =  "./File/cultural.csv.csv";
         indQuestion = r.getData(f);
         System.out.println(indQuestion[1].length);
-        
+    }
+    public Boolean getResult(){
         return this.multipleChoice();
     }
     public Boolean multipleChoice(){
         MiniGame mgame = this;
-
+        JFrame jg = this;
         int len = indQuestion.length;
         int i = (int)(Math.random()*len);
-        panel = new JPanel(new GridLayout(len ,1, 5,5));
-        //Post: agregar una columna despues de la pregunta que diga cual es la respuesta 
+        this.panel = new JPanel(new GridLayout(len ,1, 5,5));
+        //Post: La segunda columna del array sera la respuesta de la pregunta 
         int resp = Integer.parseInt(indQuestion[i][1]) ;
         System.out.println(indQuestion[i][5]);
         int j = 2;
@@ -71,11 +43,11 @@ public class MiniGame extends JFrame {
                             mgame.map.play(mgame.indice, mgame.player, true);
                             BattleGame.endGame();
                             BattleGame.continueGame(true);
-                            game.dispose();
+                            jg.dispose();
                         } else {
                             BattleGame.continueGame(false);
                             BattleGame.endGame();
-                            game.dispose();
+                            jg.dispose();
                         }
                         
                     }
@@ -113,27 +85,5 @@ public class MiniGame extends JFrame {
         mgame.show(question, panel, this.map );
         return mgame.win;
     }  
-    public void show(JLabel l, JPanel panel, Map m){
-        this.setSize(500,200);
-        this.setLayout (new BorderLayout());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);       
-        this.setLocationRelativeTo(null);    
-        this.add(l, BorderLayout.NORTH);
-        this.add(panel, BorderLayout.CENTER);
-        this.add(itemButton(m), BorderLayout.WEST);
-        this.setVisible(true);
-    } 
-    //Botones para usar los items
-    public JButton itemButton(Map map){
-        MiniGame mg = this;
-        JButton it = new JButton("Items");
-        it.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Items.useItems(map.getCastle(player), mg);
-                
-            }
-        });
-        return it;
-    }
+    
 }

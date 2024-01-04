@@ -3,6 +3,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
@@ -26,6 +27,9 @@ public class Items {
     public static void buyItems(Castle c, String i) {
         if (c.getPoints() >= items.get(i)) {
             c.buyItems(i);
+            System.out.println("compro");
+        }else{
+            JOptionPane.showMessageDialog(null, "No tienes suficientes puntos", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -93,7 +97,7 @@ public class Items {
             //this.map.play(Integer.parseInt(this.button.getText()) - 1, player);
         }
     }
-    public static void useItems(Castle c){
+    public static void useItems(Castle c, MiniGame mg){
         JFrame frame = new JFrame();
         frame.setSize(750, 613);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -140,8 +144,7 @@ public class Items {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
-                
+                frame.dispose();     
             }
         });
         layeredPane.add(back, JLayeredPane.PALETTE_LAYER);
