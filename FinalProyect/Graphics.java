@@ -49,7 +49,7 @@ public class Graphics {
         }
             //BOTONES DE JUGADORES
         
-        frame.add(this.partNorth(), BorderLayout.NORTH);
+        frame.add(this.partNorth(map), BorderLayout.NORTH);
         frame.add(this.partEast(map), BorderLayout.EAST);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,7 +81,7 @@ public class Graphics {
 
     //Componentes
           //Componentes
-    public JPanel partNorth(){
+    public JPanel partNorth(Map map){
       JPanel section1 = new JPanel(new FlowLayout());
         player1 = new JButton("Jugador 1");
         player1.addActionListener(new ActionListener() {
@@ -110,7 +110,7 @@ public class Graphics {
         squareButton.addActionListener(new ActionListener() {
            @Override
             public void actionPerformed(ActionEvent e) {
-              System.out.println("Comprar"+ player);
+              Items.showItems(map.getCastle(player));
             }
         });
         section1.add(player1);

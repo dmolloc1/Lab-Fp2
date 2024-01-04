@@ -1,11 +1,6 @@
 import java.util.*;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import java.awt.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 class Land {
     public static int SIZE_MAP = 16;
     private static ArrayList<Land> map;

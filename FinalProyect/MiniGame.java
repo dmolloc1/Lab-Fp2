@@ -45,11 +45,6 @@ public class MiniGame extends JFrame {
         
         return this.multipleChoice();
     }
- /*   public String[][] readFile(/*Que suba el archivo ){
-        //Ingresar código para lectura
-        indQuestion = new String[9][4];
-        return indQuestion;
-    }*/
     public Boolean multipleChoice(){
         MiniGame mgame = this;
 
@@ -67,7 +62,7 @@ public class MiniGame extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         mgame.win = true;
-                        mgame.dispose();
+                       
                         JOptionPane.showMessageDialog(null, "¡Ganaste!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                         int result = JOptionPane.showConfirmDialog(null, "¿Quieres continuar?", "Continuar",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                         if (result == JOptionPane.YES_OPTION) {
@@ -112,17 +107,31 @@ public class MiniGame extends JFrame {
             panel.add(b);
         }
         //Pregunta
-        game = new JFrame("MiniGame");
         JLabel question = new JLabel(indQuestion[i][0]);
+        mgame.show(question, panel, this.map );
+        return mgame.win;
+    }  
+    public void show(JLabel l, JPanel panel, Map m){
+        game = new JFrame("MiniGame");
         game.setSize(500,200);
         game.setLayout (new BorderLayout());
         game.setDefaultCloseOperation(EXIT_ON_CLOSE);       
         game.setLocationRelativeTo(null);    
-        game.add(question, BorderLayout.NORTH);
+        game.add(l, BorderLayout.NORTH);
         game.add(panel, BorderLayout.CENTER);
-        game.setVisible(true);   
-        return mgame.win;
+        game.add(itemButton(m), BorderLayout.WEST);
+        game.setVisible(true);
+    } 
+    //Botones para usar los items
+    public JButton itemButton(Map map){
+        JButton it = new JButton("Items");
+        it.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Items.useItems(map.getCastle(player));
+                
+            }
+        });
+        return it;
     }
-
-   
 }
