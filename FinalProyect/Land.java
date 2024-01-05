@@ -94,6 +94,7 @@ class Land {
     }
     public void setPoints(Castle c){
         c.setPoints(this.points);
+        this.setCastle(c);
     }
 
 }

@@ -15,13 +15,46 @@ public class TresEnRaya extends MiniGame{
 
     private void thereAreWinner() {
         if (checkForWin()) {
-            String winner = playerXTurn ? "Jugador 2" : "Jugador 1";
-            JOptionPane.showMessageDialog(null, winner + " ganó!");
-            System.exit(0);
+            String winner;
+            if(player == 1){
+               winner = playerXTurn ? "Jugador 2" : "Jugador 1"; 
+               if(playerXTurn){this.map.play(this.indice, 2,true);}
+               else{this.map.play(this.indice, 1,true);}
+            }else{winner = playerXTurn ? "Jugador 1" : "Jugador 2";
+                JOptionPane.showMessageDialog(null, winner + " ganó!");
+                if(playerXTurn){this.map.play(this.indice, 1,true);}
+                else{this.map.play(this.indice, 2,true);}
+            }
+            //Condicion que un jugador perdio su base
+            if((winner.equals("Jugador 1") && indice == 7) ||(winner.equals("Jugador 2") && indice == 12)){
+
+                
+                int result = JOptionPane.showConfirmDialog(null, "La partida termino.Desea guardar en un archivo la partida?", "Continuar",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    BattleGame.endGame();
+                    BattleGame.continueGame(true);
+                    this.dispose();
+                } else {
+                    BattleGame.continueGame(false);
+                    BattleGame.endGame();
+                    this.dispose();
+                }
+            }else{
+                int result = JOptionPane.showConfirmDialog(null, "¿Quieres continuar?", "Continuar",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (result == JOptionPane.YES_OPTION) {
+                    BattleGame.endGame();
+                    BattleGame.continueGame(true);
+                    this.dispose();
+                } else {
+                    BattleGame.continueGame(false);
+                    BattleGame.endGame();
+                    this.dispose();
+                }
+            }
         }
     }
 
-    private  void play() {
+    public  void play() {
         JPanel panel = new JPanel(new GridLayout(GRID_SIZE, GRID_SIZE));
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
@@ -86,5 +119,21 @@ public class TresEnRaya extends MiniGame{
         }
     
         return false;
+    }
+    public void useItems(String t){
+        switch (t) {
+            case "loro":
+                JOptionPane.showMessageDialog(null, "Item no valido " , "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case "escalera":
+                JOptionPane.showMessageDialog(null, "Item no valido", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                break; 
+            case "escudo":
+                JOptionPane.showMessageDialog(null,"ESCUDO: El juego se termino" , "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                break;   
+            default:
+                break;
+        }
     }
 }

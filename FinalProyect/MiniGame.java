@@ -17,6 +17,7 @@ public class MiniGame extends JFrame {
     protected int indice, player;
     private AlternativeGame ag;
     private Guess g;
+    private TresEnRaya tR;
 
     public MiniGame(Map m, int ind, int p){
         this.map = m;
@@ -40,7 +41,23 @@ public class MiniGame extends JFrame {
             default:
                 break;
         }
-  
+    }
+    public void group(){
+        int i = (int)(Math.random()*2 ) + 1;
+        switch (i) {
+            case 1:
+                tR = new TresEnRaya(map, indice, player);
+                tR.play();
+                break;
+            case 2://Adivinanza
+                g = new Guess(map, indice, player);
+                System.out.println("Funcion prueba");
+                g.play();
+                break;
+
+            default:
+                break;
+        }
     }
 
     public void show(JLabel l, JPanel panel, Map m){
@@ -71,6 +88,8 @@ public class MiniGame extends JFrame {
             g.useItems(type);
         }else if(ag != null){
             ag.useItems(type);
+        }else if(tR != null){
+            tR.useItems(type);
         }
     }
 }

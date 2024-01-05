@@ -88,6 +88,7 @@ public class AlternativeGame extends MiniGame {
                 JOptionPane.showMessageDialog(null, indQuestion[indArchivo][indQuestion[indArchivo].length - 1], "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 break; 
             case "escudo":
+            JOptionPane.showMessageDialog(null,"ESCUDO: El juego se termino" , "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
                 break;   
             default:

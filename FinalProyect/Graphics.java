@@ -70,12 +70,19 @@ public class Graphics {
         this.button = b;
       }
       public void actionPerformed(ActionEvent e) {
-        System.out.println(this.button.getText()+ "fddddd" + player);
-        MiniGame mg = new MiniGame(map, Integer.parseInt(this.button.getText()) - 1, player);
-        if(this.map.typeMiniGame(Integer.parseInt(this.button.getText()) - 1)){
+        int indice = Integer.parseInt(this.button.getText()) - 1;
+        MiniGame mg = new MiniGame(map, indice, player);
+        //Se define que tipo de minigame se usara
+        
+        if(indice == 7  || indice == 12){
+          mg.group();
+        }else if(this.map.typeMiniGame(indice)){
           mg.individual();
+          System.out.println(this.map.typeMiniGame(indice));
+        }else{
+          mg.group();
         }
-        //this.map.play(Integer.parseInt(this.button.getText()) - 1, player);
+        
       }      
     }
 

@@ -29,9 +29,7 @@ public class Map{
         row = row.alLado(this.field.get(i+1).getImage().alLado(this.field.get(i+2).getImage())).alLado(this.field.get(i+3).getImage());
         return row;
     }
-    public void levelUp(Castle c, Land l){
-        //Logicca para agregar un item
-    }
+
     public void setCastle(int i, Castle c){
         this.image = this.field.get(i).getImage().colorImage(c.getColor());
         this.field.get(i).setImage(image);
@@ -41,6 +39,7 @@ public class Map{
     public void play(int l, int c, Boolean win){
         if(win){
                 this.changeLand(l, c);
+                this.field.get(l).setCastle(this.getCastle(c));
                 this.field.get(l).setPoints(this.getCastle(c));
         }
     }
