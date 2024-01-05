@@ -21,11 +21,10 @@ public class AlternativeGame extends MiniGame {
     }
     public Boolean multipleChoice(){
         MiniGame mgame = this;
-        JFrame jg = this;
         int len = indQuestion.length;
         int i = (int)(Math.random()*len);
         this.panel = new JPanel(new GridLayout(len ,1, 5,5));
-        //Post: La segunda columna del array sera la respuesta de la pregunta 
+        //Post: La segunda columna del array es el indice de la respuesta de la pregunta 
         int resp = Integer.parseInt(indQuestion[i][1]) ;
         System.out.println(indQuestion[i][5]);
         int j = 2;
@@ -43,11 +42,11 @@ public class AlternativeGame extends MiniGame {
                             mgame.map.play(mgame.indice, mgame.player, true);
                             BattleGame.endGame();
                             BattleGame.continueGame(true);
-                            jg.dispose();
+                            mgame.dispose();
                         } else {
                             BattleGame.continueGame(false);
                             BattleGame.endGame();
-                            jg.dispose();
+                            mgame.dispose();
                         }
                         
                     }
@@ -66,11 +65,11 @@ public class AlternativeGame extends MiniGame {
                             mgame.map.play(mgame.indice, mgame.player,false);
                             BattleGame.endGame();
                             BattleGame.continueGame(true);
-                            game.dispose();
+                            mgame.dispose();
                         } else {
                             BattleGame.continueGame(false);
                             BattleGame.endGame();
-                            game.dispose();
+                            mgame.dispose();
                         }
                         
                         //mgame.continueGame();
@@ -85,5 +84,4 @@ public class AlternativeGame extends MiniGame {
         mgame.show(question, panel, this.map );
         return mgame.win;
     }  
-    
 }
