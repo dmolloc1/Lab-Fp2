@@ -26,7 +26,7 @@ public class Guess extends MiniGame {
         MiniGame mg = this;
         intentos = 0;
 
-        JLabel labelInstruccion = new JLabel("Adivina el número entre 1 y 100, tiens 5 intentos:");
+        JLabel labelInstruccion = new JLabel("Adivina el número entre 1 y 100, tienes 5 intentos:");
         panel.add(labelInstruccion);
         
         JTextField textField = new JTextField(10);
@@ -43,13 +43,12 @@ public class Guess extends MiniGame {
             public void actionPerformed(ActionEvent e) {
                 int guess = Integer.parseInt(textField.getText());
 
-                if (intentos <= 5) {
+                if (intentos < 5) {
                     if (guess == numeroAleatorio) {
                         JOptionPane.showMessageDialog(null, "¡Ganaste!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                         mg.map.play(mg.indice, mg.player, true);
                         int result = JOptionPane.showConfirmDialog(null, "¿Quieres continuar?", "Continuar",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                         if (result == JOptionPane.YES_OPTION) {
-                            mg.map.play(mg.indice, mg.player, true);
                             BattleGame.endGame();
                             BattleGame.continueGame(true);
                             mg.dispose();
