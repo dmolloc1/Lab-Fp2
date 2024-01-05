@@ -16,6 +16,7 @@ import java.util.HashMap;
 public class Items {
     public static final HashMap<String, Integer> items;
     private static int points;
+    private static String type;
 
     static {
         items = new HashMap<>();
@@ -97,7 +98,8 @@ public class Items {
             //this.map.play(Integer.parseInt(this.button.getText()) - 1, player);
         }
     }
-    public static void useItems(Castle c, MiniGame mg){
+    public static String useItems(Castle c){
+        type = "a";
         JFrame frame = new JFrame();
         frame.setSize(750, 613);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,7 +118,13 @@ public class Items {
         button1.setBounds(50, 460, 170, 40); // Establece la posición y el tamaño del botón
         button1.setBackground(new Color(211, 172, 252));
         button1.setForeground(Color.BLACK);
-        //button1.addActionListener(new Listener(c, "escudo", frame));
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                type = "escudo";
+                frame.dispose();     
+            }
+        });
         layeredPane.add(button1, JLayeredPane.PALETTE_LAYER); // Cambia la capa según sea necesario
 
         // Botón 2
@@ -124,7 +132,13 @@ public class Items {
         button2.setBounds(283, 460, 170, 40);
         button2.setBackground(new Color(250, 187, 249));
         button2.setForeground(Color.BLACK);
-        //button2.addActionListener(new Listener(c, "loro", frame));
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                type = "loro";
+                frame.dispose();       
+            }
+        });
         layeredPane.add(button2, JLayeredPane.PALETTE_LAYER);
 
 
@@ -133,7 +147,13 @@ public class Items {
         button3.setBounds(500, 460, 170, 40);
         button3.setBackground(new Color(153, 238, 240));
         button3.setForeground(Color.BLACK);
-       // button3.addActionListener(new Listener(c, "escalera", frame));
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                type = "escalera";
+                frame.dispose();       
+            }
+        });
         layeredPane.add(button3, JLayeredPane.PALETTE_LAYER);
 
         //Botón Back
@@ -151,5 +171,7 @@ public class Items {
 
         frame.add(layeredPane);
         frame.setVisible(true);
+        System.out.println(type);
+        return type;
     }
 }

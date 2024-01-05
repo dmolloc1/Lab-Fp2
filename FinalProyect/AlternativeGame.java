@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class AlternativeGame extends MiniGame {
-
+    private int indArchivo;
     public AlternativeGame(Map m, int ind, int p) {
         super(m, ind, p);
         r = new Reader();
@@ -16,13 +16,11 @@ public class AlternativeGame extends MiniGame {
         indQuestion = r.getData(f);
         System.out.println(indQuestion[1].length);
     }
-    public Boolean getResult(){
-        return this.multipleChoice();
-    }
-    public Boolean multipleChoice(){
+    public void play(){
         MiniGame mgame = this;
         int len = indQuestion.length;
         int i = (int)(Math.random()*len);
+        this.indArchivo = i;
         this.panel = new JPanel(new GridLayout(len ,1, 5,5));
         //Post: La segunda columna del array es el indice de la respuesta de la pregunta 
         int resp = Integer.parseInt(indQuestion[i][1]) ;
@@ -34,8 +32,6 @@ public class AlternativeGame extends MiniGame {
                 b.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        mgame.win = true;
-                       
                         JOptionPane.showMessageDialog(null, "¡Ganaste!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                         int result = JOptionPane.showConfirmDialog(null, "¿Quieres continuar?", "Continuar",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                         if (result == JOptionPane.YES_OPTION) {
@@ -57,7 +53,7 @@ public class AlternativeGame extends MiniGame {
                     public void actionPerformed(ActionEvent e) {
                         b.setBackground(Color.RED);
                         b.setForeground(Color.white);
-                        mgame.win = false;
+                        
                         JOptionPane.showMessageDialog(null, "¡Oh, suerte a la próxima!", "Mensaje",
                         JOptionPane.WARNING_MESSAGE);
                         int result2 = JOptionPane.showConfirmDialog(null, "¿Quieres continuar?", "Continuar",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -82,6 +78,15 @@ public class AlternativeGame extends MiniGame {
         //Pregunta
         JLabel question = new JLabel(indQuestion[i][0]);
         mgame.show(question, panel, this.map );
-        return mgame.win;
-    }  
+    }
+    public void useItems(String t){
+        switch (t) {
+            case "loro":
+                JOptionPane.showMessageDialog(null, indQuestion[indArchivo][indQuestion[indArchivo].length - 1], "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Eurekaaa");
+                break;
+            default:
+                break;
+        }
+    }
 }

@@ -71,8 +71,8 @@ public class Graphics {
       }
       public void actionPerformed(ActionEvent e) {
         System.out.println(this.button.getText()+ "fddddd" + player);
-        MiniGame mg = new MiniGame(map,Integer.parseInt(this.button.getText()) - 1, player);
-        if(this.map.typeMiniGame(Integer.parseInt(this.button.getText()) - 1, player)){
+        MiniGame mg = new MiniGame(map, Integer.parseInt(this.button.getText()) - 1, player);
+        if(this.map.typeMiniGame(Integer.parseInt(this.button.getText()) - 1)){
           mg.individual();
         }
         //this.map.play(Integer.parseInt(this.button.getText()) - 1, player);
@@ -80,7 +80,7 @@ public class Graphics {
     }
 
     //Componentes
-          //Componentes
+
     public JPanel partNorth(Map map){
       JPanel section1 = new JPanel(new FlowLayout());
         player1 = new JButton("Jugador 1");
@@ -92,6 +92,7 @@ public class Graphics {
               player1.setBackground(Color.ORANGE);
             }
         });
+        
         player2 = new JButton("Jugador 2");
         player2.addActionListener(new ActionListener() {
           @Override

@@ -11,36 +11,38 @@ public class MiniGame extends JFrame {
     protected JFrame game;
     protected JPanel panel;
     protected String[][] indQuestion;
-    protected Boolean win ;
+    protected Boolean useIt ;
     protected Reader r;
     protected Map map;
     protected int indice, player;
+    private AlternativeGame ag;
+    private Guess g;
 
     public MiniGame(Map m, int ind, int p){
         this.map = m;
         this.indice = ind;
         this.player = p;
     }
-    public boolean getWin(){
-        return this.win;
-    }
+
     public void individual(){
-        int i = (int)(Math.random()*2 + 1);
+        int i = (int)(Math.random()*2 ) + 1;
         switch (i) {
             case 1:
-                AlternativeGame ag = new AlternativeGame(map, indice, player);
-                ag.getResult();
+                ag = new AlternativeGame(map, indice, player);
+                ag.play();
                 break;
             case 2://Adivinanza
-                Guess g = new Guess(map, indice, player);
+                g = new Guess(map, indice, player);
                 System.out.println("Funcion prueba");
                 g.play();
-                break; 
+                break;
+
             default:
                 break;
         }
+  
     }
-    
+
     public void show(JLabel l, JPanel panel, Map m){
         this.setSize(500,200);
         this.setLayout (new BorderLayout());
@@ -53,15 +55,22 @@ public class MiniGame extends JFrame {
     } 
     //Botones para usar los items
     public JButton itemButton(Map map){
-        MiniGame mg = this;
+        MiniGame m = this;
         JButton it = new JButton("Items");
         it.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Items.useItems(map.getCastle(player), mg);
-                
+                m.useItems(Items.useItems(map.getCastle(player)));
             }
         });
         return it;
+    }
+    public void useItems(String type){
+        System.out.println("Justo antes de los if");
+        if(g != null){
+            g.useItems(type);
+        }else if(ag != null){
+            ag.useItems(type);
+        }
     }
 }

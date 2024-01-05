@@ -44,7 +44,7 @@ public class Map{
                 this.field.get(l).setPoints(this.getCastle(c));
         }
     }
-    public Boolean typeMiniGame(int l, int c){
+    public Boolean typeMiniGame(int l){
         return this.field.get(l).getCastle() == null;
     }
     public void changeLand(int l, int c){

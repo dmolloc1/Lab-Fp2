@@ -17,7 +17,7 @@ public class Guess extends MiniGame {
         panel = new JPanel();
         panel.setLayout(new FlowLayout());
         Random random = new Random();
-        numeroAleatorio = random.nextInt(100) + 1; // Genera número aleatorio entre 1 y 100
+        numeroAleatorio = random.nextInt(10) + 1; // Genera número aleatorio entre 1 y 100
 
         panel.setSize(300, 150);
     }
@@ -42,7 +42,7 @@ public class Guess extends MiniGame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int guess = Integer.parseInt(textField.getText());
-
+                System.out.println(guess);
                 if (intentos < 5) {
                     if (guess == numeroAleatorio) {
                         JOptionPane.showMessageDialog(null, "¡Ganaste!", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
@@ -82,6 +82,15 @@ public class Guess extends MiniGame {
         });
         JLabel p = new JLabel("ADIVINA EL NÚMERO:");
         show(p, panel, map);
-       
+    }
+    public void useItems(String t){
+        switch (t) {
+            case "loro":
+                JOptionPane.showMessageDialog(null,"El número es:" + numeroAleatorio , "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Eurekaaa");
+                break;
+            default:
+                break;
+        }
     }
 }
