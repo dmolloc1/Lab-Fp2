@@ -12,7 +12,7 @@ public class AlternativeGame extends MiniGame {
     public AlternativeGame(Map m, int ind, int p) {
         super(m, ind, p);
         r = new Reader();
-        String f =  "./File/cultural.csv.csv";
+        String f =  "./File/cultural.csv";
         indQuestion = r.getData(f);
         System.out.println(indQuestion[1].length);
     }

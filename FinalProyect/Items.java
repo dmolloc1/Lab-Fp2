@@ -119,7 +119,6 @@ public class Items {
             @Override
             public void actionPerformed(ActionEvent e) {
                 m.useItems("escudo");
-                c.useItems("escudo");
                 frame.dispose();     
             }
         });
@@ -134,7 +133,6 @@ public class Items {
             @Override
             public void actionPerformed(ActionEvent e) {
                 m.useItems("loro");
-                c.useItems("loro");
                 frame.dispose();       
             }
         });

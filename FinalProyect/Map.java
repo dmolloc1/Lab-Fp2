@@ -4,6 +4,7 @@ public class Map{
     private ArrayList<Land> field;
     private HashMap<Integer,Castle> castles;
     private Graphics currentG ;
+    public BattleGame bg;
     private Image image;
     public Map(Castle cas1, Castle cas2){ 
         this.field = new ArrayList<>(0);
@@ -16,6 +17,9 @@ public class Map{
         Graphics g = new Graphics(this.land, this);
         this.currentG = g;
 		g.print();
+    }
+    public void serBattleGame(BattleGame b){
+        this.bg = b;
     }
     public void dispose(){
         this.currentG.again();

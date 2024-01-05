@@ -31,6 +31,8 @@ public class TresEnRaya extends MiniGame{
                 
                 int result = JOptionPane.showConfirmDialog(null, "La partida termino.Desea guardar en un archivo la partida?", "Continuar",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (result == JOptionPane.YES_OPTION) {
+                    Reader r = new Reader();
+                    r.saveGame(this.map.bg);
                     BattleGame.endGame();
                     BattleGame.continueGame(true);
                     this.dispose();
