@@ -15,9 +15,6 @@ import java.util.HashMap;
 
 public class Items {
     public static final HashMap<String, Integer> items;
-    private static int points;
-    private static String type;
-
     static {
         items = new HashMap<>();
         items.put("escudo", 120);
@@ -98,8 +95,8 @@ public class Items {
             //this.map.play(Integer.parseInt(this.button.getText()) - 1, player);
         }
     }
-    public static String useItems(Castle c){
-        type = "a";
+    public static void useItems(Castle c, MiniGame m){
+    
         JFrame frame = new JFrame();
         frame.setSize(750, 613);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -121,7 +118,8 @@ public class Items {
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                type = "escudo";
+                m.useItems("escudo");
+                c.useItems("escudo");
                 frame.dispose();     
             }
         });
@@ -135,7 +133,8 @@ public class Items {
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                type = "loro";
+                m.useItems("loro");
+                c.useItems("loro");
                 frame.dispose();       
             }
         });
@@ -150,7 +149,8 @@ public class Items {
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                type = "escalera";
+                m.useItems("escalera");
+                c.useItems("escalera");
                 frame.dispose();       
             }
         });
@@ -171,7 +171,6 @@ public class Items {
 
         frame.add(layeredPane);
         frame.setVisible(true);
-        System.out.println(type);
-        return type;
+      
     }
 }

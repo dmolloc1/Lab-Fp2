@@ -19,6 +19,9 @@ class Castle{
         this.points -= Items.items.get(i); 
         System.out.println("compro: " + i);
     }
+    public void useItems(String i){
+        this.items.put(i,this.items.get(i) - 1);
+    }
     public int getItem(String i){
         return this.items.get(i);
     }

@@ -60,7 +60,7 @@ public class MiniGame extends JFrame {
         it.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m.useItems(Items.useItems(map.getCastle(player)));
+                Items.useItems(map.getCastle(player), m);
             }
         });
         return it;
