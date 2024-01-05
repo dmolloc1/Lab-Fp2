@@ -24,21 +24,21 @@ public class MiniGame extends JFrame {
     public boolean getWin(){
         return this.win;
     }
-    public Boolean individual(){
+    public void individual(){
         int i = (int)(Math.random()*2 + 1);
         switch (i) {
             case 1:
                 AlternativeGame ag = new AlternativeGame(map, indice, player);
-                return  ag.getResult();
-                
+                ag.getResult();
+                break;
             case 2://Adivinanza
                 Guess g = new Guess(map, indice, player);
                 System.out.println("Funcion prueba");
-                return g.play(); 
+                g.play();
+                break; 
             default:
                 break;
         }
-        return false;
     }
     
     public void show(JLabel l, JPanel panel, Map m){
