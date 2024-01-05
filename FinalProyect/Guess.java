@@ -87,7 +87,13 @@ public class Guess extends MiniGame {
         switch (t) {
             case "loro":
                 JOptionPane.showMessageDialog(null,"El número es:" + numeroAleatorio , "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                System.out.println("Eurekaaa");
+                break;
+            case "escudo":
+                JOptionPane.showMessageDialog(null,"ESCUDO: El juego se termino:" + numeroAleatorio , "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                break;
+            case "escalera":
+                JOptionPane.showMessageDialog(null,"ESCUDO: El número termina en " + (numeroAleatorio % 10) , "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 break;
             default:
                 break;

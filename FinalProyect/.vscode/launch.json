@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TresEnRaya",
+            "request": "launch",
+            "mainClass": "TresEnRaya",
+            "projectName": "FinalProyect_5a960a95"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

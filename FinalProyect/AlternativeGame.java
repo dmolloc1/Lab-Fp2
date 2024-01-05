@@ -82,9 +82,14 @@ public class AlternativeGame extends MiniGame {
     public void useItems(String t){
         switch (t) {
             case "loro":
-                JOptionPane.showMessageDialog(null, indQuestion[indArchivo][indQuestion[indArchivo].length - 1], "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-                System.out.println("Eurekaaa");
+                JOptionPane.showMessageDialog(null, "la respuesta es " + indQuestion[indArchivo][1], "Mensaje", JOptionPane.INFORMATION_MESSAGE);
                 break;
+            case "escalera":
+                JOptionPane.showMessageDialog(null, indQuestion[indArchivo][indQuestion[indArchivo].length - 1], "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                break; 
+            case "escudo":
+                this.dispose();
+                break;   
             default:
                 break;
         }
